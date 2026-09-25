@@ -21,7 +21,7 @@ export default ({ kw }) => ({
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
-          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
           seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),

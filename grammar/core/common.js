@@ -315,7 +315,7 @@ export default ({ kw }) => ({
             seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
             seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
-            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
             seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
             $.__temp_table_serialize_name_phrase,
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
@@ -398,6 +398,7 @@ export default ({ kw }) => ({
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),
           seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
           seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression)),
