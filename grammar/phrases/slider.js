@@ -12,6 +12,7 @@ export default ({ kw }) => ({
             field("min", $.number_literal),
           ),
           seq(
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             kw("MIN-VALUE"),
             field("min", $.number_literal),
             kw("MAX-VALUE"),
