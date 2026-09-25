@@ -19,6 +19,7 @@ export default ({ kw }) => ({
     repeat1(
       choice(
         seq(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           kw("COLUMN", { offset: 3 }),
           choice(field("column", $._expression), alias($.__at_of_suffix, $.column_of)),
         ),
