@@ -558,6 +558,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _routine_access_modifier: ($) =>
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PRIVATE"), $.access_modifier),
           alias(kw("PROTECTED"), $.access_modifier),
           alias(kw("PUBLIC"), $.access_modifier),

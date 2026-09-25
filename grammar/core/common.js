@@ -152,6 +152,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_operand_opener: ($) => seq("(", $._identifier_or_qualified_name),
   _define_private_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _definition_scope_modifier: ($) =>
@@ -160,6 +161,7 @@ export default ({ kw }) => ({
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
@@ -187,6 +189,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
   _member_access_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),

@@ -93,6 +93,7 @@ export default ({ kw }) => ({
       repeat(
         // oxlint-disable-next-line tree-sitter-optimize/choice-subset
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PRIVATE"), $.access_modifier),
           alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
           alias(kw("PROTECTED"), $.access_modifier),
@@ -199,6 +200,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __class_property_accessor_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),
@@ -281,6 +283,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/choice-subset, tree-sitter-optimize/single-use-shared-choice-inline
   _method_modifier_no_abstract: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),

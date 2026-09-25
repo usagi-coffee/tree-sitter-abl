@@ -139,6 +139,7 @@ export default ({ kw }) => ({
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/shared-choice
           choice(
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("PRIVATE"), $.access_modifier),
             alias(kw("PROTECTED"), $.access_modifier),
           ),
@@ -147,7 +148,7 @@ export default ({ kw }) => ({
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("STATIC"), $.static_modifier)),
