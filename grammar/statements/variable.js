@@ -30,6 +30,7 @@ export default ({ kw }) => ({
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $._identifier_or_string_literal)),
       alias($._format_string, $.format_phrase),
       $._color_font_option,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("COLUMN-LABEL"), field("column_label", $._format_labels)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_context_help_id, field("context_help_id", $._expression)),
