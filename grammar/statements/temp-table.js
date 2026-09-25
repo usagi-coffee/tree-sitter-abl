@@ -91,7 +91,7 @@ export default ({ kw }) => ({
       seq($._help_keyword, field("help", $.string_literal)),
       $._initial_phrase,
       seq($._kw_label, field("label", $.__temp_table_label_list)),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
