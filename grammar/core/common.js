@@ -352,6 +352,7 @@ export default ({ kw }) => ({
     ),
   _table_field: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       $._table_field_type,
