@@ -21,6 +21,7 @@ export default ({ kw }) => ({
             alias(kw("PORTRAIT"), $.portrait),
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("APPEND"), $.append),
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("BINARY"), $.binary),
             alias(kw("KEEP-MESSAGES"), $.keep_messages),
             $.__output_shared_option,
