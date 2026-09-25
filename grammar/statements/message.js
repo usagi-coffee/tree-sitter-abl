@@ -54,6 +54,7 @@ export default ({ kw }) => ({
     ),
 
   __message_set_update_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("mode", choice($._kw_set, $._kw_update)),
       field("field", $._identifier_or_qualified_name),
