@@ -78,7 +78,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
   __class_method_definition_prefix: ($) =>
-    seq(kw("METHOD"), optional($.__class_method_definition_modifiers)),
+    seq($._kw_method, optional($.__class_method_definition_modifiers)),
   __class_method_definition_modifiers: ($) =>
     prec.right(
       seq(
@@ -135,15 +135,15 @@ export default ({ kw }) => ({
       choice($.__class_named_parameter_body, $.__class_method_table_parameter),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-  __class_method_body: ($) => seq($._compound_body, optional(kw("METHOD")), $._terminator),
+  __class_method_body: ($) => seq($._compound_body, optional($._kw_method), $._terminator),
 
   __class_constructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($._compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
+    seq($._compound_body, optional(choice(kw("CONSTRUCTOR"), $._kw_method)), $._terminator),
 
   __class_destructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($._compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
+    seq($._compound_body, optional(choice(kw("DESTRUCTOR"), $._kw_method)), $._terminator),
 
   __class_destructor_parameters: ($) => seq("(", ")"),
 

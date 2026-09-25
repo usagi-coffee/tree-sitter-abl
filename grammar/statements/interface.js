@@ -69,5 +69,5 @@ export default ({ kw }) => ({
       $._event_tail,
     ),
 
-  interface_method_definition: ($) => seq(kw("METHOD"), $._method_header, $._terminator_dot),
+  interface_method_definition: ($) => seq($._kw_method, $._method_header, $._terminator_dot),
 });
