@@ -52,7 +52,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+      seq($._kw_decimals, field("decimals", $.number_literal)),
       alias($._extent_phrase, $.extent_phrase),
       $._initial_phrase,
       seq($._aggregate_label_phrase, optional($.__parameter_label_tail)),
