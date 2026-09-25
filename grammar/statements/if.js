@@ -7,7 +7,7 @@ export default ({ kw }) => ({
           $._expression,
           $._kw_then,
           field("then", $._statement),
-          optional(seq(kw("ELSE"), field("else", $._statement))),
+          optional(seq($._kw_else, field("else", $._statement))),
         ),
       ),
     ),
