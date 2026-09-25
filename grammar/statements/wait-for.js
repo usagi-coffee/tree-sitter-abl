@@ -36,7 +36,7 @@ export default ({ kw }) => ({
   __wait_for_of_tail: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
     seq($._kw_or, alias($.__wait_for_of_phrase, $.of_phrase), optional($.__wait_for_of_tail)),
-  __wait_for_focus_phrase: ($) => seq(kw("FOCUS"), field("focus", $.widget_phrase)),
+  __wait_for_focus_phrase: ($) => seq($._kw_focus, field("focus", $.widget_phrase)),
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
   __wait_for_widgets: ($) => seq($.widget_phrase, optional(seq(",", $.__wait_for_widgets))),

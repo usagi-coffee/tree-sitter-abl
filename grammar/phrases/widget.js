@@ -59,7 +59,7 @@ export default ({ kw }) => ({
       kw("DEFAULT-WINDOW"),
       kw("ERROR-STATUS"),
       kw("FILE-INFO"),
-      kw("FOCUS"),
+      $._kw_focus,
       kw("FONT-TABLE"),
       kw("LAST-EVENT"),
       kw("RCODE-INFO"),
