@@ -107,5 +107,10 @@ export default ({ kw }) => ({
   __prompt_for_to_phrase: ($) => seq($._to_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __prompt_for_view_as_phrase: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
-  __prompt_for_with_phrase: ($) => seq($._with_keyword, alias(kw("NO-VALIDATE"), $.no_validate)),
+  __prompt_for_with_phrase: ($) =>
+    seq(
+      $._with_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("NO-VALIDATE"), $.no_validate),
+    ),
 });

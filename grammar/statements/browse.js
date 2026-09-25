@@ -114,6 +114,7 @@ export default ({ kw }) => ({
       alias(kw("NO-SCROLLBAR-VERTICAL"), $.no_scrollbar_vertical),
       alias(kw("NO-AUTO-VALIDATE"), $.no_auto_validate),
       alias(kw("NO-ASSIGN"), $.no_assign),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-VALIDATE"), $.no_validate),
       alias(kw("NO-BOX"), $.no_box),
       alias(kw("NO-ROW-MARKERS"), $.no_row_markers),

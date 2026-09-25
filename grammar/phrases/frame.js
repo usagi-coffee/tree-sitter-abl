@@ -24,6 +24,7 @@ export default ({ kw }) => ({
       alias(kw("NO-HIDE"), $.no_hide),
       alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
       alias(kw("NO-HELP"), $.no_help),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-VALIDATE"), $.no_validate),
       alias(kw("SCROLLABLE"), $.scrollable),
       alias(kw("TOP-ONLY"), $.top_only),
