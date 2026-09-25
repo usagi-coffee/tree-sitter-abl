@@ -128,7 +128,7 @@ export default ({ kw }) => ({
         field("height", $.number_literal),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._inner_chars_value, kw("INNER-LINES"), field("inner_lines", $.number_literal)),
+      seq($._inner_chars_value, $._kw_inner_lines, field("inner_lines", $.number_literal)),
     ),
 
   // These for some cursed reason cannot be moved to grammar/core/common.js
@@ -205,7 +205,7 @@ export default ({ kw }) => ({
           seq(kw("LIST-ITEMS"), field("items", $.__format_combo_box_values)),
           seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__format_radio_set_buttons)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
+          seq($._kw_inner_lines, field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
           alias(kw("SIMPLE"), $.simple),

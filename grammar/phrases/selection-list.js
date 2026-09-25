@@ -17,7 +17,7 @@ export default ({ kw }) => ({
       seq(
         $._inner_chars_value,
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
-        kw("INNER-LINES"),
+        $._kw_inner_lines,
         field("inner_lines", $.number_literal),
       ),
       kw("SORT"),

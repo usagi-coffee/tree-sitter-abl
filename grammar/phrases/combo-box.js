@@ -8,7 +8,7 @@ export default ({ kw }) => ({
           $._list_items_phrase,
           $._list_item_pairs_phrase,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
+          seq($._kw_inner_lines, field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
           $._tooltip_phrase,
