@@ -55,7 +55,7 @@ export default ({ kw }) => ({
   __sql_for_update: ($) =>
     seq(
       $._for_keyword,
-      kw("UPDATE"),
+      $._kw_update,
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
@@ -102,7 +102,7 @@ export default ({ kw }) => ({
   // would read that word as a screen field, this one reads it as the keyword it
   // is. Where both could apply the keyword wins, which is the point -- the ABL
   // reading of this text was never right.
-  sql_update_statement: ($) => seq(kw("UPDATE"), $.__sql_update_body, $._terminator),
+  sql_update_statement: ($) => seq($._kw_update, $.__sql_update_body, $._terminator),
   __sql_update_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
     seq(

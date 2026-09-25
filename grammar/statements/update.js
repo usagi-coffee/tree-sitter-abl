@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __update_prefix: ($) =>
-    seq(kw("UPDATE"), choice($._set_update_record_body, $.__update_fields_body)),
+    seq($._kw_update, choice($._set_update_record_body, $.__update_fields_body)),
 
   __update_fields_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
