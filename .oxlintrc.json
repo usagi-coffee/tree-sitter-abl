@@ -48,6 +48,7 @@
         "tree-sitter-optimize/closing-delimiter-wrapper": "warn",
         "tree-sitter-optimize/single-use-delimited-sequence": "warn",
         "tree-sitter-optimize/ordered-optional-chain": "warn",
+        "tree-sitter-optimize/optional-tail-choice-collapse": "warn",
         "tree-sitter-optimize/precedence-list-head-extraction": "warn",
         "tree-sitter-optimize/field-list-head-extraction": "warn",
         "tree-sitter-optimize/choice-list-head-extraction": "warn",

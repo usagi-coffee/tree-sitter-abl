@@ -37,6 +37,7 @@ import {
   closingDelimiterWrapper,
   singleUseDelimitedSequence,
   orderedOptionalChain,
+  optionalTailChoiceCollapse,
   precedenceListHeadExtraction,
   fieldListHeadExtraction,
   choiceListHeadExtraction,
@@ -5346,3 +5347,69 @@ try {
 }
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
+
+const optionalTailChoice = (head = "$.head", tail = "$.tail") =>
+  `choice(seq(${head}, optional(${tail})), ${tail})`;
+const optionalTailGrammar = (body, use = "optional($.__options)") =>
+  `export default () => ({ statement: ($) => seq("START", ${use}, "."), __options: ($) => ${body} });`;
+new RuleTester().run("optional-tail-choice-collapse", optionalTailChoiceCollapse, {
+  valid: [
+    `export default () => ({ statement: ($) => seq("START", optional($.head), optional($.tail), ".") });`,
+    optionalTailGrammar(optionalTailChoice(), "$.__options"),
+    optionalTailGrammar(optionalTailChoice(), "alias(optional($.__options), $.options)"),
+    optionalTailGrammar(optionalTailChoice(), 'field("options", optional($.__options))'),
+    optionalTailGrammar(optionalTailChoice(), "token(optional($.__options))"),
+    optionalTailGrammar(optionalTailChoice(), "prec.right(seq(optional($.__options)))"),
+    optionalTailGrammar(optionalTailChoice(), 'optional($["__options"])'),
+    optionalTailGrammar(optionalTailChoice(), "choice(optional($.__options), $.other)"),
+    optionalTailGrammar(optionalTailChoice(), "seq(optional($.__options), optional($.__options))"),
+    optionalTailGrammar("prec.right(choice(seq($.head, optional($.tail)), $.tail))"),
+    optionalTailGrammar("choice(seq($.head, optional($.tail)), $.different)"),
+    optionalTailGrammar("choice(seq(optional($.head), optional($.tail)), $.tail)"),
+    optionalTailGrammar("choice(seq($.head, optional($.tail)), optional($.tail))"),
+    optionalTailGrammar("choice(seq($.head, $.tail), $.tail)"),
+    optionalTailGrammar("choice(seq($.head, optional($.tail)), $.tail, $.other)"),
+    optionalTailGrammar(optionalTailChoice("$.__options")),
+    optionalTailGrammar(optionalTailChoice("prec.dynamic(1, $.head)")),
+    optionalTailGrammar(optionalTailChoice('token("HEAD")')),
+    optionalTailGrammar(optionalTailChoice()).replaceAll("__options", "options"),
+    `export default grammar({ conflicts: ($) => [[$.__options]], rules: { statement: ($) => seq("START", optional($.__options), "."), __options: ($) => ${optionalTailChoice()} } });`,
+    `export default () => ({ statement: ($) => seq("START", optional($.__options), "."),
+      // oxlint-disable-next-line rule-to-test/optional-tail-choice-collapse
+      __options: ($) => ${optionalTailChoice()} });`,
+    `export default () => ({ statement: ($) => seq("START",
+      // oxlint-disable-next-line rule-to-test/optional-tail-choice-collapse
+      optional($.__options), "."), __options: ($) => ${optionalTailChoice()} });`,
+  ],
+  invalid: [
+    {
+      code: optionalTailGrammar(optionalTailChoice()),
+      errors: [{ message: /only local use is optional/ }],
+    },
+    {
+      name: "MESSAGE AS or LIKE before formatting",
+      code: optionalTailGrammar(
+        optionalTailChoice(
+          'choice($._as_type_name_phrase, seq($._like_keyword, field("like", $._identifier_or_qualified_name)))',
+          "$.__after_type",
+        ),
+      ),
+      errors: [{ message: /ordered optional head and optional tail/ }],
+    },
+    {
+      name: "preserve aliased phrase boundaries",
+      code: optionalTailGrammar(
+        optionalTailChoice(
+          "alias($.__in_phrase, $.in_phrase)",
+          "alias($.__tail_phrase, $.tail_phrase)",
+        ),
+      ),
+      errors: [{ message: /Preserve fields, aliases/ }],
+    },
+    {
+      name: "field-bearing prefix",
+      code: optionalTailGrammar(optionalTailChoice('field("head", $.head)')),
+      errors: [{ message: /both-present order/ }],
+    },
+  ],
+});
