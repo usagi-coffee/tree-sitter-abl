@@ -6,6 +6,7 @@ export default ({ kw }) => ({
     choice(
       $.at_phrase,
       $.size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-LABELS"), $.no_labels),
       alias(kw("NO-LABEL"), $.no_label),
       alias(kw("SIDE-LABELS", { offset: 10 }), $.side_labels),
