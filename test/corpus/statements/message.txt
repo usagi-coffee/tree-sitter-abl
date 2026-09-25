@@ -593,3 +593,36 @@ MESSAGE m VIEW-AS ALERT-BOX QUESTION BUTTONS YES-NO
               name: (identifier))))))
     (set_update_phrase
       field: (identifier))))
+
+================================================================================
+MESSAGE SET/UPDATE - independent type and formatting tails
+================================================================================
+
+MESSAGE "Plain" SET answer.
+MESSAGE "Type" UPDATE answer LIKE otherValue.
+MESSAGE "Format" SET answer FORMAT "x(10)".
+MESSAGE "Both" UPDATE answer LIKE otherValue FORMAT "x(10)".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)))
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)
+      like: (identifier)))
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)
+      format: (string_literal)))
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)
+      like: (identifier)
+      format: (string_literal))))
