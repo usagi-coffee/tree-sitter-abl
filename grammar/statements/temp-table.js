@@ -93,7 +93,7 @@ export default ({ kw }) => ({
       seq($._kw_label, field("label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-      // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
+      // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse, tree-sitter-optimize/inline-keyword-owner
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
