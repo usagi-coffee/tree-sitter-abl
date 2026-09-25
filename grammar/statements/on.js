@@ -111,7 +111,7 @@ export default ({ kw }) => ({
               ),
             ),
             seq(
-              field("event", choice($._kw_create, $._kw_find, kw("WRITE"), $._kw_assign)),
+              field("event", choice($._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
               $._of_keyword,
               $.__on_database_event_action,
             ),

@@ -12,7 +12,7 @@ export default ({ kw }) => ({
         // WRITE event with optional NEW and OLD buffers
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
-          kw("WRITE"),
+          $._kw_write,
           $._of_keyword,
           field("object", $.identifier),
           optional(seq($._new_keyword, optional($._kw_buffer), field("new_buffer", $.identifier))),
