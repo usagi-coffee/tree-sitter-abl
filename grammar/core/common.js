@@ -219,7 +219,7 @@ export default ({ kw }) => ({
     ),
   _dos_unix_tail: ($) =>
     choice(
-      seq(alias(kw("SILENT"), $.silent), optional($._dos_unix_commands)),
+      seq(alias($._kw_silent, $.silent), optional($._dos_unix_commands)),
       $._dos_unix_commands,
     ),
   _dos_unix_commands: ($) => prec.right(seq($._dos_unix_command, optional($._dos_unix_commands))),

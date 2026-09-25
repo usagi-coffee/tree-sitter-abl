@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __os_command_prefix: ($) =>
     seq(
       kw("OS-COMMAND"),
-      optional(choice(kw("SILENT"), kw("NO-WAIT"), kw("NO-CONSOLE"))),
+      optional(choice($._kw_silent, kw("NO-WAIT"), kw("NO-CONSOLE"))),
       $.__os_command_items,
     ),
   __os_command_items: ($) =>
