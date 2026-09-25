@@ -156,7 +156,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _definition_scope_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),

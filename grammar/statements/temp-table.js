@@ -127,8 +127,10 @@ export default ({ kw }) => ({
       seq(
         alias($._new_keyword, $.new_modifier),
         optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("SHARED"), $.scope_modifier),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARED"), $.scope_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(

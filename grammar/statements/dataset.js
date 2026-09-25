@@ -98,7 +98,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __dataset_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARED"), $.scope_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
