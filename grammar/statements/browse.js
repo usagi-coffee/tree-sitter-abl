@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       field("query", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-WAIT"), $.no_wait)),
       kw("DISPLAY"),
       choice($.__browse_columns, alias($.__browse_record, $.record)),
