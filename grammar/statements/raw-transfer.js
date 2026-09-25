@@ -26,6 +26,7 @@ export default ({ kw }) => ({
           $._kw_buffer,
           field("source_field", $.identifier),
           $._to_keyword,
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           kw("FIELD"),
           field("target_field", $.identifier),
         ),
