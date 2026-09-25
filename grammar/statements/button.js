@@ -33,7 +33,7 @@ export default ({ kw }) => ({
           seq(alias(kw("NO-FOCUS"), $.no_focus), optional(alias(kw("FLAT-BUTTON"), $.flat_button))),
           alias(kw("NO-CONVERT-3D-COLORS"), $.no_convert_3d_colors),
           seq(
-            kw("TOOLTIP"),
+            $._kw_tooltip,
             field("tooltip", choice($._identifier_or_string_literal, $.null_literal)),
           ),
         ),

@@ -95,7 +95,7 @@ export default ({ kw }) => ({
       kw("SCROLLBAR-HORIZONTAL"),
       kw("SCROLLBAR-VERTICAL"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+      seq($._kw_tooltip, field("tooltip", $._expression)),
     ),
 
   _format_colon_to: ($) =>

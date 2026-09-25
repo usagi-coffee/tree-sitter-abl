@@ -18,7 +18,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_fgcolor, field("fgcolor", $._expression)),
       alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors),
-      seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
+      seq($._kw_tooltip, field("tooltip", $._identifier_or_string_literal)),
       seq(
         alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
         optional(alias(kw("RETAIN-SHAPE"), $.retain_shape)),

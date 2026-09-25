@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       seq($._kw_pfcolor, field("pfcolor", $._expression)),
       alias(kw("ROUNDED"), $.rounded),
       alias(kw("GROUP-BOX"), $.group_box),
-      seq(kw("TOOLTIP"), field("tooltip", choice($.identifier, $.string_literal, $.null_literal))),
+      seq($._kw_tooltip, field("tooltip", choice($.identifier, $.string_literal, $.null_literal))),
       $.size_phrase,
     ),
 });
