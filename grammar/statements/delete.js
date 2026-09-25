@@ -2,13 +2,13 @@ export default ({ kw }) => ({
   delete_statement: ($) => seq($.__delete_body, $._no_error_terminator),
 
   __delete_body: ($) =>
-    seq($._delete_keyword, field("record", $._qualified_identifier), optional($._format_validate)),
+    seq($._kw_delete, field("record", $._qualified_identifier), optional($._format_validate)),
 
   delete_object_statement: ($) => seq($.__delete_object_prefix, $._no_error_terminator),
 
   __delete_object_prefix: ($) =>
     seq(
-      $._delete_keyword,
+      $._kw_delete,
       $._kw_object,
       field(
         "name",
@@ -27,12 +27,12 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __delete_procedure_prefix: ($) =>
-    seq($._delete_keyword, $._kw_procedure, field("handle", $._expression)),
+    seq($._kw_delete, $._kw_procedure, field("handle", $._expression)),
 
   delete_widget_statement: ($) => seq($.__delete_widget_prefix, $._no_error_terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __delete_widget_prefix: ($) => seq($._delete_keyword, kw("WIDGET"), $.__delete_widget_head),
+  __delete_widget_prefix: ($) => seq($._kw_delete, kw("WIDGET"), $.__delete_widget_head),
 
   __delete_widget_head: ($) =>
     seq(field("widget", $._expression), optional($.__delete_widget_tail)),

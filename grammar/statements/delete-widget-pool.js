@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __delete_widget_pool_prefix: ($) =>
     seq(
-      $._delete_keyword,
+      $._kw_delete,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("WIDGET-POOL"),
       optional(field("pool", $._identifier_or_string_literal)),

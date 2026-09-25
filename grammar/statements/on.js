@@ -98,7 +98,7 @@ export default ({ kw }) => ({
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           choice(
             seq(
-              field("event", $._delete_keyword),
+              field("event", $._kw_delete),
               $._kw_of,
               choice(
                 $.__on_database_event_action,
