@@ -71,7 +71,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_x, field("x", $._expression)),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("X-OF"), field("x_of", $._expression)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
