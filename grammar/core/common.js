@@ -617,6 +617,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
     ),
   _extent_phrase: ($) =>

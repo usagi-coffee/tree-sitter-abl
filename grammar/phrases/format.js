@@ -94,6 +94,7 @@ export default ({ kw }) => ({
       kw("NO-WORD-WRAP"),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-HORIZONTAL"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-VERTICAL"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_tooltip, field("tooltip", $._expression)),

@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       $._list_item_pairs_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-HORIZONTAL"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-VERTICAL"),
       $.size_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
