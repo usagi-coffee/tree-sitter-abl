@@ -81,5 +81,5 @@ export default ({ kw }) => ({
       ),
       $._loop_phrase_tail,
     ),
-  __do_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
+  __do_while_phrase: ($) => seq($._kw_while, field("condition", $._expression)),
 });
