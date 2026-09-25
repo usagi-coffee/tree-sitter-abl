@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       $.__copy_lob_target,
       optional(
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("NO-CONVERT"), $.no_convert),
           alias($.__copy_lob_convert_phrase, $.convert_phrase),
         ),
