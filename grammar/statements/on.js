@@ -195,7 +195,7 @@ export default ({ kw }) => ({
       kw("ABORT"),
       kw("BACKSPACE"),
       $._kw_back_tab,
-      kw("BELL"),
+      $._kw_bell,
       $._kw_clear,
       kw("CURSOR-DOWN"),
       kw("CURSOR-LEFT"),
