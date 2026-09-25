@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       $.__dde_item_time_body,
     ),
 
-  __dde_mode: ($) => choice(kw("START"), kw("STOP")),
+  __dde_mode: ($) => choice(kw("START"), $._kw_stop),
   __dde_execute_or_terminate_branch: ($) =>
     seq(
       field(

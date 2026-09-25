@@ -1,3 +1,3 @@
 export default ({ kw }) => ({
-  stop_statement: ($) => seq(kw("STOP"), $._terminator),
+  stop_statement: ($) => seq($._kw_stop, $._terminator),
 });

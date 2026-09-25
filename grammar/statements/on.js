@@ -218,7 +218,7 @@ export default ({ kw }) => ({
       kw("RETURN"),
       kw("RIGHT-END"),
       kw("SCROLL-MODE"),
-      kw("STOP"),
+      $._kw_stop,
       kw("TAB"),
     ),
   __on_ui_key_function: ($) =>
