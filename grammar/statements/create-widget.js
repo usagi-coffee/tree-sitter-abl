@@ -23,6 +23,7 @@ export default ({ kw }) => ({
         $._kw_slider,
         $._kw_sub_menu,
         $._kw_text,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("TOGGLE-BOX"),
         $._kw_window,
         seq($._kw_value, "(", field("widget_type", $._expression), ")"),
