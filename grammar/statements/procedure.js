@@ -51,6 +51,7 @@ export default ({ kw }) => ({
         field("library", alias($.string_literal, "_escaped_string")),
         optional(
           choice(
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("CDECL"), $.cdecl),
             alias(kw("PASCAL"), $.pascal),
             alias(kw("STDCALL"), $.stdcall),
