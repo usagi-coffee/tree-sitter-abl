@@ -15,7 +15,7 @@ export default ({ kw }) => ({
       optional($.__variable_extents),
       optional(alias($._no_undo_keyword, $.no_undo)),
       choice(
-        seq($._as_keyword, $._class_type),
+        seq($._kw_as, $._class_type),
         seq($._like_keyword, field("like", $._identifier_or_array_access)),
       ),
 

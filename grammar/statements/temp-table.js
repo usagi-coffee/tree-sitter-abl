@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/recurse
-        seq(choice($._as_keyword, $._kw_is), repeat($.__temp_table_index_modifier)),
+        seq(choice($._kw_as, $._kw_is), repeat($.__temp_table_index_modifier)),
       ),
       $.__temp_table_index_fields,
     ),
@@ -63,7 +63,7 @@ export default ({ kw }) => ({
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-  __temp_table_as_primary_phrase: ($) => seq($._as_keyword, alias(kw("PRIMARY"), $.primary)),
+  __temp_table_as_primary_phrase: ($) => seq($._kw_as, alias(kw("PRIMARY"), $.primary)),
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(

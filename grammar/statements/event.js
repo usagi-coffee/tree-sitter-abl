@@ -18,7 +18,7 @@ export default ({ kw }) => ({
     seq(
       optional(field("direction", $._parameter_direction)),
       field("name", $.identifier),
-      $._as_keyword,
+      $._kw_as,
       $._class_type,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice

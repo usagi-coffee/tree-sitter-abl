@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("CATCH"),
       field("name", $.identifier),
-      optional(seq($._as_keyword, optional($._kw_class), field("type", $._qualified_identifier))),
+      optional(seq($._kw_as, optional($._kw_class), field("type", $._qualified_identifier))),
       $._closed_body,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(kw("CATCH")),

@@ -41,7 +41,7 @@ export default ({ kw }) => ({
       optional($._kw_value),
       field("value", $.identifier),
       choice(
-        seq($._as_keyword, field("data_type", $.identifier)),
+        seq($._kw_as, field("data_type", $.identifier)),
         seq($._like_keyword, field("like_field", $.qualified_name)),
       ),
       optional($.__trigger_procedure_options),

@@ -225,7 +225,7 @@ export const inline = ($) => [
   $._kw_procedure,
   $._routine_access_modifier,
   $._kw_for,
-  $._as_keyword,
+  $._kw_as,
 ];
 
 export default ({ kw }) => ({
@@ -236,7 +236,7 @@ export default ({ kw }) => ({
   _kw_define: ($) => kw("DEFINE", { offset: 3 }),
   _kw_end: ($) => kw("END"),
   _kw_by: ($) => kw("BY"),
-  _as_keyword: ($) => kw("AS"),
+  _kw_as: ($) => kw("AS"),
   _no_undo_keyword: ($) => kw("NO-UNDO"),
   _of_keyword: ($) => kw("OF"),
   _like_keyword: ($) => kw("LIKE"),

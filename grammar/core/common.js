@@ -23,12 +23,12 @@ export default ({ kw }) => ({
   _as_like: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
-      seq($._as_keyword, optional($._kw_class), field("type", $._type_or_string)),
+      seq($._kw_as, optional($._kw_class), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._qualified_identifier)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
-  _as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
+  _as_type_name_phrase: ($) => seq($._kw_as, field("type", $._type_name)),
   _input_field: ($) => choice($._qualified_identifier, $.object_access, $.array_access),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
@@ -383,7 +383,7 @@ export default ({ kw }) => ({
         ),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      optional(seq(choice($._as_keyword, $._kw_is), optional($.__temp_table_index_modifiers))),
+      optional(seq(choice($._kw_as, $._kw_is), optional($.__temp_table_index_modifiers))),
       $.__temp_table_index_fields,
     ),
   __temp_table_index_modifiers: ($) =>

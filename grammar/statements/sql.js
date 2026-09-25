@@ -164,7 +164,7 @@ export default ({ kw }) => ({
       alias($.__sql_count_star, $.function_call),
       seq(
         $._expression,
-        optional(seq(optional($._as_keyword), field("title", $._identifier_or_string_literal))),
+        optional(seq(optional($._kw_as), field("title", $._identifier_or_string_literal))),
       ),
     ),
   __sql_qualified_star: ($) => seq(field("table", $.identifier), ".", "*"),
