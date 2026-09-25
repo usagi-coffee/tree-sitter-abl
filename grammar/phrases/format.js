@@ -159,7 +159,12 @@ export default ({ kw }) => ({
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
-  _format_label: ($) => choice(seq($._kw_label, $._format_labels), kw("NO-LABELS")),
+  _format_label: ($) =>
+    choice(
+      seq($._kw_label, $._format_labels),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      kw("NO-LABELS"),
+    ),
   _format_labels: ($) => seq(field("label", $._expression), optional(seq(",", $._format_labels))),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline, tree-sitter-optimize/shared-closing-delimiter-inline
