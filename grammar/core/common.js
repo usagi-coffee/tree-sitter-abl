@@ -311,7 +311,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat1(
           choice(
-            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
             seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
