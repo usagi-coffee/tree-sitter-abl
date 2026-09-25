@@ -54,6 +54,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/choice-subset
   __output_shared_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
       seq(
