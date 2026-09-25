@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       choice(
-        kw("BUTTON"),
+        $._kw_button,
         $._kw_browse,
         kw("COMBO-BOX"),
         kw("CONTROL-FRAME"),

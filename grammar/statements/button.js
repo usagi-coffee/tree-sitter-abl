@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __button_prefix: ($) =>
-    seq($._define_private_prefix, choice(kw("BUTTON"), kw("BUTTONS")), $.__button_body),
+    seq($._define_private_prefix, choice($._kw_button, kw("BUTTONS")), $.__button_body),
 
   __button_body: ($) =>
     seq(
