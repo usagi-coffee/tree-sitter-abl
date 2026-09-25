@@ -40,7 +40,7 @@ export default ({ kw }) => ({
         seq($._in_keyword, $._kw_browse, field("browse", $.__widget_name)),
       ),
       seq(
-        kw("MENU-ITEM"),
+        $._kw_menu_item,
         field("item", $._identifier_or_qualified_name),
         optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),
       ),
@@ -116,7 +116,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
-        kw("MENU-ITEM"),
+        $._kw_menu_item,
         field("item", $._identifier_or_qualified_name),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),

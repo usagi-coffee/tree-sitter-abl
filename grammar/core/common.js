@@ -98,7 +98,7 @@ export default ({ kw }) => ({
   _aliased_menu_item: ($) => alias($._menu_item, $.menu_item),
   _menu_item: ($) =>
     seq(
-      kw("MENU-ITEM"),
+      $._kw_menu_item,
       field("name", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(

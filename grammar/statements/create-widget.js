@@ -16,7 +16,7 @@ export default ({ kw }) => ({
         kw("FRAME", { offset: 4 }),
         $._kw_image,
         $._kw_menu,
-        kw("MENU-ITEM"),
+        $._kw_menu_item,
         $._kw_radio_set,
         kw("RECTANGLE"),
         kw("SELECTION-LIST"),
