@@ -65,7 +65,7 @@ export default ({ kw }) => ({
       seq(choice($._kw_column, kw("COL")), field("column", $.__browse_option_expression)),
       $._scrollbar_option,
       seq(
-        kw("SIZE"),
+        $._kw_size,
         field("width", $.__browse_option_expression),
         $._by_keyword,
         field("height", $.__browse_option_expression),
