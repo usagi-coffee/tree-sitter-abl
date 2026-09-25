@@ -13,15 +13,10 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __function_prefix_tail: ($) =>
-    seq(optional($.__function_access_parameters_tail), $.__function_compound_body),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
-  __function_access_parameters_tail: ($) =>
-    choice(
-      seq(
-        $._routine_access_modifier,
-        optional(alias($.__function_definition_parameters, $.parameters)),
-      ),
-      alias($.__function_definition_parameters, $.parameters),
+    seq(
+      optional($._routine_access_modifier),
+      optional(alias($.__function_definition_parameters, $.parameters)),
+      $.__function_compound_body,
     ),
   __function_compound_body: ($) =>
     seq(
