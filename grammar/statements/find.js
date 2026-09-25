@@ -33,6 +33,7 @@ export default ({ kw }) => ({
       $._lock_option,
       alias(kw("SHARE"), $.share),
       alias(kw("EXCLUSIVE"), $.exclusive),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-WAIT"), $.no_wait),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
