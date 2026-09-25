@@ -32,6 +32,7 @@ export default ({ kw }) => ({
       alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
       alias(kw("DROP-TARGET"), $.drop_target),
       alias(kw("CONTEXT-HELP"), $.context_help),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("EXPORT"), $.export),
       alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
       alias(kw("ACCUM"), $.accum),
