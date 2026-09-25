@@ -206,7 +206,7 @@ export default ({ kw }) => ({
       kw("END-ERROR"),
       kw("ENDKEY"),
       kw("ENTER-MENUBAR"),
-      kw("ERROR"),
+      $._kw_error,
       kw("GO"),
       $._help_keyword,
       kw("HOME"),
