@@ -109,7 +109,7 @@ export default ({ kw }) => ({
   __prompt_for_view_as_phrase: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
   __prompt_for_with_phrase: ($) =>
     seq(
-      $._with_keyword,
+      $._kw_with,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-VALIDATE"), $.no_validate),
     ),

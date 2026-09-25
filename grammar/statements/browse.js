@@ -24,12 +24,12 @@ export default ({ kw }) => ({
       seq($.__browse_enable_phrase, optional($.__browse_options_phrase)),
       $.__browse_options_phrase,
     ),
-  __browse_options_phrase: ($) => seq($._with_keyword, optional($.__browse_options)),
+  __browse_options_phrase: ($) => seq($._kw_with, optional($.__browse_options)),
   __browse_options: ($) => prec.right(seq($.__browse_option, optional($.__browse_options))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __browse_option: ($) =>
     choice(
-      $._with_keyword,
+      $._kw_with,
       seq($._kw_context_help_id, field("context_help_id", $.__browse_option_expression)),
       $.__browse_flag_option,
       seq($._kw_tooltip, field("tooltip", $.__browse_option_expression)),

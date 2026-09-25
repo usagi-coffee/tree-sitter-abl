@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  frame_phrase: ($) => seq($._with_keyword, optional($.__frame_options)),
+  frame_phrase: ($) => seq($._kw_with, optional($.__frame_options)),
   __frame_options: ($) => prec.right(seq($.__frame_option, optional($.__frame_options))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __frame_option: ($) =>
@@ -122,7 +122,7 @@ export default ({ kw }) => ({
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__frame_identifier)),
           seq($._kw_browse, field("browse", $.__frame_identifier)),
         ),
-        optional($._with_keyword),
+        optional($._kw_with),
       ),
     ),
 });

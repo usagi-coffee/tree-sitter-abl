@@ -435,7 +435,7 @@ export default ({ kw }) => ({
   _kw_procedure: ($) => kw("PROCEDURE", { offset: 4 }),
   _kw_delete: ($) => kw("DELETE"),
   _kw_close: ($) => kw("CLOSE"),
-  _with_keyword: ($) => kw("WITH"),
+  _kw_with: ($) => kw("WITH"),
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   _routine_access_modifier: ($) =>
     choice(
