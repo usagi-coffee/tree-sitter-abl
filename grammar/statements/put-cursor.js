@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  put_cursor_statement: ($) => seq(kw("PUT"), $.__put_cursor_body, $._terminator),
+  put_cursor_statement: ($) => seq($._kw_put, $.__put_cursor_body, $._terminator),
 
   __put_cursor_body: ($) =>
     seq(

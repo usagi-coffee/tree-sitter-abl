@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  put_screen_statement: ($) => seq(kw("PUT"), $.__put_screen_body, $._terminator),
+  put_screen_statement: ($) => seq($._kw_put, $.__put_screen_body, $._terminator),
 
   __put_screen_body: ($) =>
     seq(
