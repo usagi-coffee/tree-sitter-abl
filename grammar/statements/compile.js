@@ -62,6 +62,6 @@ export default ({ kw }) => ({
       kw("APPEND"),
       optional(seq("=", field("append", $._expression))),
     ),
-  __compile_page_size_option: ($) => seq(kw("PAGE-SIZE"), field("page_size", $._expression)),
+  __compile_page_size_option: ($) => seq($._kw_page_size, field("page_size", $._expression)),
   __compile_page_width_option: ($) => seq(kw("PAGE-WIDTH"), field("page_width", $._expression)),
 });
