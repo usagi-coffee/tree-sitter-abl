@@ -24,7 +24,7 @@ export default ({ kw }) => ({
       field("ddeid", $._expression),
       choice(
         field("mode", alias($.__dde_mode, $.identifier)),
-        seq(kw("SOURCE"), field("source", $._expression)),
+        seq($._kw_source, field("source", $._expression)),
       ),
       $.__dde_item_time_body,
     ),

@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __convert_prefix: ($) =>
     seq(
       kw("CONVERT"),
-      kw("SOURCE"),
+      $._kw_source,
       $._kw_codepage,
       field("source", $.string_literal),
       $._kw_target,

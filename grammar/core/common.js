@@ -276,7 +276,7 @@ export default ({ kw }) => ({
   _convert_option: ($) =>
     choice(
       seq($._kw_target, field("target", $._string_or_identifier_access_or_call)),
-      seq(kw("SOURCE"), field("source", $._string_or_identifier_access_or_call)),
+      seq($._kw_source, field("source", $._string_or_identifier_access_or_call)),
     ),
 
   _string_or_identifier_access_or_call: ($) =>
