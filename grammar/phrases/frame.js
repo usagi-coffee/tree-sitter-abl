@@ -23,6 +23,7 @@ export default ({ kw }) => ({
       alias(kw("PAGE-TOP"), $.page_top),
       alias(kw("PAGE-BOTTOM"), $.page_bottom),
       alias(kw("USE-TEXT"), $.use_text),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("BACKGROUND"), $.background),
       alias(kw("NO-HIDE"), $.no_hide),
       alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
