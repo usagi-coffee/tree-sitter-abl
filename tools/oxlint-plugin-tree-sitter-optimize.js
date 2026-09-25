@@ -3101,6 +3101,8 @@ const preferRecursion = rule(
   "Suggest measuring recursive helpers in place of repeat and repeat1",
 );
 
+// These stores aggregate findings across files; lint runs single-threaded so
+// results do not depend on parallel file completion order.
 const repeatedBodies = new Map();
 const recursiveBodies = new Map();
 const sharedSequences = new Map();

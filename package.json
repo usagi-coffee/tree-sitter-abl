@@ -30,7 +30,7 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "lint": "oxlint grammar.js grammar",
+    "lint": "oxlint --threads=1 grammar.js grammar",
     "test:lint": "node tools/test_oxlint_plugin.js",
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",

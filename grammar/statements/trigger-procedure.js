@@ -51,6 +51,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __trigger_procedure_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner -- this occurrence is part of a distinct trigger option sequence
       seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
       $._format_string,
       seq(kw("INITIAL"), field("initial", $._expression)),

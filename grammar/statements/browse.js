@@ -90,6 +90,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __browse_flag_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner -- this occurrence belongs to the browse flag choice
       alias(kw("DROP-TARGET"), $.drop_target),
       alias(kw("NO-LABELS", { alias: "NO-LABEL", offset: 8 }), $.no_labels),
       alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
