@@ -54,7 +54,7 @@ export default ({ kw }) => ({
   __dde_target_item_body: ($) =>
     seq(
       field("ddeid", $._expression),
-      kw("TARGET"),
+      $._kw_target,
       field("target", $._assignable),
       $.__dde_item_time_body,
     ),

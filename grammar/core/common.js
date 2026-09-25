@@ -275,7 +275,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _convert_option: ($) =>
     choice(
-      seq(kw("TARGET"), field("target", $._string_or_identifier_access_or_call)),
+      seq($._kw_target, field("target", $._string_or_identifier_access_or_call)),
       seq(kw("SOURCE"), field("source", $._string_or_identifier_access_or_call)),
     ),
 

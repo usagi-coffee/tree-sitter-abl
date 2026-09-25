@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       kw("SOURCE"),
       $._kw_codepage,
       field("source", $.string_literal),
-      kw("TARGET"),
+      $._kw_target,
       $._kw_codepage,
       field("target", $.string_literal),
     ),

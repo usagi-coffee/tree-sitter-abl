@@ -46,6 +46,6 @@ export default ({ kw }) => ({
     seq(
       kw("CONVERT"),
       optional(seq(kw("SOURCE"), $._kw_codepage, field("source_codepage", $._expression))),
-      optional(seq(kw("TARGET"), $._kw_codepage, field("target_codepage", $._expression))),
+      optional(seq($._kw_target, $._kw_codepage, field("target_codepage", $._expression))),
     ),
 });
