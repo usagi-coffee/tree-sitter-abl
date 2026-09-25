@@ -22,7 +22,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_alias,
       field("alias", $._alias_name),
-      $._for_keyword,
+      $._kw_for,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("DATABASE"),
       field("database", $._alias_name),
@@ -32,7 +32,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_buffer,
       field("handle", $._identifier_or_access),
-      $._for_keyword,
+      $._kw_for,
       $._kw_table,
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.__create_buffer_target))),

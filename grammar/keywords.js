@@ -224,12 +224,12 @@ export const inline = ($) => [
   $._kw_xml_node_type,
   $._kw_procedure,
   $._routine_access_modifier,
-  $._for_keyword,
+  $._kw_for,
   $._as_keyword,
 ];
 
 export default ({ kw }) => ({
-  _for_keyword: ($) => kw("FOR"),
+  _kw_for: ($) => kw("FOR"),
   _to_keyword: ($) => kw("TO"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
   _in_keyword: ($) => kw("IN"),

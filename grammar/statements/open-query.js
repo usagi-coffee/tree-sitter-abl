@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
       $._kw_query,
       field("query", $.identifier),
-      choice($._for_keyword, kw("PRESELECT")),
+      choice($._kw_for, kw("PRESELECT")),
       $._kw_each,
       $.__open_query_record_tail,
       optional($.query_tuning_phrase),

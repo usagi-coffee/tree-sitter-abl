@@ -69,7 +69,7 @@ export default ({ kw }) => ({
   __dataset_relation_head: ($) =>
     seq(
       optional(field("relation_name", $.identifier)),
-      $._for_keyword,
+      $._kw_for,
       field("parent_buffer", $.identifier),
       ",",
       field("child_buffer", $.identifier),

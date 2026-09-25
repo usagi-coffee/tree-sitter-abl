@@ -8,7 +8,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
-      $._for_keyword,
+      $._kw_for,
       $.query_table_list,
       optional(alias($.__query_cache_phrase, $.cache_phrase)),
       optional(alias(kw("SCROLLING"), $.scrolling)),

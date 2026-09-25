@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("AGGREGATE"),
       $.__aggregate_items,
-      $._for_keyword,
+      $._kw_for,
       field("table", $._qualified_identifier),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
     ),

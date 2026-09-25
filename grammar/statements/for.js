@@ -6,7 +6,7 @@ export default ({ kw }) => ({
 
   __for_body: ($) =>
     seq(
-      $._for_keyword,
+      $._kw_for,
       $.__for_record_or_variables,
       optional($.__for_while_transaction_tail),
       $.__for_block_body,

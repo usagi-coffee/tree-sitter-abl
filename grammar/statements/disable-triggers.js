@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __disable_triggers_body: ($) =>
     seq(
       $._kw_triggers,
-      $._for_keyword,
+      $._kw_for,
       field("mode", choice(kw("DUMP"), $._kw_load)),
       $._of_keyword,
       field("table", $._qualified_identifier),

@@ -21,7 +21,7 @@ export default ({ kw }) => ({
       optional($._query_name_phrase),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
-        seq($._for_keyword, $.__data_source_buffer_phrase, optional($.__data_source_buffer_tail)),
+        seq($._kw_for, $.__data_source_buffer_phrase, optional($.__data_source_buffer_tail)),
       ),
     ),
   __data_source_buffer_tail: ($) =>

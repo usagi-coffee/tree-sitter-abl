@@ -13,14 +13,14 @@ export default ({ kw }) => ({
             $.__parameter_standard_body,
             seq(
               $._kw_table,
-              $._for_keyword,
+              $._kw_for,
               field("table", $._qualified_identifier),
               optional($.__parameter_table_options),
             ),
             seq($._table_handle_value, optional($.__parameter_handle_options)),
             seq(
               $._dataset_keyword,
-              $._for_keyword,
+              $._kw_for,
               field("dataset", $._qualified_identifier),
               optional($.__parameter_table_options),
             ),
@@ -94,7 +94,7 @@ export default ({ kw }) => ({
       $._kw_parameter,
       $._kw_buffer,
       field("name", $.identifier),
-      $._for_keyword,
+      $._kw_for,
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._qualified_identifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

@@ -343,19 +343,19 @@ export default ({ kw }) => ({
       seq(
         $._kw_buffer,
         field("buffer", $.identifier),
-        $._for_keyword,
+        $._kw_for,
         field("table", $._qualified_identifier),
       ),
       seq(
         $._kw_table,
-        optional(field("for", $._for_keyword)),
+        optional(field("for", $._kw_for)),
         field("table", $._qualified_identifier),
         optional($.__class_table_options),
       ),
       seq($._table_handle_value, optional($.__class_handle_options)),
       seq(
         $._dataset_keyword,
-        optional(field("for", $._for_keyword)),
+        optional(field("for", $._kw_for)),
         field("dataset", $._qualified_identifier),
         optional($.__class_table_options),
       ),

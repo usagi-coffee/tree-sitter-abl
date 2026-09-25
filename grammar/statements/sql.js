@@ -37,7 +37,7 @@ export default ({ kw }) => ({
     seq(
       field("cursor", $.identifier),
       $._kw_cursor,
-      $._for_keyword,
+      $._kw_for,
       field("query", alias($.__sql_select_body, $.select)),
       optional(
         choice(alias($.__sql_read_only, $.read_only), alias($.__sql_for_update, $.for_update)),
@@ -51,10 +51,10 @@ export default ({ kw }) => ({
   // `seq(...)` instead parses the clause and then drops it: the tokens are
   // consumed, no error is raised, and nothing reaches the tree -- the silent
   // kind of gap, which only a node count catches.
-  __sql_read_only: ($) => seq($._for_keyword, kw("READ"), kw("ONLY")),
+  __sql_read_only: ($) => seq($._kw_for, kw("READ"), kw("ONLY")),
   __sql_for_update: ($) =>
     seq(
-      $._for_keyword,
+      $._kw_for,
       $._kw_update,
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction

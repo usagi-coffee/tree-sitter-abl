@@ -8,7 +8,7 @@ export default ({ kw }) => ({
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _key_value: ($) => seq($._kw_value, field("value", $._expression)),
-  _for_tenant: ($) => seq($._for_keyword, kw("TENANT"), field("tenant", $._expression)),
+  _for_tenant: ($) => seq($._kw_for, kw("TENANT"), field("tenant", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _table_handle_value: ($) => seq($._kw_table_handle, field("table_handle", $.identifier)),
   _set_update_record_body: ($) =>
@@ -224,7 +224,7 @@ export default ({ kw }) => ({
 
   _for_phrase: ($) =>
     seq(
-      $._for_keyword,
+      $._kw_for,
       seq(field("record", $._qualified_identifier), optional($._for_phrase_record_tail)),
     ),
   _for_phrase_record_tail: ($) =>
@@ -447,7 +447,7 @@ export default ({ kw }) => ({
       ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __dataset_for_phrase: ($) => seq($._for_keyword, $.__dataset_for_table_head),
+  __dataset_for_phrase: ($) => seq($._kw_for, $.__dataset_for_table_head),
   __dataset_for_table_head: ($) =>
     seq(field("table", $.identifier), optional(seq(",", $.__dataset_for_table_head))),
 

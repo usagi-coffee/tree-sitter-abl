@@ -7,7 +7,7 @@ export default ({ kw }) => ({
   __buffer_body: ($) =>
     seq(
       field("name", $.identifier),
-      $._for_keyword,
+      $._kw_for,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._qualified_identifier),

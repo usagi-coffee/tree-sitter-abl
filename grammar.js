@@ -668,7 +668,7 @@ export default grammar({
       _array_subscript: ($) =>
         choice(
           $._expressions,
-          seq(field("start", $._expression), $._for_keyword, field("count", $._expression)),
+          seq(field("start", $._expression), $._kw_for, field("count", $._expression)),
         ),
 
       // Callables

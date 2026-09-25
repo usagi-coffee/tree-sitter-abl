@@ -99,19 +99,19 @@ export default ({ kw }) => ({
         $._kw_buffer,
         // oxlint-disable-next-line tree-sitter-optimize/shared-field-marker
         field("buffer", $.identifier),
-        $._for_keyword,
+        $._kw_for,
         field("table", $._qualified_identifier),
       ),
       seq(
         $._kw_table,
-        optional($._for_keyword),
+        optional($._kw_for),
         field("table", $._qualified_identifier),
         optional($.__function_table_options),
       ),
       seq($._table_handle_value, optional($.__function_table_options)),
       seq(
         $._dataset_keyword,
-        $._for_keyword,
+        $._kw_for,
         field("dataset", $._qualified_identifier),
         optional($.__function_table_options),
       ),
