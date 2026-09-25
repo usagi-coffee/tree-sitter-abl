@@ -97,6 +97,7 @@ export default ({ kw }) => ({
       $._for_keyword,
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("PRESELECT"), $.preselect)),
     ),
 
