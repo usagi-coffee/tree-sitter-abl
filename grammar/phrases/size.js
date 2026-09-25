@@ -6,6 +6,6 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice($._kw_size, $._kw_size_chars, $._kw_size_pixels),
       field("width", $._expression),
-      $._by_keyword,
+      $._kw_by,
     ),
 });

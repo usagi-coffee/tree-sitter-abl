@@ -1,7 +1,7 @@
 // Non-core statement-specific shared rules
 
 export default ({ kw }) => ({
-  _width_by: ($) => seq(field("width", $.number_literal), $._by_keyword),
+  _width_by: ($) => seq(field("width", $.number_literal), $._kw_by),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
   _inner_chars_value: ($) => seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
@@ -239,7 +239,7 @@ export default ({ kw }) => ({
       field("start", $._expression),
       $._kw_to,
       field("end", $._expression),
-      optional(seq($._by_keyword, field("step", $._expression))),
+      optional(seq($._kw_by, field("step", $._expression))),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-closing-delimiter-inline

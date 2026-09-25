@@ -13,7 +13,7 @@ export default ({ kw }) => ({
             repeat1(
               choice(
                 seq(
-                  $._by_keyword,
+                  $._kw_by,
                   field("by", $._expression),
                   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
                   optional(kw("DESCENDING", { offset: 4 })),

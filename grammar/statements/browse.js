@@ -70,19 +70,19 @@ export default ({ kw }) => ({
       seq(
         $._kw_size,
         field("width", $.__browse_option_expression),
-        $._by_keyword,
+        $._kw_by,
         field("height", $.__browse_option_expression),
       ),
       seq(
         $._kw_size_chars,
         field("width_chars", $.__browse_option_expression),
-        $._by_keyword,
+        $._kw_by,
         field("height_chars", $.__browse_option_expression),
       ),
       seq(
         $._kw_size_pixels,
         field("width_pixels", $.__browse_option_expression),
-        $._by_keyword,
+        $._kw_by,
         field("height_pixels", $.__browse_option_expression),
       ),
     ),

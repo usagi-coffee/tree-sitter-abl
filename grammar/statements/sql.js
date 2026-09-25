@@ -193,7 +193,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       $._kw_group,
-      $._by_keyword,
+      $._kw_by,
       field("group", $._qualified_identifier),
       optional($.__sql_group_by_tail),
     ),
@@ -206,7 +206,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("ORDER"),
-      $._by_keyword,
+      $._kw_by,
       alias($.__sql_order_term, $.order_term),
       optional($.__sql_order_by_tail),
     ),
