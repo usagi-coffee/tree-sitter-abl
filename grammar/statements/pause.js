@@ -3,6 +3,7 @@ export default ({ kw }) => ({
   __pause_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("PAUSE"),
       optional(field("duration", $._expression)),
       optional(alias(kw("BEFORE-HIDE"), $.before_hide)),
