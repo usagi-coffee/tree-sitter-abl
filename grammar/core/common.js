@@ -569,7 +569,7 @@ export default ({ kw }) => ({
         choice($.__return_error_clause, kw("NO-APPLY"), field("return_value", $._expression)),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __return_error_clause: ($) => seq($._kw_error, optional(field("error_value", $._expression))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline
   _when_phrase: ($) => seq($._kw_when, field("when", $._expression)),
