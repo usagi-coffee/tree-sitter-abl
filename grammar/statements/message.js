@@ -66,7 +66,7 @@ export default ({ kw }) => ({
       ),
       optional($.__message_set_update_after_type),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
+  // oxlint-disable-next-line tree-sitter-optimize/optional-tail-choice-collapse
   __message_set_update_after_type: ($) =>
     choice(
       seq($._format_string, optional($.__message_set_update_after_format)),
