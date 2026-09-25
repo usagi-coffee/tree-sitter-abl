@@ -2,7 +2,7 @@
 
 export default ({ kw }) => ({
   _width_by: ($) => seq(field("width", $.number_literal), $._by_keyword),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
   _inner_chars_value: ($) => seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
