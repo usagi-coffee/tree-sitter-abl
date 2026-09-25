@@ -474,6 +474,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
       _bare_marker_identifier: ($) =>
         choice(alias($._kw_buffer, $.identifier), alias($._kw_table_handle, $.identifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/short-shared-category-name
       _identifier_or_array_access: ($) => choice($._qualified_identifier, $.array_access),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
