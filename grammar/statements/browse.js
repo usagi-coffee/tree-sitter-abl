@@ -49,8 +49,8 @@ export default ({ kw }) => ({
       ),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
       choice(
-        seq(field("down", $.number_literal), kw("DOWN")),
-        seq(kw("DOWN"), field("down", $.__browse_option_expression)),
+        seq(field("down", $.number_literal), $._kw_down),
+        seq($._kw_down, field("down", $.__browse_option_expression)),
       ),
       seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__browse_option_expression)),
       seq(kw("DEFAULT-BUTTON"), field("default_button", $.__browse_option_expression)),

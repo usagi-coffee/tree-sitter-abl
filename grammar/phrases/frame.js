@@ -85,11 +85,11 @@ export default ({ kw }) => ({
     choice(
       prec.right(
         seq(
-          kw("DOWN"),
+          $._kw_down,
           optional(field("count", choice($.number_literal, $.parenthesized_expression))),
         ),
       ),
-      seq(field("value", $.__frame_expression), kw("DOWN")),
+      seq(field("value", $.__frame_expression), $._kw_down),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
