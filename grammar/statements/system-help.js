@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       seq(kw("ALTERNATE-KEY"), field("alternate_key", $.__system_help_expression)),
       seq(kw("PARTIAL-KEY"), field("partial_key", $.__system_help_expression)),
       seq(kw("SET-CONTENTS"), field("set_contents", $.__system_help_expression)),
-      seq(kw("COMMAND"), field("command", $.__system_help_expression)),
+      seq($._kw_command, field("command", $.__system_help_expression)),
       seq(
         kw("MULTIPLE-KEY"),
         field("multiple_key", $.__system_help_expression),

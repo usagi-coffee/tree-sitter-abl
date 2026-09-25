@@ -37,7 +37,7 @@ export default ({ kw }) => ({
         choice(alias(kw("EXECUTE"), $.identifier), alias(kw("TERMINATE"), $.identifier)),
       ),
       field("ddeid", $._expression),
-      optional(seq(kw("COMMAND"), field("command", $._expression), optional($.__dde_time_phrase))),
+      optional(seq($._kw_command, field("command", $._expression), optional($.__dde_time_phrase))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __dde_initiate_body: ($) =>
