@@ -117,6 +117,7 @@ export default ({ kw }) => ({
     seq(
       kw("SUB-MENU"),
       field("name", $.identifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("DISABLED"), $.disabled)),
       optional($._aggregate_label_phrase),
     ),
