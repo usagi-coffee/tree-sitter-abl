@@ -20,7 +20,7 @@ export default ({ kw }) => ({
     ),
   __create_alias: ($) =>
     seq(
-      kw("ALIAS"),
+      $._kw_alias,
       field("alias", $._alias_name),
       $._for_keyword,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
