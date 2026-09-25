@@ -113,7 +113,7 @@ export default ({ kw }) => ({
 
   destructor_definition: ($) =>
     seq(
-      kw("DESTRUCTOR"),
+      $._kw_destructor,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       field("name", $.identifier),
@@ -143,7 +143,7 @@ export default ({ kw }) => ({
 
   __class_destructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($._compound_body, optional(choice(kw("DESTRUCTOR"), $._kw_method)), $._terminator),
+    seq($._compound_body, optional(choice($._kw_destructor, $._kw_method)), $._terminator),
 
   __class_destructor_parameters: ($) => seq("(", ")"),
 
