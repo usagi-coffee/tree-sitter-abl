@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __save_cache_prefix: ($) =>
     seq(
       kw("SAVE"),
-      kw("CACHE"),
+      $._kw_cache,
       choice(kw("CURRENT"), kw("COMPLETE")),
       choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
       $._to_keyword,

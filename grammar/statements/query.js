@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       optional(alias(kw("SCROLLING"), $.scrolling)),
       optional(alias(kw("RCODE-INFORMATION"), $.rcode_information)),
     ),
-  __query_cache_phrase: ($) => seq(kw("CACHE"), field("cache", $.number_literal)),
+  __query_cache_phrase: ($) => seq($._kw_cache, field("cache", $.number_literal)),
 
   query_table_list: ($) => seq($.__query_table_entry, optional($.__query_table_list_tail)),
   __query_table_list_tail: ($) =>
