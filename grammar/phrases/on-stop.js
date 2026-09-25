@@ -3,7 +3,7 @@ export default ({ kw }) => ({
     seq(
       $._on_keyword,
       kw("STOP"),
-      kw("UNDO"),
+      $._kw_undo,
       optional(field("undo_label", $.identifier)),
       $._on_action_tail,
     ),

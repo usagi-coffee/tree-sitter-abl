@@ -4,7 +4,7 @@ export default ({ kw }) => ({
     seq(
       $._on_keyword,
       kw("ERROR"),
-      kw("UNDO"),
+      $._kw_undo,
       optional(field("undo_label", $.identifier)),
       optional(seq(",", $.__on_error_action)),
     ),

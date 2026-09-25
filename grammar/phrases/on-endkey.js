@@ -4,7 +4,7 @@ export default ({ kw }) => ({
     seq(
       $._on_keyword,
       choice(kw("ENDKEY"), kw("END-KEY")),
-      kw("UNDO"),
+      $._kw_undo,
       optional(field("undo_label", $.identifier)),
       optional($._on_action_tail),
     ),

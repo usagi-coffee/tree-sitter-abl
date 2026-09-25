@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __undo_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("UNDO"),
+      $._kw_undo,
       optional(field("undo_label", $.identifier)),
       optional(seq(",", $.__undo_action)),
     ),
