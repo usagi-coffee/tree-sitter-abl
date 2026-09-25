@@ -166,7 +166,7 @@ export default ({ kw }) => ({
               field("message", $.__browse_option_expression),
               ")",
             ),
-            alias(kw("AUTO-RETURN"), $.auto_return),
+            alias($._kw_auto_return, $.auto_return),
             alias(kw("DISABLE-AUTO-ZAP"), $.disable_auto_zap),
             alias(kw("MOVEABLE"), $.moveable),
             alias(kw("RESIZABLE"), $.resizable),

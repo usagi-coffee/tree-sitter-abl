@@ -80,8 +80,8 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($._format_view_as, $.view_as_phrase),
-        optional(alias(kw("AUTO-RETURN"), $.auto_return)),
+        optional(alias($._kw_auto_return, $.auto_return)),
       ),
-      alias(kw("AUTO-RETURN"), $.auto_return),
+      alias($._kw_auto_return, $.auto_return),
     ),
 });

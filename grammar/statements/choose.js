@@ -23,7 +23,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __choose_option: ($) =>
     choice(
-      alias(kw("AUTO-RETURN"), $.auto_return),
+      alias($._kw_auto_return, $.auto_return),
       seq(kw("COLOR"), field("color", $.color_phrase)),
       alias($._go_on_phrase, $.go_on),
       seq(kw("KEYS"), field("keys", $.identifier)),

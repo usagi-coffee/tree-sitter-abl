@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     choice(
       $.__format_at_phrase,
       $._format_field_option,
-      kw("AUTO-RETURN"),
+      $._kw_auto_return,
       kw("BLANK"),
       kw("DEBLANK"),
       kw("DISABLE-AUTO-ZAP"),

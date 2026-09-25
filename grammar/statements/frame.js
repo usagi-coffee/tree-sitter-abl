@@ -97,7 +97,7 @@ export default ({ kw }) => ({
         choice(
           $._format_field_option,
           $._tooltip_phrase,
-          alias(kw("AUTO-RETURN"), $.auto_return),
+          alias($._kw_auto_return, $.auto_return),
           alias(kw("BLANK"), $.blank),
           alias(kw("DEBLANK"), $.deblank),
           alias(kw("DISABLE-AUTO-ZAP"), $.disable_auto_zap),
