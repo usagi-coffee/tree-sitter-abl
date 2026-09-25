@@ -43,6 +43,7 @@ export default ({ kw }) => ({
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       $._initial_phrase,
       $.view_as_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
       alias($._no_undo_keyword, $.no_undo),
       $.trigger_phrase,
