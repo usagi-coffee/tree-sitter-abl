@@ -7,6 +7,7 @@ export default ({ kw }) => ({
   // Widening the FOR branch counter makes record-phrase ambiguities global.
   __do_body: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("DO"),
       choice(
         seq(alias($._for_phrase, $.for_phrase), optional($._selection_after_for), $.__do_body_tail),
