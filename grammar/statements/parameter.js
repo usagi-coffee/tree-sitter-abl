@@ -62,6 +62,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("APPEND"), $.append),
           alias(kw("BIND"), $.bind),
           alias(kw("BY-VALUE"), $.by_value),
