@@ -21,7 +21,7 @@ export default ({ kw }) => ({
       seq(kw("CONTEXT"), field("context", $.__system_help_expression)),
       seq(kw("CONTEXT-POPUP"), field("context_popup", $.__system_help_expression)),
       seq(kw("HELP-TOPIC"), field("help_topic", $.__system_help_expression)),
-      seq(kw("KEY"), field("key", $.__system_help_expression)),
+      seq($._kw_key, field("key", $.__system_help_expression)),
       seq(kw("ALTERNATE-KEY"), field("alternate_key", $.__system_help_expression)),
       seq(kw("PARTIAL-KEY"), field("partial_key", $.__system_help_expression)),
       seq(kw("SET-CONTENTS"), field("set_contents", $.__system_help_expression)),

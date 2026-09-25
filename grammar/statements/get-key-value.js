@@ -5,6 +5,6 @@ export default ({ kw }) => ({
     seq(
       kw("GET-KEY-VALUE"),
       $._key_section,
-      choice(seq(kw("KEY"), field("key", $._expression), $._key_value), $._kw_default),
+      choice(seq($._kw_key, field("key", $._expression), $._key_value), $._kw_default),
     ),
 });

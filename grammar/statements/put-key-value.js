@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       choice(
         seq(
           $._key_section,
-          kw("KEY"),
+          $._kw_key,
           choice(field("key", $._expression), $._kw_default),
           $._key_value,
         ),
