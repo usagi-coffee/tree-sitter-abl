@@ -3,7 +3,7 @@ export default ({ kw }) => ({
   __connect_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("CONNECT"),
+      $._kw_connect,
       optional(field("database", choice($.identifier, $.string_literal, $.function_call))),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
