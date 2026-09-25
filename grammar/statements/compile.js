@@ -12,7 +12,7 @@ export default ({ kw }) => ({
       seq(
         kw("SAVE"),
         optional(seq("=", field("save", $._expression))),
-        optional(seq(kw("INTO"), field("into", $._expression))),
+        optional(seq($._kw_into, field("into", $._expression))),
       ),
       seq(
         kw("LISTING"),

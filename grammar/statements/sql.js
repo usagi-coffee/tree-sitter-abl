@@ -81,7 +81,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       field("cursor", $.identifier),
-      kw("INTO"),
+      $._kw_into,
       field("target", $._identifier_or_array_access),
       optional($.__sql_fetch_target_tail),
     ),
@@ -178,7 +178,7 @@ export default ({ kw }) => ({
   __sql_into_clause: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
-      kw("INTO"),
+      $._kw_into,
       field("into", $._identifier_or_array_access),
       optional($.__sql_into_target_tail),
     ),
