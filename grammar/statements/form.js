@@ -22,6 +22,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           alias($._kw_menu, $.identifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           optional(alias(kw("NO-LABEL"), $.no_label)),
           optional(alias(kw("NO-LABELS"), $.no_labels)),
           optional($._format_string),
