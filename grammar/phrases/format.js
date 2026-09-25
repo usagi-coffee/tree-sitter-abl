@@ -141,7 +141,7 @@ export default ({ kw }) => ({
     prec(
       "format_value",
       seq(
-        kw("FORMAT", { offset: 4 }),
+        $._kw_format,
         choice(
           field("format", $.string_literal),
           seq("(", field("format", $.string_literal), ")"),

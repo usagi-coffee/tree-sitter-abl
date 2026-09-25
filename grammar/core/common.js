@@ -536,7 +536,7 @@ export default ({ kw }) => ({
 
   _format_string: ($) =>
     seq(
-      kw("FORMAT", { offset: 4 }),
+      $._kw_format,
       field(
         "format",
         choice($.string_literal, $.number_literal, alias($.__unquoted_format, $.format_picture)),
