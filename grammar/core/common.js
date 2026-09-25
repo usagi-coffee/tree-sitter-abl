@@ -414,6 +414,7 @@ export default ({ kw }) => ({
   __dataset_body_tail: ($) =>
     choice(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
         optional($.__dataset_body_after_serialize_hidden),
       ),
