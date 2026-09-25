@@ -19,7 +19,7 @@ export default ({ kw }) => ({
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.__set_fields_tail_after_go_on),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __set_fields_tail_after_go_on: ($) =>
     choice(
       seq($._format_validate, optional($.__set_fields_tail_after_format_validate)),
