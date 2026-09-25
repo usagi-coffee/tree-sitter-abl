@@ -26,7 +26,7 @@ export default ({ kw }) => ({
           alias(kw("ANSI-ONLY"), $.ansi_only),
           alias(kw("FIXED-ONLY"), $.fixed_only),
           seq(kw("MAX-SIZE"), field("max_size", $._expression)),
-          seq(kw("MIN-SIZE"), field("min_size", $._expression)),
+          seq($._kw_min_size, field("min_size", $._expression)),
           $.__system_dialog_window_option,
         ),
       ),

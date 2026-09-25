@@ -37,7 +37,7 @@ export default ({ kw }) => ({
       seq(kw("PREPROCESS"), field("preprocess", $._expression)),
       seq(kw("OPTIONS"), field("options", $._expression)),
       seq(kw("OPTIONS-FILE"), field("options_file", $._expression)),
-      seq(kw("MIN-SIZE"), optional(alias($._equals_value, $.min_size))),
+      seq($._kw_min_size, optional(alias($._equals_value, $.min_size))),
       seq(kw("DEFAULT-UNTRANSLATABLE"), optional(alias($._equals_value, $.default_untranslatable))),
       seq(kw("LANGUAGES"), "(", field("languages", $._expression), ")"),
       seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
