@@ -92,6 +92,7 @@ export default ({ kw }) => ({
   _map_phrase: ($) =>
     choice(
       seq($._kw_map, field("map", $._identifier_or_string_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-MAP"), $.no_map),
     ),
 
