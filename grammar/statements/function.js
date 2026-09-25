@@ -68,7 +68,7 @@ export default ({ kw }) => ({
         optional(alias($.__function_map_phrase, $.map_phrase)),
         alias($.__function_in_phrase, $.in_phrase),
       ),
-      alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forward),
+      alias($._kw_forwards, $.forward),
     ),
   __function_parameters: ($) => seq("(", optional($.__function_parameter_list), ")"),
   __function_parameter_list: ($) =>

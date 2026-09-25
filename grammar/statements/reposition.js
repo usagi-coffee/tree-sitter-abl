@@ -22,10 +22,7 @@ export default ({ kw }) => ({
             seq($._row_keyword, field("row", $._expression)),
           ),
         ),
-        seq(
-          alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forwards),
-          field("count", $._expression),
-        ),
+        seq(alias($._kw_forwards, $.forwards), field("count", $._expression)),
         seq(
           alias(kw("BACKWARDS", { alias: "BACKWARD", offset: 8 }), $.backwards),
           field("count", $._expression),
