@@ -37,6 +37,7 @@ export default ({ kw }) => ({
     seq($.__dynamic_function_atom, $.__dynamic_function_concatenation_tail),
   __dynamic_function_concatenation_tail: ($) =>
     seq("+", $.__dynamic_function_atom, optional($.__dynamic_function_concatenation_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-choice-inline
   __dynamic_function_atom: ($) =>
     choice($._string_or_identifier_access_or_call, $.parenthesized_expression),
 });
