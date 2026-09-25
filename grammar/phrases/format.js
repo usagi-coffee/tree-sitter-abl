@@ -90,6 +90,7 @@ export default ({ kw }) => ({
       kw("LARGE"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_max_chars, field("max_chars", $.number_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("NO-BOX"),
       kw("NO-WORD-WRAP"),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
