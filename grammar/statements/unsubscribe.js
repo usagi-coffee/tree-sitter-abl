@@ -10,6 +10,11 @@ export default ({ kw }) => ({
       optional(alias($.__unsubscribe_in_phrase, $.in_phrase)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
-  __unsubscribe_event: ($) => choice(field("event", $._expression), alias(kw("ALL"), $.all)),
+  __unsubscribe_event: ($) =>
+    choice(
+      field("event", $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("ALL"), $.all),
+    ),
   __unsubscribe_in_phrase: ($) => seq($._in_keyword, field("publisher", $._expression)),
 });

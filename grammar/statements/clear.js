@@ -6,6 +6,7 @@ export default ({ kw }) => ({
       kw("CLEAR"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ALL"), $.all)),
       optional(alias(kw("NO-PAUSE"), $.no_pause)),
     ),

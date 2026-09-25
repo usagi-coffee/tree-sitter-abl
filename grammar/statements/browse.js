@@ -179,7 +179,14 @@ export default ({ kw }) => ({
   __browse_option_expression: ($) => prec.right($._expression),
 
   __browse_enable_phrase: ($) =>
-    seq(kw("ENABLE"), choice(alias(kw("ALL"), $.all), $.__browse_enable_fields)),
+    seq(
+      kw("ENABLE"),
+      choice(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        alias(kw("ALL"), $.all),
+        $.__browse_enable_fields,
+      ),
+    ),
   __browse_enable_fields: ($) =>
     prec.right(
       seq(

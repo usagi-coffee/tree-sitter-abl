@@ -14,5 +14,10 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __hide_target: ($) =>
-    choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $._widget_phrases),
+    choice(
+      alias(kw("MESSAGE"), $.message),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("ALL"), $.all),
+      $._widget_phrases,
+    ),
 });

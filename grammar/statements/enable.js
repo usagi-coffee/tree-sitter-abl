@@ -18,6 +18,7 @@ export default ({ kw }) => ({
     ),
   __enable_body: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("ALL"), $.all), optional(seq($._kw_except, $._except_name_list))),
       $.__enable_items_list,
     ),

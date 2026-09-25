@@ -127,7 +127,13 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_projection: ($) =>
     seq(
-      optional(choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct))),
+      optional(
+        choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+          alias(kw("ALL"), $.all),
+          alias(kw("DISTINCT"), $.distinct),
+        ),
+      ),
       $.__sql_select_columns,
       optional($.__sql_into_clause),
     ),

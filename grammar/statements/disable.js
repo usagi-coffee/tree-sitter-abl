@@ -11,7 +11,11 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __disable_items: ($) =>
-    choice(seq(alias(kw("ALL"), $.all), optional($._except_fields)), $.__disable_items_list),
+    choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      seq(alias(kw("ALL"), $.all), optional($._except_fields)),
+      $.__disable_items_list,
+    ),
   __disable_items_list: ($) =>
     prec.right(seq(alias($.__disable_item, $.disable_item), optional($.__disable_items_list))),
 
