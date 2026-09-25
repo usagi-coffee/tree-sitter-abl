@@ -110,7 +110,7 @@ export default ({ kw }) => ({
       "format_position",
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("COLON"), field("colon", $._expression)),
+        seq($._kw_colon, field("colon", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._to_keyword, field("to", $._expression)),
       ),
