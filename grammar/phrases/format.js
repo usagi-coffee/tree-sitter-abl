@@ -45,6 +45,7 @@ export default ({ kw }) => ({
           ),
           optional($._alignment),
         ),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
         seq($._row_keyword, field("row", $.number_literal)),
       ),
@@ -52,6 +53,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_at_column: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("COLUMN-OF"), field("column_of", $._expression)),
