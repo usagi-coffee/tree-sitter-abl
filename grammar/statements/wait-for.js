@@ -17,7 +17,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __wait_for_focus_pause_tail: ($) =>
     choice(
       seq(
