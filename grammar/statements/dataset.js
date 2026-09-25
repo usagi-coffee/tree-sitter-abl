@@ -20,6 +20,7 @@ export default ({ kw }) => ({
   __dataset_relation_qualifiers: ($) =>
     choice(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("REPOSITION"), $.reposition),
         optional($.__dataset_data_relation_after_reposition),
       ),
