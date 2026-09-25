@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   editor_phrase: ($) =>
-    seq(kw("EDITOR"), optional($.__editor_options), $.__editor_size, optional($.__editor_options)),
+    seq($._kw_editor, optional($.__editor_options), $.__editor_size, optional($.__editor_options)),
   __editor_options: ($) => prec.right(seq($.__editor_option, optional($.__editor_options))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __editor_option: ($) =>

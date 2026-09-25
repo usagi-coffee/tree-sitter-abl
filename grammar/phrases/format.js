@@ -114,7 +114,7 @@ export default ({ kw }) => ({
   __format_editor_phrase: ($) =>
     prec.left(
       seq(
-        kw("EDITOR"),
+        $._kw_editor,
         optional($.__format_editor_options),
         $.__format_editor_size,
         optional($.__format_editor_options),

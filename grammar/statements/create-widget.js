@@ -10,7 +10,7 @@ export default ({ kw }) => ({
         kw("COMBO-BOX"),
         kw("CONTROL-FRAME"),
         kw("DIALOG-BOX"),
-        kw("EDITOR"),
+        $._kw_editor,
         kw("FILL-IN"),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FRAME", { offset: 4 }),
