@@ -272,10 +272,10 @@ export default ({ kw }) => ({
         $._new_keyword,
         optional($._kw_buffer),
         field("new_record", $.identifier),
-        kw("OLD"),
+        $._kw_old,
         optional($._kw_buffer),
         field("old_record", $.identifier),
       ),
-      seq(kw("OLD"), optional($._kw_value), field("old_field", $.identifier)),
+      seq($._kw_old, optional($._kw_value), field("old_field", $.identifier)),
     ),
 });
