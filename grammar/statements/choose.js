@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       seq(kw("KEYS"), field("keys", $.identifier)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("PAUSE"), field("pause", $._expression)),
     ),
 });
