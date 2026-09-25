@@ -481,7 +481,7 @@ export default ({ kw }) => ({
   _aggregate_label_phrase: ($) => seq($._kw_label, field("label", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")),
-  _parameter_direction: ($) => choice($._kw_input, kw("OUTPUT"), kw("INPUT-OUTPUT", { offset: 7 })),
+  _parameter_direction: ($) => choice($._kw_input, $._kw_output, kw("INPUT-OUTPUT", { offset: 7 })),
 
   _alert_box_options: ($) =>
     choice(
