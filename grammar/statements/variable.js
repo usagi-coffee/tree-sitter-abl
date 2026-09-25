@@ -76,11 +76,13 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $._member_access_modifier,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("STATIC"), $.static_modifier),
         optional($._member_access_modifier),
         optional($._serialization_modifier),

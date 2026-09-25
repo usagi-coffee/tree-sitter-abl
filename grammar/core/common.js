@@ -167,10 +167,15 @@ export default ({ kw }) => ({
     choice(
       $._definition_scope_modifier,
       alias(kw("PROTECTED"), $.access_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("PRIVATE"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("PROTECTED"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PRIVATE"), $.access_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PROTECTED"), $.access_modifier)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline

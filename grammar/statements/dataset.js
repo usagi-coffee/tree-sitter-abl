@@ -106,6 +106,7 @@ export default ({ kw }) => ({
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
       ),

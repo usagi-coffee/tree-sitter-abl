@@ -44,6 +44,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __event_type_modifier: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     choice(alias(kw("STATIC"), $.static_modifier), alias(kw("ABSTRACT"), $.abstract_modifier)),
   __event_type_modifiers: ($) =>
     prec.right(seq($.__event_type_modifier, optional($.__event_type_modifiers))),

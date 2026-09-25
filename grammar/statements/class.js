@@ -98,6 +98,7 @@ export default ({ kw }) => ({
           alias(kw("PROTECTED"), $.access_modifier),
           alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
           alias(kw("PUBLIC"), $.access_modifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("STATIC"), $.static_modifier),
           $.preprocessor_name,
         ),
@@ -267,6 +268,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __class_property_class_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
@@ -284,6 +286,7 @@ export default ({ kw }) => ({
       alias(kw("PROTECTED"), $.access_modifier),
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("OVERRIDE"), $.override_modifier),

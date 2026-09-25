@@ -36,6 +36,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __var_storage_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
