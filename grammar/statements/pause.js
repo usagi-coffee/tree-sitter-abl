@@ -15,6 +15,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __pause_message: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("MESSAGE"), field("message", $.string_literal)),
       alias(kw("NO-MESSAGE"), $.no_message),
     ),
