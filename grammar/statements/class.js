@@ -241,6 +241,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
       seq(kw("IMPLEMENTS"), field("interface", $._type_name), optional($.__class_implements_tail)),
       alias(kw("USE-WIDGET-POOL"), $.use_widget_pool),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ABSTRACT"), $.abstract),
       alias(kw("FINAL"), $.final),
       alias(kw("SERIALIZABLE"), $.serializable),
