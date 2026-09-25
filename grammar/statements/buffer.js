@@ -14,6 +14,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PRESELECT"), $.preselect),
           seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
