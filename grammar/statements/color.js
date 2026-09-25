@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __color_prefix: ($) => seq(kw("COLOR"), optional($.__color_body)),
 
   __color_body: ($) =>
-    seq(optional(choice(alias(kw("DISPLAY"), $.display), $._kw_prompt)), $.__color_tail),
+    seq(optional(choice(alias($._kw_display, $.display), $._kw_prompt)), $.__color_tail),
 
   __color_tail: ($) =>
     seq(
