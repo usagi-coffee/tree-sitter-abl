@@ -7,5 +7,5 @@ export default ({ kw }) => ({
         seq($.__entered_operator, field("field", $.identifier)),
       ),
     ),
-  __entered_operator: ($) => seq(optional(alias($._not_keyword, $.not)), kw("ENTERED")),
+  __entered_operator: ($) => seq(optional(alias($._kw_not, $.not)), kw("ENTERED")),
 });

@@ -446,5 +446,5 @@ export default ({ kw }) => ({
       alias(kw("PUBLIC"), $.access_modifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
-  _not_keyword: ($) => kw("NOT"),
+  _kw_not: ($) => kw("NOT"),
 });

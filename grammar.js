@@ -541,7 +541,7 @@ export default grammar({
       unary_expression: ($) =>
         choice(
           prec("unary", seq($.__unary_sign, $._expression)),
-          prec("not", seq($._not_keyword, $._expression)),
+          prec("not", seq($._kw_not, $._expression)),
         ),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
       __unary_sign: ($) => choice("+", "-"),
