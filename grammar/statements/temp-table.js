@@ -45,7 +45,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("like", $.__temp_table_like_name),
-      optional(alias(kw("VALIDATE"), $.validate)),
+      optional(alias($._kw_validate, $.validate)),
       optional($.__temp_table_use_index_phrases),
     ),
   __temp_table_use_index_phrases: ($) =>
@@ -54,7 +54,7 @@ export default ({ kw }) => ({
     seq(
       $._like_keyword,
       field("type", $.__temp_table_like_name),
-      optional(alias(kw("VALIDATE"), $.validate)),
+      optional(alias($._kw_validate, $.validate)),
     ),
   __temp_table_use_index_phrase: ($) =>
     seq(

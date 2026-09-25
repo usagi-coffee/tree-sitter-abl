@@ -164,7 +164,7 @@ export default ({ kw }) => ({
   _format_validate: ($) => seq($.__format_validate_prefix, ")"),
   __format_validate_prefix: ($) =>
     seq(
-      kw("VALIDATE"),
+      $._kw_validate,
       "(",
       field("condition", $._expression),
       ",",

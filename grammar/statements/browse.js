@@ -157,7 +157,7 @@ export default ({ kw }) => ({
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq($._help_keyword, field("help", $.string_literal)),
             seq(
-              kw("VALIDATE"),
+              $._kw_validate,
               "(",
               field("validate", $.__browse_option_expression),
               ",",
