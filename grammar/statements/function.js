@@ -133,6 +133,7 @@ export default ({ kw }) => ({
       optional(alias(kw("APPEND"), $.append)),
       choice(
         seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("BY-VALUE"), $.by_value),
       ),
     ),
