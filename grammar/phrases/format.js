@@ -244,6 +244,7 @@ export default ({ kw }) => ({
         kw("VIEW-AS"),
         choice(
           seq($._kw_text, optional($.__format_view_as_tail)),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
           // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
           seq($._kw_fill_in, optional($._kw_native), optional($.__format_view_as_tail)),
