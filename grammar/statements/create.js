@@ -53,7 +53,7 @@ export default ({ kw }) => ({
     ),
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
-      choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
+      choice(kw("CALL"), $._kw_query, kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
       $._handle_in_widget_pool,
     ),
   __create_handle_with_pool_body: ($) =>

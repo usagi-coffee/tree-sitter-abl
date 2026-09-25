@@ -7,7 +7,7 @@ export default ({ kw }) => ({
     seq(
       kw("OPEN"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
-      kw("QUERY"),
+      $._kw_query,
       field("query", $.identifier),
       choice($._for_keyword, kw("PRESELECT")),
       kw("EACH"),

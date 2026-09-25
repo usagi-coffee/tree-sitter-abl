@@ -8,7 +8,7 @@ export default ({ kw }) => ({
   __browse_body: ($) =>
     seq(
       field("name", $.identifier),
-      kw("QUERY"),
+      $._kw_query,
       field("query", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
