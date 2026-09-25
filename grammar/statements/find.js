@@ -14,7 +14,7 @@ export default ({ kw }) => ({
           alias($._kw_current, $.current),
         ),
       ),
-      field("table", $._identifier_or_qualified_name),
+      field("table", $._qualified_identifier),
       optional(field("constant", $._expression)),
       optional($.__find_options),
     ),
@@ -39,7 +39,7 @@ export default ({ kw }) => ({
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
       seq($._using_keyword, field("values", $._expressions)),
-      seq($._kw_use_index, field("index", $._identifier_or_qualified_name)),
+      seq($._kw_use_index, field("index", $._qualified_identifier)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

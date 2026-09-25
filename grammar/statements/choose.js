@@ -11,7 +11,7 @@ export default ({ kw }) => ({
     ),
   __choose_field_help: ($) =>
     seq(
-      field("field", $._identifier_or_qualified_name),
+      field("field", $._qualified_identifier),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._help_keyword, field("help", $.string_literal)),

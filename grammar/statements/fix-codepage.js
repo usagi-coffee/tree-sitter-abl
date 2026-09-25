@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("FIX-CODEPAGE"),
       "(",
-      field("target", $._identifier_or_qualified_name),
+      field("target", $._qualified_identifier),
       ")",
       "=",
       field("codepage", $._expression),

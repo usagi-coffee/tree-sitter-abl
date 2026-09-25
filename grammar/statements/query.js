@@ -22,7 +22,7 @@ export default ({ kw }) => ({
 
   __query_table_entry: ($) =>
     seq(
-      field("table", $._identifier_or_qualified_name),
+      field("table", $._qualified_identifier),
       optional(alias($.__query_field_list, $.field_list)),
     ),
   __query_field_list: ($) =>

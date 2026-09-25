@@ -7,7 +7,7 @@ export default ({ kw }) => ({
         field(
           "handle",
           // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-          choice($._identifier_or_qualified_name, $.preprocessor_name),
+          choice($._qualified_identifier, $.preprocessor_name),
         ),
       ),
       $.__widget_entry,
@@ -41,7 +41,7 @@ export default ({ kw }) => ({
       ),
       seq(
         $._kw_menu_item,
-        field("item", $._identifier_or_qualified_name),
+        field("item", $._qualified_identifier),
         optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
@@ -117,12 +117,12 @@ export default ({ kw }) => ({
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         $._kw_menu_item,
-        field("item", $._identifier_or_qualified_name),
+        field("item", $._qualified_identifier),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name)),
+      field("handle", choice($._qualified_identifier, $.preprocessor_name)),
     ),
 });

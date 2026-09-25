@@ -6,7 +6,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("BUFFER-COPY"),
-      field("source", $._identifier_or_qualified_name),
+      field("source", $._qualified_identifier),
       optional(
         choice(
           alias($.__buffer_copy_except_phrase, $.except_phrase),
@@ -14,7 +14,7 @@ export default ({ kw }) => ({
         ),
       ),
       $._to_keyword,
-      field("target", $._identifier_or_qualified_name),
+      field("target", $._qualified_identifier),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-LOBS"), $.no_lobs)),

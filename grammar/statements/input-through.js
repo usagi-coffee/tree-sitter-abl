@@ -26,7 +26,7 @@ export default ({ kw }) => ({
       $.number_literal,
       $.function_call,
       $.object_access,
-      $._identifier_or_qualified_name,
+      $._qualified_identifier,
       $.preprocessor_name,
       alias($.__input_through_shell_variable, $.shell_variable),
     ),

@@ -8,7 +8,7 @@ export default ($) => [
   [$.function_call, $._input_field],
   // Purpose: treat tokens after INPUT THROUGH program as arguments, not program name.
   // Example: INPUT THROUGH prog arg1.
-  [$.__input_through_arg_value, $._identifier_or_qualified_name],
+  [$.__input_through_arg_value, $._qualified_identifier],
   // Purpose: prefer function call when THROUGH argument uses '('.
   // Example: INPUT THROUGH prog myFunc().
   [$.function_call, $.__input_through_arg_value],

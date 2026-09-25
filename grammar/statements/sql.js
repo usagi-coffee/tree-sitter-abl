@@ -60,17 +60,13 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
           $._of_keyword,
-          field("column", $._identifier_or_qualified_name),
+          field("column", $._qualified_identifier),
           optional($.__sql_for_update_column_tail),
         ),
       ),
     ),
   __sql_for_update_column_tail: ($) =>
-    seq(
-      ",",
-      field("column", $._identifier_or_qualified_name),
-      optional($.__sql_for_update_column_tail),
-    ),
+    seq(",", field("column", $._qualified_identifier), optional($.__sql_for_update_column_tail)),
 
   // `OPEN c.` -- distinct from OPEN QUERY, which names its keyword.
   open_cursor_statement: ($) => seq($._kw_open, field("cursor", $.identifier), $._terminator),
@@ -106,7 +102,7 @@ export default ({ kw }) => ({
   __sql_update_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
     seq(
-      field("table", $._identifier_or_qualified_name),
+      field("table", $._qualified_identifier),
       $._kw_set,
       alias($.__sql_update_assignment, $.assignment),
       optional($.__sql_update_assignment_tail),
@@ -118,8 +114,7 @@ export default ({ kw }) => ({
       alias($.__sql_update_assignment, $.assignment),
       optional($.__sql_update_assignment_tail),
     ),
-  __sql_update_assignment: ($) =>
-    seq(field("column", $._identifier_or_qualified_name), $._equals_value),
+  __sql_update_assignment: ($) => seq(field("column", $._qualified_identifier), $._equals_value),
 
   select_statement: ($) => seq($.__sql_select_body, $._terminator),
 
@@ -191,7 +186,7 @@ export default ({ kw }) => ({
   // here.
   // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __sql_table_reference: ($) =>
-    seq(field("name", $._identifier_or_qualified_name), optional(field("alias", $.identifier))),
+    seq(field("name", $._qualified_identifier), optional(field("alias", $.identifier))),
 
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __sql_group_by_clause: ($) =>
@@ -199,12 +194,12 @@ export default ({ kw }) => ({
     seq(
       $._kw_group,
       $._by_keyword,
-      field("group", $._identifier_or_qualified_name),
+      field("group", $._qualified_identifier),
       optional($.__sql_group_by_tail),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __sql_group_by_tail: ($) =>
-    seq(",", field("group", $._identifier_or_qualified_name), optional($.__sql_group_by_tail)),
+    seq(",", field("group", $._qualified_identifier), optional($.__sql_group_by_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __sql_having_clause: ($) => seq(kw("HAVING"), field("condition", $._expression)),
   __sql_order_by_clause: ($) =>

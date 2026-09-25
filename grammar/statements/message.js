@@ -57,12 +57,12 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("mode", choice($._kw_set, $._kw_update)),
-      field("field", $._identifier_or_qualified_name),
+      field("field", $._qualified_identifier),
       optional(
         choice(
           $._as_type_name_phrase,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
+          seq($._like_keyword, field("like", $._qualified_identifier)),
         ),
       ),
       optional($.__message_set_update_after_type),

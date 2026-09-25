@@ -178,7 +178,7 @@ export default ({ kw }) => ({
             alias($.__browse_column_view_as, $.view_as_phrase),
           ),
         ),
-        optional(alias(seq("@", field("base", $._identifier_or_qualified_name)), $.base_field)),
+        optional(alias(seq("@", field("base", $._qualified_identifier)), $.base_field)),
       ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

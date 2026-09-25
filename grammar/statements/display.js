@@ -44,7 +44,7 @@ export default ({ kw }) => ({
   __display_items: ($) =>
     choice(
       seq(
-        field("record", $._identifier_or_qualified_name),
+        field("record", $._qualified_identifier),
         optional(seq($._kw_except, $._except_name_list)),
       ),
       $.__display_items_tail,
@@ -107,7 +107,6 @@ export default ({ kw }) => ({
     ),
 
   __display_base_field: ($) =>
-    choice($._identifier_or_qualified_name, alias($.__display_base_element, $.array_access)),
-  __display_base_element: ($) =>
-    seq(field("array", $._identifier_or_qualified_name), $._index_prefix, "]"),
+    choice($._qualified_identifier, alias($.__display_base_element, $.array_access)),
+  __display_base_element: ($) => seq(field("array", $._qualified_identifier), $._index_prefix, "]"),
 });

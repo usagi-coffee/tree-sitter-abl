@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       field(
         "name",
         choice(
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           $._routine_name_initial,
           alias($.__operator_name, $.identifier),
         ),

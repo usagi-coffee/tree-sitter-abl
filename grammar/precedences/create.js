@@ -8,7 +8,7 @@ export default ($) => [
   [$.__create_temp_table_body, $.__object_access_handle_type],
   // Purpose: prefer CREATE BUFFER target over bare identifier.
   // Example: CREATE BUFFER hBuf FOR TABLE Customer IN WIDGET-POOL wp.
-  [$.__create_buffer_target, $._identifier_or_qualified_name],
+  [$.__create_buffer_target, $._qualified_identifier],
   // Purpose: keep CREATE handle forms ahead of DATA-SOURCE handle and DATASET expression prefixes.
   // Example: CREATE DATA-SOURCE hSource; CREATE DATASET hDataset.
   // Reference: CREATE statement handle forms.

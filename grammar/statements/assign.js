@@ -29,12 +29,12 @@ export default ({ kw }) => ({
 
   __assign_record_body: ($) =>
     seq(
-      field("record", $._identifier_or_qualified_name),
+      field("record", $._qualified_identifier),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
           $._kw_except,
-          field("field", $._identifier_or_qualified_name),
+          field("field", $._qualified_identifier),
           optional($.__assign_except_field_tail),
         ),
       ),
@@ -42,7 +42,7 @@ export default ({ kw }) => ({
   __assign_except_field_tail: ($) =>
     seq(
       optional(","),
-      field("field", $._identifier_or_qualified_name),
+      field("field", $._qualified_identifier),
       optional($.__assign_except_field_tail),
     ),
 

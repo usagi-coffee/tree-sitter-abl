@@ -58,12 +58,12 @@ export default ({ kw }) => ({
   __open_query_record_phrase: ($) =>
     prec.right(
       seq(
-        field("record", $._identifier_or_qualified_name),
+        field("record", $._qualified_identifier),
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
           choice(
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-            seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
+            seq($._of_keyword, field("of", $._qualified_identifier)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq($._kw_where, field("where", $._expression)),
             seq($._kw_use_index, field("index", $.identifier)),

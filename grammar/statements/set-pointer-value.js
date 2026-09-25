@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SET-POINTER-VALUE"),
       "(",
-      field("target", choice($._identifier_or_qualified_name, $.object_access)),
+      field("target", choice($._qualified_identifier, $.object_access)),
       $._close_equals_value,
     ),
 });

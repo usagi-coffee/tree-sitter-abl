@@ -12,7 +12,7 @@ export default ({ kw }) => ({
     choice(
       prec(-2, $.if_preprocessor_directive),
       prec(-1, $.preprocessor_name),
-      $._identifier_or_qualified_name,
+      $._qualified_identifier,
       $.system_handle_identifier,
       $.widget_qualified_name,
       $.parenthesized_expression,
@@ -45,7 +45,7 @@ export default ({ kw }) => ({
     choice(
       prec(-2, $.if_preprocessor_directive),
       prec(-1, $.preprocessor_name),
-      $._identifier_or_qualified_name,
+      $._qualified_identifier,
       $.system_handle_identifier,
       $.widget_qualified_name,
       $.parenthesized_expression,

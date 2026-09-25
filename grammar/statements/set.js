@@ -42,13 +42,13 @@ export default ({ kw }) => ({
       prec.right(
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
-          field("field", $._identifier_or_qualified_name),
+          field("field", $._qualified_identifier),
           optional($.format_phrase),
           optional($._when_phrase),
         ),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
-      seq(field("field", $._identifier_or_qualified_name), "=", field("value", $._expression)),
+      seq(field("field", $._qualified_identifier), "=", field("value", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
       seq(field("field", $.array_access), "=", field("value", $._expression)),
       seq($._kw_text, "(", $._text_fields, ")"),

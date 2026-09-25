@@ -6,11 +6,11 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       choice($._kw_stored_procedure, kw("STORED-PROC")),
-      field("procedure", $._identifier_or_qualified_name),
+      field("procedure", $._qualified_identifier),
       optional($._status),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        seq($._kw_where, kw("PROC-HANDLE"), "=", field("handle", $._identifier_or_qualified_name)),
+        seq($._kw_where, kw("PROC-HANDLE"), "=", field("handle", $._qualified_identifier)),
       ),
     ),
 });

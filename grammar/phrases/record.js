@@ -1,9 +1,9 @@
 export default ({ kw }) => ({
-  of_phrase: ($) => seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
+  of_phrase: ($) => seq($._of_keyword, field("record", $._qualified_identifier)),
   record_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      field("record", $._identifier_or_qualified_name),
+      field("record", $._qualified_identifier),
       optional($.__record_field_list_preprocessor_tail),
       optional($.__record_options),
     ),
@@ -19,7 +19,7 @@ export default ({ kw }) => ({
   __record_option: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
+      seq($._of_keyword, field("of", $._qualified_identifier)),
       prec.right(seq($._kw_where, field("where", optional($._expression)))),
       seq(
         kw("TENANT-WHERE"),
@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         optional(alias(kw("SKIP-GROUP-DUPLICATES"), $.skip_group_duplicates)),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._kw_use_index, field("index", $._identifier_or_qualified_name)),
+      seq($._kw_use_index, field("index", $._qualified_identifier)),
       alias(kw("TABLE-SCAN"), $.table_scan),
       seq(
         $._using_keyword,
@@ -42,8 +42,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
-  __record_using_field: ($) =>
-    seq(optional($._frame_identifier_phrase), $._identifier_or_qualified_name),
+  __record_using_field: ($) => seq(optional($._frame_identifier_phrase), $._qualified_identifier),
   __record_using_fields_tail: ($) =>
     seq($._kw_and, field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
 
@@ -64,7 +63,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_field_names: ($) =>
     seq(
-      seq($._identifier_or_qualified_name, optional(seq($._index_prefix, "]"))),
+      seq($._qualified_identifier, optional(seq($._index_prefix, "]"))),
       optional($.__record_field_name_tail),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/recursive-continuation-inline

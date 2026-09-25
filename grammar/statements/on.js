@@ -142,7 +142,7 @@ export default ({ kw }) => ({
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
   __on_database_event_action: ($) =>
     seq(
-      field("object", $._identifier_or_qualified_name),
+      field("object", $._qualified_identifier),
       optional($.__on_database_event_tail),
       choice($.__on_revert_action, $._statement),
     ),
@@ -184,7 +184,7 @@ export default ({ kw }) => ({
   __on_in_phrase: ($) => seq($._in_keyword, field("context", $.__on_context_value)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __on_context_value: ($) =>
-    choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
+    choice($.system_handle_identifier, $.object_access, $._qualified_identifier),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
   // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
   // and plain $._events (F1, F10, etc.).

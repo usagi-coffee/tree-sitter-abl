@@ -21,7 +21,7 @@ export default ($) => [
   [$._display_space_phrase, $._expression],
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
-  [$.__display_field, $._identifier_or_qualified_name],
+  [$.__display_field, $._qualified_identifier],
   // Purpose: prefer widget-qualified syntax over a bare display record when IN follows.
   // Example: DISPLAY Customer.Name IN FRAME f.
   // Reference: DISPLAY statement widget-qualified field.

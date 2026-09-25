@@ -116,7 +116,7 @@ export default grammar({
     // both are alive and only the receiver settles it -- which the parser has
     // already reduced away. A precedence was tried first and does not resolve
     // it: this is a shift/reduce on the token, not an ordering of rules.
-    [$._identifier_or_qualified_name, $.scoped_name],
+    [$._qualified_identifier, $.scoped_name],
     // `METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID Foo():` -- on the `{` the
     // parser must decide whether the modifier list continues with a macro or
     // has ended and something else opens on a brace. Both readings are still
@@ -294,7 +294,7 @@ export default grammar({
           $.function_call,
           $.binary_expression,
           $.parenthesized_expression,
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           alias($._new_keyword, $.identifier),
           alias($._kw_window, $.identifier),
           alias($._in_keyword, $.identifier),
@@ -412,7 +412,7 @@ export default grammar({
         ),
       __preprocessor_name_value: ($) =>
         choice(
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           $.string_literal,
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
@@ -458,7 +458,7 @@ export default grammar({
         ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
-      _identifier_or_qualified_name: ($) =>
+      _qualified_identifier: ($) =>
         choice(
           $.macro_concatenated_name,
           $.identifier,
@@ -474,10 +474,10 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
       _bare_marker_identifier: ($) =>
         choice(alias($._kw_buffer, $.identifier), alias($._kw_table_handle, $.identifier)),
-      _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
+      _identifier_or_array_access: ($) => choice($._qualified_identifier, $.array_access),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
-        choice($._identifier_or_qualified_name, $.array_access, $.object_access),
+        choice($._qualified_identifier, $.array_access, $.object_access),
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
@@ -521,7 +521,7 @@ export default grammar({
       _assignable: ($) =>
         choice(
           $.object_access,
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           $.scoped_name,
           $.widget_qualified_name,
           $.array_access,
@@ -570,7 +570,7 @@ export default grammar({
         field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
       _object_access_plain_left: ($) =>
         choice(
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           $._bare_marker_identifier,
           $.system_handle_identifier,
           $.preprocessor_name,
@@ -582,14 +582,14 @@ export default grammar({
           seq(
             field("widget", alias($._widgets, $.identifier)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-            field("left", choice($._identifier_or_qualified_name, $.preprocessor_name)),
+            field("left", choice($._qualified_identifier, $.preprocessor_name)),
           ),
         ),
       _object_access_handle_prefix: ($) =>
         prec.right(
           seq(
             field("handle", $.__object_access_handle_type),
-            field("name", $._identifier_or_qualified_name),
+            field("name", $._qualified_identifier),
           ),
         ),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
@@ -658,7 +658,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/single-use-field-choice-sequence
       __array_access_prefix: ($) =>
         seq(
-          field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
+          field("array", choice($._qualified_identifier, $.object_access, $.scoped_name)),
           "[",
           field("index", $._array_subscript),
         ),
@@ -686,7 +686,7 @@ export default grammar({
       __argument_body: ($) =>
         seq(
           choice(
-            seq(field("name", $._identifier_or_qualified_name), $.__argument_in_handle),
+            seq(field("name", $._qualified_identifier), $.__argument_in_handle),
             seq(
               choice(
                 seq(
@@ -694,7 +694,7 @@ export default grammar({
                   field(
                     "name",
                     choice(
-                      $._identifier_or_qualified_name,
+                      $._qualified_identifier,
                       $.object_access,
                       $.function_call,
                       $.binary_expression,
@@ -729,7 +729,7 @@ export default grammar({
           field(
             "in_handle",
             choice(
-              $._identifier_or_qualified_name,
+              $._qualified_identifier,
               $.system_handle_identifier,
               $.object_access,
               $.array_access,
@@ -744,7 +744,7 @@ export default grammar({
           field(
             "function",
             choice(
-              $._identifier_or_qualified_name,
+              $._qualified_identifier,
               alias($.__symbolic_name, $.identifier),
               $.object_access,
               $.scoped_name,
@@ -758,12 +758,7 @@ export default grammar({
         seq(
           field(
             "target",
-            choice(
-              $._identifier_or_qualified_name,
-              $.scoped_name,
-              $.object_access,
-              $.function_call,
-            ),
+            choice($._qualified_identifier, $.scoped_name, $.object_access, $.function_call),
           ),
           $.__widget_qualified_name_separator,
           $._widgets,
@@ -773,7 +768,7 @@ export default grammar({
 
       _window_handle: ($) =>
         choice(
-          $._identifier_or_qualified_name,
+          $._qualified_identifier,
           $.system_handle_identifier,
           $.object_access,
           $.function_call,

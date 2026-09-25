@@ -10,7 +10,7 @@ export default ({ kw }) => ({
       $._for_keyword,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(field("for", kw("TEMP-TABLE"))),
-      field("table", $._identifier_or_qualified_name),
+      field("table", $._qualified_identifier),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(

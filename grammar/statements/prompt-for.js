@@ -31,7 +31,7 @@ export default ({ kw }) => ({
     ),
   __prompt_for_except_fields: ($) =>
     prec.right(
-      seq(alias($._identifier_or_qualified_name, $.field), optional($.__prompt_for_except_fields)),
+      seq(alias($._qualified_identifier, $.field), optional($.__prompt_for_except_fields)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __prompt_for_fields_tail: ($) =>
@@ -51,7 +51,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        field("field", $._identifier_or_qualified_name),
+        field("field", $._qualified_identifier),
         optional($.format_phrase),
         optional($._when_phrase),
       ),

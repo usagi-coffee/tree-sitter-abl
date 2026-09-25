@@ -9,7 +9,7 @@ export default ({ kw }) => ({
             "type",
             choice(
               $.scoped_name,
-              $._identifier_or_qualified_name,
+              $._qualified_identifier,
               $.string_literal,
               alias($.__new_generic_type, $.generic_type),
             ),
@@ -18,12 +18,12 @@ export default ({ kw }) => ({
         ),
         // Record buffer check: NEW record or NEW(record)
         prec.right(
-          choice(field("record", $._identifier_or_qualified_name), seq($.__new_record_opener, ")")),
+          choice(field("record", $._qualified_identifier), seq($.__new_record_opener, ")")),
         ),
       ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __new_record_opener: ($) => seq("(", field("record", $._identifier_or_qualified_name)),
+  __new_record_opener: ($) => seq("(", field("record", $._qualified_identifier)),
   // Keep generic constructor names local to NEW to limit parser state growth.
   // TODO: Cover scoped, nested, and macro-based generic constructor names.
   __new_generic_type: ($) =>

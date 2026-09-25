@@ -17,7 +17,7 @@ export default ({ kw }) => ({
   __color_targets: ($) =>
     prec.right(
       seq(
-        choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression),
+        choice($._qualified_identifier, $.scoped_name, $.input_expression),
         optional($.__color_targets),
       ),
     ),

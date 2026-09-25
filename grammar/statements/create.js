@@ -108,7 +108,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      field("table", choice($._identifier_or_qualified_name, $.preprocessor_name)),
+      field("table", choice($._qualified_identifier, $.preprocessor_name)),
       optional($._for_tenant),
       optional(
         seq(

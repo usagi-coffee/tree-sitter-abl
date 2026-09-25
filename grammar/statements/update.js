@@ -39,5 +39,5 @@ export default ({ kw }) => ({
   __update_field_target_item: ($) =>
     seq(field("field", $.__update_field_target), optional($.format_phrase)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
-  __update_field_target: ($) => choice($._identifier_or_qualified_name, $.array_access),
+  __update_field_target: ($) => choice($._qualified_identifier, $.array_access),
 });

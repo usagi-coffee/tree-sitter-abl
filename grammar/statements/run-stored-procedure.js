@@ -27,10 +27,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         kw("LOAD-RESULT-INTO"),
-        field("result_handle", $._identifier_or_qualified_name),
+        field("result_handle", $._qualified_identifier),
         optional($._status),
       ),
-      seq(field("handle_var", $._identifier_or_qualified_name), "=", kw("PROC-HANDLE")),
+      seq(field("handle_var", $._qualified_identifier), "=", kw("PROC-HANDLE")),
     ),
 
   __run_stored_procedure_params: ($) => seq($.__run_stored_procedure_params_prefix, ")"),

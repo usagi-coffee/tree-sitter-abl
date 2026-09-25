@@ -4,7 +4,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("INSERT"),
-      field("record", $._identifier_or_qualified_name),
+      field("record", $._qualified_identifier),
       optional($._except_fields),
       optional($.__insert_after_except),
     ),

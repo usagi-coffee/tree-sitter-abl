@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SET-SIZE"),
       "(",
-      field("buffer", $._identifier_or_qualified_name),
+      field("buffer", $._qualified_identifier),
       ")",
       "=",
       field("size", $._expression),

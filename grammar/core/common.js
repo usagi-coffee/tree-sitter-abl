@@ -14,7 +14,7 @@ export default ({ kw }) => ({
   _set_update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      field("record", $._identifier_or_qualified_name),
+      field("record", $._qualified_identifier),
       optional($._except_fields),
       optional($.frame_phrase),
     ),
@@ -25,11 +25,11 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
       seq($._as_keyword, optional($._kw_class), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
+      seq($._like_keyword, field("like", $._qualified_identifier)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
-  _input_field: ($) => choice($._identifier_or_qualified_name, $.object_access, $.array_access),
+  _input_field: ($) => choice($._qualified_identifier, $.object_access, $.array_access),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _in_widget_pool: ($) =>
@@ -48,21 +48,18 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _except_fields: ($) => seq($._kw_except, $._except_field_names),
-  _field_names: ($) =>
-    seq($._identifier_or_qualified_name, optional(seq(optional(","), $._field_names))),
+  _field_names: ($) => seq($._qualified_identifier, optional(seq(optional(","), $._field_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _query_name_phrase: ($) => seq($._kw_query, field("query", $.identifier)),
   _field_references: ($) =>
-    prec.right(seq(field("field", $._identifier_or_qualified_name), optional($._field_references))),
+    prec.right(seq(field("field", $._qualified_identifier), optional($._field_references))),
   _expression_list: ($) => prec.right(seq($._expression, optional($._expression_list))),
   _except_field_names: ($) =>
     prec.right(seq(field("except", $.identifier), optional($._except_field_names))),
   _except_name_list: ($) =>
-    prec.right(
-      seq(field("except", $._identifier_or_qualified_name), optional($._except_name_list)),
-    ),
+    prec.right(seq(field("except", $._qualified_identifier), optional($._except_name_list))),
   _import_export_except_names: ($) =>
-    prec.right(seq($._identifier_or_qualified_name, optional($._import_export_except_names))),
+    prec.right(seq($._qualified_identifier, optional($._import_export_except_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _initial_phrase: ($) => seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
@@ -78,7 +75,7 @@ export default ({ kw }) => ({
     prec.right(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        field("field", $._identifier_or_qualified_name),
+        field("field", $._qualified_identifier),
         optional($.format_phrase),
         optional($._text_fields),
       ),
@@ -151,9 +148,9 @@ export default ({ kw }) => ({
       ),
     ),
   _record_or_parenthesized_record: ($) =>
-    choice($._identifier_or_qualified_name, seq($.__record_operand_opener, ")")),
+    choice($._qualified_identifier, seq($.__record_operand_opener, ")")),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __record_operand_opener: ($) => seq("(", $._identifier_or_qualified_name),
+  __record_operand_opener: ($) => seq("(", $._qualified_identifier),
   _define_private_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
@@ -228,10 +225,10 @@ export default ({ kw }) => ({
   _for_phrase: ($) =>
     seq(
       $._for_keyword,
-      seq(field("record", $._identifier_or_qualified_name), optional($._for_phrase_record_tail)),
+      seq(field("record", $._qualified_identifier), optional($._for_phrase_record_tail)),
     ),
   _for_phrase_record_tail: ($) =>
-    seq(",", field("record", $._identifier_or_qualified_name), optional($._for_phrase_record_tail)),
+    seq(",", field("record", $._qualified_identifier), optional($._for_phrase_record_tail)),
 
   _loop_phrase: ($) =>
     seq(field("variable", choice($.identifier, $.macro_concatenated_name)), $._loop_phrase_tail),
@@ -579,7 +576,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
-  _status: ($) => seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
+  _status: ($) => seq(field("status_var", $._qualified_identifier), "=", kw("PROC-STATUS")),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
   _comma_position_length: ($) => seq(",", $._position_length),

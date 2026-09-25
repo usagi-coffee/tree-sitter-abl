@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("AGGREGATE"),
       $.__aggregate_items,
       $._for_keyword,
-      field("table", $._identifier_or_qualified_name),
+      field("table", $._qualified_identifier),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
     ),
   __aggregate_items: ($) =>

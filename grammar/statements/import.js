@@ -19,11 +19,8 @@ export default ({ kw }) => ({
     ),
   __import_fields: ($) =>
     prec.right(
-      seq(
-        choice($._identifier_or_qualified_name, alias("^", $.skip_field)),
-        optional($.__import_fields),
-      ),
+      seq(choice($._qualified_identifier, alias("^", $.skip_field)), optional($.__import_fields)),
     ),
   __import_unformatted_phrase: ($) =>
-    seq($._kw_unformatted, field("field", $._identifier_or_qualified_name)),
+    seq($._kw_unformatted, field("field", $._qualified_identifier)),
 });

@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       prec.right(
         seq(
           optional(choice($._kw_first, $._kw_last)),
-          field("table", $._identifier_or_qualified_name),
+          field("table", $._qualified_identifier),
           optional($.__record_query_options),
         ),
       ),
@@ -63,7 +63,7 @@ export default ({ kw }) => ({
 
   __record_query_where_phrase: ($) => seq($._kw_where, optional($._expression)),
   __record_query_using_phrase: ($) =>
-    seq($._using_keyword, field("index", $._identifier_or_qualified_name)),
+    seq($._using_keyword, field("index", $._qualified_identifier)),
   __record_query_frame_phrase: ($) =>
     seq(
       $._kw_and,
@@ -75,6 +75,5 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
   __record_query_lock_phrase: ($) => kw("NO-LOCK"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  __record_query_use_index: ($) =>
-    seq($._kw_use_index, field("index", $._identifier_or_qualified_name)),
+  __record_query_use_index: ($) => seq($._kw_use_index, field("index", $._qualified_identifier)),
 });

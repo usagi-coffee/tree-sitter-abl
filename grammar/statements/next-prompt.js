@@ -3,9 +3,5 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __next_prompt_prefix: ($) =>
-    seq(
-      kw("NEXT-PROMPT"),
-      field("field", $._identifier_or_qualified_name),
-      optional($.frame_phrase),
-    ),
+    seq(kw("NEXT-PROMPT"), field("field", $._qualified_identifier), optional($.frame_phrase)),
 });

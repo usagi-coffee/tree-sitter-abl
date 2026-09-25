@@ -15,7 +15,7 @@ export default ($) => [
   // Purpose: when FORMAT is followed by identifier-like text, keep it inside format_phrase.
   // Example: PUT x FORMAT decF.
   // Reference: FORMAT option in format-phrase.
-  ["format_value", $._identifier_or_qualified_name],
+  ["format_value", $._qualified_identifier],
   // Purpose: avoid treating FORMAT target as a function call start (`fmt(`) in ambiguous contexts.
   // Example: SET p FORMAT fmt(x).
   // Reference: format-phrase disambiguation.

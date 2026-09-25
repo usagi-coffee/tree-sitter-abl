@@ -92,6 +92,6 @@ export default ({ kw }) => ({
       $.include_file_reference,
       $.preprocessor_name,
       $.string_literal,
-      $._identifier_or_qualified_name,
+      $._qualified_identifier,
     ),
 });

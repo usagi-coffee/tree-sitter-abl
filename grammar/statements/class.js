@@ -323,7 +323,7 @@ export default ({ kw }) => ({
       seq($._as_keyword, $._class_type, optional($.__class_method_extent_phrase)),
       seq(
         $._like_keyword,
-        field("like", $._identifier_or_qualified_name),
+        field("like", $._qualified_identifier),
         optional($.__class_method_extent_phrase),
       ),
     ),
@@ -344,19 +344,19 @@ export default ({ kw }) => ({
         $._kw_buffer,
         field("buffer", $.identifier),
         $._for_keyword,
-        field("table", $._identifier_or_qualified_name),
+        field("table", $._qualified_identifier),
       ),
       seq(
         $._kw_table,
         optional(field("for", $._for_keyword)),
-        field("table", $._identifier_or_qualified_name),
+        field("table", $._qualified_identifier),
         optional($.__class_table_options),
       ),
       seq($._table_handle_value, optional($.__class_handle_options)),
       seq(
         $._dataset_keyword,
         optional(field("for", $._for_keyword)),
-        field("dataset", $._identifier_or_qualified_name),
+        field("dataset", $._qualified_identifier),
         optional($.__class_table_options),
       ),
       seq(

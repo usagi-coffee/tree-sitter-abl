@@ -22,7 +22,7 @@ export default ({ kw }) => ({
               $.object_access,
               $.array_access,
               $.parenthesized_expression,
-              $._identifier_or_qualified_name,
+              $._qualified_identifier,
             ),
           ),
         ),

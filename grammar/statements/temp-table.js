@@ -67,7 +67,7 @@ export default ({ kw }) => ({
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(
-      field("field", $._identifier_or_qualified_name),
+      field("field", $._qualified_identifier),
       optional(
         field(
           "sort_order",
@@ -118,7 +118,7 @@ export default ({ kw }) => ({
       ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-  __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
+  __temp_table_like_name: ($) => choice($._qualified_identifier, $.array_access),
   __temp_table_label_list: ($) =>
     seq($.string_literal, optional(seq(",", $.__temp_table_label_list))),
   __temp_table_serialize_name_phrase: ($) =>
