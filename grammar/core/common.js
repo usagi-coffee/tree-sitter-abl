@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
       seq($._kw_as, optional($._kw_class), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._like_keyword, field("like", $._qualified_identifier)),
+      seq($._kw_like, field("like", $._qualified_identifier)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _as_type_name_phrase: ($) => seq($._kw_as, field("type", $._type_name)),
@@ -202,7 +202,7 @@ export default ({ kw }) => ({
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),
 
-  _like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
+  _like_phrase: ($) => seq($._kw_like, $.__temp_table_like_body),
 
   _stream_phrase: ($) =>
     seq(choice($._kw_stream, $._kw_stream_handle), field("stream", $.identifier)),

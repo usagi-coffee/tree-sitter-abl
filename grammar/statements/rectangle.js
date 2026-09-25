@@ -14,7 +14,7 @@ export default ({ kw }) => ({
   __rectangle_option: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._like_keyword, field("like", $.identifier)),
+      seq($._kw_like, field("like", $.identifier)),
       alias(kw("NO-FILL"), $.no_fill),
       seq(kw("EDGE-CHARS"), field("edge_chars", $._expression)),
       seq(kw("EDGE-PIXELS"), field("edge_pixels", $._expression)),

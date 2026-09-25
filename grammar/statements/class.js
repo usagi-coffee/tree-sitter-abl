@@ -322,7 +322,7 @@ export default ({ kw }) => ({
     choice(
       seq($._kw_as, $._class_type, optional($.__class_method_extent_phrase)),
       seq(
-        $._like_keyword,
+        $._kw_like,
         field("like", $._qualified_identifier),
         optional($.__class_method_extent_phrase),
       ),

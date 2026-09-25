@@ -13,7 +13,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_title, field("title", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._like_keyword, field("like", $.identifier)),
+      seq($._kw_like, field("like", $.identifier)),
       alias(kw("MENUBAR"), $.menubar),
       $._aliased_menu_item,
       alias($._menu_submenu, $.submenu_item),

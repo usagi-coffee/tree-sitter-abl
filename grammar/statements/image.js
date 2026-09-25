@@ -11,7 +11,7 @@ export default ({ kw }) => ({
     choice(
       $.image_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._like_keyword, field("like", $.identifier)),
+      seq($._kw_like, field("like", $.identifier)),
       $.size_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_bgcolor, field("bgcolor", $._expression)),

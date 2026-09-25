@@ -62,7 +62,7 @@ export default ({ kw }) => ({
         choice(
           $._as_type_name_phrase,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq($._like_keyword, field("like", $._qualified_identifier)),
+          seq($._kw_like, field("like", $._qualified_identifier)),
         ),
       ),
       optional($.__message_set_update_after_type),

@@ -39,7 +39,7 @@ export default ({ kw }) => ({
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __temp_table_like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
+  __temp_table_like_phrase: ($) => seq($._kw_like, $.__temp_table_like_body),
   __temp_table_like_sequential_phrase: ($) => seq(kw("LIKE-SEQUENTIAL"), $.__temp_table_like_body),
   __temp_table_like_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -52,7 +52,7 @@ export default ({ kw }) => ({
     prec.right(seq($.__temp_table_use_index_phrase, optional($.__temp_table_use_index_phrases))),
   __temp_table_like_type_clause: ($) =>
     seq(
-      $._like_keyword,
+      $._kw_like,
       field("type", $.__temp_table_like_name),
       optional(alias($._kw_validate, $.validate)),
     ),
