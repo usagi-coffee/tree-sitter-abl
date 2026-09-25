@@ -14,7 +14,7 @@ export default ({ kw }) => ({
   __system_help_action: ($) =>
     choice(
       alias(kw("CONTENTS"), $.contents),
-      alias(kw("QUIT"), $.quit),
+      alias($._kw_quit, $.quit),
       alias(kw("FINDER"), $.finder),
       alias(kw("FORCE-FILE"), $.force_file),
       alias($._help_keyword, $.help),

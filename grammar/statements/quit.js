@@ -1,3 +1,3 @@
 export default ({ kw }) => ({
-  quit_statement: ($) => seq(kw("QUIT"), $._terminator),
+  quit_statement: ($) => seq($._kw_quit, $._terminator),
 });
