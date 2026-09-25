@@ -34,5 +34,5 @@ export default ({ kw }) => ({
   __using_type_arguments: ($) =>
     prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_arguments)))),
 
-  __using_from_clause: ($) => seq($._kw_from, choice(kw("ASSEMBLY"), kw("PROPATH"))),
+  __using_from_clause: ($) => seq($._kw_from, choice(kw("ASSEMBLY"), $._kw_propath)),
 });
