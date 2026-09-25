@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __call_prefix: ($) =>
-    seq(kw("CALL"), field("routine", $.identifier), optional($.__call_arguments)),
+    seq($._kw_call, field("routine", $.identifier), optional($.__call_arguments)),
 
   __call_arguments: ($) =>
     prec.right(seq(alias($.__call_argument, $.argument), optional($.__call_arguments))),
