@@ -66,7 +66,7 @@ export default ({ kw }) => ({
             seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq($._kw_where, field("where", $._expression)),
-            seq(kw("USE-INDEX"), field("index", $.identifier)),
+            seq($._kw_use_index, field("index", $.identifier)),
             field("lock", $._lock_option),
             seq(optional(alias($._kw_left, $.left)), alias(kw("OUTER-JOIN"), $.outer_join)),
           ),

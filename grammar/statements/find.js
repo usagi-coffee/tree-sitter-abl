@@ -38,7 +38,7 @@ export default ({ kw }) => ({
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
       seq($._using_keyword, field("values", $._expressions)),
-      seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
+      seq($._kw_use_index, field("index", $._identifier_or_qualified_name)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

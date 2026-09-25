@@ -76,5 +76,5 @@ export default ({ kw }) => ({
   __record_query_lock_phrase: ($) => kw("NO-LOCK"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __record_query_use_index: ($) =>
-    seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
+    seq($._kw_use_index, field("index", $._identifier_or_qualified_name)),
 });

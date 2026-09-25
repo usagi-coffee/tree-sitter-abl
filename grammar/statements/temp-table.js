@@ -58,7 +58,7 @@ export default ({ kw }) => ({
     ),
   __temp_table_use_index_phrase: ($) =>
     seq(
-      kw("USE-INDEX"),
+      $._kw_use_index,
       field("index", choice($.identifier, $._unquoted_name_initial)),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
