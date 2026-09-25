@@ -7,6 +7,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SINGLE"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("MULTIPLE"),
       kw("NO-DRAG"),
       $._list_items_phrase,
