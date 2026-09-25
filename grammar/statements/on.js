@@ -215,7 +215,7 @@ export default ({ kw }) => ({
       kw("NEXT-FRAME"),
       kw("PREV-FRAME"),
       kw("RECALL"),
-      kw("RETURN"),
+      $._kw_return,
       kw("RIGHT-END"),
       kw("SCROLL-MODE"),
       $._kw_stop,

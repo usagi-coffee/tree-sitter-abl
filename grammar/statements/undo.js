@@ -23,7 +23,7 @@ export default ({ kw }) => ({
       ),
       $._undo_lnr_target,
       seq(
-        kw("RETURN"),
+        $._kw_return,
         optional(
           choice(
             $.__return_error_clause,

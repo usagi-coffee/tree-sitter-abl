@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       $._define_keyword,
       choice(
-        seq(field("direction", kw("RETURN")), $._kw_parameter, $.__parameter_standard_body),
+        seq(field("direction", $._kw_return), $._kw_parameter, $.__parameter_standard_body),
         seq(
           field("direction", $._parameter_direction),
           $._kw_parameter,

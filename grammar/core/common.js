@@ -563,7 +563,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _on_phrase_return: ($) =>
     seq(
-      kw("RETURN"),
+      $._kw_return,
       optional(
         choice($.__return_error_clause, kw("NO-APPLY"), field("return_value", $._expression)),
       ),
