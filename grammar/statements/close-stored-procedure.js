@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   close_stored_procedure_statement: ($) =>
-    seq($._close_keyword, $.__close_stored_procedure_body, $._terminator),
+    seq($._kw_close, $.__close_stored_procedure_body, $._terminator),
 
   __close_stored_procedure_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

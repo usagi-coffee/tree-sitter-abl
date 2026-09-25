@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __input_output_prefix: ($) => seq($._kw_input_output, optional($._stream_phrase)),
   __input_output_body: ($) =>
     choice(
-      alias($._close_keyword, $.close),
+      alias($._kw_close, $.close),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $._kw_through,

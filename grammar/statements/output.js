@@ -6,7 +6,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __output_body: ($) =>
     choice(
-      alias($._close_keyword, $.close),
+      alias($._kw_close, $.close),
       seq(
         $._kw_to,
         $.__output_to_target,
