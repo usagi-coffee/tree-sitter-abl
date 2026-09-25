@@ -217,6 +217,7 @@ export default ({ kw }) => ({
           seq($._kw_inner_lines, field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("SIMPLE"), $.simple),
           alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
           alias(kw("DROP-DOWN"), $.drop_down),
