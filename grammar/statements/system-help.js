@@ -41,7 +41,7 @@ export default ({ kw }) => ({
       choice(
         alias(kw("MAXIMIZE"), $.maximize),
         seq(
-          kw("X"),
+          $._kw_x,
           field("x", $.__system_help_expression),
           kw("Y"),
           field("y", $.__system_help_expression),

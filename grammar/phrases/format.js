@@ -70,7 +70,7 @@ export default ({ kw }) => ({
   __format_at_x: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("X"), field("x", $._expression)),
+      seq($._kw_x, field("x", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("X-OF"), field("x_of", $._expression)),
     ),
