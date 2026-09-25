@@ -185,6 +185,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
   _serialization_modifier: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
