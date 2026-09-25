@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __load_after_dir: ($) =>
     choice(
-      seq(kw("APPLICATION"), field("app", $._expression), optional($.__load_after_application)),
+      seq($._kw_application, field("app", $._expression), optional($.__load_after_application)),
       $.__load_after_application,
     ),
   __load_after_application: ($) =>
