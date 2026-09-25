@@ -104,6 +104,7 @@ export default ({ kw }) => ({
                 $.__on_database_event_action,
                 seq(
                   field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
+                  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
                   optional(alias(kw("ANYWHERE"), $.anywhere)),
                   $.__on_trigger_action,
                 ),
@@ -127,14 +128,17 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event_target: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ANYWHERE"), $.anywhere),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         alias($.__on_of_phrase, $.of_phrase),
         optional($.__on_ui_event_widgets_tail),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("ANYWHERE"), $.anywhere)),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
   __on_database_event_action: ($) =>
     seq(
@@ -156,6 +160,7 @@ export default ({ kw }) => ({
   __on_web_notify_branch: ($) =>
     seq(
       field("event", alias($.__on_web_notify_event, $.string_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ANYWHERE"), $.anywhere),
       $._statement,
     ),

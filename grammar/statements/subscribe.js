@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       ),
       optional($._to_keyword),
       field("event", $._string_or_identifier_access_or_call),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),
     ),

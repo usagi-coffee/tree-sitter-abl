@@ -8,6 +8,7 @@ export default ({ kw }) => ({
     seq(
       $._on_keyword,
       field("event", $.__trigger_event_list),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ANYWHERE"), $.anywhere)),
       $.__trigger_action,
       optional($.__triggers_entries),
