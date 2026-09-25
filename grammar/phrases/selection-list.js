@@ -20,6 +20,7 @@ export default ({ kw }) => ({
         $._kw_inner_lines,
         field("inner_lines", $.number_literal),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SORT"),
       $._tooltip_phrase,
     ),
