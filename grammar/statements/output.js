@@ -19,6 +19,7 @@ export default ({ kw }) => ({
             alias(kw("COLLATE"), $.collate),
             alias(kw("LANDSCAPE"), $.landscape),
             alias(kw("PORTRAIT"), $.portrait),
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("APPEND"), $.append),
             alias(kw("BINARY"), $.binary),
             alias(kw("KEEP-MESSAGES"), $.keep_messages),
