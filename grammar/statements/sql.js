@@ -173,7 +173,7 @@ export default ({ kw }) => ({
       ),
     ),
   __sql_qualified_star: ($) => seq(field("table", $.identifier), ".", "*"),
-  __sql_count_star: ($) => seq(field("function", kw("COUNT")), "(", alias("*", $.star), ")"),
+  __sql_count_star: ($) => seq(field("function", $._kw_count), "(", alias("*", $.star), ")"),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __sql_into_clause: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
