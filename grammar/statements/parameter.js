@@ -5,14 +5,10 @@ export default ({ kw }) => ({
     seq(
       $._define_keyword,
       choice(
-        seq(
-          field("direction", kw("RETURN")),
-          kw("PARAMETER", { offset: 5 }),
-          $.__parameter_standard_body,
-        ),
+        seq(field("direction", kw("RETURN")), $._kw_parameter, $.__parameter_standard_body),
         seq(
           field("direction", $._parameter_direction),
-          kw("PARAMETER", { offset: 5 }),
+          $._kw_parameter,
           choice(
             $.__parameter_standard_body,
             seq(
@@ -91,7 +87,7 @@ export default ({ kw }) => ({
 
   __parameter_buffer_parameter: ($) =>
     seq(
-      kw("PARAMETER", { offset: 5 }),
+      $._kw_parameter,
       $._kw_buffer,
       field("name", $.identifier),
       $._for_keyword,
