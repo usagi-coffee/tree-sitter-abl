@@ -88,7 +88,7 @@ export default ({ kw }) => ({
     ),
   constructor_definition: ($) =>
     seq(
-      kw("CONSTRUCTOR"),
+      $._kw_constructor,
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         // oxlint-disable-next-line tree-sitter-optimize/choice-subset
@@ -139,7 +139,7 @@ export default ({ kw }) => ({
 
   __class_constructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($._compound_body, optional(choice(kw("CONSTRUCTOR"), $._kw_method)), $._terminator),
+    seq($._compound_body, optional(choice($._kw_constructor, $._kw_method)), $._terminator),
 
   __class_destructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
