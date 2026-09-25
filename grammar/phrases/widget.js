@@ -91,7 +91,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
+        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment, tree-sitter-optimize/inline-keyword-owner
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
