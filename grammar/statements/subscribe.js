@@ -11,7 +11,7 @@ export default ({ kw }) => ({
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),
     ),
-  __subscribe_in_phrase: ($) => seq($._in_keyword, field("publisher", $._text_operand)),
+  __subscribe_in_phrase: ($) => seq($._kw_in, field("publisher", $._text_operand)),
   __subscribe_run_procedure_phrase: ($) =>
     seq(kw("RUN-PROCEDURE"), field("procedure", $._text_operand)),
 });

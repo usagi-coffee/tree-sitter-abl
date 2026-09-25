@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       ),
       optional(
         seq(
-          $._in_keyword,
+          $._kw_in,
           field(
             "context",
             choice(

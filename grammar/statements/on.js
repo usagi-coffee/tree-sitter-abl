@@ -181,7 +181,7 @@ export default ({ kw }) => ({
         $._terminator,
       ),
     ),
-  __on_in_phrase: ($) => seq($._in_keyword, field("context", $.__on_context_value)),
+  __on_in_phrase: ($) => seq($._kw_in, field("context", $.__on_context_value)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __on_context_value: ($) =>
     choice($.system_handle_identifier, $.object_access, $._qualified_identifier),

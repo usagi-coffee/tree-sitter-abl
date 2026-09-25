@@ -22,7 +22,7 @@ export default ({ kw }) => ({
 
   __apply_in_widget: ($) =>
     seq(
-      $._in_keyword,
+      $._kw_in,
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._kw_browse, field("browse", $.identifier)),

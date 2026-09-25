@@ -16,5 +16,5 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ALL"), $.all),
     ),
-  __unsubscribe_in_phrase: ($) => seq($._in_keyword, field("publisher", $._expression)),
+  __unsubscribe_in_phrase: ($) => seq($._kw_in, field("publisher", $._expression)),
 });

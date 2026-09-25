@@ -86,7 +86,7 @@ export default ({ kw }) => ({
     ),
   __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
 
-  __run_in_phrase: ($) => seq($._in_keyword, field("context", $.__run_context_value)),
+  __run_in_phrase: ($) => seq($._kw_in, field("context", $.__run_context_value)),
   __run_on_server: ($) => seq($._on_keyword, $._kw_server, field("server", $._expression)),
 
   __run_asynchronous: ($) =>

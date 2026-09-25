@@ -34,7 +34,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _in_widget_pool: ($) =>
     seq(
-      $._in_keyword,
+      $._kw_in,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("WIDGET-POOL"),
       field(

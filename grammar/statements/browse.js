@@ -61,7 +61,7 @@ export default ({ kw }) => ({
       seq($._kw_widget_id, field("widget_id", $.__browse_option_expression)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__browse_option_expression)),
-      seq($._in_keyword, $._kw_window, field("window", $.__browse_option_expression)),
+      seq($._kw_in, $._kw_window, field("window", $.__browse_option_expression)),
       seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
       seq($._row_keyword, field("row", $.__browse_option_expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice

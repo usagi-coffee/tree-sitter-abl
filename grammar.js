@@ -297,7 +297,7 @@ export default grammar({
           $._qualified_identifier,
           alias($._new_keyword, $.identifier),
           alias($._kw_window, $.identifier),
-          alias($._in_keyword, $.identifier),
+          alias($._kw_in, $.identifier),
           $.system_handle_identifier,
           $.object_access,
           $.array_access,
@@ -727,7 +727,7 @@ export default grammar({
         ),
       __argument_in_handle: ($) =>
         seq(
-          $._in_keyword,
+          $._kw_in,
           field(
             "in_handle",
             choice(
@@ -766,7 +766,7 @@ export default grammar({
           $._widgets,
           field("widget", choice($.identifier, $.preprocessor_name)),
         ),
-      __widget_qualified_name_separator: ($) => $._in_keyword,
+      __widget_qualified_name_separator: ($) => $._kw_in,
 
       _window_handle: ($) =>
         choice(

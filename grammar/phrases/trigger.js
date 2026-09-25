@@ -58,11 +58,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __persistent_trigger_tail: ($) =>
     choice(
-      seq(
-        $._in_keyword,
-        field("handle", $._expression),
-        optional($.__persistent_trigger_parameters),
-      ),
+      seq($._kw_in, field("handle", $._expression), optional($.__persistent_trigger_parameters)),
       $.__persistent_trigger_parameters,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist

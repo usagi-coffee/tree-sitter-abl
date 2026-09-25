@@ -23,26 +23,26 @@ export default ({ kw }) => ({
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-        seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+        seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
         field("field", $.array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("column", $._identifier_or_array_access),
-        seq($._in_keyword, $._kw_browse, field("browse", $.__widget_name)),
+        seq($._kw_in, $._kw_browse, field("browse", $.__widget_name)),
       ),
       seq(
         $._kw_menu_item,
         field("item", $._qualified_identifier),
-        optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),
+        optional(seq($._kw_in, $._kw_menu, field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),
@@ -95,23 +95,23 @@ export default ({ kw }) => ({
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-        seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+        seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
         field("field", $.array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         field("column", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq($._in_keyword, $._kw_browse, field("browse", $.__widget_name)),
+        seq($._kw_in, $._kw_browse, field("browse", $.__widget_name)),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
@@ -119,7 +119,7 @@ export default ({ kw }) => ({
         $._kw_menu_item,
         field("item", $._qualified_identifier),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        optional(seq($._in_keyword, $._kw_menu, field("menu", $.__widget_name))),
+        optional(seq($._kw_in, $._kw_menu, field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
