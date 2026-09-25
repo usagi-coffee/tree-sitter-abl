@@ -3,19 +3,19 @@ export default ({ kw }) => ({
 
   __enum_prefix: ($) =>
     seq(
-      kw("ENUM"),
+      $._kw_enum,
       field("name", $._type_name),
       optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),
       optional($.__enum_definitions),
       $._end_keyword,
-      kw("ENUM"),
+      $._kw_enum,
     ),
 
   __enum_definitions: ($) =>
     prec.right(
       seq(
-        seq($._define_keyword, kw("ENUM"), $.__enum_members, $._terminator),
+        seq($._define_keyword, $._kw_enum, $.__enum_members, $._terminator),
         optional($.__enum_definitions),
       ),
     ),
