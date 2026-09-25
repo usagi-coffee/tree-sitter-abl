@@ -11,7 +11,7 @@ export default ({ kw }) => ({
         kw("CONTROL-FRAME"),
         kw("DIALOG-BOX"),
         $._kw_editor,
-        kw("FILL-IN"),
+        $._kw_fill_in,
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FRAME", { offset: 4 }),
         $._kw_image,
