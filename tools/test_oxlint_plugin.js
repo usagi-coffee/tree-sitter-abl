@@ -1,3 +1,7 @@
+import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
@@ -60,6 +64,7 @@ import {
   singleUsePrecedence,
   singleUseChoice,
   singleUseSharedChoiceInline,
+  multiUsePrivateChoiceInline,
   sharedKeywordInline,
   singleUseSharedSequenceInline,
   sharedKeywordAliasChoiceInline,
@@ -5266,5 +5271,78 @@ new RuleTester().run("inline-keyword-owner", inlineKeywordOwner, {
 });
 RuleTester.it = inlineKeywordPreviousIt;
 resetSharingCandidates();
+
+new RuleTester().run("multi-use-private-choice-inline", multiUsePrivateChoiceInline, {
+  valid: [
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => $.__name });`,
+    `export default () => ({ _name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($._name, $._name) });`,
+    `export default () => ({ name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($.name, $.name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.__name), first: ($) => seq($.__name, $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, seq("(", $.identifier, ")")), first: ($) => seq($.__name, $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq(alias($.__name, $.name), $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq(token($.__name), $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq(token.immediate($.__name), $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq(prec.dynamic(1, $.__name), $.__name) });`,
+    `export default () => ({ __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($["__name"], $.__name) });`,
+    `export default grammar({ inline: ($) => [$.__name], rules: { __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($.__name, $.__name) } });`,
+    `export default grammar({ conflicts: ($) => [[$.__name, $.other]], rules: { __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($.__name, $.__name) } });`,
+    `export default grammar({ precedences: ($) => [[$.__name, $.other]], rules: { __name: ($) => choice($.identifier, $.preprocessor_name), first: ($) => seq($.__name, $.__name) } });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/multi-use-private-choice-inline
+      __name: ($) => choice($.identifier, $.preprocessor_name),
+      first: ($) => seq($.__name, $.__name),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "widget names used under different fields",
+      code: `export default () => ({ __sample_name: ($) => choice($.identifier, $.preprocessor_name), frame: ($) => field("frame", $.__sample_name), browse: ($) => optional(field("browse", $.__sample_name)) });`,
+      errors: [{ message: /__sample_name has 2 unaliased local uses/ }],
+    },
+    {
+      name: "multiple uses in one core grammar rule",
+      code: `export default grammar({ rules: { __name: ($) => choice($.identifier, $.preprocessor_name), names: ($) => seq($.__name, ",", $.__name) } });`,
+      errors: [{ message: /__name has 2 unaliased local uses/ }],
+    },
+  ],
+});
+
+const inlineFixture = mkdtempSync(join(tmpdir(), "abl-inline-lint-"));
+try {
+  writeFileSync(
+    join(inlineFixture, "grammar.js"),
+    `export default grammar({
+    inline: ($) => [
+      $.__already_inline,
+      // $.__commented_candidate,
+      "not metadata: $.__string_candidate",
+    ],
+    rules: {},
+  });`,
+  );
+  const privateChoice = (name) =>
+    `export default () => ({ ${name}: ($) => choice($.identifier, $.preprocessor_name), names: ($) => seq($.${name}, $.${name}) });`;
+  new RuleTester().run(
+    "multi-use-private-choice-inline cross-file metadata",
+    multiUsePrivateChoiceInline,
+    {
+      valid: [
+        {
+          cwd: inlineFixture,
+          filename: join(inlineFixture, "grammar", "names.js"),
+          code: privateChoice("__already_inline"),
+        },
+      ],
+      invalid: ["__not_inline", "__commented_candidate", "__string_candidate"].map((name) => ({
+        cwd: inlineFixture,
+        filename: join(inlineFixture, "grammar", "names.js"),
+        code: privateChoice(name),
+        errors: [{ message: new RegExp(`${name} has 2 unaliased local uses`) }],
+      })),
+    },
+  );
+} finally {
+  rmSync(inlineFixture, { recursive: true, force: true });
+}
 
 console.log("✓ Optimizer lint plugin tests passed successfully");

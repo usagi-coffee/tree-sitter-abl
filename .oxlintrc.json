@@ -81,6 +81,7 @@
         "tree-sitter-optimize/prefix-extraction": "warn",
         "tree-sitter-optimize/single-use-choice": "warn",
         "tree-sitter-optimize/single-use-shared-choice-inline": "warn",
+        "tree-sitter-optimize/multi-use-private-choice-inline": "warn",
         "tree-sitter-optimize/shared-keyword-inline": "warn",
         "tree-sitter-optimize/single-use-shared-sequence-inline": "warn",
         "tree-sitter-optimize/shared-keyword-alias-choice-inline": "warn",

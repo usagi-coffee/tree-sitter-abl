@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
 function callName(node) {
   if (node?.type !== "CallExpression") return null;
   if (node.callee.type === "Identifier") return node.callee.name;
@@ -4116,6 +4119,95 @@ export const singleUseChoice = rule((context) => {
   };
 }, "Suggest measuring inlining of small, locally single-use private choices");
 
+function rootInlineSymbols(context) {
+  const root = resolve(context.cwd, "grammar.js");
+  let source;
+  try {
+    source =
+      resolve(context.filename) === root
+        ? context.sourceCode.getText()
+        : readFileSync(root, "utf8");
+  } catch {
+    return new Set();
+  }
+  // Read the static inline array without executing the project's grammar module.
+  // Keep literals opaque so comments and strings cannot supply metadata entries.
+  const tokens =
+    source.match(
+      /\/\*[\s\S]*?\*\/|\/\/[^\r\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|[$A-Z_a-z][$\w]*|=>|[^\s]/g,
+    ) ?? [];
+  const code = tokens.filter((part) => !part.startsWith("//") && !part.startsWith("/*"));
+  const names = new Set();
+  for (let i = 0; i < code.length - 6; i++) {
+    if (code.slice(i, i + 7).join(" ") !== "inline : ( $ ) => [") continue;
+    let depth = 1;
+    for (let j = i + 7; j < code.length && depth > 0; j++) {
+      if (code[j] === "[") depth++;
+      if (code[j] === "]") depth--;
+      if (code[j] === "$" && code[j + 1] === "." && /^[$A-Z_a-z][$\w]*$/.test(code[j + 2] ?? ""))
+        names.add(code[j + 2]);
+    }
+  }
+  return names;
+}
+
+export const multiUsePrivateChoiceInline = rule((context) => {
+  const inlined = rootInlineSymbols(context);
+  const properties = [];
+  const references = new Map();
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) properties.push(node);
+    },
+    MemberExpression(node) {
+      const name =
+        memberName(node) ??
+        (node.computed &&
+        node.object.type === "Identifier" &&
+        node.object.name === "$" &&
+        node.property.type === "Literal" &&
+        typeof node.property.value === "string"
+          ? node.property.value
+          : null);
+      if (!name) return;
+      const uses = references.get(name) ?? [];
+      uses.push(node);
+      references.set(name, uses);
+    },
+    "Program:exit"() {
+      for (const property of properties) {
+        const name = ruleName(property),
+          body = property.value.body;
+        if (!name.startsWith("__") || inlined.has(name) || isRuleDisabled(context, property))
+          continue;
+        if (callName(body) !== "choice" || body.arguments.length < 2 || body.arguments.length > 5)
+          continue;
+        if (!body.arguments.every((part) => memberName(part) && memberName(part) !== name))
+          continue;
+        const uses = references.get(name) ?? [];
+        if (uses.length < 2) continue;
+        const safeUses = uses.every((use) => {
+          const owner = enclosingRule(use);
+          if (use.computed || !owner || owner === property || owner.parent !== property.parent)
+            return false;
+          for (let parent = use.parent; parent !== owner; parent = parent.parent) {
+            if (["alias", "token", "token.immediate", "prec.dynamic"].includes(callName(parent)))
+              return false;
+          }
+          return true;
+        });
+        if (!safeUses) continue;
+        report(
+          context,
+          property,
+          "multi-use-private-choice-inline",
+          `${name} has ${uses.length} unaliased local uses of a small symbol choice; try adding it to grammar.inline. Check cross-file uses, aliases and existing inline/conflict/precedence metadata first; preserve alternatives and field scopes, then measure parser bytes and counts and validate trees.`,
+        );
+      }
+    },
+  };
+}, "Suggest metadata inlining of multiply used private choices of grammar symbols");
+
 export const singleUseSharedChoiceInline = rule((context) => {
   const properties = [];
   const references = new Map();
@@ -4700,6 +4792,7 @@ export default {
     "prefix-extraction": prefixExtraction,
     "single-use-choice": singleUseChoice,
     "single-use-shared-choice-inline": singleUseSharedChoiceInline,
+    "multi-use-private-choice-inline": multiUsePrivateChoiceInline,
     "shared-keyword-inline": sharedKeywordInline,
     "single-use-shared-sequence-inline": singleUseSharedSequenceInline,
     "shared-keyword-alias-choice-inline": sharedKeywordAliasChoiceInline,
