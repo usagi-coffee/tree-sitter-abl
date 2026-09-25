@@ -50,7 +50,9 @@ export default ({ kw }) => ({
     ),
   __dataset_not_active_recursive_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("RECURSIVE"), $.recursive),
     ),
 

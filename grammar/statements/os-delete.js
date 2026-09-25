@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   os_delete_statement: ($) => seq($.__os_delete_prefix, $._terminator),
 
   __os_delete_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq(kw("OS-DELETE"), $.__os_delete_targets, optional(alias(kw("RECURSIVE"), $.recursive))),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
