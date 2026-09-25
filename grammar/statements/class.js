@@ -355,7 +355,7 @@ export default ({ kw }) => ({
         optional($.__class_table_options),
       ),
       seq(
-        kw("DATASET-HANDLE"),
+        $._kw_dataset_handle,
         field("dataset_handle", $.identifier),
         optional($.__class_handle_options),
       ),
