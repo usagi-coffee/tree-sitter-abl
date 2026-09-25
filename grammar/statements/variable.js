@@ -35,6 +35,7 @@ export default ({ kw }) => ({
       seq($._kw_context_help_id, field("context_help_id", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_decimals, field("decimals", $.number_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("DROP-TARGET"), $.drop_target),
       seq($._kw_label, field("label", $._format_labels)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
