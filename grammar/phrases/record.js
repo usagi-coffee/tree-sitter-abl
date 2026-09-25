@@ -30,7 +30,7 @@ export default ({ kw }) => ({
       seq($._kw_use_index, field("index", $._qualified_identifier)),
       alias(kw("TABLE-SCAN"), $.table_scan),
       seq(
-        $._using_keyword,
+        $._kw_using,
         field("field", $.__record_using_field),
         optional($.__record_using_fields_tail),
       ),

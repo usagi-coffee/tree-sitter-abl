@@ -62,8 +62,7 @@ export default ({ kw }) => ({
     ),
 
   __record_query_where_phrase: ($) => seq($._kw_where, optional($._expression)),
-  __record_query_using_phrase: ($) =>
-    seq($._using_keyword, field("index", $._qualified_identifier)),
+  __record_query_using_phrase: ($) => seq($._kw_using, field("index", $._qualified_identifier)),
   __record_query_frame_phrase: ($) =>
     seq(
       $._kw_and,

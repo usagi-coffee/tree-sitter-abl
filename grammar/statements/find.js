@@ -38,7 +38,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
-      seq($._using_keyword, field("values", $._expressions)),
+      seq($._kw_using, field("values", $._expressions)),
       seq($._kw_use_index, field("index", $._qualified_identifier)),
     ),
 

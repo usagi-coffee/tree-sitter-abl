@@ -3,11 +3,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-alias-sequence
   __using_prefix: ($) =>
-    seq(
-      $._using_keyword,
-      $.__using_type_refs,
-      optional(alias($.__using_from_clause, $.from_clause)),
-    ),
+    seq($._kw_using, $.__using_type_refs, optional(alias($.__using_from_clause, $.from_clause))),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
   __using_type_refs: ($) =>

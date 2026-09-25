@@ -112,7 +112,7 @@ export default ({ kw }) => ({
       optional($._for_tenant),
       optional(
         seq(
-          $._using_keyword,
+          $._kw_using,
           choice(
             seq($._kw_rowid, $.__create_record_locator_rowid),
             seq($._kw_recid, $.__create_record_locator_recid),

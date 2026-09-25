@@ -11,7 +11,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __insert_after_except: ($) =>
     choice(
-      seq($._using_keyword, field("using", $._expression), optional($.frame_phrase)),
+      seq($._kw_using, field("using", $._expression), optional($.frame_phrase)),
       $.frame_phrase,
     ),
 });
