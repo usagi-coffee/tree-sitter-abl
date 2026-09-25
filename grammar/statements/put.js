@@ -22,7 +22,7 @@ export default ({ kw }) => ({
           optional(
             seq(
               // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-              choice($._at_keyword, $._kw_to),
+              choice($._kw_at, $._kw_to),
               field("position", $._expression),
             ),
           ),
