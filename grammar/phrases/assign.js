@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  assign_phrase: ($) => seq(kw("ASSIGN"), $.__assign_body),
+  assign_phrase: ($) => seq($._kw_assign, $.__assign_body),
 
   __assign_body: ($) =>
     seq(

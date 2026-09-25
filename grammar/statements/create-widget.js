@@ -44,5 +44,5 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __create_widget_assign_phrase: ($) => seq(kw("ASSIGN"), $._assign_pair_list),
+  __create_widget_assign_phrase: ($) => seq($._kw_assign, $._assign_pair_list),
 });

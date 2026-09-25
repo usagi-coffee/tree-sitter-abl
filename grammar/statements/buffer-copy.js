@@ -21,7 +21,7 @@ export default ({ kw }) => ({
     ),
   __buffer_copy_except_phrase: ($) => seq($._kw_except, $._field_names),
   __buffer_copy_using_phrase: ($) => seq($._using_keyword, $._field_names),
-  __buffer_copy_assign_phrase: ($) => seq(kw("ASSIGN"), $.__buffer_copy_assign_pairs),
+  __buffer_copy_assign_phrase: ($) => seq($._kw_assign, $.__buffer_copy_assign_pairs),
   __buffer_copy_assign_pair: ($) =>
     seq(
       field("left", $._assignable),

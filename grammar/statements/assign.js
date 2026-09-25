@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __assign_prefix: ($) =>
     seq(
-      kw("ASSIGN"),
+      $._kw_assign,
       optional(
         choice(
           alias($.__assign_statement_phrase_body, $.assign_phrase),

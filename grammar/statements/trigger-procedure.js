@@ -20,7 +20,7 @@ export default ({ kw }) => ({
         ),
         // ASSIGN event
         seq(
-          kw("ASSIGN"),
+          $._kw_assign,
           choice(
             seq($._of_keyword, field("object", $.qualified_name)),
             seq(
