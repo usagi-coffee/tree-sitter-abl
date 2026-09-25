@@ -10,7 +10,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        kw("SAVE"),
+        $._kw_save,
         optional(seq("=", field("save", $._expression))),
         optional(seq($._kw_into, field("into", $._expression))),
       ),

@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __save_cache_prefix: ($) =>
     seq(
-      kw("SAVE"),
+      $._kw_save,
       $._kw_cache,
       // oxlint-disable-next-line tree-sitter-optimize/choice-product-extraction
       choice($._kw_current, kw("COMPLETE")),
