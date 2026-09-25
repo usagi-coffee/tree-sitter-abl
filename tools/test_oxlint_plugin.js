@@ -24,6 +24,7 @@ import {
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
+  shortKeywordHelperName,
   shortSharedCategoryName,
   shortPrivatePrefix,
   shortAliasedLexicalName,
@@ -5480,6 +5481,51 @@ new RuleTester().run("short-shared-category-name", shortSharedCategoryName, {
       name: "inline and conflict metadata must be updated with references",
       code: `export default grammar({ inline: ($) => [$._identifier_or_qualified_name], conflicts: ($) => [[$._identifier_or_qualified_name, $.other]], rules: { ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name) } });`,
       errors: [{ message: /Update all references and metadata/ }],
+    },
+  ],
+});
+
+const keywordHelperRule = (name = "_procedure_keyword", body = 'kw("PROCEDURE", { offset: 4 })') =>
+  `export default () => ({ ${name}: ($) => ${body} });`;
+new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
+  valid: [
+    keywordHelperRule("_kw_procedure"),
+    keywordHelperRule("procedure_keyword"),
+    keywordHelperRule("__procedure_keyword"),
+    keywordHelperRule("_other_keyword"),
+    keywordHelperRule('["_procedure_keyword"]'),
+    keywordHelperRule(undefined, "token(/PROCEDURE/i)"),
+    keywordHelperRule(undefined, 'choice(kw("PROCEDURE"), kw("PROC"))'),
+    keywordHelperRule(undefined, 'prec(1, kw("PROCEDURE"))'),
+    keywordHelperRule(undefined, "kw(word)"),
+    keywordHelperRule(undefined, 'kw("PROCEDURE", options)'),
+    keywordHelperRule(undefined, 'kw("PROCEDURE", {}, extra)'),
+    keywordHelperRule(undefined, "kw()"),
+    `export default () => ({ _procedure_keyword: ($) => kw("PROCEDURE"), _kw_procedure: ($) => kw("PROCEDURE") });`,
+    `export default () => ({ _procedure_keyword: ($) => kw("PROCEDURE"), root: ($) => alias($.name, $._procedure_keyword) });`,
+    `export default () => ({ _procedure_keyword: ($) => kw("PROCEDURE"), root: ($) => alias($.name, $["_procedure_keyword"]) });`,
+    ...["externals", "supertypes", "word"].map(
+      (key) =>
+        `export default grammar({ ${key}: ($) => [$._procedure_keyword], rules: { _procedure_keyword: ($) => kw("PROCEDURE") } });`,
+    ),
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/short-keyword-helper-name
+      _procedure_keyword: ($) => kw("PROCEDURE"),
+    });`,
+  ],
+  invalid: [
+    { code: keywordHelperRule(), errors: [{ message: /_kw_procedure/ }] },
+    {
+      code: keywordHelperRule("_new_keyword", 'kw("NEW")'),
+      errors: [{ message: /Preserve the exact kw call/ }],
+    },
+    {
+      code: keywordHelperRule("_no_error_keyword", 'kw("NO-ERROR", { alias: "ERROR" })'),
+      errors: [{ message: /_kw_no_error/ }],
+    },
+    {
+      code: `export default grammar({ inline: ($) => [$._procedure_keyword], conflicts: ($) => [[$._procedure_keyword, $.name]], rules: { _procedure_keyword: ($) => kw("PROCEDURE"), root: ($) => alias($._procedure_keyword, $.identifier) } });`,
+      errors: [{ message: /update all references and metadata/ }],
     },
   ],
 });
