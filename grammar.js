@@ -947,6 +947,7 @@ export default grammar({
       _terminator: ($) => choice($._terminator_dot, ";"),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _no_error_terminator: ($) => seq(optional($.__no_error), $._terminator),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
 
       // Contains non-core statement-specific shared rules

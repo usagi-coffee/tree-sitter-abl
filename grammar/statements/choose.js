@@ -27,6 +27,7 @@ export default ({ kw }) => ({
       seq(kw("COLOR"), field("color", $.color_phrase)),
       alias($._go_on_phrase, $.go_on),
       seq(kw("KEYS"), field("keys", $.identifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("PAUSE"), field("pause", $._expression)),

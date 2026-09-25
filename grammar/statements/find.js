@@ -34,6 +34,7 @@ export default ({ kw }) => ({
       alias(kw("SHARE"), $.share),
       alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-WAIT"), $.no_wait),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
       seq($._using_keyword, field("values", $._expressions)),

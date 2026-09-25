@@ -1,7 +1,12 @@
 export default ({ kw }) => ({
   assign_phrase: ($) => seq(kw("ASSIGN"), $.__assign_body),
 
-  __assign_body: ($) => seq($._assign_pair_list, optional(alias(kw("NO-ERROR"), $.no_error))),
+  __assign_body: ($) =>
+    seq(
+      $._assign_pair_list,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      optional(alias(kw("NO-ERROR"), $.no_error)),
+    ),
 
   _assign_pair_list: ($) =>
     prec.right(seq(alias($.__assign_pair, $.assign_pair), optional($._assign_pair_list))),

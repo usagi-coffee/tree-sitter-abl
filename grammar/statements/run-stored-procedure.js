@@ -13,7 +13,12 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __run_stored_procedure_result_no_error: ($) =>
     choice(
-      seq($.__run_stored_procedure_result, optional(alias(kw("NO-ERROR"), $.no_error))),
+      seq(
+        $.__run_stored_procedure_result,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        optional(alias(kw("NO-ERROR"), $.no_error)),
+      ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
     ),
 

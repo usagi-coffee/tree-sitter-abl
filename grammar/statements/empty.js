@@ -6,6 +6,7 @@ export default ({ kw }) => ({
       kw("EMPTY"),
       kw("TEMP-TABLE"),
       field("name", $.identifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });
