@@ -11,7 +11,7 @@ export default ({ kw }) => ({
           alias($._kw_last, $.last),
           alias($._kw_next, $.next),
           alias(kw("PREV"), $.prev),
-          alias(kw("CURRENT"), $.current),
+          alias($._kw_current, $.current),
         ),
       ),
       field("table", $._identifier_or_qualified_name),
