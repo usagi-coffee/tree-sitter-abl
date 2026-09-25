@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __find_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("FIND"),
+      $._kw_find,
       optional(
         choice(
           alias($._kw_first, $.first),
