@@ -20,7 +20,7 @@ export default ({ kw }) => ({
     choice(
       $._kw_average,
       $._kw_count,
-      kw("MAXIMUM"),
+      $._kw_maximum,
       kw("MINIMUM"),
       kw("TOTAL"),
       kw("SUB-AVERAGE"),
