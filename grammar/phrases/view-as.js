@@ -9,7 +9,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("widget", $._kw_fill_in),
-          optional(kw("NATIVE")),
+          optional($._kw_native),
           optional($.__radio_set_size_tooltip_tail),
         ),
         $.radio_set_phrase,

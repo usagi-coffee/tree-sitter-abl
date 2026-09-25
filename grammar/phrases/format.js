@@ -246,7 +246,7 @@ export default ({ kw }) => ({
           seq($._kw_text, optional($.__format_view_as_tail)),
           seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
           // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-          seq($._kw_fill_in, optional(kw("NATIVE")), optional($.__format_view_as_tail)),
+          seq($._kw_fill_in, optional($._kw_native), optional($.__format_view_as_tail)),
           alias($.__format_editor_phrase, $.editor_phrase),
           alias($.__format_radio_set_phrase, $.radio_set_phrase),
           alias($.__format_combo_box_phrase, $.combo_box_phrase),
