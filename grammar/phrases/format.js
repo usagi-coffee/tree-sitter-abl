@@ -87,7 +87,7 @@ export default ({ kw }) => ({
       seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("BUFFER-LINES"), field("buffer_lines", $.number_literal)),
-      kw("LARGE"),
+      $._kw_large,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_max_chars, field("max_chars", $.number_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
