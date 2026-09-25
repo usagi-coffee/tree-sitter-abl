@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __put_cursor_body: ($) =>
     seq(
-      kw("CURSOR"),
+      $._kw_cursor,
       choice(
         kw("OFF"),
         seq(

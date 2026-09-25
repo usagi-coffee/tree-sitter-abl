@@ -36,7 +36,7 @@ export default ({ kw }) => ({
   __sql_declare_cursor_body: ($) =>
     seq(
       field("cursor", $.identifier),
-      kw("CURSOR"),
+      $._kw_cursor,
       $._for_keyword,
       field("query", alias($.__sql_select_body, $.select)),
       optional(

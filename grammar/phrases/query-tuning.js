@@ -24,7 +24,7 @@ export default ({ kw }) => ({
             kw("EXTENDED"),
             optional(
               choice(
-                alias(kw("CURSOR"), $.cursor),
+                alias($._kw_cursor, $.cursor),
                 alias(kw("DATA-BIND"), $.data_bind),
                 alias(kw("PERFORMANCE"), $.performance),
                 alias(kw("VERBOSE"), $.verbose),
