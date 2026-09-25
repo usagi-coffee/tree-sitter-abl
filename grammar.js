@@ -592,6 +592,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
       __object_access_handle_type: ($) =>
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("TEMP-TABLE"), $.identifier),
           alias($._kw_buffer, $.identifier),
           alias($._kw_data_source, $.identifier),
