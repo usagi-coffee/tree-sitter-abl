@@ -546,6 +546,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARE-LOCK"), $.share_lock),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
       alias(kw("NO-LOCK"), $.no_lock),
     ),
