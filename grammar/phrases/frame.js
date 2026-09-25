@@ -33,6 +33,7 @@ export default ({ kw }) => ({
       alias(kw("NO-HELP"), $.no_help),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-VALIDATE"), $.no_validate),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SCROLLABLE"), $.scrollable),
       alias(kw("TOP-ONLY"), $.top_only),
       alias(kw("SCREEN-IO"), $.screen_io),
