@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   image_definition: ($) => seq($.__image_prefix, $._terminator),
 
   __image_prefix: ($) =>
-    seq($._define_private_prefix, kw("IMAGE"), field("name", $.identifier), $.__image_options),
+    seq($._define_private_prefix, $._kw_image, field("name", $.identifier), $.__image_options),
 
   __image_options: ($) => prec.right(seq($.__image_option, optional($.__image_options))),
 
