@@ -28,7 +28,7 @@ export default ({ kw }) => ({
       seq(
         field("constant", $.string_literal),
         optional(
-          seq(choice($._at_keyword, $._to_keyword), field("position", token(/[0-9]+(\.[0-9]+)?/))),
+          seq(choice($._at_keyword, $._kw_to), field("position", token(/[0-9]+(\.[0-9]+)?/))),
         ),
       ),
       "^",

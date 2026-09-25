@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SUBSCRIBE"),
       optional(seq($._kw_procedure, field("subscriber", $._text_operand))),
-      optional($._to_keyword),
+      optional($._kw_to),
       field("event", $._text_operand),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),

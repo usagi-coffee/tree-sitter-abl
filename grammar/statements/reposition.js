@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       field("query", $.identifier),
       choice(
         seq(
-          $._to_keyword,
+          $._kw_to,
           choice(
             // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
             seq(

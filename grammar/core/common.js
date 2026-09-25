@@ -237,7 +237,7 @@ export default ({ kw }) => ({
     seq(
       "=",
       field("start", $._expression),
-      $._to_keyword,
+      $._kw_to,
       field("end", $._expression),
       optional(seq($._by_keyword, field("step", $._expression))),
     ),

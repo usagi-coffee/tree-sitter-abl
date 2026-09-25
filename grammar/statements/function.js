@@ -137,6 +137,6 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),
 
-  __function_map_phrase: ($) => seq($._kw_map, $._to_keyword, field("actual", $.identifier)),
+  __function_map_phrase: ($) => seq($._kw_map, $._kw_to, field("actual", $.identifier)),
   __function_in_phrase: ($) => seq($._in_keyword, field("context", $._expression)),
 });

@@ -102,7 +102,7 @@ export default ({ kw }) => ({
     seq(
       field("progid", $._expression),
       field("handle", $.identifier),
-      optional(seq($._kw_connect, optional(seq($._to_keyword, field("target", $._expression))))),
+      optional(seq($._kw_connect, optional(seq($._kw_to, field("target", $._expression))))),
     ),
   __create_record: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

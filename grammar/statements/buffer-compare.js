@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("BUFFER-COMPARE"),
       field("source", $._expression),
       optional(seq(choice($._kw_except, $._using_keyword), $._field_references)),
-      $._to_keyword,
+      $._kw_to,
       field("target", $._expression),
       optional($.__buffer_compare_tail),
     ),

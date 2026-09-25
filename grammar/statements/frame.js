@@ -70,7 +70,7 @@ export default ({ kw }) => ({
             choice(
               $.at_phrase,
               // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-              seq($._to_keyword, field("to", $._expression)),
+              seq($._kw_to, field("to", $._expression)),
               $.__frame_display_option,
             ),
           ),

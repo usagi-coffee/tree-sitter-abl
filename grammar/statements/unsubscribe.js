@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("UNSUBSCRIBE"),
       optional(seq($._kw_procedure, field("subscriber", $._expression))),
-      optional($._to_keyword),
+      optional($._kw_to),
       $.__unsubscribe_event,
       optional(alias($.__unsubscribe_in_phrase, $.in_phrase)),
     ),

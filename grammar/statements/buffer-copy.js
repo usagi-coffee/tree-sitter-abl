@@ -13,7 +13,7 @@ export default ({ kw }) => ({
           alias($.__buffer_copy_using_phrase, $.using_phrase),
         ),
       ),
-      $._to_keyword,
+      $._kw_to,
       field("target", $._qualified_identifier),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

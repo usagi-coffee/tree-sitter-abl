@@ -27,7 +27,7 @@ export default ({ kw }) => ({
           "=",
           // oxlint-disable-next-line tree-sitter-optimize/shared-field-marker
           field("start", $._expression),
-          $._to_keyword,
+          $._kw_to,
           field("end", $._expression),
         ),
         optional($.__trigger_body_after_loop),
@@ -40,7 +40,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __trigger_down_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq($._kw_down, optional($._to_keyword), optional(field("down", $._expression))),
+    seq($._kw_down, optional($._kw_to), optional(field("down", $._expression))),
 
   __persistent_trigger: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

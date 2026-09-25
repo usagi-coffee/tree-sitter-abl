@@ -230,7 +230,7 @@ export const inline = ($) => [
 
 export default ({ kw }) => ({
   _kw_for: ($) => kw("FOR"),
-  _to_keyword: ($) => kw("TO"),
+  _kw_to: ($) => kw("TO"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
   _in_keyword: ($) => kw("IN"),
   _define_keyword: ($) => kw("DEFINE", { offset: 3 }),

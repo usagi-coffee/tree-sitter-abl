@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       $.__copy_lob_source,
       optional(seq(kw("STARTING"), $._at_keyword, field("starting_at", $._expression))),
       optional(seq($._kw_for, field("for_length", $._expression))),
-      $._to_keyword,
+      $._kw_to,
       $.__copy_lob_target,
       optional(
         choice(

@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/choice-product-extraction
       choice($._kw_current, kw("COMPLETE")),
       choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
-      $._to_keyword,
+      $._kw_to,
       choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset

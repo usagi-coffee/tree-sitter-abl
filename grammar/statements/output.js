@@ -8,7 +8,7 @@ export default ({ kw }) => ({
     choice(
       alias($._close_keyword, $.close),
       seq(
-        $._to_keyword,
+        $._kw_to,
         $.__output_to_target,
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
