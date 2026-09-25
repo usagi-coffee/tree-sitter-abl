@@ -90,6 +90,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("NUM-COPIES"), field("copies", $._expression)),
           alias(kw("LANDSCAPE"), $.landscape),
           alias(kw("PORTRAIT"), $.portrait),
