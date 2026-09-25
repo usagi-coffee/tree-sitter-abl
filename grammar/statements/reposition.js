@@ -12,7 +12,7 @@ export default ({ kw }) => ({
           choice(
             // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
             seq(
-              kw("ROWID"),
+              $._kw_rowid,
               field("rowid", $._expression),
               optional($.__reposition_rowid_tail),
               optional($.__reposition_tenant_no_error_tail),

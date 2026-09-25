@@ -113,7 +113,7 @@ export default ({ kw }) => ({
         seq(
           $._using_keyword,
           choice(
-            seq(kw("ROWID"), $.__create_record_locator_rowid),
+            seq($._kw_rowid, $.__create_record_locator_rowid),
             seq(kw("RECID"), $.__create_record_locator_recid),
           ),
         ),

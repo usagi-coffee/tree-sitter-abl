@@ -30,7 +30,7 @@ export default ({ kw }) => ({
   __data_source_buffer_phrase: ($) =>
     seq(
       field("buffer", $._identifier_or_qualified_name),
-      optional(seq(kw("KEYS"), "(", choice(kw("ROWID"), $.__data_source_key_fields), ")")),
+      optional(seq(kw("KEYS"), "(", choice($._kw_rowid, $.__data_source_key_fields), ")")),
     ),
   __data_source_key_fields: ($) =>
     seq(
