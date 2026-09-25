@@ -76,7 +76,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_at_y: ($) =>
-    choice(seq(kw("Y"), field("y", $._expression)), seq(kw("Y-OF"), field("y_of", $._expression))),
+    choice(seq($._kw_y, field("y", $._expression)), seq(kw("Y-OF"), field("y_of", $._expression))),
 
   __format_editor_options: ($) =>
     prec.right(seq($.__format_editor_option, optional($.__format_editor_options))),

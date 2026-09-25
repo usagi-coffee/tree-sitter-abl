@@ -43,7 +43,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("X-OF"), field("x_of", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("Y"), field("y", $._expression)),
+        seq($._kw_y, field("y", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("Y-OF"), field("y_of", $._expression)),
       ),

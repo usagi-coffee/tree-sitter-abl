@@ -43,7 +43,7 @@ export default ({ kw }) => ({
         seq(
           $._kw_x,
           field("x", $.__system_help_expression),
-          kw("Y"),
+          $._kw_y,
           field("y", $.__system_help_expression),
           kw("WIDTH"),
           field("width", $.__system_help_expression),

@@ -18,7 +18,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_from,
       choice(
-        seq($._kw_x, field("x", $.number_literal), kw("Y"), field("y", $.number_literal)),
+        seq($._kw_x, field("x", $.number_literal), $._kw_y, field("y", $.number_literal)),
         seq(
           $._row_keyword,
           field("row", $.number_literal),
