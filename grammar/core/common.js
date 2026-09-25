@@ -566,7 +566,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_return,
       optional(
-        choice($.__return_error_clause, kw("NO-APPLY"), field("return_value", $._expression)),
+        choice($.__return_error_clause, $._kw_no_apply, field("return_value", $._expression)),
       ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence

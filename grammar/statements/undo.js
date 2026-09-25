@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         optional(
           choice(
             $.__return_error_clause,
-            alias(kw("NO-APPLY"), $.no_apply),
+            alias($._kw_no_apply, $.no_apply),
             field("return_value", $._expression),
           ),
         ),
