@@ -44,6 +44,7 @@ export default ({ kw }) => ({
     seq($.__create_buffer_name, $.__create_buffer_concatenation_tail),
   __create_buffer_concatenation_tail: ($) =>
     prec.right(seq("+", $.__create_buffer_name, optional($.__create_buffer_concatenation_tail))),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-choice-inline
   __create_buffer_name: ($) =>
     choice(
       $._identifier_or_access_or_call,
