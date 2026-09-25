@@ -53,6 +53,7 @@ export default ({ kw }) => ({
         seq(field("down", $.number_literal), $._kw_down),
         seq($._kw_down, field("down", $.__browse_option_expression)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__browse_option_expression)),
       seq(kw("DEFAULT-BUTTON"), field("default_button", $.__browse_option_expression)),
       seq(kw("RETAIN"), field("retain", $.__browse_option_expression)),
