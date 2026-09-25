@@ -11,7 +11,7 @@ export default ({ kw }) => ({
       optional($.__function_extent_phrase),
       $.__function_prefix_tail,
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/single-use-alias-sequence
   __function_prefix_tail: ($) =>
     seq(
       optional($._routine_access_modifier),
