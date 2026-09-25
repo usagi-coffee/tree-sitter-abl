@@ -8,12 +8,12 @@ export default ({ kw }) => ({
       $._kw_for,
       choice(
         // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.
-        seq(field("event", $.identifier), $._of_keyword, field("object", $.identifier)),
+        seq(field("event", $.identifier), $._kw_of, field("object", $.identifier)),
         // WRITE event with optional NEW and OLD buffers
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           $._kw_write,
-          $._of_keyword,
+          $._kw_of,
           field("object", $.identifier),
           optional(seq($._new_keyword, optional($._kw_buffer), field("new_buffer", $.identifier))),
           optional($.__trigger_procedure_old_buffer),
@@ -22,7 +22,7 @@ export default ({ kw }) => ({
         seq(
           $._kw_assign,
           choice(
-            seq($._of_keyword, field("object", $.qualified_name)),
+            seq($._kw_of, field("object", $.qualified_name)),
             seq(
               seq($._new_keyword, $.__trigger_procedure_value_body),
               optional(seq($._kw_old, $.__trigger_procedure_value_body)),

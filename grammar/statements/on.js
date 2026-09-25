@@ -99,7 +99,7 @@ export default ({ kw }) => ({
           choice(
             seq(
               field("event", $._delete_keyword),
-              $._of_keyword,
+              $._kw_of,
               choice(
                 $.__on_database_event_action,
                 seq(
@@ -112,7 +112,7 @@ export default ({ kw }) => ({
             ),
             seq(
               field("event", choice($._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
-              $._of_keyword,
+              $._kw_of,
               $.__on_database_event_action,
             ),
           ),
@@ -262,7 +262,7 @@ export default ({ kw }) => ({
     ),
   __on_of_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
-    seq($._of_keyword, field("widget", $.widget_phrase), optional($.__on_of_widget_tail)),
+    seq($._kw_of, field("widget", $.widget_phrase), optional($.__on_of_widget_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __on_of_widget_tail: ($) =>
     seq(",", field("widget", $.widget_phrase), optional($.__on_of_widget_tail)),

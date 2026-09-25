@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  of_phrase: ($) => seq($._of_keyword, field("record", $._qualified_identifier)),
+  of_phrase: ($) => seq($._kw_of, field("record", $._qualified_identifier)),
   record_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
@@ -19,7 +19,7 @@ export default ({ kw }) => ({
   __record_option: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._of_keyword, field("of", $._qualified_identifier)),
+      seq($._kw_of, field("of", $._qualified_identifier)),
       prec.right(seq($._kw_where, field("where", optional($._expression)))),
       seq(
         kw("TENANT-WHERE"),

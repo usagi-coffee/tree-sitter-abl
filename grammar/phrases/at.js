@@ -30,7 +30,7 @@ export default ({ kw }) => ({
         seq($._kw_row_of, field("row_of", $._expression)),
       ),
     ),
-  __at_of_suffix: ($) => prec.right(seq($._of_keyword, $._expression)),
+  __at_of_suffix: ($) => prec.right(seq($._kw_of, $._expression)),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __at_x_y: ($) =>

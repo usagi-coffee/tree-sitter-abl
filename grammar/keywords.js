@@ -238,7 +238,7 @@ export default ({ kw }) => ({
   _kw_by: ($) => kw("BY"),
   _kw_as: ($) => kw("AS"),
   _kw_no_undo: ($) => kw("NO-UNDO"),
-  _of_keyword: ($) => kw("OF"),
+  _kw_of: ($) => kw("OF"),
   _like_keyword: ($) => kw("LIKE"),
   _row_keyword: ($) => kw("ROW"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline

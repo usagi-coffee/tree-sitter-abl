@@ -59,7 +59,7 @@ export default ({ kw }) => ({
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
-          $._of_keyword,
+          $._kw_of,
           field("column", $._qualified_identifier),
           optional($.__sql_for_update_column_tail),
         ),
