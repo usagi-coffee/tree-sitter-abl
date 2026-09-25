@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("STATUS"),
       choice(
-        seq(kw("DEFAULT"), optional(field("message", $._expression))),
+        seq($._kw_default, optional(field("message", $._expression))),
         seq($._kw_input, optional(choice(kw("OFF"), field("message", $._expression)))),
       ),
       optional($.in_window_phrase),

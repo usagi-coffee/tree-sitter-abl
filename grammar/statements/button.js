@@ -14,7 +14,7 @@ export default ({ kw }) => ({
           alias(kw("AUTO-GO"), $.auto_go),
           alias(kw("AUTO-ENDKEY"), $.auto_endkey),
           alias(kw("AUTO-END-KEY"), $.auto_endkey),
-          alias(kw("DEFAULT"), $.default),
+          alias($._kw_default, $.default),
           $._color_font_option,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._kw_context_help_id, field("context_help_id", $._expression)),
