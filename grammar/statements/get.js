@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __get_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("GET"),
+      $._kw_get,
       field("direction", choice(kw("FIRST"), kw("NEXT"), kw("PREV"), kw("LAST"), kw("CURRENT"))),
       field("query", $.identifier),
       optional(

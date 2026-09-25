@@ -10,7 +10,7 @@ export default ({ kw }) => ({
         seq(
           field(
             "action",
-            choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier)),
+            choice(alias($._kw_get, $.identifier), alias(kw("REQUEST"), $.identifier)),
           ),
           $.__dde_target_item_body,
         ),
