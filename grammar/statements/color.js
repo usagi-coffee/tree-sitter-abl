@@ -5,12 +5,12 @@ export default ({ kw }) => ({
   __color_prefix: ($) => seq(kw("COLOR"), optional($.__color_body)),
 
   __color_body: ($) =>
-    seq(optional(choice(alias(kw("DISPLAY"), $.display), kw("PROMPT"))), $.__color_tail),
+    seq(optional(choice(alias(kw("DISPLAY"), $.display), $._kw_prompt)), $.__color_tail),
 
   __color_tail: ($) =>
     seq(
       field("color", $.color_phrase),
-      optional(seq(kw("PROMPT"), field("prompt_color", $.color_phrase))),
+      optional(seq($._kw_prompt, field("prompt_color", $.color_phrase))),
       $.__color_targets,
       optional($.frame_phrase),
     ),

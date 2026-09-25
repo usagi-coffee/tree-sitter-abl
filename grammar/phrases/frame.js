@@ -53,7 +53,7 @@ export default ({ kw }) => ({
         kw("COLOR"),
         optional(kw("DISPLAY")),
         field("color", $.__frame_color_value),
-        optional(seq(kw("PROMPT"), field("prompt_color", $.__frame_color_value))),
+        optional(seq($._kw_prompt, field("prompt_color", $.__frame_color_value))),
       ),
       seq(kw("TITLE"), optional($.__frame_title_options), field("title", $.__frame_expression)),
       choice(
