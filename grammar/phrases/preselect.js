@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   preselect_phrase: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("PRESELECT"),
       $.preselect_record_list,
       optional(
