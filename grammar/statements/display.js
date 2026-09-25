@@ -35,7 +35,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("UNLESS-HIDDEN"), $.unless_hidden),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __display_window_frame_tail: ($) =>
     choice(seq($.in_window_phrase, optional($._frame_phrases)), $._frame_phrases),
   __display_window_frame_phrases: ($) =>
