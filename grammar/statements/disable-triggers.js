@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_triggers,
       $._for_keyword,
-      field("mode", choice(kw("DUMP"), kw("LOAD"))),
+      field("mode", choice(kw("DUMP"), $._kw_load)),
       $._of_keyword,
       field("table", $._identifier_or_qualified_name),
       optional(alias(kw("ALLOW-REPLICATION"), $.allow_replication)),
