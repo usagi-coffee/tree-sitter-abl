@@ -11,7 +11,7 @@ export default ({ kw }) => ({
     choice(
       $._color_font_option,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("TITLE"), field("title", $._expression)),
+      seq($._kw_title, field("title", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $.identifier)),
       alias(kw("MENUBAR"), $.menubar),

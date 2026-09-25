@@ -44,7 +44,7 @@ export default ({ kw }) => ({
       ),
       seq(kw("ROW-HEIGHT-PIXELS"), field("row_height_pixels", $.__browse_option_expression)),
       seq(
-        kw("TITLE"),
+        $._kw_title,
         optional($._frame_title_option),
         field("title", $.__browse_option_expression),
       ),

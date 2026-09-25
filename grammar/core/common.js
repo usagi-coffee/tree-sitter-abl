@@ -491,7 +491,7 @@ export default ({ kw }) => ({
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
-  _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
+  _alert_box_title: ($) => seq($._kw_title, field("title", $._alert_box_title_value)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _alert_box_title_value: ($) =>
     choice(
