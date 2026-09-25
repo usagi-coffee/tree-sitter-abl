@@ -54,7 +54,7 @@ export default ({ kw }) => ({
 
   __message_set_update_phrase: ($) =>
     seq(
-      field("mode", choice(kw("SET"), $._kw_update)),
+      field("mode", choice($._kw_set, $._kw_update)),
       field("field", $._identifier_or_qualified_name),
       optional($.__message_set_update_options),
     ),

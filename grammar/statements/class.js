@@ -161,7 +161,7 @@ export default ({ kw }) => ({
           ),
           seq(
             optional($.__class_property_accessor_modifier),
-            kw("SET"),
+            $._kw_set,
             optional($.__class_property_accessor_parameters),
             $.__class_property_accessor_tail,
           ),
@@ -196,7 +196,7 @@ export default ({ kw }) => ({
     choice(
       $._terminator_dot,
       // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-      seq($.__class_property_accessor_body, optional(choice($._kw_get, kw("SET"))), $._terminator),
+      seq($.__class_property_accessor_body, optional(choice($._kw_get, $._kw_set)), $._terminator),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset

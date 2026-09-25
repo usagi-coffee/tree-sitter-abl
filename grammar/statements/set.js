@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __set_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("SET"),
+      $._kw_set,
       optional($._stream_phrase),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),

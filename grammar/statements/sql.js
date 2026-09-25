@@ -107,7 +107,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
     seq(
       field("table", $._identifier_or_qualified_name),
-      kw("SET"),
+      $._kw_set,
       alias($.__sql_update_assignment, $.assignment),
       optional($.__sql_update_assignment_tail),
       optional($.__aggregate_where_phrase),

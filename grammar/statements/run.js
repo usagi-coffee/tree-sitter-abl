@@ -48,7 +48,7 @@ export default ({ kw }) => ({
       alias(seq(kw("SINGLE-RUN"), optional($.__run_persistence_set_tail)), $.single_run),
       alias(seq(kw("SINGLETON"), optional($.__run_persistence_set_tail)), $.singleton),
     ),
-  __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__display_base_field)),
+  __run_persistence_set_tail: ($) => seq($._kw_set, field("handle", $.__display_base_field)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _run_target: ($) =>

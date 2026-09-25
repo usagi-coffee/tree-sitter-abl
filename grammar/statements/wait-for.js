@@ -13,7 +13,7 @@ export default ({ kw }) => ({
         ),
         seq(
           field("method", $.function_call),
-          optional(seq(kw("SET"), field("return_value", $._identifier_or_access))),
+          optional(seq($._kw_set, field("return_value", $._identifier_or_access))),
         ),
       ),
     ),
