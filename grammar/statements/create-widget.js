@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   create_widget_statement: ($) =>
-    prec.right(seq(kw("CREATE"), $.__create_widget_body, $._terminator)),
+    prec.right(seq($._kw_create, $.__create_widget_body, $._terminator)),
   __create_widget_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(

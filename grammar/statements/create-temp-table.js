@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  create_temp_table_statement: ($) => seq(kw("CREATE"), $.__create_temp_table_body, $._terminator),
+  create_temp_table_statement: ($) => seq($._kw_create, $.__create_temp_table_body, $._terminator),
 
   __create_temp_table_body: ($) =>
     seq(
