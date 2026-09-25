@@ -26,7 +26,7 @@ export default ({ kw }) => ({
       alias($._kw_auto_return, $.auto_return),
       seq($._kw_color, field("color", $.color_phrase)),
       alias($._go_on_phrase, $.go_on),
-      seq(kw("KEYS"), field("keys", $.identifier)),
+      seq($._kw_keys, field("keys", $.identifier)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ERROR"), $.no_error),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
