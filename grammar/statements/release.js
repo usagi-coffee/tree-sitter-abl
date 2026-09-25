@@ -1,4 +1,4 @@
 export default ({ kw }) => ({
   release_statement: ($) =>
-    seq(kw("RELEASE"), field("record", $._identifier_or_qualified_name), $._no_error_terminator),
+    seq($._kw_release, field("record", $._identifier_or_qualified_name), $._no_error_terminator),
 });
