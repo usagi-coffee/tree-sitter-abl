@@ -225,6 +225,7 @@ export default ({ kw }) => ({
           alias(kw("SIMPLE"), $.simple),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("DROP-DOWN"), $.drop_down),
           seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
         ),
