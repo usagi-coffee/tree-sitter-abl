@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   view_statement: ($) => seq($.__view_prefix, $._terminator),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/non-empty-tail-extraction
   __view_prefix: ($) => seq(kw("VIEW"), optional($._stream_phrase), optional($.__view_window_tail)),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __view_window_tail: ($) =>
     choice(seq($._widget_phrases, optional($.in_window_phrase)), $.in_window_phrase),
 });
