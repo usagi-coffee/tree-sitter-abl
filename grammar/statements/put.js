@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __put_output: ($) =>
     choice(
-      seq(optional(alias(kw("UNFORMATTED"), $.unformatted)), $.__put_output_items_tail),
+      seq(optional(alias($._kw_unformatted, $.unformatted)), $.__put_output_items_tail),
       alias(seq(kw("CONTROL"), $._expression_list), $.control_phrase),
     ),
   __put_output_items_tail: ($) =>

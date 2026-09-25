@@ -25,5 +25,5 @@ export default ({ kw }) => ({
       ),
     ),
   __import_unformatted_phrase: ($) =>
-    seq(kw("UNFORMATTED"), field("field", $._identifier_or_qualified_name)),
+    seq($._kw_unformatted, field("field", $._identifier_or_qualified_name)),
 });
