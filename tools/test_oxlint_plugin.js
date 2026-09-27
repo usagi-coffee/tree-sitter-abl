@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedSymbolAliasChoiceInline,
   inlineDispatcherBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
@@ -88,6 +89,86 @@ import {
 
 RuleTester.describe = (_name, run) => run();
 RuleTester.it = (_name, run) => run();
+
+const mixedSymbolAliasChoice = `choice($.identifier, $.string_literal, $.number_literal, alias($._signed_number_literal, $.number_literal))`;
+new RuleTester().run("shared-symbol-alias-choice-inline", sharedSymbolAliasChoiceInline, {
+  valid: [
+    `export default () => ({ event_values: ($) => ${mixedSymbolAliasChoice} });`,
+    `export default () => ({ __event_values: ($) => ${mixedSymbolAliasChoice} });`,
+    `export default () => ({ _event_values: ($) => choice($.identifier, $.number_literal) });`,
+    `export default () => ({ _event_values: ($) => choice(alias($.a, $.value), alias($.b, $.value)) });`,
+    `export default () => ({ _event_values: ($) => choice($.identifier, alias(kw("TRUE"), $.value)) });`,
+    `export default () => ({ _event_values: ($) => choice($.identifier, alias($.value, $._hidden)) });`,
+    `export default () => ({ _event_values: ($) => choice($._event_values, alias($.value, $.number)) });`,
+    `export default () => ({ _event_values: ($) => choice($.identifier, alias($._event_values, $.number)) });`,
+    `export default () => ({ _event_values: ($) => prec.right(${mixedSymbolAliasChoice}) });`,
+    `export default () => ({ _event_values: ($) => choice($.a, $.b, $.c, $.d, $.e, $.f, alias($.g, $.h)) });`,
+    `export default () => ({ _event_values: ($) => ${mixedSymbolAliasChoice}, root: ($) => alias($._event_values, $.value) });`,
+    `export default () => ({ _event_values: ($) => ${mixedSymbolAliasChoice}, root: ($) => token(seq("x", $._event_values)) });`,
+    `export default grammar({ inline: ($) => [$._event_values], rules: { _event_values: ($) => ${mixedSymbolAliasChoice} } });`,
+    `export default grammar({ conflicts: ($) => [[$._event_values, $.other]], rules: { _event_values: ($) => ${mixedSymbolAliasChoice} } });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-symbol-alias-choice-inline
+      _event_values: ($) => ${mixedSymbolAliasChoice},
+    });`,
+  ],
+  invalid: [
+    {
+      name: "event symbols include a signed-number alias",
+      code: `export default () => ({ _event_values: ($) => ${mixedSymbolAliasChoice} });`,
+      errors: [{ message: /_event_values mixes direct symbols and named symbol aliases/ }],
+    },
+    {
+      name: "shared mixed choice has multiple field-scoped uses",
+      code: `export default () => ({
+        _event_values: ($) => ${mixedSymbolAliasChoice},
+        first: ($) => field("event", $._event_values),
+        second: ($) => seq("ON", field("event", $._event_values)),
+      });`,
+      errors: [{ message: /preserve every alternative, alias and field scope/ }],
+    },
+    {
+      name: "aliases can precede direct alternatives",
+      code: `export default grammar({ rules: { _event_values: ($) => choice(alias($.signed, $.number), $.identifier) } });`,
+      errors: [{ message: /_event_values mixes direct symbols and named symbol aliases/ }],
+    },
+  ],
+});
+
+const mixedChoiceFixture = mkdtempSync(join(tmpdir(), "abl-mixed-choice-lint-"));
+try {
+  writeFileSync(
+    join(mixedChoiceFixture, "grammar.js"),
+    `export default grammar({
+      // $._comment_only is not metadata.
+      inline: ($) => [$._event_values],
+      rules: {},
+    });`,
+  );
+  new RuleTester().run(
+    "shared-symbol-alias-choice-inline cross-file metadata",
+    sharedSymbolAliasChoiceInline,
+    {
+      valid: [
+        {
+          cwd: mixedChoiceFixture,
+          filename: join(mixedChoiceFixture, "grammar", "common.js"),
+          code: `export default () => ({ _event_values: ($) => ${mixedSymbolAliasChoice} });`,
+        },
+      ],
+      invalid: [
+        {
+          cwd: mixedChoiceFixture,
+          filename: join(mixedChoiceFixture, "grammar", "common.js"),
+          code: `export default () => ({ _comment_only: ($) => ${mixedSymbolAliasChoice} });`,
+          errors: [{ message: /_comment_only mixes direct symbols and named symbol aliases/ }],
+        },
+      ],
+    },
+  );
+} finally {
+  rmSync(mixedChoiceFixture, { recursive: true, force: true });
+}
 
 const compoundRecursiveItem = `seq(field("field", $._assignable), optional(seq("=", field("value", $._expression))), optional($._when_phrase), optional($.__items))`;
 new RuleTester().run("recursive-item-extraction", recursiveItemExtraction, {
