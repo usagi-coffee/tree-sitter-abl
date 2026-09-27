@@ -552,7 +552,7 @@ export default grammar({
       // parse as either assignment_statement or expression_statement (equality check).
       // By excluding `=` here, expression_statement cannot match `x = 5.`, forcing it
       // to parse as assignment_statement.
-      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline, tree-sitter-optimize/shared-symbol-alias-choice-inline
       _statement_expression: ($) =>
         choice(
           alias($.binary_expression_no_eq, $.binary_expression),
