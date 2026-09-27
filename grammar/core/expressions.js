@@ -5,6 +5,8 @@ export default ({ kw }) => ({
       $.binary_expression,
       $.unary_expression,
       $._primary_expression,
+      // Bare argument references stay extras instead of starting expression statements.
+      $.argument_reference,
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/inline-dispatcher-boundary
@@ -30,7 +32,6 @@ export default ({ kw }) => ({
       $.array_access,
       $.scoped_name,
       $.object_access,
-      $.argument_reference,
       $.number_literal,
       $.date_literal,
       $.string_literal,
@@ -38,38 +39,6 @@ export default ({ kw }) => ({
       $.null_literal,
       $.input_expression,
       // oxlint-disable-next-line tree-sitter-optimize/forwarded-alias-reuse
-      alias($.include_expression, $.include_file_reference),
-    ),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
-  _statement_primary_expression: ($) =>
-    choice(
-      prec(-2, $.if_preprocessor_directive),
-      prec(-1, $.preprocessor_name),
-      $._qualified_identifier,
-      $.system_handle_identifier,
-      $.widget_qualified_name,
-      $.parenthesized_expression,
-      $.available_expression,
-      $.can_find_expression,
-      $.current_changed_expression,
-      $.ambiguous_expression,
-      $.accum_expression,
-      $.locked_expression,
-      $.new_expression,
-      $.entered_expression,
-      $.dataset_reference,
-      $.seek_expression,
-      $.function_call,
-      $.array_access,
-      $.scoped_name,
-      $.object_access,
-      $.number_literal,
-      $.date_literal,
-      $.string_literal,
-      $.boolean_literal,
-      $.null_literal,
-      $.input_expression,
-      // oxlint-disable-next-line tree-sitter-optimize/shared-expression-alias, tree-sitter-optimize/forwarded-alias-reuse
       alias($.include_expression, $.include_file_reference),
     ),
 });

@@ -45,3 +45,89 @@ DYNAMIC-FUNCTION(ENTRY(2,c) IN h).
               (argument
                 name: (identifier))))
           in_handle: (identifier))))))
+
+================================================================================
+PRIMARY - argument references as extras and expression operands
+================================================================================
+
+{1} doWork().
+doWork() {2}.
+x = {1} + {2}.
+doWork({1}, {2}).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (argument_reference)
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments))
+    (argument_reference))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (argument_reference)
+      (argument_reference)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (argument_reference))
+        (argument
+          name: (argument_reference))))))
+
+================================================================================
+PRIMARY - argument references in BUFFER-COMPARE operands
+================================================================================
+
+BUFFER-COMPARE source TO target COMPARES:
+  WHEN {1} = {2} THEN RETURN.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      (compares)
+      field: (argument_reference)
+      value: (argument_reference)
+      action: (return_statement))))
+
+================================================================================
+PRIMARY - statement operators and parenthesized equality
+================================================================================
+
+a + b * c.
+a = b = c.
+(a = b).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (binary_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))))
