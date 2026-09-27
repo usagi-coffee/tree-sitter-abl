@@ -59,6 +59,7 @@ export default ({ kw }) => ({
       alias($.__run_procedure_path, $.procedure_name),
       $.macro_concatenated_name,
       $.identifier,
+      $.string_literal,
       $._routine_name_initial,
       alias($.__operator_name, $.identifier),
       $.qualified_name,

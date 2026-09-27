@@ -1,0 +1,42 @@
+================================================================================
+RUN - quoted procedure paths and arguments
+================================================================================
+
+RUN "/opt/app/job.p".
+RUN 'dir with spaces/job.p'(INPUT value, OUTPUT result) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (string_literal))
+  (run_statement
+    procedure: (string_literal)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))
+    (no_error)))
+
+================================================================================
+RUN - quoted targets with persistence and procedure context
+================================================================================
+
+RUN "worker.p" PERSISTENT SET h.
+RUN "inner" IN h (1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (string_literal)
+    (persistent
+      handle: (identifier)))
+  (run_statement
+    procedure: (string_literal)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (number_literal)))))
