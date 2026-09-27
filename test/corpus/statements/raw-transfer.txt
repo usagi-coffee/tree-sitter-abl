@@ -77,9 +77,9 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
         right: (string_literal))))
   (raw_transfer_statement
     source_field: (identifier)
-    target: (identifier))
-  (expression_statement
-    (identifier))
+    target: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (raw_transfer_statement
     source_field: (identifier)
     target_field: (identifier))

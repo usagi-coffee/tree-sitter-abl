@@ -6,7 +6,11 @@ export default ({ kw }) => ({
       kw("RAW-TRANSFER"),
       choice(
         // Case 1: source TO target (basic)
-        seq(field("source_field", $.identifier), $._kw_to, field("target", $.identifier)),
+        seq(
+          field("source_field", $._qualified_identifier),
+          $._kw_to,
+          field("target", $._qualified_identifier),
+        ),
         // Case 2: FIELD source TO target
         seq(
           kw("FIELD"),
@@ -17,18 +21,18 @@ export default ({ kw }) => ({
         // Case 3: BUFFER source TO target
         seq(
           $._kw_buffer,
-          field("source_field", $.identifier),
+          field("source_field", $._qualified_identifier),
           $._kw_to,
-          field("target", $.identifier),
+          field("target", $._qualified_identifier),
         ),
         // Case 4: BUFFER source TO FIELD target
         seq(
           $._kw_buffer,
-          field("source_field", $.identifier),
+          field("source_field", $._qualified_identifier),
           $._kw_to,
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           kw("FIELD"),
-          field("target_field", $.identifier),
+          field("target_field", $._qualified_identifier),
         ),
         // Case 5: FIELD source TO BUFFER target
         seq(
@@ -41,10 +45,10 @@ export default ({ kw }) => ({
         // Case 6: BUFFER source TO BUFFER target
         seq(
           $._kw_buffer,
-          field("source_field", $.identifier),
+          field("source_field", $._qualified_identifier),
           $._kw_to,
           $._kw_buffer,
-          field("target_field", $.identifier),
+          field("target_field", $._qualified_identifier),
         ),
       ),
     ),

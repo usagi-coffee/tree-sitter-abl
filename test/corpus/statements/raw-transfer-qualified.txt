@@ -1,0 +1,24 @@
+================================================================================
+RAW-TRANSFER - qualified fields with optional FIELD marker
+================================================================================
+
+RAW-TRANSFER source_record TO target_record.raw_value.
+RAW-TRANSFER target_record.raw_value TO source_record.
+RAW-TRANSFER BUFFER source_record TO FIELD target_record.raw_value.
+RAW-TRANSFER FIELD target_record.raw_value TO BUFFER source_record.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (raw_transfer_statement
+    source_field: (identifier)
+    target: (qualified_name left: (identifier) right: (identifier)))
+  (raw_transfer_statement
+    source_field: (qualified_name left: (identifier) right: (identifier))
+    target: (identifier))
+  (raw_transfer_statement
+    source_field: (identifier)
+    target_field: (qualified_name left: (identifier) right: (identifier)))
+  (raw_transfer_statement
+    source_field: (qualified_name left: (identifier) right: (identifier))
+    target_field: (identifier)))
