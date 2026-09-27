@@ -784,6 +784,7 @@ export default grammar({
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
       // Routine names accept initials and operators that remain illegal in data identifiers.
+      // oxlint-disable-next-line tree-sitter-optimize/shared-symbol-alias-choice-inline
       _routine_name: ($) =>
         choice(
           $.identifier,
