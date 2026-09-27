@@ -5,6 +5,7 @@ import coreExpressions from "./grammar/core/expressions.js";
 import coreStatements from "./grammar/core/statements.js";
 import expressions from "./grammar/expressions/index.js";
 import { kw } from "./grammar/helpers/keywords.js";
+import { label_identifier } from "./grammar/helpers/label-keywords.js";
 import keywordRules, {
   COMPARISON_OPERATORS,
   WIDGETS,
@@ -64,6 +65,7 @@ export default grammar({
     // consuming what follows, which would swallow a trailing comment into
     // itself instead of leaving it as its own comment node (see scanner.c).
     $._macro_statement_token,
+    $._label_start,
   ],
   extras: ($) => [/[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/, $.comment, $.argument_reference],
   word: ($) => $.identifier,
@@ -175,6 +177,7 @@ export default grammar({
   ],
   inline: ($) => [
     ...inlineKeywords($),
+    $._label,
     $.__widget_name,
     $.__frame_identifier,
     $.__frame_color_value,
@@ -811,7 +814,12 @@ export default grammar({
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
           $.identifier,
         ),
-      _label: ($) => seq(field("label", $.identifier), alias($._colon, ":")),
+      _label: ($) =>
+        seq(
+          $._label_start,
+          field("label", alias($._label_identifier, $.identifier)),
+          alias($._colon, ":"),
+        ),
       // `!` is excluded after `.` and `:` because it is legal only in routine names.
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
@@ -850,6 +858,9 @@ export default grammar({
       ...coreExpressions(ctx),
       // Contains only $._statement aggregate and statement costs
       ...coreStatements(ctx),
+      // Labels have different keyword restrictions in blocks and EDITING phrases.
+      _label_identifier: ($) => label_identifier(),
+      _editing_label_identifier: ($) => label_identifier(true),
     };
   })(),
 });

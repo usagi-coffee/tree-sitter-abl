@@ -1,4 +1,5 @@
 #include <tree_sitter/parser.h>
+#include <string.h>
 #include <wctype.h>
 
 enum TokenType {
@@ -10,8 +11,113 @@ enum TokenType {
   TERMINATOR_DOT,
   STRING_LITERAL,
   BLOCK_COMMENT,
-  MACRO_STATEMENT
+  MACRO_STATEMENT,
+  LABEL_START
 };
+
+// The opening /* has already been consumed.
+static bool scan_block_comment(TSLexer *lexer) {
+  unsigned int depth = 1;
+  while (!lexer->eof(lexer)) {
+    int32_t c = lexer->lookahead;
+    lexer->advance(lexer, false);
+    if (c == '/' && lexer->lookahead == '*') {
+      lexer->advance(lexer, false);
+      depth++;
+    } else if (c == '*' && lexer->lookahead == '/') {
+      lexer->advance(lexer, false);
+      if (--depth == 0) return true;
+    }
+  }
+  return false;
+}
+
+static bool label_space(int32_t c) {
+  return iswspace(c) || c == 0xFEFF || c == 0x2060 || c == 0x200B;
+}
+
+static bool skip_space(TSLexer *lexer, bool skip) {
+  for (;;) {
+    if (label_space(lexer->lookahead) || lexer->lookahead == '~') {
+      lexer->advance(lexer, skip);
+    } else if (lexer->lookahead == '\\') {
+      lexer->advance(lexer, skip);
+      if (lexer->lookahead == '\r') lexer->advance(lexer, skip);
+      if (lexer->lookahead != '\n') return false;
+      lexer->advance(lexer, skip);
+    } else {
+      return true;
+    }
+  }
+}
+
+static bool label_name_char(int32_t c) {
+  return iswalnum(c) || c == '_' || c == '-' || c == '&' || c == '#' ||
+         c == '%' || c == '$' || c == '!' || (c >= 0x80 && !label_space(c));
+}
+
+// Peek across extras, leaving their nodes and ranges to the normal lexer.
+static bool skip_label_trivia(TSLexer *lexer) {
+  for (;;) {
+    if (!skip_space(lexer, false)) return false;
+    if (lexer->lookahead == '/') {
+      lexer->advance(lexer, false);
+      if (lexer->lookahead == '/') {
+        while (!lexer->eof(lexer) && lexer->lookahead != '\n') {
+          lexer->advance(lexer, false);
+        }
+      } else if (lexer->lookahead == '*') {
+        lexer->advance(lexer, false);
+        if (!scan_block_comment(lexer)) return false;
+      } else {
+        return false;
+      }
+    } else if (lexer->lookahead == '{') {
+      lexer->advance(lexer, false);
+      if (lexer->lookahead == '*') {
+        lexer->advance(lexer, false);
+      } else {
+        if (lexer->lookahead < '0' || lexer->lookahead > '9') return false;
+        do {
+          lexer->advance(lexer, false);
+        } while (lexer->lookahead >= '0' && lexer->lookahead <= '9');
+      }
+      if (lexer->lookahead != '}') return false;
+      lexer->advance(lexer, false);
+    } else {
+      return true;
+    }
+  }
+}
+
+static bool scan_label_start(TSLexer *lexer) {
+  // The marker consumes nothing: the grammar still owns the identifier and
+  // colon, and applies the keyword restrictions for the surrounding block.
+  lexer->mark_end(lexer);
+  char name[8] = {0};
+  unsigned int length = 0;
+  do {
+    if (length < sizeof(name) - 1) {
+      name[length] = lexer->lookahead < 0x80 ? towupper(lexer->lookahead) : 0x7F;
+    }
+    length++;
+    lexer->advance(lexer, false);
+  } while (label_name_char(lexer->lookahead));
+
+  // These words followed by ':' open blocks themselves, even when the next
+  // statement is another block (DO: REPEAT: ... END. END.).
+  if (length < sizeof(name) &&
+      (!strcmp(name, "DO") || !strcmp(name, "REPEAT") ||
+       !strcmp(name, "FINALLY") || !strcmp(name, "EDITING"))) return false;
+
+  if (!skip_label_trivia(lexer) || lexer->lookahead != ':') return false;
+  lexer->advance(lexer, false);
+  // A label colon must be followed by whitespace; adjacent text belongs to
+  // object access or another token, even when that text starts a comment.
+  if (!label_space(lexer->lookahead) && !lexer->eof(lexer)) return false;
+  lexer->result_symbol = LABEL_START;
+  return true;
+}
 
 void *tree_sitter_abl_external_scanner_create() {
   return NULL;
@@ -46,12 +152,17 @@ bool tree_sitter_abl_external_scanner_scan(
   const bool *valid_symbols
 ) {
   (void)payload;
-  if (valid_symbols[MACRO_STATEMENT]) {
+  if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START]) {
     // Extras (whitespace) are not yet skipped when the external scanner runs;
     // skip them before looking for an indented macro statement.
-    while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
-      lexer->advance(lexer, true);
-    }
+    if (!skip_space(lexer, true)) return false;
+  }
+
+  if (valid_symbols[LABEL_START] && !valid_symbols[COLON] &&
+      label_name_char(lexer->lookahead)) {
+    // A failed peek has advanced the lexer. Return immediately so it cannot
+    // affect string, comment, or punctuation scans in this call.
+    return scan_label_start(lexer);
   }
 
   if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '{') {
@@ -159,9 +270,7 @@ bool tree_sitter_abl_external_scanner_scan(
     }
 
     if (valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] || valid_symbols[COLON]) {
-      while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
-        lexer->advance(lexer, true);
-      }
+      if (!skip_space(lexer, true)) return false;
 
       if (lexer->lookahead == ':') {
         lexer->advance(lexer, false);
@@ -279,33 +388,10 @@ bool tree_sitter_abl_external_scanner_scan(
     }
     lexer->advance(lexer, false);
 
-    unsigned int depth = 1;
-    while (!lexer->eof(lexer)) {
-      if (lexer->lookahead == '/') {
-        lexer->advance(lexer, false);
-        if (lexer->lookahead == '*') {
-          lexer->advance(lexer, false);
-          depth++;
-          continue;
-        }
-        continue;
-      }
-
-      if (lexer->lookahead == '*') {
-        lexer->advance(lexer, false);
-        if (lexer->lookahead == '/') {
-          lexer->advance(lexer, false);
-          depth--;
-          if (depth == 0) {
-            lexer->mark_end(lexer);
-            lexer->result_symbol = BLOCK_COMMENT;
-            return true;
-          }
-        }
-        continue;
-      }
-
-      lexer->advance(lexer, false);
+    if (scan_block_comment(lexer)) {
+      lexer->mark_end(lexer);
+      lexer->result_symbol = BLOCK_COMMENT;
+      return true;
     }
   }
 
