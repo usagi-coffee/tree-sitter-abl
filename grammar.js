@@ -226,6 +226,7 @@ export default grammar({
     $.__browse_flag_option,
     $._identifier_or_array_access,
     $._unquoted_name_initial,
+    $._routine_name_initial,
     $._parameter_direction,
     $._dos_unix_command,
     $.__buffer_compare_compares,
