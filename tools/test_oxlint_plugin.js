@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  inlineDispatcherBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -5529,3 +5530,46 @@ new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
     },
   ],
 });
+
+const broadInlineChoice =
+  "choice(prec(-2, $.macro), prec(-1, $.name), $.a, $.b, $.c, $.d, $.e, alias($.include, $.reference))";
+const inlineBoundaryFixture = (body, name = "_dispatch", inline = true) =>
+  `export default grammar({ inline: ($) => [${inline ? `$.${name}` : ""}], rules: { ${name}: ($) => ${body} } });`;
+new RuleTester().run("inline-dispatcher-boundary", inlineDispatcherBoundary, {
+  valid: [
+    inlineBoundaryFixture(broadInlineChoice, "_dispatch", false),
+    inlineBoundaryFixture(broadInlineChoice, "dispatch"),
+    inlineBoundaryFixture("choice($.a, $.b)"),
+    inlineBoundaryFixture('choice($.a, $.b, $.c, $.d, $.e, $.f, $.g, seq("(", $.value, ")"))'),
+    `export default grammar({ inline: ($) => [$._dispatch], rules: {
+      // oxlint-disable-next-line rule-to-test/inline-dispatcher-boundary
+      _dispatch: ($) => ${broadInlineChoice}
+    } });`,
+  ],
+  invalid: [
+    {
+      code: inlineBoundaryFixture(broadInlineChoice),
+      errors: [{ message: /_dispatch expands a broad symbol choice through grammar.inline/ }],
+    },
+  ],
+});
+const boundaryFixture = mkdtempSync(join(tmpdir(), "abl-boundary-lint-"));
+try {
+  writeFileSync(
+    join(boundaryFixture, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._dispatch], rules: {} });",
+  );
+  new RuleTester().run("inline-dispatcher-boundary cross-file metadata", inlineDispatcherBoundary, {
+    valid: [],
+    invalid: [
+      {
+        cwd: boundaryFixture,
+        filename: join(boundaryFixture, "grammar", "expressions.js"),
+        code: `export default () => ({ _dispatch: ($) => ${broadInlineChoice} });`,
+        errors: [{ message: /_dispatch expands a broad symbol choice through grammar.inline/ }],
+      },
+    ],
+  });
+} finally {
+  rmSync(boundaryFixture, { recursive: true, force: true });
+}
