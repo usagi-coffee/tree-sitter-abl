@@ -409,6 +409,7 @@ export default grammar({
           choice($.identifier, $.number_literal),
           optional(seq("=", field("value", $.__preprocessor_name_value))),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-dispatcher-boundary
       __preprocessor_name_value: ($) =>
         choice(
           $._qualified_identifier,
