@@ -543,9 +543,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _undo_lnr_target: ($) =>
     choice(
-      seq($._kw_leave, optional(field("leave_label", $.identifier))),
-      seq($._kw_next, optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq($._kw_leave, optional(field("leave_label", alias($._label_identifier, $.identifier)))),
+      seq($._kw_next, optional(field("next_label", alias($._label_identifier, $.identifier)))),
+      seq(kw("RETRY"), optional(field("retry_label", alias($._label_identifier, $.identifier)))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _on_phrase_return: ($) =>

@@ -53,7 +53,8 @@ static bool skip_space(TSLexer *lexer, bool skip) {
 
 static bool label_name_char(int32_t c) {
   return iswalnum(c) || c == '_' || c == '-' || c == '&' || c == '#' ||
-         c == '%' || c == '$' || c == '!' || (c >= 0x80 && !label_space(c));
+         c == '%' || c == '$' || c == '!' || c == '@' || c == '+' || c == '*' ||
+         c == '/' || (c >= 0x80 && !label_space(c));
 }
 
 // Peek across extras, leaving their nodes and ranges to the normal lexer.
@@ -90,19 +91,35 @@ static bool skip_label_trivia(TSLexer *lexer) {
   }
 }
 
-static bool scan_label_start(TSLexer *lexer) {
+static bool scan_label_start(TSLexer *lexer, bool leading_dot) {
   // The marker consumes nothing: the grammar still owns the identifier and
   // colon, and applies the keyword restrictions for the surrounding block.
-  lexer->mark_end(lexer);
+  if (!leading_dot) lexer->mark_end(lexer);
   char name[8] = {0};
   unsigned int length = 0;
-  do {
+  if (leading_dot) name[length++] = '.';
+  if (lexer->lookahead == '/' && !leading_dot) {
+    lexer->advance(lexer, false);
+    // Comment delimiters start comments only at the beginning of a token.
+    if (lexer->lookahead == '*') {
+      lexer->advance(lexer, false);
+      if (!scan_block_comment(lexer)) return false;
+      lexer->mark_end(lexer);
+      lexer->result_symbol = BLOCK_COMMENT;
+      return true;
+    }
+    if (lexer->lookahead == '/') return false;
+    name[length++] = '/';
+  }
+  while (label_name_char(lexer->lookahead) || lexer->lookahead == '.') {
+    int32_t c = lexer->lookahead;
     if (length < sizeof(name) - 1) {
-      name[length] = lexer->lookahead < 0x80 ? towupper(lexer->lookahead) : 0x7F;
+      name[length] = c < 0x80 ? towupper(c) : 0x7F;
     }
     length++;
     lexer->advance(lexer, false);
-  } while (label_name_char(lexer->lookahead));
+    if (c == '.' && !iswdigit(lexer->lookahead)) return false;
+  }
 
   // These words followed by ':' open blocks themselves, even when the next
   // statement is another block (DO: REPEAT: ... END. END.).
@@ -162,7 +179,7 @@ bool tree_sitter_abl_external_scanner_scan(
       label_name_char(lexer->lookahead)) {
     // A failed peek has advanced the lexer. Return immediately so it cannot
     // affect string, comment, or punctuation scans in this call.
-    return scan_label_start(lexer);
+    return scan_label_start(lexer, false);
   }
 
   if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '{') {
@@ -219,9 +236,14 @@ bool tree_sitter_abl_external_scanner_scan(
   }
 
   if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] ||
-      valid_symbols[NAMEPLUS] || valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT]) {
+      valid_symbols[NAMEPLUS] || valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT] ||
+      valid_symbols[LABEL_START]) {
     if (lexer->lookahead == '.') {
+      lexer->mark_end(lexer);
       lexer->advance(lexer, false);
+      if (valid_symbols[LABEL_START] && !valid_symbols[COLON] && iswdigit(lexer->lookahead)) {
+        return scan_label_start(lexer, true);
+      }
       lexer->mark_end(lexer);
 
       if ((iswalpha(lexer->lookahead) || lexer->lookahead == '_') && valid_symbols[NAMEDOT]) {
@@ -229,10 +251,13 @@ bool tree_sitter_abl_external_scanner_scan(
         return true;
       }
 
-      if (valid_symbols[TERMINATOR_DOT]) {
+      // An adjacent name character keeps the period inside a name or number,
+      // including a leading decimal component in a label reference (.1a).
+      if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead)) {
         lexer->result_symbol = TERMINATOR_DOT;
         return true;
       }
+      return false;
     }
 
     if (lexer->lookahead == '+' && valid_symbols[NAMEPLUS]) {
@@ -311,10 +336,11 @@ bool tree_sitter_abl_external_scanner_scan(
           lexer->result_symbol = NAMEDOT;
           return true;
         }
-        if (valid_symbols[TERMINATOR_DOT]) {
+        if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead)) {
           lexer->result_symbol = TERMINATOR_DOT;
           return true;
         }
+        return false;
       }
     }
   }

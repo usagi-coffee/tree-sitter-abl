@@ -6,7 +6,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $._kw_undo,
-      optional(field("undo_label", $.identifier)),
+      optional(field("undo_label", alias($._label_identifier, $.identifier))),
       optional(seq(",", $.__undo_action)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice

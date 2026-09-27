@@ -4,7 +4,9 @@ export default ({ kw }) => ({
     seq(
       $._kw_on,
       $._kw_quit,
-      optional(seq($._kw_undo, optional(field("undo_label", $.identifier)))),
+      optional(
+        seq($._kw_undo, optional(field("undo_label", alias($._label_identifier, $.identifier)))),
+      ),
       optional($._on_action_tail),
     ),
 });

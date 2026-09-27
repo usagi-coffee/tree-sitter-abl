@@ -5,7 +5,7 @@ export default ({ kw }) => ({
       $._kw_on,
       $._kw_error,
       $._kw_undo,
-      optional(field("undo_label", $.identifier)),
+      optional(field("undo_label", alias($._label_identifier, $.identifier))),
       optional(seq(",", $.__on_error_action)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice

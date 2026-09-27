@@ -1,0 +1,369 @@
+================================================================================
+Labels - numeric and symbolic names
+================================================================================
+
+1a: REPEAT: LEAVE 1a. END.
+1_foo: REPEAT: LEAVE 1_foo. END.
+1-foo: REPEAT: LEAVE 1-foo. END.
+.1a: REPEAT: LEAVE .1a. END.
+1.2a: REPEAT: LEAVE 1.2a. END.
+--1.2a: REPEAT: LEAVE --1.2a. END.
+$loop: REPEAT: LEAVE $loop. END.
+#loop: REPEAT: LEAVE #loop. END.
+%loop: REPEAT: LEAVE %loop. END.
+&loop: REPEAT: LEAVE &loop. END.
+!loop: REPEAT: LEAVE !loop. END.
+-loop: REPEAT: LEAVE -loop. END.
+@loop: REPEAT: LEAVE @loop. END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier)))))
+
+================================================================================
+Labels - operator names and numeric period components
+================================================================================
+
+/a: REPEAT: LEAVE /a. END.
+*a: REPEAT: LEAVE *a. END.
+a/b: REPEAT: LEAVE a/b. END.
+a*: REPEAT: LEAVE a*. END.
+a+/b: REPEAT: LEAVE a+/b. END.
+a.1: REPEAT: LEAVE a.1. END.
+a/*x*/: REPEAT: LEAVE a/*x*/. END.
+a//x: REPEAT: LEAVE a//x. END.
+0xfoo: REPEAT: LEAVE 0xfoo. END.
+0x1g: REPEAT: LEAVE 0x1g. END.
++0x1: REPEAT: LEAVE +0x1. END.
+*1: REPEAT: LEAVE *1. END.
+/1: REPEAT: LEAVE /1. END.
+1*2: REPEAT: LEAVE 1*2. END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier)))))
+
+================================================================================
+Labels - numeric DO and FOR labels
+================================================================================
+
+1a: DO: LEAVE 1a. END.
+1a: FOR EACH tt_label_check: LEAVE 1a. END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (for_statement label: (identifier)
+    (record_phrase record: (identifier))
+    (body (leave_statement label: (identifier)))))
+
+================================================================================
+EDITING - numeric and symbolic label names
+================================================================================
+
+SET qty WITH 1a: EDITING: READKEY. LEAVE 1a. END.
+UPDATE qty $edit: EDITING: READKEY. NEXT $edit. END.
+PROMPT-FOR qty /edit: EDITING: READKEY. LEAVE /edit. END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field field: (identifier))
+    (frame_phrase)
+    (editing_phrase label: (identifier)
+      (readkey_statement)
+      (leave_statement label: (identifier))))
+  (update_statement
+    (field field: (identifier))
+    (editing_phrase label: (identifier)
+      (readkey_statement)
+      (next_statement label: (identifier))))
+  (prompt_for_statement
+    (field field: (identifier))
+    (editing_phrase label: (identifier)
+      (readkey_statement)
+      (leave_statement label: (identifier)))))
+
+================================================================================
+Labels - nonstandard names in control-flow clauses
+================================================================================
+
+1a: REPEAT ON ERROR UNDO 1a, RETRY 1a:
+  UNDO 1a, NEXT 1a.
+END.
+$loop: REPEAT ON ENDKEY UNDO $loop, LEAVE $loop:
+  NEXT $loop.
+END.
+-looper: REPEAT ON STOP UNDO -looper, RETRY -looper:
+  UNDO -looper, RETRY -looper.
+END.
+quit/loop: REPEAT ON QUIT UNDO quit/loop, LEAVE quit/loop:
+  LEAVE quit/loop.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement label: (identifier)
+    (on_error_phrase undo_label: (identifier) retry_label: (identifier))
+    (body (undo_statement undo_label: (identifier) next_label: (identifier))))
+  (repeat_statement label: (identifier)
+    (on_endkey_phrase undo_label: (identifier) leave_label: (identifier))
+    (body (next_statement label: (identifier))))
+  (repeat_statement label: (identifier)
+    (on_stop_phrase undo_label: (identifier) retry_label: (identifier))
+    (body (undo_statement undo_label: (identifier) retry_label: (identifier))))
+  (repeat_statement label: (identifier)
+    (on_quit_phrase undo_label: (identifier) leave_label: (identifier))
+    (body (leave_statement label: (identifier)))))
+
+================================================================================
+Labels - comments before slash and star names
+================================================================================
+
+/* before slash label */
+/entry: REPEAT: LEAVE /entry. END.
+// before star label
+*entry: DO: LEAVE *entry. END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (comment (block_comment))
+  (repeat_statement label: (identifier)
+    (body (leave_statement label: (identifier))))
+  (comment (line_comment))
+  (do_statement label: (identifier)
+    (body (leave_statement label: (identifier)))))
+
+================================================================================
+Labels - reject 1 as a name
+:error
+================================================================================
+
+1: REPEAT: LEAVE 1. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject -1 as a name
+:error
+================================================================================
+
+-1: REPEAT: LEAVE -1. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject 1.2 as a name
+:error
+================================================================================
+
+1.2: REPEAT: LEAVE 1.2. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject 1..2a as a name
+:error
+================================================================================
+
+1..2a: REPEAT: LEAVE 1..2a. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject a.b as a name
+:error
+================================================================================
+
+a.b: REPEAT: LEAVE a.b. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject .a as a name
+:error
+================================================================================
+
+.a: REPEAT: LEAVE .a. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject a? as a name
+:error
+================================================================================
+
+a?: REPEAT: LEAVE a?. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject 0x1 as a name
+:error
+================================================================================
+
+0x1: REPEAT: LEAVE 0x1. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject -0XFF as a name
+:error
+================================================================================
+
+-0XFF: REPEAT: LEAVE -0XFF. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject - as a name
+:error
+================================================================================
+
+-: REPEAT: LEAVE -. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject * as a name
+:error
+================================================================================
+
+*: REPEAT: LEAVE *. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject / as a name
+:error
+================================================================================
+
+/: REPEAT: LEAVE /. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject @ as a name
+:error
+================================================================================
+
+@: REPEAT: LEAVE @. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject 1 as a control-flow target
+:error
+================================================================================
+
+outer_loop: REPEAT: LEAVE 1. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject 0x1 as a control-flow target
+:error
+================================================================================
+
+outer_loop: REPEAT: LEAVE 0x1. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - reject IF as a control-flow target
+:error
+================================================================================
+
+outer_loop: REPEAT: LEAVE IF. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - statement periods remain separate from comments
+================================================================================
+
+BELL. /* comment */ BELL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (bell_statement)
+  (comment (block_comment))
+  (bell_statement))
+
+================================================================================
+Labels - a period adjacent to a name is not a statement separator
+:error
+================================================================================
+
+outer_loop: REPEAT: LEAVE.outer_loop. END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Labels - a period adjacent to a comment is not a statement separator
+:error
+================================================================================
+
+BELL./* comment */ BELL.
+
+--------------------------------------------------------------------------------

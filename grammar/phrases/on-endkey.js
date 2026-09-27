@@ -5,7 +5,7 @@ export default ({ kw }) => ({
       $._kw_on,
       choice($._kw_endkey, kw("END-KEY")),
       $._kw_undo,
-      optional(field("undo_label", $.identifier)),
+      optional(field("undo_label", alias($._label_identifier, $.identifier))),
       optional($._on_action_tail),
     ),
 });
