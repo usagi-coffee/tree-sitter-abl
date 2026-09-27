@@ -4,7 +4,7 @@ import { $ } from "bun";
 const [, , ...args] = Bun.argv;
 
 const proc = Bun.spawnSync({
-  cmd: ["tree-sitter", "test", "--rebuild", ...args],
+  cmd: ["tree-sitter", "test", ...args],
   stdout: "pipe",
   stderr: "pipe",
 });
