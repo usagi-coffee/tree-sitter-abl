@@ -210,6 +210,7 @@ export default grammar({
     $._echo_phrase,
     $._on_phrase_action,
     $._primary_expression,
+    $._events,
     $.__preprocessor_name_value,
     $._identifier_or_access_or_call,
     $._format_validate,
