@@ -193,7 +193,6 @@ export default grammar({
     $._logical_operator,
     $.__multiplicative_operator,
     $._comparison_operator,
-    $._statement_primary_expression,
     $._type_or_string,
     $._alert_box_title_value,
     $._alert_buttons_phrase,
