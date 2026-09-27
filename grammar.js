@@ -633,7 +633,7 @@ export default grammar({
           field("right", alias($._identifier_immediate, $.identifier)),
           optional($.__qualified_name_tail),
         ),
-      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline, tree-sitter-optimize/shared-symbol-alias-choice-inline
       _qualified_name_left: ($) =>
         choice(
           $.macro_concatenated_name,
