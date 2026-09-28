@@ -276,7 +276,7 @@ export default grammar({
           optional(field("arguments", $.__include_arguments)),
         ),
       include_expression: ($) => $.__include_file_reference,
-      include_statement: ($) => $.__include_file_reference,
+      include_statement: ($) => seq(optional($._label), $.__include_file_reference),
       __include_arguments: ($) => choice($.__include_arguments_values, $.__include_arguments_named),
       __include_arguments_values: ($) =>
         prec.right(

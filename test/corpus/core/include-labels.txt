@@ -1,0 +1,85 @@
+================================================================================
+Include labels - include supplies the block
+================================================================================
+
+mainloop:
+{block.i}
+PAUSE 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    label: (identifier)
+    file: (include_file_path
+      (identifier)))
+  (pause_statement
+    duration: (number_literal)))
+
+================================================================================
+Include labels - keyword label and named arguments
+================================================================================
+
+CHOOSE: {block.i &mode="repeat"}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    label: (identifier)
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))))
+
+================================================================================
+Include labels - macro directory and quoted procedure argument
+================================================================================
+
+mainloop:
+/* The include supplies the block header and body. */
+{{&INCLUDE_DIR}block.i ""program.p"" "(OUTPUT result)"}
+PAUSE 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    label: (identifier)
+    (comment
+      (block_comment))
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal)))
+  (pause_statement
+    duration: (number_literal)))
+
+================================================================================
+Include labels - reject a reserved keyword label
+:error
+================================================================================
+
+IF: {block.i}
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Include labels - keep labels off non-header statements
+:error
+================================================================================
+
+mainloop: RUN "program.p".
+
+--------------------------------------------------------------------------------
