@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   leave_statement: ($) => seq($.__leave_prefix, $._terminator),
 
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/single-use-alias-sequence
   __leave_prefix: ($) =>
     seq($._kw_leave, optional(field("label", alias($._label_identifier, $.identifier)))),
 });
