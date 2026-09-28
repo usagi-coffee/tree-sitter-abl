@@ -1,0 +1,76 @@
+================================================================================
+Include argument names - numeric initials and keywords
+================================================================================
+
+{worker.i &2JM="amount" &2="second" &DO="yes" &table.field="field" &-x="value"}
+MESSAGE {&2JM} {&2_foo} {&2}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal)))
+  (message_statement
+    (preprocessor_name
+      (identifier))
+    (preprocessor_name
+      (identifier))
+    (preprocessor_name
+      (number_literal))))
+
+================================================================================
+Include argument names - macro-generated names
+================================================================================
+
+{worker.i &{1}="*" &{&file}="*" &prefix{&suffix}="value"}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      name: (argument_reference)
+      value: (string_literal))
+    argument: (include_argument
+      name: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    argument: (include_argument
+      name: (macro_concatenated_name)
+      value: (string_literal))))
+
+================================================================================
+Include argument names - reject a missing name
+:error
+================================================================================
+
+{worker.i &="value"}
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Include argument names - keep macro definition name restrictions
+:error
+================================================================================
+
+&SCOPED-DEFINE 2JM amount
+
+--------------------------------------------------------------------------------

@@ -292,7 +292,21 @@ export default grammar({
           ),
         ),
       include_named_argument: ($) =>
-        seq("&", field("name", $.identifier), seq("=", field("value", $._include_argument_value))),
+        seq(
+          "&",
+          field(
+            "name",
+            choice(
+              alias($.__include_argument_name, $.identifier),
+              $.preprocessor_name,
+              $.argument_reference,
+              $.macro_concatenated_name,
+            ),
+          ),
+          "=",
+          field("value", $._include_argument_value),
+        ),
+      __include_argument_name: ($) => token(/[\p{L}\p{N}_\-.&#%$!]+/),
       // oxlint-disable-next-line tree-sitter-optimize/body-extraction
       _include_argument_value: ($) =>
         choice(
@@ -412,7 +426,7 @@ export default grammar({
           "&",
           // {&2 = "default"} defaults positional include argument 2 when
           // the caller omits it; {&NAME} refers to a named one.
-          choice($.identifier, $.number_literal),
+          choice($.identifier, $.number_literal, alias($._numeric_identifier, $.identifier)),
           optional(seq("=", field("value", $.__preprocessor_name_value))),
         ),
       // oxlint-disable-next-line tree-sitter-optimize/inline-dispatcher-boundary
