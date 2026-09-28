@@ -704,6 +704,38 @@
     }
   },
   {
+    "type": "analyze_resume_preprocessor_directive",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "preprocessor_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "analyze_suspend_preprocessor_directive",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "preprocessor_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "annotation",
     "named": true,
     "fields": {
@@ -779,6 +811,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -4630,6 +4666,14 @@
         },
         {
           "type": "aggregate_statement",
+          "named": true
+        },
+        {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
           "named": true
         },
         {
@@ -11863,6 +11907,14 @@
           "named": true
         },
         {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
+          "named": true
+        },
+        {
           "type": "annotation",
           "named": true
         },
@@ -12852,6 +12904,14 @@
           "named": true
         },
         {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
+          "named": true
+        },
+        {
           "type": "annotation",
           "named": true
         },
@@ -13569,7 +13629,7 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "body",
@@ -13908,6 +13968,10 @@
           "named": true
         },
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "constructor_definition",
           "named": true
         },
@@ -14056,6 +14120,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -17857,6 +17925,14 @@
             "named": true
           },
           {
+            "type": "analyze_resume_preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "analyze_suspend_preprocessor_directive",
+            "named": true
+          },
+          {
             "type": "annotation",
             "named": true
           },
@@ -21578,6 +21654,10 @@
           "named": true
         },
         {
+          "type": "preprocessor_name",
+          "named": true
+        },
+        {
           "type": "static_modifier",
           "named": true
         }
@@ -21590,7 +21670,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -26115,7 +26195,7 @@
       },
       "ddeid": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "accum_expression",
@@ -26253,6 +26333,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -30425,7 +30509,18 @@
   {
     "type": "editing_phrase",
     "named": true,
-    "fields": {},
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -30436,6 +30531,14 @@
         },
         {
           "type": "aggregate_statement",
+          "named": true
+        },
+        {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
           "named": true
         },
         {
@@ -31900,6 +32003,10 @@
           "named": true
         },
         {
+          "type": "preprocessor_name",
+          "named": true
+        },
+        {
           "type": "signature",
           "named": true
         },
@@ -31916,7 +32023,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "identifier",
@@ -32666,6 +32773,10 @@
         "types": [
           {
             "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -34686,7 +34797,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "body",
@@ -43971,6 +44082,14 @@
           "named": true
         },
         {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
+          "named": true
+        },
+        {
           "type": "annotation",
           "named": true
         },
@@ -46074,6 +46193,14 @@
             "named": true
           },
           {
+            "type": "analyze_resume_preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "analyze_suspend_preprocessor_directive",
+            "named": true
+          },
+          {
             "type": "annotation",
             "named": true
           },
@@ -46765,6 +46892,14 @@
           },
           {
             "type": "aggregate_statement",
+            "named": true
+          },
+          {
+            "type": "analyze_resume_preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "analyze_suspend_preprocessor_directive",
             "named": true
           },
           {
@@ -48533,7 +48668,19 @@
         "required": false,
         "types": [
           {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -48717,6 +48864,16 @@
           },
           {
             "type": "include_file_path",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -48984,6 +49141,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -52523,7 +52684,7 @@
     "fields": {
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -52551,7 +52712,7 @@
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "generic_type",
@@ -52586,7 +52747,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_modifier",
@@ -52820,6 +52981,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "generic_type",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -54417,6 +54582,14 @@
         },
         {
           "type": "aggregate_statement",
+          "named": true
+        },
+        {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
           "named": true
         },
         {
@@ -59385,6 +59558,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
         }
       ]
     }
@@ -60618,6 +60795,14 @@
         },
         {
           "type": "aggregate_statement",
+          "named": true
+        },
+        {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
           "named": true
         },
         {
@@ -64662,6 +64847,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       },
@@ -64889,6 +65082,10 @@
             "named": true
           },
           {
+            "type": "preprocessor_name",
+            "named": true
+          },
+          {
             "type": "qualified_name",
             "named": true
           }
@@ -64900,6 +65097,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]
@@ -68232,6 +68433,10 @@
           },
           {
             "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
             "named": true
           },
           {
@@ -72502,6 +72707,14 @@
           "named": true
         },
         {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
+          "named": true
+        },
+        {
           "type": "annotation",
           "named": true
         },
@@ -73983,7 +74196,7 @@
     "fields": {
       "value": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "accum_expression",
@@ -79097,6 +79310,10 @@
           {
             "type": "number_literal",
             "named": true
+          },
+          {
+            "type": "preprocessor_name",
+            "named": true
           }
         ]
       },
@@ -80603,6 +80820,14 @@
         },
         {
           "type": "aggregate_statement",
+          "named": true
+        },
+        {
+          "type": "analyze_resume_preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "analyze_suspend_preprocessor_directive",
           "named": true
         },
         {
@@ -85951,7 +86176,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_modifier",
@@ -87640,6 +87865,10 @@
           "named": true
         },
         {
+          "type": "preprocessor_name",
+          "named": true
+        },
+        {
           "type": "scope_modifier",
           "named": true
         },
@@ -89044,6 +89273,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -90067,6 +90306,10 @@
   },
   {
     "type": "FORMAT",
+    "named": false
+  },
+  {
+    "type": "FORWARD",
     "named": false
   },
   {
@@ -91583,10 +91826,6 @@
     "named": true
   },
   {
-    "type": "auto_return",
-    "named": true
-  },
-  {
     "type": "background",
     "named": true
   },
@@ -91611,15 +91850,7 @@
     "named": true
   },
   {
-    "type": "blank",
-    "named": true
-  },
-  {
     "type": "block_comment",
-    "named": true
-  },
-  {
-    "type": "break",
     "named": true
   },
   {
@@ -91651,18 +91882,6 @@
     "named": true
   },
   {
-    "type": "clear",
-    "named": true
-  },
-  {
-    "type": "clipboard",
-    "named": true
-  },
-  {
-    "type": "collate",
-    "named": true
-  },
-  {
     "type": "compares",
     "named": true
   },
@@ -91687,14 +91906,6 @@
     "named": true
   },
   {
-    "type": "current",
-    "named": true
-  },
-  {
-    "type": "cursor",
-    "named": true
-  },
-  {
     "type": "data_bind",
     "named": true
   },
@@ -91703,23 +91914,7 @@
     "named": true
   },
   {
-    "type": "deblank",
-    "named": true
-  },
-  {
-    "type": "default",
-    "named": true
-  },
-  {
-    "type": "disable_auto_zap",
-    "named": true
-  },
-  {
     "type": "disabled",
-    "named": true
-  },
-  {
-    "type": "display",
     "named": true
   },
   {
@@ -91783,10 +91978,6 @@
     "named": true
   },
   {
-    "type": "first",
-    "named": true
-  },
-  {
     "type": "fit_last_column",
     "named": true
   },
@@ -91812,14 +92003,6 @@
   },
   {
     "type": "format_picture",
-    "named": true
-  },
-  {
-    "type": "forward",
-    "named": true
-  },
-  {
-    "type": "forwards",
     "named": true
   },
   {
@@ -91867,18 +92050,6 @@
     "named": true
   },
   {
-    "type": "large",
-    "named": true
-  },
-  {
-    "type": "last",
-    "named": true
-  },
-  {
-    "type": "left",
-    "named": true
-  },
-  {
     "type": "line_comment",
     "named": true
   },
@@ -91920,14 +92091,6 @@
   },
   {
     "type": "new_instance",
-    "named": true
-  },
-  {
-    "type": "next",
-    "named": true
-  },
-  {
-    "type": "no_apply",
     "named": true
   },
   {
@@ -92059,10 +92222,6 @@
     "named": true
   },
   {
-    "type": "no_tab_stop",
-    "named": true
-  },
-  {
     "type": "no_underline",
     "named": true
   },
@@ -92072,10 +92231,6 @@
   },
   {
     "type": "no_wait",
-    "named": true
-  },
-  {
-    "type": "no_word_wrap",
     "named": true
   },
   {
@@ -92100,10 +92255,6 @@
   },
   {
     "type": "outer_join",
-    "named": true
-  },
-  {
-    "type": "overlay",
     "named": true
   },
   {
@@ -92147,10 +92298,6 @@
     "named": true
   },
   {
-    "type": "prev",
-    "named": true
-  },
-  {
     "type": "primary",
     "named": true
   },
@@ -92160,10 +92307,6 @@
   },
   {
     "type": "program_flag",
-    "named": true
-  },
-  {
-    "type": "quit",
     "named": true
   },
   {
@@ -92279,10 +92422,6 @@
     "named": true
   },
   {
-    "type": "silent",
-    "named": true
-  },
-  {
     "type": "simple",
     "named": true
   },
@@ -92335,10 +92474,6 @@
     "named": true
   },
   {
-    "type": "text",
-    "named": true
-  },
-  {
     "type": "then_branch",
     "named": true
   },
@@ -92375,10 +92510,6 @@
     "named": true
   },
   {
-    "type": "unformatted",
-    "named": true
-  },
-  {
     "type": "unique",
     "named": true
   },
@@ -92388,10 +92519,6 @@
   },
   {
     "type": "unless_hidden",
-    "named": true
-  },
-  {
-    "type": "up",
     "named": true
   },
   {
@@ -92416,10 +92543,6 @@
   },
   {
     "type": "use_widget_pool",
-    "named": true
-  },
-  {
-    "type": "validate",
     "named": true
   },
   {
