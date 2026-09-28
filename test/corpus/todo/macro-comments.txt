@@ -7,7 +7,7 @@ TODO - macro comment around assignments
 ================================================================================
 
 /{&enabled}*/
-ASSIGN value = inputValue.
+ASSIGN itemValue = inputValue.
 /{&enabled}*/
 
 --------------------------------------------------------------------------------
