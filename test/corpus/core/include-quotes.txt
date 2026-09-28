@@ -1,0 +1,176 @@
+================================================================================
+Include quoting - triple quotes in the final positional argument
+================================================================================
+
+{fragment.i "first" """}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - closing brace ends a double-quoted argument
+================================================================================
+
+{fragment.i "text}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - closing brace ends a single-quoted argument
+================================================================================
+
+{fragment.i 'text}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - multiline quoted argument
+================================================================================
+
+{fragment.i "first
+second}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - nested macro braces stay inside the argument
+================================================================================
+
+&SCOPED-DEFINE textValue suffix
+{fragment.i "prefix{&textValue}tail}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - escaped braces stay inside quoted arguments
+================================================================================
+
+{fragment.i "prefix~}suffix" "prefix~{suffix" "prefix\}suffix"}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - preserve normally closed strings
+================================================================================
+
+&SCOPED-DEFINE textValue suffix
+{fragment.i "plain" ""quoted"" "prefix{&textValue}tail"}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (string_literal)))
+  (message_statement
+    (string_literal)))
+
+================================================================================
+Include quoting - ordinary unterminated strings remain errors
+:error
+================================================================================
+
+MESSAGE "text}.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Include quoting - the include still requires a closing brace
+:error
+================================================================================
+
+{fragment.i "text
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Include quoting - an unescaped brace closes the include before a later quote
+:error
+================================================================================
+
+{fragment.i "text}tail"}
+MESSAGE "after".
+
+--------------------------------------------------------------------------------

@@ -15,7 +15,8 @@ enum TokenType {
   LABEL_START,
   ESCAPE,
   END_OF_FILE,
-  BLOCK_END
+  BLOCK_END,
+  INCLUDE_STRING_LITERAL
 };
 
 // The opening /* has already been consumed.
@@ -387,12 +388,27 @@ bool tree_sitter_abl_external_scanner_scan(
     }
   }
 
-  if (valid_symbols[STRING_LITERAL] &&
+  bool include_string = valid_symbols[INCLUDE_STRING_LITERAL];
+  if ((valid_symbols[STRING_LITERAL] || include_string) &&
       (lexer->lookahead == '"' || lexer->lookahead == '\'')) {
     char start = lexer->lookahead;
+    unsigned int brace_depth = 0;
     lexer->advance(lexer, false);
 
     while (!lexer->eof(lexer)) {
+      // The outer include brace ends even an unfinished quoted argument.
+      // Nested macro references and escaped braces remain argument content.
+      if (include_string && lexer->lookahead == '}') {
+        if (brace_depth == 0) {
+          lexer->mark_end(lexer);
+          lexer->result_symbol = INCLUDE_STRING_LITERAL;
+          return true;
+        }
+        brace_depth--;
+      } else if (include_string && lexer->lookahead == '{') {
+        brace_depth++;
+      }
+
       if (lexer->lookahead == start) {
         lexer->advance(lexer, false);
         if (lexer->lookahead == start) {
@@ -434,6 +450,11 @@ bool tree_sitter_abl_external_scanner_scan(
       if (lexer->lookahead == '~') {
         lexer->advance(lexer, false);
         if (!lexer->eof(lexer)) {
+          lexer->advance(lexer, false);
+        }
+      } else if (include_string && lexer->lookahead == '\\') {
+        lexer->advance(lexer, false);
+        if (lexer->lookahead == '{' || lexer->lookahead == '}' || lexer->lookahead == '\\') {
           lexer->advance(lexer, false);
         }
       } else {
