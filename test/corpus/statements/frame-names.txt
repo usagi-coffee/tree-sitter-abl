@@ -1,0 +1,140 @@
+================================================================================
+FRAME names - numeric initials in declarations and references
+================================================================================
+
+DEFINE FRAME 2a x.
+FORM x WITH FRAME 2a.
+DISPLAY x WITH FRAME 2a.
+UPDATE x WITH FRAME 2a.
+HIDE FRAME 2a.
+VIEW FRAME 2a.
+CLEAR FRAME 2a.
+MESSAGE FRAME 2a:TITLE.
+MESSAGE INPUT FRAME 2a x.
+ASSIGN x:SCREEN-VALUE IN FRAME 2a = "1".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (hide_statement
+    (widget_phrase
+      frame: (identifier)))
+  (view_statement
+    (widget_phrase
+      frame: (identifier)))
+  (clear_statement
+    frame: (identifier))
+  (message_statement
+    (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
+  (message_statement
+    (input_expression
+      frame: (identifier)
+      field: (identifier)))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (widget_qualified_name
+          target: (object_access
+            left: (identifier)
+            right: (identifier))
+          (identifier)
+          widget: (identifier))
+        right: (string_literal)))))
+
+================================================================================
+FRAME names - numeric prefixes are names, not numeric literals
+================================================================================
+
+DEFINE FRAME 2_foo x.
+DEFINE FRAME 2-frame x.
+DEFINE FRAME 1.2a x.
+DEFINE FRAME 0x1g x.
+DISPLAY x WITH FRAME 2_foo.
+DISPLAY x WITH FRAME 2-frame.
+DISPLAY x WITH FRAME 1.2a.
+DISPLAY x WITH FRAME 0x1g.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+FRAME names - reject a decimal literal
+:error
+================================================================================
+
+DEFINE FRAME 1.2 x.
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+FRAME names - reject a hexadecimal literal
+:error
+================================================================================
+
+DEFINE FRAME 0x1 x.
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+FRAME names - preserve data identifier restrictions
+:error
+================================================================================
+
+DEFINE VARIABLE 2a AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+

@@ -22,7 +22,7 @@ export default ({ kw }) => ({
           seq(
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             kw("FRAME", { offset: 4 }),
-            field("frame", $.__widget_name),
+            field("frame", $._frame_name),
             ":",
             field("attr", $.identifier),
           ),

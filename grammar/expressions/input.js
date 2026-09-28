@@ -11,7 +11,7 @@ export default ({ kw }) => ({
   __input_widget_phrase: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
+      seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_browse, field("browse", $.identifier)),
     ),

@@ -14,7 +14,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      field("name", choice($.identifier, $.preprocessor_name)),
+      field("name", $._frame_name),
       choice(
         seq(field("record", $._qualified_identifier), $._kw_except, $._field_references),
         optional($.__frame_form_items),

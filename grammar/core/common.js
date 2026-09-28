@@ -62,6 +62,8 @@ export default ({ kw }) => ({
     prec.right(seq($._qualified_identifier, optional($._import_export_except_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _initial_phrase: ($) => seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+  _frame_name: ($) =>
+    choice($.identifier, alias($._numeric_identifier, $.identifier), $.preprocessor_name),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   // VIEW and HIDE are the only users, and both admit a trailing IN WINDOW that
   // the shared widget_phrase cannot be told apart from IN FRAME with a single
@@ -122,14 +124,14 @@ export default ({ kw }) => ({
   _frame_browse_menu_widget: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+      seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_browse, field("browse", $.__widget_name)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
       seq(choice($._kw_menu, $._kw_sub_menu), field("menu", $.__widget_name)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
-  _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
+  _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _color_font_option: ($) =>
     prec(

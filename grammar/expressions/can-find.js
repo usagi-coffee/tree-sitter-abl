@@ -68,7 +68,7 @@ export default ({ kw }) => ({
       $._kw_and,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FRAME", { offset: 4 }),
-      optional(field("frame", $.identifier)),
+      optional(field("frame", $._frame_name)),
       field("field", $.identifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse

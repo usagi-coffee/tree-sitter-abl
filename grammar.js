@@ -5,7 +5,7 @@ import coreExpressions from "./grammar/core/expressions.js";
 import coreStatements from "./grammar/core/statements.js";
 import expressions from "./grammar/expressions/index.js";
 import { kw } from "./grammar/helpers/keywords.js";
-import { label_identifier } from "./grammar/helpers/label-keywords.js";
+import { label_identifier, numeric_identifier } from "./grammar/helpers/label-keywords.js";
 import keywordRules, {
   COMPARISON_OPERATORS,
   WIDGETS,
@@ -180,6 +180,7 @@ export default grammar({
     $._label,
     $.__widget_name,
     $.__frame_identifier,
+    $._frame_name,
     $.__frame_color_value,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
@@ -586,10 +587,16 @@ export default grammar({
       _object_access_widget_prefix: ($) =>
         prec(
           "object_widget_prefix",
-          seq(
-            field("widget", alias($._widgets, $.identifier)),
-            // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-            field("left", choice($._qualified_identifier, $.preprocessor_name)),
+          choice(
+            seq(
+              field("widget", alias($._widgets, $.identifier)),
+              // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+              field("left", choice($._qualified_identifier, $.preprocessor_name)),
+            ),
+            seq(
+              field("widget", alias(kw("FRAME", { offset: 4 }), $.identifier)),
+              field("left", alias($._numeric_identifier, $.identifier)),
+            ),
           ),
         ),
       _object_access_handle_prefix: ($) =>
@@ -768,8 +775,13 @@ export default grammar({
             choice($._qualified_identifier, $.scoped_name, $.object_access, $.function_call),
           ),
           $.__widget_qualified_name_separator,
-          $._widgets,
-          field("widget", choice($.identifier, $.preprocessor_name)),
+          choice(
+            seq($._widgets, field("widget", choice($.identifier, $.preprocessor_name))),
+            seq(
+              alias(kw("FRAME", { offset: 4 }), $.identifier),
+              field("widget", alias($._numeric_identifier, $.identifier)),
+            ),
+          ),
         ),
       __widget_qualified_name_separator: ($) => $._kw_in,
 
@@ -797,6 +809,8 @@ export default grammar({
           alias($.__operator_name, $.identifier),
         ),
       __symbolic_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
+
+      _numeric_identifier: ($) => numeric_identifier(),
 
       __numeric_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 

@@ -52,6 +52,16 @@ function identifier_except(words) {
     if (!initial && !node.end) branches.push("");
     return `(?:${branches.join("|")})`;
   };
+  return new RustRegex(`${pattern(root, true)}|${numeric_identifier_pattern()}`);
+}
+
+export function numeric_identifier() {
+  return token(new RustRegex(numeric_identifier_pattern()));
+}
+
+function numeric_identifier_pattern() {
+  const rest = String.raw`\p{L}\p{N}_\-+&#%$!@*/`;
+  const tail = String.raw`(?:[${rest}]|\.[0-9])*`;
   // Numeric and operator prefixes need a nonnumeric name character. Hexadecimal
   // literals (0xFF and -0xFF) remain numbers; +0xFF is an identifier in ABL.
   const prefixUnit = String.raw`(?:[+\-/0-9]|\.[0-9])`;
@@ -59,5 +69,5 @@ function identifier_except(words) {
   const core = String.raw`\p{L}_&#%$!@*`;
   const nonHexPrefix = String.raw`(?:[+1-9]|\.[0-9]|0${prefixUnit}|-(?:[+\-/1-9]|\.[0-9])|-0${prefixUnit})${prefixUnit}*|-`;
   const extended = String.raw`${prefix}[[${core}]--[xX]]${tail}|(?:${nonHexPrefix})[xX]${tail}|-?0[xX][0-9a-fA-F]*(?:[[${rest}]--[0-9a-fA-F]]|\.[0-9])${tail}`;
-  return new RustRegex(`${pattern(root, true)}|${extended}`);
+  return extended;
 }
