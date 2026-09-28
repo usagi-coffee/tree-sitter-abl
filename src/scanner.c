@@ -12,7 +12,8 @@ enum TokenType {
   STRING_LITERAL,
   BLOCK_COMMENT,
   MACRO_STATEMENT,
-  LABEL_START
+  LABEL_START,
+  ESCAPE
 };
 
 // The opening /* has already been consumed.
@@ -169,6 +170,27 @@ bool tree_sitter_abl_external_scanner_scan(
   const bool *valid_symbols
 ) {
   (void)payload;
+  if (valid_symbols[ESCAPE]) {
+    while (label_space(lexer->lookahead)) lexer->advance(lexer, true);
+    if (lexer->lookahead == '~' || lexer->lookahead == '\\') {
+      bool tilde = lexer->lookahead == '~';
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+      // Tilde trivia and UNIX escapes leave punctuation to its grammar rule.
+      // Quotes and braces have different escaped meanings; backslashes in
+      // complete filename tokens are consumed by the filename lexer instead.
+      int32_t c = lexer->lookahead;
+      if (c == '\r') {
+        lexer->advance(lexer, false);
+        c = lexer->lookahead == '\n' ? '\n' : 0;
+      }
+      if (tilde || c == '\n' || (c > 0 && c < 0x80 && strchr("()[],:.;+-*/=<>", c))) {
+        lexer->result_symbol = ESCAPE;
+        return true;
+      }
+      return false;
+    }
+  }
   if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START]) {
     // Extras (whitespace) are not yet skipped when the external scanner runs;
     // skip them before looking for an indented macro statement.

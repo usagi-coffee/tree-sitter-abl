@@ -66,8 +66,9 @@ export default grammar({
     // itself instead of leaving it as its own comment node (see scanner.c).
     $._macro_statement_token,
     $._label_start,
+    $._escape,
   ],
-  extras: ($) => [/[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/, $.comment, $.argument_reference],
+  extras: ($) => [/[\s\f\uFEFF\u2060\u200B]/, $.comment, $.argument_reference, $._escape],
   word: ($) => $.identifier,
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)

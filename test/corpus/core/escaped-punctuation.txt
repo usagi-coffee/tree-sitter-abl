@@ -1,0 +1,100 @@
+================================================================================
+Escaped punctuation - calls and arguments
+================================================================================
+
+MESSAGE LENGTH\("abc"\) SUBSTRING\("abc"\,1\,2\).
+ZMDLogMaster\("test", "message", 0).
+MESSAGE \(1 + 2\).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (string_literal))
+        (argument
+          name: (number_literal)))))
+  (message_statement
+    (parenthesized_expression
+      (binary_expression
+        (number_literal)
+        (number_literal)))))
+
+================================================================================
+Escaped punctuation - blocks and accessors
+================================================================================
+
+DO\:
+  values\[1\] \= 2\.
+  IF values\[1\] \> 0 THEN MESSAGE values\[1\].
+END\.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (assignment_statement
+        left: (array_access
+          array: (identifier)
+          index: (number_literal))
+        operator: (assignment_operator)
+        right: (number_literal))
+      (if_statement
+        (binary_expression
+          (array_access
+            array: (identifier)
+            index: (number_literal))
+          (number_literal))
+        then: (message_statement
+          (array_access
+            array: (identifier)
+            index: (number_literal)))))))
+
+================================================================================
+Escaped punctuation - preserve unquoted Windows paths
+================================================================================
+
+RUN src\prodoc\langref\r-udfdef.p PERSISTENT SET myhand.
+RUN Erp\Model\Vente\ErpTrt PERSISTENT SET h.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier)))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))))
+
+================================================================================
+Escaped punctuation - quotes cannot open a normal string
+:error
+================================================================================
+
+MESSAGE \"hello\".
+
+--------------------------------------------------------------------------------
