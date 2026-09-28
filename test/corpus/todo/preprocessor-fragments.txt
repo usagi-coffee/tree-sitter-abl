@@ -1,35 +1,34 @@
-The :error markers record deferred conditional-fragment support. The assignment
-example terminates both branches so it isolates the parser gap from the missing
-period in the original file's THEN branch.
+The :error markers record deferred conditional-fragment support, including
+complete statements whose parts span preprocessor branches.
 
 ================================================================================
-TODO - conditional PUT function call (CIM/cim_iclomt.i:27)
+TODO - conditional PUT function call
 :error
 ================================================================================
 
-&SCOPED-DEFINE Opis "description"
+&SCOPED-DEFINE textValue "example"
 PUT UNFORMATTED
-  &IF DEFINED(Opis) EQ 0 &THEN ' - '
-  &ELSE ' "' SUBSTRING({&Opis}, 1, 24) '"' &ENDIF
+  &IF DEFINED(textValue) EQ 0 &THEN ' - '
+  &ELSE ' "' SUBSTRING({&textValue}, 1, 24) '"' &ENDIF
   SKIP.
 
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - conditional PUT values and SKIP (CIM/cim_sosomt.i:41)
+TODO - conditional PUT values and SKIP
 :error
 ================================================================================
 
-&SCOPED-DEFINE Faktura "invoice"
+&SCOPED-DEFINE itemValue "example"
 PUT UNFORMATTED
-  &IF DEFINED(Faktura) EQ 0 &THEN ''
-  &ELSE '"' {&Faktura} '"' SKIP &ENDIF
+  &IF DEFINED(itemValue) EQ 0 &THEN ''
+  &ELSE '"' {&itemValue} '"' SKIP &ENDIF
   "." SKIP.
 
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - conditional assignment terminators (CIM/cim_wowois2jm.i:17)
+TODO - conditional assignment terminators
 :error
 ================================================================================
 
@@ -40,7 +39,7 @@ MESSAGE n.
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - conditional expression suffix (INC/zm_throw.i:3)
+TODO - conditional expression suffix
 :error
 ================================================================================
 

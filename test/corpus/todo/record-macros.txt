@@ -2,7 +2,7 @@ These include templates require macro substitution. The :error markers record
 deferred support for record operands and statement fragments in raw source.
 
 ================================================================================
-TODO - positional CREATE record (INC/xxcreate.i:11)
+TODO - positional CREATE record
 :error
 ================================================================================
 
@@ -11,16 +11,16 @@ CREATE {1}.
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - macro FIND selector, record and options (INC/xxfind.i:12)
+TODO - macro FIND selector, record and options
 :error
 ================================================================================
 
-FIND {&which} {&file} {&where}.
+FIND {&selector} {&recordName} {&options}.
 
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - positional AVAILABLE record (INC/xxfindxx.i:14, INC/xxmfnp.i:41)
+TODO - positional AVAILABLE record
 :error
 ================================================================================
 
@@ -29,7 +29,7 @@ IF NOT AVAILABLE {1} THEN BELL.
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - positional LOCKED record (INC/xxfindxx.i:14)
+TODO - positional LOCKED record
 :error
 ================================================================================
 

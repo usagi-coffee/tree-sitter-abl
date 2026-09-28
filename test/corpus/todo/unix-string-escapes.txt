@@ -2,30 +2,30 @@ These compiler-valid UNIX forms have deferred parser support. The :error markers
 record the current gaps; replace them with clean trees when support is added.
 
 ================================================================================
-TODO - UNIX escaped tildes (CHUI/zmetyk.p:1109)
+TODO - UNIX escaped tildes
 :error
 ================================================================================
 
-DEFINE VARIABLE requestString AS CHARACTER NO-UNDO.
-ASSIGN requestString = 'CT\~\~CD,\~CC^\~CT\~' + '\r\n'.
+DEFINE VARIABLE textValue AS CHARACTER NO-UNDO.
+ASSIGN textValue = 'prefix\~\~middle\~suffix\~' + '\r\n'.
 
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - UNIX escaped URL quotes (MES/mrp_autoclose_zr.p:28)
+TODO - UNIX escaped quotes in concatenation
 :error
 ================================================================================
 
-DEFINE VARIABLE cmd AS CHARACTER NO-UNDO.
-cmd = "curl -X GET \"https://example.invalid/?id=" + "42" + '\"'.
+DEFINE VARIABLE textValue AS CHARACTER NO-UNDO.
+textValue = "prefix \"value=" + "42" + '\"'.
 
 --------------------------------------------------------------------------------
 
 ================================================================================
-TODO - UNIX escaped HTML quotes (MYKI/logi_szczegoly_brutto.p:219)
+TODO - UNIX escaped quotes in output
 :error
 ================================================================================
 
-PUT "<font size=\"4\"> <table size=3 border=\"1\">" SKIP.
+PUT "<item name=\"value\" count=\"1\">" SKIP.
 
 --------------------------------------------------------------------------------
