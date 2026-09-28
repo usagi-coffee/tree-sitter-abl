@@ -68,6 +68,7 @@ export default grammar({
     $._label_start,
     $._escape,
     $._end_of_file,
+    $._block_end,
   ],
   extras: ($) => [/[\s\f\uFEFF\u2060\u200B]/, $.comment, $.argument_reference, $._escape],
   word: ($) => $.identifier,

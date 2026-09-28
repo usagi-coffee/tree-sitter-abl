@@ -1,0 +1,256 @@
+================================================================================
+Empty IF branches - THEN before END
+================================================================================
+
+DO:
+  IF TRUE THEN
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (empty_statement)))))
+
+================================================================================
+Empty IF branches - ELSE before END
+================================================================================
+
+DO:
+  IF TRUE THEN BELL. ELSE
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (bell_statement)
+        else: (empty_statement)))))
+
+================================================================================
+Empty IF branches - comments before END
+================================================================================
+
+DO:
+  IF TRUE THEN /* omitted THEN */
+END.
+DO:
+  IF TRUE THEN BELL. ELSE // omitted ELSE
+eNd.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        (comment
+          (block_comment))
+        then: (empty_statement))))
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (bell_statement)
+        (comment
+          (line_comment))
+        else: (empty_statement)))))
+
+================================================================================
+Empty IF branches - THEN at EOF
+================================================================================
+
+IF TRUE THEN
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (boolean_literal)
+    then: (empty_statement)))
+
+================================================================================
+Empty IF branches - ELSE at EOF
+================================================================================
+
+IF TRUE THEN BELL. ELSE
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (boolean_literal)
+    then: (bell_statement)
+    else: (empty_statement)))
+
+================================================================================
+Empty IF branches - trailing comment at EOF
+================================================================================
+
+IF TRUE THEN /* omitted branch */
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (boolean_literal)
+    (comment
+      (block_comment))
+    then: (empty_statement)))
+
+================================================================================
+Empty IF branches - nested THEN before END
+================================================================================
+
+DO:
+  IF TRUE THEN IF FALSE THEN
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (if_statement
+          (boolean_literal)
+          then: (empty_statement))))))
+
+================================================================================
+Empty IF branches - ELSE belongs to the nearest IF
+================================================================================
+
+DO:
+  IF TRUE THEN IF FALSE THEN BELL. ELSE
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (if_statement
+          (boolean_literal)
+          then: (bell_statement)
+          else: (empty_statement))))))
+
+================================================================================
+Empty IF branches - explicit empty THEN allows ELSE
+================================================================================
+
+DO:
+  IF TRUE THEN . ELSE BELL.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (empty_statement)
+        else: (bell_statement)))))
+
+================================================================================
+Empty IF branches - END PROCEDURE
+================================================================================
+
+PROCEDURE work:
+  IF TRUE THEN
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (empty_statement)))))
+
+================================================================================
+Empty IF branches - label names beginning with END
+================================================================================
+
+DO:
+  IF TRUE THEN ENDLESS: DO: LEAVE ENDLESS. END.
+  IF TRUE THEN END.1: DO: LEAVE END.1. END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (do_statement
+          label: (identifier)
+          (body
+            (leave_statement
+              label: (identifier)))))
+      (if_statement
+        (boolean_literal)
+        then: (do_statement
+          label: (identifier)
+          (body
+            (leave_statement
+              label: (identifier))))))))
+
+================================================================================
+Empty IF branches - empty branch and final END without a period
+================================================================================
+
+DO: IF TRUE THEN END
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (if_statement
+        (boolean_literal)
+        then: (empty_statement)))))
+
+================================================================================
+Empty IF branches - reject an implicit empty THEN before ELSE
+:error
+================================================================================
+
+DO:
+  IF TRUE THEN ELSE BELL.
+END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Empty IF branches - reject a nested empty THEN before ELSE
+:error
+================================================================================
+
+DO:
+  IF TRUE THEN IF FALSE THEN ELSE BELL.
+END.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Empty IF branches - reject an empty THEN before ELSE at top level
+:error
+================================================================================
+
+IF TRUE THEN ELSE BELL.
+
+--------------------------------------------------------------------------------

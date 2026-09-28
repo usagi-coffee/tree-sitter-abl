@@ -6,9 +6,15 @@ export default ({ kw }) => ({
         seq(
           $._expression,
           $._kw_then,
-          field("then", $._statement),
-          optional(seq($._kw_else, field("else", $._statement))),
+          field("then", $.__if_branch),
+          optional(seq($._kw_else, field("else", $.__if_branch))),
         ),
       ),
+    ),
+  __if_branch: ($) =>
+    choice(
+      $._statement,
+      alias($._end_of_file, $.empty_statement),
+      alias($._block_end, $.empty_statement),
     ),
 });

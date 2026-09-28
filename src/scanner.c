@@ -14,7 +14,8 @@ enum TokenType {
   MACRO_STATEMENT,
   LABEL_START,
   ESCAPE,
-  END_OF_FILE
+  END_OF_FILE,
+  BLOCK_END
 };
 
 // The opening /* has already been consumed.
@@ -93,9 +94,9 @@ static bool skip_label_trivia(TSLexer *lexer) {
   }
 }
 
-static bool scan_label_start(TSLexer *lexer, bool leading_dot) {
-  // The marker consumes nothing: the grammar still owns the identifier and
-  // colon, and applies the keyword restrictions for the surrounding block.
+static bool scan_statement_start(TSLexer *lexer, bool leading_dot, const bool *valid_symbols) {
+  // Markers consume nothing: the grammar owns the following identifier,
+  // colon or END keyword.
   if (!leading_dot) lexer->mark_end(lexer);
   char name[8] = {0};
   unsigned int length = 0;
@@ -115,13 +116,26 @@ static bool scan_label_start(TSLexer *lexer, bool leading_dot) {
   }
   while (label_name_char(lexer->lookahead) || lexer->lookahead == '.') {
     int32_t c = lexer->lookahead;
+    bool after_end = valid_symbols[BLOCK_END] && length == 3 && !strcmp(name, "END");
     if (length < sizeof(name) - 1) {
       name[length] = c < 0x80 ? towupper(c) : 0x7F;
     }
     length++;
     lexer->advance(lexer, false);
-    if (c == '.' && !iswdigit(lexer->lookahead)) return false;
+    if (c == '.' && !iswdigit(lexer->lookahead)) {
+      if (after_end) {
+        lexer->result_symbol = BLOCK_END;
+        return true;
+      }
+      return false;
+    }
   }
+
+  if (valid_symbols[BLOCK_END] && length == 3 && !strcmp(name, "END")) {
+    lexer->result_symbol = BLOCK_END;
+    return true;
+  }
+  if (!valid_symbols[LABEL_START]) return false;
 
   // These words followed by ':' open blocks themselves, even when the next
   // statement is another block (DO: REPEAT: ... END. END.).
@@ -197,17 +211,17 @@ bool tree_sitter_abl_external_scanner_scan(
     lexer->result_symbol = END_OF_FILE;
     return true;
   }
-  if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START]) {
+  if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START] || valid_symbols[BLOCK_END]) {
     // Extras (whitespace) are not yet skipped when the external scanner runs;
     // skip them before looking for an indented macro statement.
     if (!skip_space(lexer, true)) return false;
   }
 
-  if (valid_symbols[LABEL_START] && !valid_symbols[COLON] &&
+  if ((valid_symbols[LABEL_START] || valid_symbols[BLOCK_END]) && !valid_symbols[COLON] &&
       label_name_char(lexer->lookahead)) {
     // A failed peek has advanced the lexer. Return immediately so it cannot
     // affect string, comment, or punctuation scans in this call.
-    return scan_label_start(lexer, false);
+    return scan_statement_start(lexer, false, valid_symbols);
   }
 
   if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '{') {
@@ -270,7 +284,7 @@ bool tree_sitter_abl_external_scanner_scan(
       lexer->mark_end(lexer);
       lexer->advance(lexer, false);
       if (valid_symbols[LABEL_START] && !valid_symbols[COLON] && iswdigit(lexer->lookahead)) {
-        return scan_label_start(lexer, true);
+        return scan_statement_start(lexer, true, valid_symbols);
       }
       lexer->mark_end(lexer);
 
