@@ -67,6 +67,7 @@ export default grammar({
     $._macro_statement_token,
     $._label_start,
     $._escape,
+    $._end_of_file,
   ],
   extras: ($) => [/[\s\f\uFEFF\u2060\u200B]/, $.comment, $.argument_reference, $._escape],
   word: ($) => $.identifier,
@@ -251,7 +252,9 @@ export default grammar({
   rules: (() => {
     const ctx = { kw };
     return {
-      source_code: ($) => optional($._statements),
+      // A complete statement list can consume EOF too, preserving the statement
+      // interpretation of a standalone include instead of making it an expression.
+      source_code: ($) => optional(seq($._statements, optional($._end_of_file))),
       _statements: ($) => prec.right(seq($._statement, optional($._statements))),
 
       // Comments
@@ -874,7 +877,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _value_expression_opener: ($) => seq($._kw_value, "(", field("value", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
-      _terminator: ($) => choice($._terminator_dot, ";"),
+      _terminator: ($) => choice($._terminator_dot, ";", $._end_of_file),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _no_error_terminator: ($) => seq(optional($.__no_error), $._terminator),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

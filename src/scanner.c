@@ -13,7 +13,8 @@ enum TokenType {
   BLOCK_COMMENT,
   MACRO_STATEMENT,
   LABEL_START,
-  ESCAPE
+  ESCAPE,
+  END_OF_FILE
 };
 
 // The opening /* has already been consumed.
@@ -190,6 +191,11 @@ bool tree_sitter_abl_external_scanner_scan(
       }
       return false;
     }
+  }
+  if (valid_symbols[END_OF_FILE] && lexer->eof(lexer)) {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = END_OF_FILE;
+    return true;
   }
   if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START]) {
     // Extras (whitespace) are not yet skipped when the external scanner runs;

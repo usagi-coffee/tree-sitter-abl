@@ -1,3 +1,3 @@
 export default () => ({
-  empty_statement: ($) => $._terminator,
+  empty_statement: ($) => choice($._terminator_dot, ";"),
 });
