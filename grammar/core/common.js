@@ -130,7 +130,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
       seq(choice($._kw_menu, $._kw_sub_menu), field("menu", $.__widget_name)),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset, tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
   _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _color_font_option: ($) =>
