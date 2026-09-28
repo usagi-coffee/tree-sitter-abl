@@ -542,7 +542,7 @@ export default ({ kw }) => ({
   _on_action_tail: ($) => seq(",", $._on_phrase_action),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _on_phrase_action: ($) => choice($._undo_lnr_target, $._on_phrase_return),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _undo_lnr_target: ($) =>
     choice(
       seq($._kw_leave, optional(field("leave_label", alias($._label_identifier, $.identifier)))),
