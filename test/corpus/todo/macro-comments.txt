@@ -1,0 +1,36 @@
+These markers form comment delimiters after macro expansion. The :error markers
+record deferred support for their unexpanded source representation.
+
+================================================================================
+TODO - macro comment around assignments (INC/xxcrtr.i:16)
+:error
+================================================================================
+
+/{&xxloc_mstr}*/
+ASSIGN xxloc_domain = global_domain.
+/{&xxloc_mstr}*/
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - paired macro comment markers (INC/xxfindtr.i:14)
+:error
+================================================================================
+
+/{&t1}*/
+/{&t1}*/
+/{&t2}*/
+/{&t2}*/
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - macro comment around an include (INC/xxfixxtr.i:12)
+:error
+================================================================================
+
+/{&xxloc_mstr}*/
+{xxfind.i &file="xxloc_mstr" &where="WHERE xxloc_domain = global_domain"}
+/{&xxloc_mstr}*/
+
+--------------------------------------------------------------------------------

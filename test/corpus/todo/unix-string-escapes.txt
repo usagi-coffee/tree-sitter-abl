@@ -1,0 +1,31 @@
+These compiler-valid UNIX forms have deferred parser support. The :error markers
+record the current gaps; replace them with clean trees when support is added.
+
+================================================================================
+TODO - UNIX escaped tildes (CHUI/zmetyk.p:1109)
+:error
+================================================================================
+
+DEFINE VARIABLE requestString AS CHARACTER NO-UNDO.
+ASSIGN requestString = 'CT\~\~CD,\~CC^\~CT\~' + '\r\n'.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - UNIX escaped URL quotes (MES/mrp_autoclose_zr.p:28)
+:error
+================================================================================
+
+DEFINE VARIABLE cmd AS CHARACTER NO-UNDO.
+cmd = "curl -X GET \"https://example.invalid/?id=" + "42" + '\"'.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - UNIX escaped HTML quotes (MYKI/logi_szczegoly_brutto.p:219)
+:error
+================================================================================
+
+PUT "<font size=\"4\"> <table size=3 border=\"1\">" SKIP.
+
+--------------------------------------------------------------------------------

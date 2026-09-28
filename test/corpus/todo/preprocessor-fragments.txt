@@ -1,0 +1,52 @@
+The :error markers record deferred conditional-fragment support. The assignment
+example terminates both branches so it isolates the parser gap from the missing
+period in the original file's THEN branch.
+
+================================================================================
+TODO - conditional PUT function call (CIM/cim_iclomt.i:27)
+:error
+================================================================================
+
+&SCOPED-DEFINE Opis "description"
+PUT UNFORMATTED
+  &IF DEFINED(Opis) EQ 0 &THEN ' - '
+  &ELSE ' "' SUBSTRING({&Opis}, 1, 24) '"' &ENDIF
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - conditional PUT values and SKIP (CIM/cim_sosomt.i:41)
+:error
+================================================================================
+
+&SCOPED-DEFINE Faktura "invoice"
+PUT UNFORMATTED
+  &IF DEFINED(Faktura) EQ 0 &THEN ''
+  &ELSE '"' {&Faktura} '"' SKIP &ENDIF
+  "." SKIP.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - conditional assignment terminators (CIM/cim_wowois2jm.i:17)
+:error
+================================================================================
+
+DEFINE VARIABLE n AS INTEGER NO-UNDO.
+n = &IF TRUE &THEN 0. &ELSE INTEGER("1"). &ENDIF
+MESSAGE n.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+TODO - conditional expression suffix (INC/zm_throw.i:3)
+:error
+================================================================================
+
+UNDO, THROW NEW Progress.Lang.AppError(
+  "base"
+  &IF TRUE &THEN + " " + STRING(2) &ENDIF,
+  400).
+
+--------------------------------------------------------------------------------
