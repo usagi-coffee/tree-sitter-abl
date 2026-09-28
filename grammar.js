@@ -598,6 +598,7 @@ export default grammar({
           $.preprocessor_name,
           $.scoped_name,
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/body-extraction
       _object_access_widget_prefix: ($) =>
         prec(
           "object_widget_prefix",
