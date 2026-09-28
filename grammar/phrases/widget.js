@@ -94,7 +94,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment, tree-sitter-optimize/inline-keyword-owner
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
+        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment, tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         optional(seq($._kw_in, kw("FRAME", { offset: 4 }), field("frame", $._frame_name))),
       ),
       seq(
