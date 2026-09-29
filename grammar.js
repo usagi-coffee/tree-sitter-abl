@@ -209,7 +209,6 @@ export default grammar({
     $._object_access_expression_left,
     $._object_access_plain_prefix,
     $._logical_operator,
-    $.__multiplicative_operator,
     $._comparison_operator,
     $._type_or_string,
     $._alert_box_title_value,
