@@ -347,18 +347,11 @@ export default grammar({
 
       // Preprocessor
       global_define_preprocessor_directive: ($) =>
-        seq(
-          token(prec(1, /&GLOBAL-DEFINE/i)),
-          field("name", $.identifier),
-          field("value", $.preprocessor_value),
-        ),
-      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
+        seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body),
       scoped_define_preprocessor_directive: ($) =>
-        seq(
-          token(prec(1, /&SCOPED-DEFINE/i)),
-          field("name", $.identifier),
-          field("value", $.preprocessor_value),
-        ),
+        seq(token(prec(1, /&SCOPED-DEFINE/i)), $.__define_preprocessor_body),
+      __define_preprocessor_body: ($) =>
+        seq(field("name", $.identifier), field("value", $.preprocessor_value)),
       if_preprocessor_directive: ($) => seq($.__if_preprocessor_directive_prefix, token(/&ENDIF/i)),
       __if_preprocessor_directive_prefix: ($) =>
         seq(
