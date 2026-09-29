@@ -145,7 +145,7 @@ PREPROCESSOR IF DIRECTIVES - mixed with statements
     (endif_branch)))
 
 ================================================================================
-PREPROCESSOR - macro alone on its line is a statement
+PREPROCESSOR - macro alone on its line is an extra
 ================================================================================
 
 DEFINE VARIABLE x AS INTEGER NO-UNDO.
@@ -159,7 +159,7 @@ ASSIGN x = 1.
     name: (identifier)
     type: (identifier)
     (no_undo))
-  (constant)
+  (constant (identifier))
   (assign_statement
     (assign_phrase
       (assign_pair
@@ -299,7 +299,7 @@ x = 1.
   (analyze_resume_preprocessor_directive))
 
 ================================================================================
-Preprocessor - consecutive whole-line macro statements preserve constant nodes
+Preprocessor - consecutive macro extras preserve constant nodes
 ================================================================================
 
 {&FIRST}
@@ -308,7 +308,7 @@ Preprocessor - consecutive whole-line macro statements preserve constant nodes
 --------------------------------------------------------------------------------
 
 (source_code
-  (constant)
-  (constant)
+  (constant (identifier))
+  (constant (identifier))
   (comment
     (line_comment)))

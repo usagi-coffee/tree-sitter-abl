@@ -1,0 +1,192 @@
+================================================================================
+Macro extras - between a label and FOR
+================================================================================
+
+pattern:
+{&_proparse_ prolint-nowarn(wholeindex)}
+FOR EACH ttPatterns WHERE ttPatterns.wModule = vCurrentModule OR ttPatterns.wModule = "" NO-LOCK:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    label: (identifier)
+    (constant (identifier) value: (preprocessor_value))
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (binary_expression
+          (qualified_name left: (identifier) right: (identifier))
+          (identifier))
+        (binary_expression
+          (qualified_name left: (identifier) right: (identifier))
+          (string_literal)))
+      (no_lock))
+    (body)))
+
+================================================================================
+Macro extras - inline and between labeled blocks
+================================================================================
+
+{&FIRST} {&SECOND}
+outer: {&ANNOTATION} DO:
+  inner: {&_proparse_ prolint-nowarn(wholeindex)} REPEAT:
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier))
+  (constant (identifier))
+  (do_statement
+    label: (identifier)
+    (constant (identifier))
+    (body
+      (repeat_statement
+        label: (identifier)
+        (constant (identifier) value: (preprocessor_value))
+        (body)))))
+
+================================================================================
+Macro extras - required type and assignment values
+================================================================================
+
+DEFINE VARIABLE x AS {&TYPE} NO-UNDO.
+DEFINE VARIABLE y AS {&TYPE}
+  NO-UNDO.
+ASSIGN x = {&MAXVAL}
+       y = 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (preprocessor_name (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (preprocessor_name (identifier))
+    (no_undo))
+  (assign_statement
+    (assign_phrase
+      (assign_pair left: (identifier) right: (preprocessor_name (identifier)))
+      (assign_pair left: (identifier) right: (number_literal)))))
+
+================================================================================
+Macro extras - comments stay separate
+================================================================================
+
+{&FIRST} /* block */
+{&_proparse_ prolint-nowarn(varusage)} // line
+{&LAST}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier))
+  (comment (block_comment))
+  (constant (identifier) value: (preprocessor_value))
+  (comment (line_comment))
+  (constant (identifier)))
+
+================================================================================
+Macro extras - between label name and colon
+================================================================================
+
+outer {&MARKER} : DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement label: (identifier) (constant (identifier)) (body)))
+================================================================================
+Macro extras - annotation does not supply a required type
+:error
+================================================================================
+
+DEFINE VARIABLE x AS {&_proparse_ prolint-nowarn(varusage)}.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Macro extras - concatenated names remain intact
+================================================================================
+
+{&PREFIX}{&PART}field = 1.
+x = {&PREFIX}{&PART}field.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (macro_concatenated_name)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (macro_concatenated_name)))
+
+================================================================================
+Macro extras - annotation before macro operands
+================================================================================
+
+{&_proparse_ prolint-nowarn(varusage)}
+{&TARGET} /* target */ = 1.
+{&VALUE} / 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier) value: (preprocessor_value))
+  (assignment_statement
+    left: (preprocessor_name (identifier))
+    (comment (block_comment))
+    operator: (assignment_operator)
+    right: (number_literal))
+  (expression_statement
+    (binary_expression
+      (preprocessor_name (identifier))
+      (number_literal))))
+
+================================================================================
+Macro extras - preserve names and nested or quoted payloads
+================================================================================
+
+{&NAME = "a}b"}
+{&2 = {&FALLBACK}}
+{&_proparse_ prolint-nowarn(varusage)}
+outer {&MARKER = "{&NESTED}"} : DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier) value: (string_literal))
+  (constant (number_literal) value: (preprocessor_value))
+  (constant (identifier) value: (preprocessor_value))
+  (do_statement
+    label: (identifier)
+    (constant (identifier) value: (string_literal))
+    (body)))
+
+================================================================================
+Macro extras - preserve scalar default types
+================================================================================
+
+{&TEXT = "default"}
+{&LIMIT = -12.5}
+{&ENABLED = TRUE}
+{&NAME = NOPE}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier) value: (string_literal))
+  (constant (identifier) value: (number_literal))
+  (constant (identifier) value: (boolean_literal))
+  (constant (identifier) value: (identifier)))

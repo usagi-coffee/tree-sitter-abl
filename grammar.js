@@ -58,20 +58,23 @@ export default grammar({
     $._terminator_dot,
     $.string_literal,
     $.block_comment,
-    // External token: a {&NAME} alone on its line (only whitespace and an
-    // optional // comment before the newline) is a whole macro statement,
-    // distinct from the same spelling used inline as a preprocessor_name.
-    // A grammar-level regex token cannot look ahead past '}' without
-    // consuming what follows, which would swallow a trailing comment into
-    // itself instead of leaving it as its own comment node (see scanner.c).
-    $._macro_statement_token,
+    $._macro_extra_start,
+    $._macro_extra_payload,
+    $._macro_extra_default,
+    $._preprocessor_start,
     $._label_start,
     $._escape,
     $._end_of_file,
     $._block_end,
     $._include_string_literal,
   ],
-  extras: ($) => [/[\s\f\uFEFF\u2060\u200B]/, $.comment, $.argument_reference, $._escape],
+  extras: ($) => [
+    /[\s\f\uFEFF\u2060\u200B]/,
+    $.comment,
+    $.argument_reference,
+    $.constant,
+    $._escape,
+  ],
   word: ($) => $.identifier,
   conflicts: ($) => [
     // f(A<B,C> BY-VALUE) can contain a generic type with a passing modifier
@@ -432,12 +435,40 @@ export default grammar({
       __include_file_name: ($) =>
         /[A-Za-z0-9_!\\/.-](?:[A-Za-z0-9_!\\/.-]|\{&[0-9A-Za-z_-]+\})*\.[A-Za-z][A-Za-z0-9]*/,
 
+      // Extra macros retain their names and any default or annotation payload.
+      constant: ($) =>
+        seq(
+          $._macro_extra_start,
+          choice($.identifier, $.number_literal, alias($._numeric_identifier, $.identifier)),
+          optional(
+            choice(
+              seq(
+                "=",
+                field(
+                  "value",
+                  choice(
+                    $.identifier,
+                    $.string_literal,
+                    $.number_literal,
+                    alias($._signed_number_literal, $.number_literal),
+                    alias(token(prec(1, /TRUE|FALSE|YES|NO/i)), $.boolean_literal),
+                    alias($._macro_extra_default, $.preprocessor_value),
+                  ),
+                ),
+              ),
+              field("value", alias($._macro_extra_payload, $.preprocessor_value)),
+            ),
+          ),
+          "}",
+        ),
+
       // Constants
       preprocessor_name: ($) => prec(1, seq($.__preprocessor_name_prefix, "}")),
       __preprocessor_name_prefix: ($) =>
         seq(
-          "{",
-          "&",
+          // The external opener signals value contexts; the internal opener
+          // preserves contextual lexing of macro-prefixed include paths and names.
+          choice(seq("{", "&"), $._preprocessor_start),
           // {&2 = "default"} defaults positional include argument 2 when
           // the caller omits it; {&NAME} refers to a named one.
           choice($.identifier, $.number_literal, alias($._numeric_identifier, $.identifier)),
@@ -490,7 +521,7 @@ export default grammar({
           $.identifier,
           $.macro_concatenated_name,
         ),
-      _type_name: ($) => choice($.generic_type, $._simple_type_name),
+      _type_name: ($) => choice($.generic_type, $._simple_type_name, $.preprocessor_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _qualified_identifier: ($) =>
         choice(

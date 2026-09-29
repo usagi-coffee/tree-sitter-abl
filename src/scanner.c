@@ -11,7 +11,10 @@ enum TokenType {
   TERMINATOR_DOT,
   STRING_LITERAL,
   BLOCK_COMMENT,
-  MACRO_STATEMENT,
+  MACRO_EXTRA_START,
+  MACRO_EXTRA_PAYLOAD,
+  MACRO_EXTRA_DEFAULT,
+  PREPROCESSOR_START,
   LABEL_START,
   ESCAPE,
   END_OF_FILE,
@@ -61,6 +64,73 @@ static bool label_name_char(int32_t c) {
          c == '/' || (c >= 0x80 && !label_space(c));
 }
 
+// Stop before the matching closing brace, preserving quoted and nested payloads.
+static bool scan_macro_body(TSLexer *lexer) {
+  unsigned int depth = 0;
+  int32_t quote = 0;
+  while (!lexer->eof(lexer)) {
+    int32_t c = lexer->lookahead;
+    if (!quote && !depth && c == '}') return true;
+    lexer->advance(lexer, false);
+    if (c == '~' && !lexer->eof(lexer)) {
+      lexer->advance(lexer, false);
+    } else if (quote) {
+      if (c == quote) {
+        if (lexer->lookahead == quote) lexer->advance(lexer, false);
+        else quote = 0;
+      }
+    } else if (c == '\'' || c == '"') {
+      quote = c;
+    } else if (c == '{') {
+      depth++;
+    } else if (c == '}' && depth) {
+      depth--;
+    }
+  }
+  return false;
+}
+
+// A following name segment belongs to one macro_concatenated_name token.
+// mark_end must already identify the current macro before this lookahead.
+static bool macro_has_suffix(TSLexer *lexer) {
+  while (lexer->lookahead == '{') {
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '&') lexer->advance(lexer, false);
+    bool saw_name = false;
+    while (iswalnum(lexer->lookahead) || lexer->lookahead == '_' || lexer->lookahead == '-') {
+      saw_name = true;
+      lexer->advance(lexer, false);
+    }
+    if (!saw_name || lexer->lookahead != '}') return false;
+    lexer->advance(lexer, false);
+  }
+  int32_t c = lexer->lookahead;
+  return iswalnum(c) || c == '_' || c == '-' || c == '&' || c == '#' ||
+         c == '%' || c == '$' || (c >= 0x80 && !label_space(c));
+}
+
+// Look past comments without skipping another macro: an annotation may
+// precede a separate statement whose first operand is itself a macro.
+static bool macro_has_operator(TSLexer *lexer) {
+  for (;;) {
+    if (!skip_space(lexer, false)) return false;
+    int32_t c = lexer->lookahead;
+    if (c != '/') {
+      return c == ':' || c == '=' || c == '[' || c == '+' || c == '-' ||
+             c == '*' || c == '<' || c == '>';
+    }
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '/') {
+      while (!lexer->eof(lexer) && lexer->lookahead != '\n') lexer->advance(lexer, false);
+    } else if (lexer->lookahead == '*') {
+      lexer->advance(lexer, false);
+      if (!scan_block_comment(lexer)) return false;
+    } else {
+      return true;
+    }
+  }
+}
+
 // Peek across extras, leaving their nodes and ranges to the normal lexer.
 static bool skip_label_trivia(TSLexer *lexer) {
   for (;;) {
@@ -81,6 +151,10 @@ static bool skip_label_trivia(TSLexer *lexer) {
       lexer->advance(lexer, false);
       if (lexer->lookahead == '*') {
         lexer->advance(lexer, false);
+      } else if (lexer->lookahead == '&') {
+        lexer->advance(lexer, false);
+        if (lexer->lookahead == '}') return false;
+        if (!scan_macro_body(lexer)) return false;
       } else {
         if (lexer->lookahead < '0' || lexer->lookahead > '9') return false;
         do {
@@ -212,9 +286,8 @@ bool tree_sitter_abl_external_scanner_scan(
     lexer->result_symbol = END_OF_FILE;
     return true;
   }
-  if (valid_symbols[MACRO_STATEMENT] || valid_symbols[LABEL_START] || valid_symbols[BLOCK_END]) {
-    // Extras (whitespace) are not yet skipped when the external scanner runs;
-    // skip them before looking for an indented macro statement.
+  if (valid_symbols[LABEL_START] || valid_symbols[BLOCK_END]) {
+    // Skip whitespace before looking for statement markers.
     if (!skip_space(lexer, true)) return false;
   }
 
@@ -225,57 +298,74 @@ bool tree_sitter_abl_external_scanner_scan(
     return scan_statement_start(lexer, false, valid_symbols);
   }
 
-  if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '{') {
-    lexer->advance(lexer, false);
-    // A {&NAME} macro alone on its line (a "pragma", e.g. prolint-nowarn
-    // annotations) is its own statement/class member, distinct from the same
-    // {&NAME} spelling used inline as a preprocessor_name (an accessor
-    // modifier, an EXTENT size, ...). Only what follows the closing '}'
-    // tells them apart, and a regex token cannot look ahead without
-    // consuming a trailing "// comment" into itself (losing it as its own
-    // comment node), so it is decided here instead: peek past '}', and
-    // commit only if nothing but optional whitespace and an optional
-    // "// comment" precede the newline.
-    if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '&') {
-      lexer->advance(lexer, false); // consume '&'
-      bool saw_body = false;
-
-      while (!lexer->eof(lexer) && lexer->lookahead != '}' && lexer->lookahead != '\r' &&
-             lexer->lookahead != '\n') {
-        saw_body = true;
-        lexer->advance(lexer, false);
-      }
-
-      if (saw_body && lexer->lookahead == '}') {
-        lexer->advance(lexer, false); // consume '}'
-        lexer->mark_end(lexer); // the token itself is just "{&NAME}"
-
-        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
-          lexer->advance(lexer, false);
-        }
-
-        if (lexer->lookahead == '/') {
-          lexer->advance(lexer, false);
-          if (lexer->lookahead == '/') {
-            while (!lexer->eof(lexer) && lexer->lookahead != '\r' && lexer->lookahead != '\n') {
-              lexer->advance(lexer, false);
-            }
-          } else {
-            return false; // a single '/' is not a comment, not this pattern
+  if (valid_symbols[MACRO_EXTRA_PAYLOAD] || valid_symbols[MACRO_EXTRA_DEFAULT]) {
+    while (label_space(lexer->lookahead)) lexer->advance(lexer, true);
+    if (lexer->lookahead == '=' || lexer->lookahead == '}' || lexer->eof(lexer)) return false;
+    bool default_value = valid_symbols[MACRO_EXTRA_DEFAULT];
+    // Quoted defaults use the regular external string scanner below.
+    bool string_value = default_value && (lexer->lookahead == '\'' || lexer->lookahead == '"');
+    if (!string_value) {
+      if (default_value) {
+        if (iswalpha(lexer->lookahead) || lexer->lookahead == '_') {
+          do {
+            lexer->advance(lexer, false);
+          } while (iswalnum(lexer->lookahead) || lexer->lookahead == '_' ||
+                   lexer->lookahead == '-' || lexer->lookahead == '&' ||
+                   lexer->lookahead == '#' || lexer->lookahead == '%' ||
+                   lexer->lookahead == '$' || lexer->lookahead == '!');
+        } else if (iswdigit(lexer->lookahead) || lexer->lookahead == '+' ||
+                   lexer->lookahead == '-' || lexer->lookahead == '.') {
+          if (lexer->lookahead == '+' || lexer->lookahead == '-') lexer->advance(lexer, false);
+          while (iswdigit(lexer->lookahead)) lexer->advance(lexer, false);
+          if (lexer->lookahead == '.') {
+            lexer->advance(lexer, false);
+            while (iswdigit(lexer->lookahead)) lexer->advance(lexer, false);
           }
         }
-
-        if (lexer->lookahead == '\r') lexer->advance(lexer, false);
-        if (lexer->lookahead == '\n') {
-          lexer->result_symbol = MACRO_STATEMENT;
-          return true;
-        }
+        while (label_space(lexer->lookahead)) lexer->advance(lexer, false);
+        // Let the internal lexer retain the scalar's ordinary node type.
+        if (lexer->lookahead == '}') return false;
       }
+      if (!scan_macro_body(lexer)) return false;
+      lexer->mark_end(lexer);
+      lexer->result_symbol = default_value ? MACRO_EXTRA_DEFAULT : MACRO_EXTRA_PAYLOAD;
+      return true;
     }
+  }
 
-    // No match: the peeking above must not leak into the checks below, which
-    // assume they are looking at the original, unadvanced lexer position.
-    return false;
+  if (valid_symbols[MACRO_EXTRA_START] && lexer->lookahead == '{') {
+    lexer->advance(lexer, false);
+    if (lexer->lookahead != '&') return false;
+    lexer->advance(lexer, false);
+    // Ordinary references use explicit value rules. Text after the name
+    // (other than a default introduced by '=') is an annotation payload,
+    // even inside an expression or directly adjacent to the next token.
+    bool value = valid_symbols[PREPROCESSOR_START] && !valid_symbols[LABEL_START];
+    lexer->mark_end(lexer);
+    bool saw_name = false;
+    while (label_name_char(lexer->lookahead) || lexer->lookahead == '.') {
+      saw_name = true;
+      lexer->advance(lexer, false);
+    }
+    if (!saw_name || !skip_space(lexer, false)) return false;
+    bool payload = lexer->lookahead != '}' && lexer->lookahead != '=';
+    if (value && !payload) {
+      if (lexer->lookahead == '}') {
+        lexer->advance(lexer, false);
+        if (macro_has_suffix(lexer)) return false;
+      }
+      lexer->result_symbol = PREPROCESSOR_START;
+      return true;
+    }
+    if (!scan_macro_body(lexer)) return false;
+    lexer->advance(lexer, false);
+    if (!payload) {
+      if (macro_has_suffix(lexer)) return false;
+      // Operators keep macro receivers and assignment targets in the grammar.
+      if (valid_symbols[PREPROCESSOR_START] && macro_has_operator(lexer)) return false;
+    }
+    lexer->result_symbol = MACRO_EXTRA_START;
+    return true;
   }
 
   if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] ||

@@ -7,7 +7,6 @@ export default ({ kw }) => ({
       // Special
       // oxlint-disable-next-line tree-sitter-optimize/forwarded-alias-reuse
       alias($.include_statement, $.include_file_reference),
-      alias($._macro_statement_token, $.constant),
       $.global_define_preprocessor_directive,
       $.scoped_define_preprocessor_directive,
       $._if_preprocessor_statement,

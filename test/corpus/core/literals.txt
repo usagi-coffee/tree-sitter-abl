@@ -7,9 +7,8 @@ CONSTANT
 --------------------------------------------------------------------------------
 
 (source_code
-  (expression_statement
-    (preprocessor_name
-      (identifier))))
+  (constant (identifier))
+  (empty_statement))
 
 ================================================================================
 BOOLEAN LITERAL

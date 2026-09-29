@@ -1,0 +1,104 @@
+================================================================================
+Prolint - single and multiple rule suppressions with spelling variations
+================================================================================
+
+{&_proparse_ prolint-nowarn(wholeindex)}
+{&_PROPARSE_ prolint-nowarn(substitute,strattrib)}
+{&_Proparse_ PROLINT-NOWARN( varusage, where-udf, use-index )}
+{&_proparse_ prolint-nowarn(sortaccess-wholeindex)}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier) value: (preprocessor_value))
+  (constant (identifier) value: (preprocessor_value))
+  (constant (identifier) value: (preprocessor_value))
+  (constant (identifier) value: (preprocessor_value)))
+
+================================================================================
+Prolint - THEN and ELSE remain attached to their statements
+================================================================================
+
+IF TRUE THEN
+  {&_proparse_ prolint-nowarn(message)} MESSAGE "yes".
+ELSE
+  {&_proparse_ prolint-nowarn(message)} MESSAGE "no".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (boolean_literal)
+    (constant (identifier) value: (preprocessor_value))
+    then: (message_statement (string_literal))
+    (constant (identifier) value: (preprocessor_value))
+    else: (message_statement (string_literal))))
+
+================================================================================
+Prolint - annotations in argument and expression positions
+================================================================================
+
+x = INTEGER({&_proparse_ prolint-nowarn(overflow)} 1).
+y = {&_proparse_ prolint-nowarn(overflow)} -1.
+DEFINE VARIABLE z AS {&_proparse_ prolint-nowarn(varusage)} INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (constant (identifier) value: (preprocessor_value))
+        (argument name: (number_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    (constant (identifier) value: (preprocessor_value))
+    right: (unary_expression (number_literal)))
+  (variable_definition
+    name: (identifier)
+    (constant (identifier) value: (preprocessor_value))
+    type: (identifier)))
+
+================================================================================
+Prolint - adjacent statements and trailing comments
+================================================================================
+
+{&_proparse_ prolint-nowarn(message)}MESSAGE "ok".
+{&_proparse_ prolint-nowarn(message)} /* explanation */ MESSAGE "ok".
+{&_proparse_ prolint-nowarn(message)}// explanation
+MESSAGE "ok".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier) value: (preprocessor_value))
+  (message_statement (string_literal))
+  (constant (identifier) value: (preprocessor_value))
+  (comment (block_comment))
+  (message_statement (string_literal))
+  (constant (identifier) value: (preprocessor_value))
+  (comment (line_comment))
+  (message_statement (string_literal)))
+
+
+================================================================================
+Prolint - multiline rule list and empty marker
+================================================================================
+
+{&_proparse_}
+{&_proparse_
+  prolint-nowarn(
+    varusage,
+    wholeindex
+  )
+}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant (identifier))
+  (constant (identifier) value: (preprocessor_value)))

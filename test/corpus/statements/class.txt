@@ -736,7 +736,9 @@ END CLASS.
 (source_code
   (class_definition
     name: (identifier)
-    (constant)
+    (constant
+      (identifier)
+      value: (preprocessor_value))
     (method_definition
       (access_modifier)
       type: (identifier)
@@ -819,7 +821,8 @@ END CLASS.
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (constant))))
+      (preprocessor_name
+        (identifier)))))
 
 ================================================================================
 CLASS - full-line macro pragma followed by a trailing comment
@@ -836,7 +839,9 @@ END CLASS.
 (source_code
   (class_definition
     name: (identifier)
-    (constant)
+    (constant
+      (identifier)
+      value: (preprocessor_value))
     (comment
       (line_comment))
     (method_definition
