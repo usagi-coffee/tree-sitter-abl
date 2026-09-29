@@ -468,6 +468,7 @@ export default grammar({
         seq(
           // The external opener signals value contexts; the internal opener
           // preserves contextual lexing of macro-prefixed include paths and names.
+          // oxlint-disable-next-line tree-sitter-optimize/choice-product-extraction
           choice(seq("{", "&"), $._preprocessor_start),
           // {&2 = "default"} defaults positional include argument 2 when
           // the caller omits it; {&NAME} refers to a named one.
