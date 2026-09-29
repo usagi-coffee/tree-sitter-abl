@@ -553,6 +553,7 @@ export default grammar({
       _widgets: ($) =>
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         prec.right(alias(choice(...WIDGETS, kw("FRAME", { offset: 4 })), $.identifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _events: ($) =>
         choice(
           $.identifier,
