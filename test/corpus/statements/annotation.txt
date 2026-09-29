@@ -29,3 +29,142 @@ ANNOTATION
       (attribute
         name: (identifier)
         value: (string_literal)))))
+
+================================================================================
+ANNOTATION - dotted names and attributes
+================================================================================
+
+@VisualDesigner.FormMember (NeedsInitialize="true").
+@VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true", type="System.Int32").
+@Tools.VisualDesigner.FormMember.
+@Version.123.
+@Foo/Bar.
+DEFINE VARIABLE followingStatement AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (annotation
+    name: (identifier)
+    (attributes
+      (attribute
+        name: (identifier)
+        value: (string_literal))))
+  (annotation
+    name: (identifier)
+    (attributes
+      (attribute
+        name: (identifier)
+        value: (string_literal))
+      (attribute
+        name: (identifier)
+        value: (string_literal))
+      (attribute
+        name: (identifier)
+        value: (string_literal))))
+  (annotation
+    name: (identifier))
+  (annotation
+    name: (identifier))
+  (annotation
+    name: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+ANNOTATION - Visual Designer method context
+================================================================================
+
+CLASS SampleControl INHERITS Progress.Windows.UserControl:
+  @InitializeComponent.
+  @InitializeComponent.
+  METHOD PRIVATE VOID InitializeComponent():
+    @VisualDesigner.FormMember (NeedsInitialize="true").
+    DEFINE VARIABLE tableViewDefinition1 AS Telerik.WinControls.UI.TableViewDefinition NO-UNDO.
+    tableViewDefinition1 = NEW Telerik.WinControls.UI.TableViewDefinition().
+    @VisualDesigner.FormMember (NeedsInitialize="false", InitializeArray="true", type="System.Int32").
+    DEFINE VARIABLE arrayvar15 AS INTEGER EXTENT 4 NO-UNDO.
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    super: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (annotation
+      name: (identifier))
+    (annotation
+      name: (identifier))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (annotation
+          name: (identifier)
+          (attributes
+            (attribute
+              name: (identifier)
+              value: (string_literal))))
+        (variable_definition
+          name: (identifier)
+          type: (qualified_name
+            left: (identifier)
+            right: (identifier)
+            right: (identifier)
+            right: (identifier))
+          (no_undo))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (new_expression
+            type: (qualified_name
+              left: (identifier)
+              right: (identifier)
+              right: (identifier)
+              right: (identifier))
+            (arguments)))
+        (annotation
+          name: (identifier)
+          (attributes
+            (attribute
+              name: (identifier)
+              value: (string_literal))
+            (attribute
+              name: (identifier)
+              value: (string_literal))
+            (attribute
+              name: (identifier)
+              value: (string_literal))))
+        (variable_definition
+          name: (identifier)
+          type: (identifier)
+          (extent_phrase
+            size: (number_literal))
+          (no_undo))))))
+
+================================================================================
+ANNOTATION - reject an empty dotted name component
+:error
+================================================================================
+
+@Foo..Bar.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+ANNOTATION - reject dotted attribute names
+:error
+================================================================================
+
+@Foo.Bar (Some.Attribute="value").
+
+--------------------------------------------------------------------------------

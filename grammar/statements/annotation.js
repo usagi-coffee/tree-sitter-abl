@@ -2,9 +2,10 @@ export default () => ({
   annotation: ($) => seq("@", $.__annotation_body, $._terminator),
 
   __annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),
+  __annotation_qualified_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*(?:\.[^\s()=,\.]+)*/),
   __annotation_body: ($) =>
     seq(
-      field("name", alias($.__annotation_name, $.identifier)),
+      field("name", alias($.__annotation_qualified_name, $.identifier)),
       optional(seq("(", optional(alias($.__annotation_attributes, $.attributes)), ")")),
     ),
   __annotation_attributes: ($) =>
