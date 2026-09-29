@@ -23,8 +23,7 @@ export default ({ kw }) => ({
   _class_type: ($) => seq(optional($._kw_class), field("type", $._type_or_string)),
   _as_like: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
-      seq($._kw_as, optional($._kw_class), field("type", $._type_or_string)),
+      seq($._kw_as, $._class_type),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_like, field("like", $._qualified_identifier)),
     ),
