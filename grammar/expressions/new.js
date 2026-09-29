@@ -31,8 +31,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice($.qualified_name, $.identifier),
       "<",
-      $._type_name,
-      optional($._generic_type_arguments_tail),
+      $._generic_type_arguments,
       ">",
     ),
 });
