@@ -4,8 +4,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $._kw_clear,
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-      optional(seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name))),
+      optional($._frame_identifier_phrase),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ALL"), $.all)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
