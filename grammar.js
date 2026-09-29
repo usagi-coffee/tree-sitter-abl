@@ -208,7 +208,6 @@ export default grammar({
     $._object_access_plain_left,
     $._object_access_expression_left,
     $._object_access_plain_prefix,
-    $._logical_operator,
     $._type_or_string,
     $._alert_box_title_value,
     $._alert_buttons_phrase,
