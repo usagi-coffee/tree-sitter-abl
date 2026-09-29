@@ -65,6 +65,7 @@ export default ({ kw }) => ({
       ),
       alias($._kw_forwards, $.forward),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist
   __function_parameters: ($) => seq("(", optional($.__function_parameter_list), ")"),
   __function_parameter_list: ($) =>
     seq(
