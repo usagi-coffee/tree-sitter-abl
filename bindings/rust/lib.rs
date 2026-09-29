@@ -50,6 +50,43 @@ pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
 #[cfg(test)]
 mod tests {
+    #[cfg(feature = "wasm-test")]
+    #[test]
+    fn test_can_load_wasm_grammar() {
+        let wasm_path =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tree-sitter-abl.wasm");
+        let wasm = std::fs::read(wasm_path)
+            .expect("Build the WASM grammar first with `bun run build:wasm`");
+        let engine = tree_sitter::wasmtime::Engine::default();
+        let mut store =
+            tree_sitter::WasmStore::new(&engine).expect("Error creating Tree-sitter WASM store");
+        let language = store
+            .load_language("abl", &wasm)
+            .expect("Error loading abl grammar into WASM store");
+        assert!(language.is_wasm());
+        assert_eq!(store.language_count(), 1);
+
+        let mut parser = tree_sitter::Parser::new();
+        parser
+            .set_wasm_store(store)
+            .expect("Error setting WASM store");
+        parser
+            .set_language(&language)
+            .expect("Error setting abl WASM language");
+        let source = "MESSAGE \"Hello, world!\".";
+        let tree = parser
+            .parse(source, None)
+            .expect("Error parsing with WASM grammar");
+        let root = tree.root_node();
+        assert!(
+            !root.has_error(),
+            "Unexpected parse errors: {}",
+            root.to_sexp()
+        );
+        assert_eq!(root.end_byte(), source.len());
+        assert!(root.named_child_count() > 0);
+    }
+
     #[test]
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();

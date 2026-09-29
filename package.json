@@ -38,6 +38,7 @@
     "format": "oxfmt",
     "test": "bun run tools/generate.js && bun run tools/test.js",
     "test:queries": "tree-sitter test",
+    "test:wasm": "cargo test --features wasm-test --lib",
     "test:update": "bun run tools/generate.js && bun run tools/test.js",
     "generate:full": "tree-sitter generate",
     "generate": "bun run tools/generate.js",
