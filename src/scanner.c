@@ -298,7 +298,9 @@ bool tree_sitter_abl_external_scanner_scan(
     return scan_statement_start(lexer, false, valid_symbols);
   }
 
-  if (valid_symbols[MACRO_EXTRA_PAYLOAD] || valid_symbols[MACRO_EXTRA_DEFAULT]) {
+  // Payload and default contexts are mutually exclusive. Recovery enables both;
+  // scanning a macro body there can repeatedly consume the rest of the file.
+  if (valid_symbols[MACRO_EXTRA_PAYLOAD] != valid_symbols[MACRO_EXTRA_DEFAULT]) {
     while (label_space(lexer->lookahead)) lexer->advance(lexer, true);
     if (lexer->lookahead == '=' || lexer->lookahead == '}' || lexer->eof(lexer)) return false;
     bool default_value = valid_symbols[MACRO_EXTRA_DEFAULT];

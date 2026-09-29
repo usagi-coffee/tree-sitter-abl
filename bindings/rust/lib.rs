@@ -50,6 +50,42 @@ pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn test_macro_recovery_has_bounded_lookahead() {
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        use std::sync::Arc;
+
+        let mut parser = tree_sitter::Parser::new();
+        parser.set_language(&super::LANGUAGE.into()).unwrap();
+        let consumed = Arc::new(AtomicUsize::new(0));
+        let count = consumed.clone();
+        parser.set_logger(Some(Box::new(move |kind, message| {
+            if kind == tree_sitter::LogType::Lex && message.starts_with("consume character:") {
+                count.fetch_add(1, Ordering::Relaxed);
+            }
+        })));
+
+        // A discarded parse branch probes recovery at DATA-SOURCE. It must not
+        // treat the remaining file as a macro payload and scan to EOF each time.
+        for repetitions in [64, 128] {
+            let source =
+                "CLASS X:\n  DEFINE PRIVATE STATIC DATA-SOURCE ds FOR bCust.\nEND.\n"
+                    .repeat(repetitions);
+            consumed.store(0, Ordering::Relaxed);
+            let tree = parser.parse(&source, None).unwrap();
+            assert!(!tree.root_node().has_error());
+            assert_eq!(tree.root_node().end_byte(), source.len());
+            let consumed = consumed.load(Ordering::Relaxed);
+            assert!(consumed > 0, "Lexer logging must be enabled");
+            assert!(
+                consumed < source.len() * 10,
+                "Excessive lookahead: {} characters consumed for {} input bytes",
+                consumed,
+                source.len()
+            );
+        }
+    }
+
     #[cfg(feature = "wasm-test")]
     #[test]
     fn test_can_load_wasm_grammar() {
