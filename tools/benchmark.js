@@ -7,10 +7,13 @@ const corpusPath = resolve(process.argv[2] ?? "tools/benchmark.p");
 const runs = 3;
 const speeds = [];
 
-const env = { ...process.env, XDG_CACHE_HOME: "/tmp/tree-sitter-cache" };
+const env = { ...process.env, CC: "clang", XDG_CACHE_HOME: "/tmp/tree-sitter-cache" };
 
 function parse(rebuild) {
-  return spawnSync("tree-sitter", ["parse", "--time", "--stat", "--quiet", corpusPath], {
+  const args = ["parse", "--time", "--stat", "--quiet", corpusPath];
+  // Compiler changes do not invalidate Tree-sitter's cached library.
+  if (rebuild) args.push("--rebuild");
+  return spawnSync("tree-sitter", args, {
     encoding: "utf8",
     env,
   });

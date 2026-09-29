@@ -6,7 +6,7 @@ OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
 The grammar currently faces a few issues, please keep in mind:
 
-- Tree-sitter generated `parser.c` (due to high action/state count) is currently beyond the GitHub file limit (100MiB) so it needs to be "minified" to be hosted on GitHub, look at `tools/minify.js`.
+- Tree-sitter generated `parser.c` (due to high action/state count) is currently beyond the GitHub file limit (100MiB) so it needs to be "minified" to be hosted on GitHub, we are using [tree-trimmer](https://github.com/usagi-coffee/tree-trimmer) to minify before publishing.
 - During the `.wasm` build, tree-sitter uses [`wasm-opt`](https://github.com/WebAssembly/binaryen) optimization pass on the binary, the pass [takes a long time](https://github.com/WebAssembly/binaryen/issues/7319) (~16mins), please be patient.
 
 ## See also

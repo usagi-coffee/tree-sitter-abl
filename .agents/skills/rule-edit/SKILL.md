@@ -188,11 +188,7 @@ When optimizing
 - Preserve distinct token identity; avoid token packing.
 - Preserve existing corpus behavior.
 - Optimize one change at a time, measure it, then run focused and full tests. A parser-size improvement is invalid if parsing behavior changes.
-
-The only acceptable optimizations results are:
-1. `src/parser.c` size reduction and (`ACTION_COUNT` or `STATE_COUNT` or `LARGE_STATE_COUNT`) reduction.
-2. `src/parser.c` size reduction and neutral parser count delta.
-3. `src/parser.c` size reduction that more than `100000` bytes while being under tree-sitter limit of `65535` `ACTION_COUNT` and `STATE_COUNT`.
+- Favor action count reductions unless the hit to state counts it relatively big
 
 ## Verification
 
