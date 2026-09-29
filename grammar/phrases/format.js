@@ -128,12 +128,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/body-extraction
   __format_editor_size: ($) =>
     choice(
-      seq(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-        choice($._kw_size, $._kw_size_chars, $._kw_size_pixels),
-        $._width_by,
-        field("height", $.number_literal),
-      ),
+      seq($._size_keyword, $._width_by, field("height", $.number_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._inner_chars_value, $._kw_inner_lines, field("inner_lines", $.number_literal)),
     ),
