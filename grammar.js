@@ -509,6 +509,7 @@ export default grammar({
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
       __generic_type_prefix: ($) =>
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq($._simple_type_name, "<", $._generic_type_arguments),
