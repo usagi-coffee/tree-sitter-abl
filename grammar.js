@@ -930,8 +930,7 @@ export default grammar({
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
-        // oxlint-disable-next-line tree-sitter-optimize/recurse
-        repeat1(
+        seq(
           choice(
             seq(
               $._object_access_separator,
@@ -939,6 +938,7 @@ export default grammar({
             ),
             seq($._namedoublecolon, field("member", alias($._identifier_immediate, $.identifier))),
           ),
+          optional($._object_access_tail),
         ),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
