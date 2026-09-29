@@ -1,6 +1,7 @@
 // Non-core statement-specific shared rules
 
 export default ({ kw }) => ({
+  _extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
   _size_keyword: ($) => choice($._kw_size, $._kw_size_chars, $._kw_size_pixels),
   _width_by: ($) => seq(field("width", $.number_literal), $._kw_by),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner

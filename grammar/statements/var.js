@@ -19,14 +19,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __var_initializer: ($) => seq("=", $._assignment_value),
-  __var_extent_prefix: ($) =>
-    seq(
-      "[",
-      optional(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-        choice($.number_literal, $.preprocessor_name, $.identifier),
-      ),
-    ),
+  __var_extent_prefix: ($) => seq("[", optional($._extent_size)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __var_modifier: ($) =>
     choice(

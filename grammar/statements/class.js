@@ -307,11 +307,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __class_method_return_extent_phrase: ($) =>
-    seq(
-      $._kw_extent,
-      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
-    ),
+    seq($._kw_extent, optional(field("size", $._extent_size))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_method_variable_type_phrase: ($) =>
     choice(
@@ -324,13 +320,7 @@ export default ({ kw }) => ({
     ),
 
   __class_method_extent_phrase: ($) =>
-    prec.right(
-      seq(
-        $._kw_extent,
-        // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction, tree-sitter-optimize/shared-choice
-        optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
-      ),
-    ),
+    prec.right(seq($._kw_extent, optional(field("size", $._extent_size)))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __class_method_table_parameter: ($) =>
     choice(
