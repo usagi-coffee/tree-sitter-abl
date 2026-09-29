@@ -808,6 +808,7 @@ export default grammar({
           kw("BIND"),
         ),
       __argument_generic_type: ($) => seq($.__argument_generic_type_prefix, ">"),
+      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
       __argument_generic_type_prefix: ($) =>
         seq(
           choice(
