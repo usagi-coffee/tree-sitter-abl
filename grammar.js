@@ -215,6 +215,7 @@ export default grammar({
     $._format_field_option,
     $._format_label,
     $._comparison_operator_no_eq,
+    $._generic_type_arguments_tail,
     $._simple_type_name,
     $._identifier_or_string_literal,
     $._as_like,
@@ -503,7 +504,7 @@ export default grammar({
       __generic_type_prefix: ($) =>
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq($._simple_type_name, "<", $._generic_type_arguments),
-      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction, tree-sitter-optimize/single-use-shared-sequence-inline, tree-sitter-optimize/recursive-continuation-inline
+      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
       _generic_type_arguments_tail: ($) => seq(",", $._generic_type_arguments),
       _generic_type_arguments: ($) => seq($._type_name, optional($._generic_type_arguments_tail)),
       _simple_type_name: ($) =>
