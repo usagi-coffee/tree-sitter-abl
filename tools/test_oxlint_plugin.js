@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
   inlineDispatcherBoundary,
   sharedRepeatedSignature,
@@ -86,6 +87,54 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const choiceSuffixGrammar =
+  'export default () => ({root: ($) => seq($.direction, $.__argument_body), __argument_body: ($) => seq(choice(field("name", $.identifier), seq($.marker, field("name", $.expression))), optional($.__passing))});';
+new RuleTester().run("choice-suffix-hoist", choiceSuffixHoist, {
+  valid: [
+    choiceSuffixGrammar.replaceAll("__argument_body", "argument_body"),
+    choiceSuffixGrammar.replace("optional($.__passing)", "$.__passing"),
+    choiceSuffixGrammar.replace("$.identifier", "$.__argument_body"),
+    choiceSuffixGrammar.replace("root: ($)", "other: ($) => $.__argument_body, root: ($)"),
+    choiceSuffixGrammar.replace(
+      "seq($.direction, $.__argument_body)",
+      "seq($.direction, alias($.__argument_body, $.argument))",
+    ),
+    choiceSuffixGrammar.replace(
+      "seq($.direction, $.__argument_body)",
+      'field("argument", seq($.direction, $.__argument_body))',
+    ),
+    choiceSuffixGrammar.replace(
+      "seq($.direction, $.__argument_body)",
+      "prec.right(seq($.direction, $.__argument_body))",
+    ),
+    choiceSuffixGrammar.replace(
+      "seq($.direction, $.__argument_body)",
+      "optional(seq($.direction, $.__argument_body))",
+    ),
+    choiceSuffixGrammar.replace(
+      "seq($.direction, $.__argument_body)",
+      'seq($.direction, $["__argument_body"])',
+    ),
+    choiceSuffixGrammar
+      .replace("__argument_body: ($) => seq", "__argument_body: ($) => prec.right(seq")
+      .replace("optional($.__passing))", "optional($.__passing)))"),
+    choiceSuffixGrammar.replace(
+      "__argument_body:",
+      "\n// oxlint-disable-next-line rule-to-test/choice-suffix-hoist\n__argument_body:",
+    ),
+    choiceSuffixGrammar.replace("$.identifier", "optional($.identifier)"),
+    choiceSuffixGrammar.replace("$.expression", "dynamic($)"),
+    "export default grammar({inline: ($) => [$.__body], rules: {root: ($) => seq($.start, $.__body), __body: ($) => seq(choice($.a, $.b), optional($.tail))}});",
+  ],
+  invalid: [
+    { code: choiceSuffixGrammar, errors: [{ message: /moving the complete optional suffix/ }] },
+    {
+      code: 'export default () => ({root: ($) => seq($.__body, "."), __body: ($) => seq(choice($.a, $.b), optional($.tail))});',
+      errors: [{ message: /moving the complete optional suffix/ }],
+    },
+  ],
+});
 
 RuleTester.describe = (_name, run) => run();
 RuleTester.it = (_name, run) => run();
