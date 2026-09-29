@@ -1,0 +1,446 @@
+================================================================================
+CAST - generic dictionary type argument
+================================================================================
+
+DEFINE VARIABLE vList AS System.Collections.Generic.Dictionary<CHARACTER, ICoreDynObjectDefinition> NO-UNDO.
+vList = CAST(vObjectsDefinition:Objets, System.Collections.Generic.Dictionary<CHARACTER, ICoreObjectDefinition>).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (identifier)
+      (identifier))
+    (no_undo))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (object_access
+            left: (identifier)
+            right: (identifier)))
+        (argument
+          name: (generic_type
+            (qualified_name
+              left: (identifier)
+              right: (identifier)
+              right: (identifier)
+              right: (identifier))
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+CAST - nested generic type arguments and member access
+================================================================================
+
+vList = CAST(source, Dictionary<CHARACTER, List<System.Object>>).
+consume(CAST(source, List<SHORT>), other).
+CAST(source, List<System.Object>):Clear().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)
+            (generic_type
+              (identifier)
+              (qualified_name
+                left: (identifier)
+                right: (identifier))))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (generic_type
+                  (identifier)
+                  (identifier))))))
+        (argument
+          name: (identifier)))))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (generic_type
+                (identifier)
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))))))
+        right: (identifier))
+      (arguments))))
+
+================================================================================
+CAST - ordinary type names and nested calls
+================================================================================
+
+vObject = cast(source, ObjectType).
+vObject = CAST(CAST(source, Progress.Lang.Object), acme.ObjectType).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (qualified_name
+                  left: (identifier)
+                  right: (identifier)
+                  right: (identifier))))))
+        (argument
+          name: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+CAST - neighboring comparison arguments
+================================================================================
+
+consume(a < b, c > d, a < b AND c > d).
+consume(CAST(source, List<SHORT>), a < b, c > d).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (binary_expression
+              (identifier)
+              (identifier))
+            (binary_expression
+              (identifier)
+              (identifier)))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (generic_type
+                  (identifier)
+                  (identifier))))))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Generic type arguments - ordinary functions and methods
+================================================================================
+
+inspect(List<CHARACTER>).
+inspect(1, Dictionary<CHARACTER, List<System.Object>>, 2).
+receiver:inspect(List<INTEGER>).
+info = GET-CLASS(List<CHARACTER>).
+result = TYPE-OF(source, List<CHARACTER>).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)
+            (generic_type
+              (identifier)
+              (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        (argument
+          name: (number_literal)))))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Generic type arguments - scoped nested and macro names
+================================================================================
+
+inspect(Ns::List<CHARACTER>).
+inspect(Outer+Inner<INTEGER>).
+inspect({&PREFIX}List<CHARACTER>).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (scoped_name
+              left: (identifier)
+              right: (identifier))
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (nested_type_name
+              left: (identifier)
+              right: (identifier))
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (macro_concatenated_name)
+            (identifier)))))))
+
+================================================================================
+Generic type arguments - comparison and arithmetic boundaries
+================================================================================
+
+inspect(a < b, c > d).
+inspect(a+b, a + b, a+b < c, d > e).
+inspect(ns::a < b, c > d).
+inspect(a < b, c > BY-VALUE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (binary_expression
+              (identifier)
+              (identifier))
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (scoped_name
+              left: (identifier)
+              right: (identifier))
+            (identifier)))
+        (argument
+          name: (binary_expression
+            (identifier)
+            (identifier))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Generic type arguments - directions and adjacent arguments
+================================================================================
+
+inspect(INPUT List<CHARACTER>, Dictionary<INTEGER, CHARACTER>, lastValue).
+inspect(firstValue, List<CHARACTER>).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)))
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)
+            (identifier)))
+        (argument
+          name: (identifier)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (generic_type
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+Generic type arguments - reject empty type parameters
+:error
+================================================================================
+
+inspect(List<>).
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Generic type arguments - reject missing type parameter
+:error
+================================================================================
+
+inspect(Dictionary<,INTEGER>).
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Generic type arguments - reject trailing type separator
+:error
+================================================================================
+
+inspect(List<INTEGER,>).
+
+--------------------------------------------------------------------------------
+
+

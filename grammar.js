@@ -74,6 +74,13 @@ export default grammar({
   extras: ($) => [/[\s\f\uFEFF\u2060\u200B]/, $.comment, $.argument_reference, $._escape],
   word: ($) => $.identifier,
   conflicts: ($) => [
+    // f(A<B,C> BY-VALUE) can contain a generic type with a passing modifier
+    // or two comparisons when BY-VALUE is an identifier. Keep both parses.
+    [$.__argument_generic_type_prefix, $._qualified_identifier],
+    // The same argument ambiguity applies to scoped names, e.g. ns::A<B,C>.
+    [$.__argument_generic_type_prefix, $._expression],
+    // f(A+B<C,D> BY-VALUE) also permits a nested type or arithmetic comparisons.
+    [$._qualified_identifier, $._nested_type_left],
     // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._expression, $.function_call],
     // INPUT starts either an argument direction or the screen-buffer INPUT function.
@@ -737,7 +744,14 @@ export default grammar({
                     ),
                   ),
                 ),
-                field("name", choice($._expression, $._bare_marker_identifier)),
+                field(
+                  "name",
+                  choice(
+                    $._expression,
+                    alias($.__argument_generic_type, $.generic_type),
+                    $._bare_marker_identifier,
+                  ),
+                ),
               ),
               optional($.__argument_in_handle),
             ),
@@ -758,6 +772,29 @@ export default grammar({
           kw("APPEND"),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           kw("BIND"),
+        ),
+      __argument_generic_type: ($) => seq($.__argument_generic_type_prefix, ">"),
+      __argument_generic_type_prefix: ($) =>
+        seq(
+          choice(
+            $.scoped_name,
+            $.qualified_name,
+            alias($.__argument_nested_type, $.nested_type_name),
+            $.identifier,
+            $.macro_concatenated_name,
+          ),
+          "<",
+          $._type_name,
+          optional($._generic_type_arguments_tail),
+        ),
+      // Share the expression '+' token so a+b remains addition in arguments.
+      __argument_nested_type: ($) =>
+        seq(field("left", $._nested_type_left), $.__argument_nested_type_tail),
+      __argument_nested_type_tail: ($) =>
+        seq(
+          "+",
+          field("right", alias($._identifier_immediate, $.identifier)),
+          optional($.__argument_nested_type_tail),
         ),
       __argument_in_handle: ($) =>
         seq(
