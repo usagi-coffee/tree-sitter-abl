@@ -2327,17 +2327,27 @@ export const forwardedAliasReuse = rule((context) => {
 export const closingDelimiterHoist = rule((context) => {
   const properties = [],
     references = new Map();
-  const payload = (node) => {
+  const payload = (node, allowAlias = false) => {
     if (memberName(node)) return true;
     const call = callName(node);
-    if (call === "optional") return node.arguments.length === 1 && payload(node.arguments[0]);
-    if (call === "choice") return node.arguments.length >= 2 && node.arguments.every(payload);
+    if (call === "optional")
+      return node.arguments.length === 1 && payload(node.arguments[0], allowAlias);
+    if (call === "choice")
+      return (
+        node.arguments.length >= 2 && node.arguments.every((part) => payload(part, allowAlias))
+      );
+    if (call === "alias" && allowAlias)
+      return (
+        node.arguments.length === 2 &&
+        !!memberName(node.arguments[0]) &&
+        !!memberName(node.arguments[1])
+      );
     if (call === "field")
       return (
         node.arguments.length === 2 &&
         node.arguments[0].type === "Literal" &&
         typeof node.arguments[0].value === "string" &&
-        payload(node.arguments[1])
+        payload(node.arguments[1], allowAlias)
       );
     return false;
   };
@@ -2382,9 +2392,26 @@ export const closingDelimiterHoist = rule((context) => {
           pairs[open.value] !== close.value
         )
           continue;
-        if (!body.arguments.slice(1, -1).every(payload)) continue;
         const uses = references.get(name) ?? [];
-        if (uses.length < 2 || uses.length > 4) continue;
+        const use = uses[0],
+          aliasCall = use?.parent;
+        const singleAliased =
+          uses.length === 1 &&
+          callName(aliasCall) === "alias" &&
+          aliasCall.arguments.length === 2 &&
+          aliasCall.arguments[0] === use &&
+          !!memberName(aliasCall.arguments[1]);
+        if (!singleAliased && (uses.length < 2 || uses.length > 4)) continue;
+        if (
+          !body.arguments
+            .slice(1, -1)
+            .every(
+              (part) =>
+                payload(part, singleAliased) ||
+                (singleAliased && part.type === "Literal" && part.value === ","),
+            )
+        )
+          continue;
         if (
           !uses.every((use) => {
             const owner = enclosingRule(use);
@@ -2398,6 +2425,7 @@ export const closingDelimiterHoist = rule((context) => {
             )
               return false;
             for (let parent = use.parent; parent !== owner; parent = parent.parent) {
+              if (singleAliased && parent === aliasCall) continue;
               if (
                 parent.type === "CallExpression" &&
                 ![
@@ -2422,12 +2450,14 @@ export const closingDelimiterHoist = rule((context) => {
           context,
           property,
           "closing-delimiter-hoist",
-          `${name} repeats a complete delimited value at ${uses.length} local uses; try retaining its opening delimiter and contents in a prefix helper and appending the closing delimiter at each caller, inside the original fields and optional wrappers. Check external references and metadata, preserve token identity and tree shape, then measure parser bytes and counts.`,
+          singleAliased
+            ? `${name} has one aliased local use; try extracting its opening delimiter and contents into a hidden prefix helper, keeping the closing delimiter in ${name} and the alias at its caller. Preserve fields, token identity and tree shape, check external references and metadata, then measure parser bytes and counts.`
+            : `${name} repeats a complete delimited value at ${uses.length} local uses; try retaining its opening delimiter and contents in a prefix helper and appending the closing delimiter at each caller, inside the original fields and optional wrappers. Check external references and metadata, preserve token identity and tree shape, then measure parser bytes and counts.`,
         );
       }
     },
   };
-}, "Suggest moving closing delimiters from reused value helpers into their callers");
+}, "Suggest separating closing delimiters from reused or single-use aliased value helpers");
 
 export const closingDelimiterWrapper = rule((context) => {
   const properties = [];

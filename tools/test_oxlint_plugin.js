@@ -5049,8 +5049,45 @@ new RuleTester().run("choice-product-extraction", choiceProductExtraction, {
 
 const closingHoistGrammar =
   'export default () => ({a: ($) => optional(field("extent", $.__extent)), b: ($) => field("extent", $.__extent), __extent: ($) => seq("[", optional(choice($.number, $.name)), "]")});';
+const aliasedClosingHoistGrammar =
+  'export default () => ({call: ($) => seq($.name, alias($.__arguments, $.arguments)), __arguments: ($) => seq("(", $.argument, ",", alias($.__type_argument, $.argument), ")")});';
 new RuleTester().run("closing-delimiter-hoist", closingDelimiterHoist, {
   valid: [
+    aliasedClosingHoistGrammar.replace("alias($.__arguments, $.arguments)", "$.__arguments"),
+    aliasedClosingHoistGrammar.replace(
+      "alias($.__arguments, $.arguments)",
+      "token(alias($.__arguments, $.arguments))",
+    ),
+    aliasedClosingHoistGrammar.replace(
+      "alias($.__arguments, $.arguments)",
+      "prec.dynamic(1, alias($.__arguments, $.arguments))",
+    ),
+    aliasedClosingHoistGrammar.replace(
+      "alias($.__arguments, $.arguments)",
+      'alias($.__arguments, "arguments")',
+    ),
+    aliasedClosingHoistGrammar.replace(
+      "$.__arguments, $.arguments",
+      '$["__arguments"], $.arguments',
+    ),
+    aliasedClosingHoistGrammar.replace("alias($.__type_argument, $.argument)", "getArgument($)"),
+    aliasedClosingHoistGrammar.replace("$.__type_argument", "$.__arguments"),
+    aliasedClosingHoistGrammar.replace(
+      "alias($.__type_argument, $.argument)",
+      'alias("TYPE", $.argument)',
+    ),
+    aliasedClosingHoistGrammar.replace('seq("(", $.argument', 'seq("[", $.argument'),
+    aliasedClosingHoistGrammar.replace(
+      "__arguments:",
+      "\n// oxlint-disable-next-line rule-to-test/closing-delimiter-hoist\n__arguments:",
+    ),
+    aliasedClosingHoistGrammar.replace(
+      "call:",
+      "\n// oxlint-disable-next-line rule-to-test/closing-delimiter-hoist\ncall:",
+    ),
+    'export default grammar({inline: ($) => [$.__arguments], rules: {call: ($) => alias($.__arguments, $.arguments), __arguments: ($) => seq("(", $.argument, ")")}});',
+    'export default () => ({a: ($) => alias($.__arguments, $.arguments), b: ($) => alias($.__arguments, $.arguments), __arguments: ($) => seq("(", $.argument, ")")});',
+    'export default () => ({call: ($) => alias($.arguments, $.__arguments), __arguments: ($) => seq("(", $.argument, ")")});',
     closingHoistGrammar.replace('b: ($) => field("extent", $.__extent), ', ""),
     closingHoistGrammar.replace(
       'b: ($) => field("extent", $.__extent)',
@@ -5077,6 +5114,29 @@ new RuleTester().run("closing-delimiter-hoist", closingDelimiterHoist, {
     'export default grammar({inline: ($) => [$.__extent], rules: {a: ($) => $.__extent, b: ($) => $.__extent, __extent: ($) => seq("[", $.n, "]")}});',
   ],
   invalid: [
+    {
+      code: aliasedClosingHoistGrammar,
+      errors: [
+        {
+          message:
+            /one aliased local use.*keeping the closing delimiter in __arguments and the alias at its caller/,
+        },
+      ],
+    },
+    {
+      code: aliasedClosingHoistGrammar.replace(
+        "alias($.__arguments, $.arguments)",
+        'prec.right(optional(field("parameters", alias($.__arguments, $.arguments))))',
+      ),
+      errors: [{ message: /one aliased local use/ }],
+    },
+    {
+      code: aliasedClosingHoistGrammar.replace(
+        'seq("(", $.argument, ",", alias($.__type_argument, $.argument), ")")',
+        'seq("[", optional(field("value", choice($.name, alias($.__item, $.item)))), "]")',
+      ),
+      errors: [{ message: /one aliased local use/ }],
+    },
     {
       code: closingHoistGrammar,
       errors: [{ message: /complete delimited value at 2 local uses/ }],
