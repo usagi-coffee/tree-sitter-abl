@@ -513,8 +513,8 @@ export default grammar({
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq($._simple_type_name, "<", $._type_name, optional($._generic_type_arguments_tail)),
       // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
-      _generic_type_arguments_tail: ($) =>
-        seq(",", $._type_name, optional($._generic_type_arguments_tail)),
+      _generic_type_arguments_tail: ($) => seq(",", $._generic_type_arguments),
+      _generic_type_arguments: ($) => seq($._type_name, optional($._generic_type_arguments_tail)),
       _simple_type_name: ($) =>
         choice(
           $.scoped_name,
@@ -819,8 +819,7 @@ export default grammar({
             $.macro_concatenated_name,
           ),
           "<",
-          $._type_name,
-          optional($._generic_type_arguments_tail),
+          $._generic_type_arguments,
         ),
       // Share the expression '+' token so a+b remains addition in arguments.
       __argument_nested_type: ($) =>
