@@ -472,7 +472,7 @@ export default grammar({
           choice(seq("{", "&"), $._preprocessor_start),
           // {&2 = "default"} defaults positional include argument 2 when
           // the caller omits it; {&NAME} refers to a named one.
-          // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/alternative-extraction
+          // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/alternative-extraction, tree-sitter-optimize/choice-product-extraction
           choice($.identifier, $.number_literal, alias($._numeric_identifier, $.identifier)),
           optional(seq("=", field("value", $.__preprocessor_name_value))),
         ),
