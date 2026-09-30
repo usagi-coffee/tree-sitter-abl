@@ -618,6 +618,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_extent,
       optional(
+        // oxlint-disable-next-line tree-sitter-optimize/choice-subset
         field("size", choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal)),
       ),
     ),
