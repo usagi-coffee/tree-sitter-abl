@@ -33,8 +33,10 @@ export default ({ kw }) => ({
       optional(seq($._kw_except, $.__assign_except_fields)),
     ),
   __assign_except_fields: ($) =>
-    seq(field("field", $._qualified_identifier), optional($.__assign_except_field_tail)),
-  __assign_except_field_tail: ($) => seq(optional(","), $.__assign_except_fields),
+    seq(
+      field("field", $._qualified_identifier),
+      optional(seq(optional(","), $.__assign_except_fields)),
+    ),
 
   __assign_input_body: ($) =>
     seq(
