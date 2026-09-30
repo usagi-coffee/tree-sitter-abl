@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         seq($._kw_row, field("row", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(
-          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner, tree-sitter-optimize/intra-rule-shared-choice
           seq(choice($._kw_column, kw("COL")), field("column", $._expression)),
         ),
       ),
