@@ -239,6 +239,7 @@ export default grammar({
     $._format_colon_to,
     $.__temp_table_like_name,
     $.__browse_flag_option,
+    $.__browse_option_expression,
     $._identifier_or_array_access,
     $._unquoted_name_initial,
     $._routine_name_initial,

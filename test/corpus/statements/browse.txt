@@ -981,3 +981,48 @@ x = 6/2.
     right: (binary_expression
       (number_literal)
       (number_literal))))
+
+================================================================================
+BROWSE - arithmetic option values retain column and widget boundaries
+================================================================================
+
+DEFINE BROWSE bExpr QUERY qExpr DISPLAY
+  Customer.Name COLUMN-FONT iFont + 1 LABEL-FGCOLOR iColor * 2
+  Customer.Balance COLUMN-BGCOLOR iBackground + 3
+  WITH ROW iRow + 1 COLUMN iColumn + 2 SIZE iWidth + 3 BY iHeight + 4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      column_font: (binary_expression
+        (identifier)
+        (number_literal))
+      label_fgcolor: (binary_expression
+        (identifier)
+        (number_literal)))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      column_bgcolor: (binary_expression
+        (identifier)
+        (number_literal)))
+    row: (binary_expression
+      (identifier)
+      (number_literal))
+    column: (binary_expression
+      (identifier)
+      (number_literal))
+    width: (binary_expression
+      (identifier)
+      (number_literal))
+    height: (binary_expression
+      (identifier)
+      (number_literal))))
