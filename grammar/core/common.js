@@ -32,6 +32,13 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _as_type_name_phrase: ($) => seq($._kw_as, field("type", $._type_name)),
   _input_field: ($) => choice($._qualified_identifier, $.object_access, $.array_access),
+  _frame_browse_selector: ($) =>
+    choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
+      seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      seq($._kw_browse, field("browse", $.__widget_name)),
+    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _in_widget_pool: ($) =>

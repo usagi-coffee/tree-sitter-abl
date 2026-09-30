@@ -39,7 +39,7 @@ export default ({ kw }) => ({
   __assign_input_body: ($) =>
     seq(
       optional($._kw_input),
-      $.__assign_input_selector,
+      $._frame_browse_selector,
       $.__assign_input_fields,
       optional($.__assign_input_sections),
     ),
@@ -48,17 +48,10 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         $._kw_input,
-        $.__assign_input_selector,
+        $._frame_browse_selector,
         $.__assign_input_fields,
         optional($.__assign_input_sections),
       ),
-    ),
-  __assign_input_selector: ($) =>
-    choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-      seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._kw_browse, field("browse", $.__widget_name)),
     ),
   __assign_input_fields: ($) => seq($.__assign_input_field, optional($.__assign_input_fields)),
   __assign_input_field: ($) =>

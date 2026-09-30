@@ -78,10 +78,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __view_hide_widget_phrase: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
-      seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._kw_browse, field("browse", $.__widget_name)),
+      $._frame_browse_selector,
       $.__view_hide_widget_ref,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
       seq(choice($._kw_menu, $._kw_sub_menu), field("menu", $.__widget_name)),
