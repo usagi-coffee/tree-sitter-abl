@@ -41,6 +41,6 @@ export default ({ kw }) => ({
 
   __wait_for_widgets: ($) => seq($.widget_phrase, optional(seq(",", $.__wait_for_widgets))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
-  __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
-  __wait_for_event_list_tail: ($) => seq(optional(","), $.__wait_for_event_list),
+  __wait_for_event_list: ($) =>
+    seq($._events, optional(seq(optional(","), $.__wait_for_event_list))),
 });
