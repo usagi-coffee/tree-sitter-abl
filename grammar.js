@@ -923,6 +923,7 @@ export default grammar({
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
+      // oxlint-disable-next-line tree-sitter-optimize/recursive-choice-item-extraction
       _object_access_tail: ($) =>
         seq(
           choice(
