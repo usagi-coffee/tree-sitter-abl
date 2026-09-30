@@ -65,5 +65,6 @@ export default ({ kw }) => ({
       $._kw_then,
       field("action", $._statement),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __buffer_compare_when_operand: ($) => choice($._primary_expression, $.argument_reference),
 });
