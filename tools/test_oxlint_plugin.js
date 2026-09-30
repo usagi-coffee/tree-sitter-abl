@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  optionalSelectorBodyInline,
   intraRuleSharedChoice,
   choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
@@ -88,6 +89,101 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const optionalSelectorBodyGrammar =
+  "export default () => ({__color_prefix: ($) => seq($._kw_color, optional($.__color_body)), __color_body: ($) => seq(optional(choice(alias($._kw_display, $.display), $._kw_prompt)), $.__color_tail)});";
+new RuleTester().run("optional-selector-body-inline", optionalSelectorBodyInline, {
+  valid: [
+    optionalSelectorBodyGrammar.replaceAll("__color_body", "color_body"),
+    optionalSelectorBodyGrammar.replaceAll("__color_body", "_color_body"),
+    optionalSelectorBodyGrammar.replace("optional($.__color_body)", "$.__color_body"),
+    optionalSelectorBodyGrammar.replace("$.__color_body)", '$["__color_body"])'),
+    optionalSelectorBodyGrammar.replace(
+      "__color_body:",
+      "other: ($) => $.__color_body, __color_body:",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "__color_body:",
+      'other: ($) => $["__color_body"], __color_body:',
+    ),
+    optionalSelectorBodyGrammar.replace("$.__color_tail", "$.__color_body"),
+    optionalSelectorBodyGrammar.replace("$._kw_prompt", "$.__color_body"),
+    optionalSelectorBodyGrammar.replace("$.__color_tail", "$.color_tail"),
+    optionalSelectorBodyGrammar.replace("$.__color_tail", "optional($.__color_tail)"),
+    optionalSelectorBodyGrammar.replace("$.__color_tail", "dynamic($)"),
+    optionalSelectorBodyGrammar.replace("$.__color_tail)", "$.__color_tail, $.extra)"),
+    optionalSelectorBodyGrammar.replace(
+      "optional(choice(alias($._kw_display, $.display), $._kw_prompt))",
+      "choice(alias($._kw_display, $.display), $._kw_prompt)",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "optional(choice(alias($._kw_display, $.display), $._kw_prompt))",
+      "optional($._kw_display)",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "choice(alias($._kw_display, $.display), $._kw_prompt)",
+      "choice($._kw_display)",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "choice(alias($._kw_display, $.display), $._kw_prompt)",
+      "choice($.a, $.b, $.c, $.d, $.e, $.f)",
+    ),
+    optionalSelectorBodyGrammar.replace("alias($._kw_display, $.display)", 'kw("DISPLAY")'),
+    optionalSelectorBodyGrammar.replace("alias($._kw_display, $.display)", 'token("DISPLAY")'),
+    optionalSelectorBodyGrammar.replace("$.display", "$._display"),
+    optionalSelectorBodyGrammar.replace("$._kw_prompt", 'field("selector", $._kw_prompt)'),
+    ...["alias", "field", "token", "token.immediate", "prec.dynamic", "repeat", "custom"].map(
+      (wrapper) =>
+        optionalSelectorBodyGrammar.replace(
+          "seq($._kw_color, optional($.__color_body))",
+          `${wrapper}(${wrapper === "field" ? '"body", ' : wrapper === "prec.dynamic" ? "1, " : ""}seq($._kw_color, optional($.__color_body))${wrapper === "alias" ? ", $.body" : ""})`,
+        ),
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "__color_body:",
+      "\n// oxlint-disable-next-line rule-to-test/optional-selector-body-inline\n__color_body:",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "__color_prefix:",
+      "\n// oxlint-disable-next-line rule-to-test/optional-selector-body-inline\n__color_prefix:",
+    ),
+    optionalSelectorBodyGrammar.replace(
+      "optional($.__color_body)",
+      "\n// oxlint-disable-next-line rule-to-test/optional-selector-body-inline\noptional($.__color_body)",
+    ),
+    ...["inline", "conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+      optionalSelectorBodyGrammar
+        .replace(
+          "export default () => ({",
+          `export default grammar({${metadata}: ($) => [$.__color_body], rules: {`,
+        )
+        .replace("});", "}});"),
+    ),
+    optionalSelectorBodyGrammar.replace("export default () =>", "const unrelated ="),
+  ],
+  invalid: [
+    {
+      name: "COLOR optional mixed symbol and alias selector adapter",
+      code: optionalSelectorBodyGrammar,
+      errors: [{ message: /__color_body.*inside that same optional wrapper/ }],
+    },
+    {
+      name: "all symbol alternatives before a hidden tail",
+      code: optionalSelectorBodyGrammar.replace("alias($._kw_display, $.display)", "$._kw_display"),
+      errors: [
+        { message: /optional symbol selector.*Preserve selector order, aliases, tail fields/ },
+      ],
+    },
+    {
+      name: "caller static precedence stays outside the optional body",
+      code: optionalSelectorBodyGrammar.replace(
+        "seq($._kw_color, optional($.__color_body))",
+        'prec.right("color", seq($._kw_color, optional($.__color_body)))',
+      ),
+      errors: [{ message: /one unaliased local optional use in __color_prefix/ }],
+    },
+  ],
+});
 
 const intraRuleOperandChoice = "choice($._primary_expression, $.argument_reference)";
 const intraRuleChoiceGrammar = (left, right = left) =>
