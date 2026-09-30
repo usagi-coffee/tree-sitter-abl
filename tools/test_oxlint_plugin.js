@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  intraRuleSharedChoice,
   choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
   inlineDispatcherBoundary,
@@ -87,6 +88,77 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const intraRuleOperandChoice = "choice($._primary_expression, $.argument_reference)";
+const intraRuleChoiceGrammar = (left, right = left) =>
+  `export default () => ({ sample: ($) => seq(field("field", ${left}), field("value", ${right})) });`;
+new RuleTester().run("intra-rule-shared-choice", intraRuleSharedChoice, {
+  valid: [
+    `export default () => ({ sample: ($) => field("field", ${intraRuleOperandChoice}) });`,
+    `export default () => ({ first: ($) => ${intraRuleOperandChoice}, second: ($) => ${intraRuleOperandChoice} });`,
+    intraRuleChoiceGrammar(
+      intraRuleOperandChoice,
+      "choice($.argument_reference, $._primary_expression)",
+    ),
+    intraRuleChoiceGrammar(intraRuleOperandChoice, "choice($._expression, $.argument_reference)"),
+    intraRuleChoiceGrammar('choice(field("left", $.a), $.b)', 'choice(field("right", $.a), $.b)'),
+    intraRuleChoiceGrammar("choice(alias($.a, $.left), $.b)", "choice(alias($.a, $.right), $.b)"),
+    intraRuleChoiceGrammar(
+      `prec.right("left", ${intraRuleOperandChoice})`,
+      `prec.right("right", ${intraRuleOperandChoice})`,
+    ),
+    intraRuleChoiceGrammar(
+      'choice(kw("MODE", {offset: 2}), $.a)',
+      'choice(kw("MODE", {offset: 3}), $.a)',
+    ),
+    intraRuleChoiceGrammar(
+      'choice(kw("MODE", {alias: "LEFT"}), $.a)',
+      'choice(kw("MODE", {alias: "RIGHT"}), $.a)',
+    ),
+    intraRuleChoiceGrammar("choice(token(/name/i), $.a)", "choice(token(/name/), $.a)"),
+    intraRuleChoiceGrammar("choice($.a, $.sample)"),
+    intraRuleChoiceGrammar("choice(optional($.a), $.b)"),
+    intraRuleChoiceGrammar('choice(field("item", optional($.a)), $.b)'),
+    intraRuleChoiceGrammar("choice(prec.dynamic(1, $.a), $.b)"),
+    intraRuleChoiceGrammar("choice($.a, dynamic($))"),
+    ...["token", "token.immediate", "alias", "prec.dynamic"].map(
+      (wrapper) =>
+        `export default () => ({ sample: ($) => ${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}seq(choice("A", "B"), choice("A", "B"))${wrapper === "alias" ? ", $.name" : ""}) });`,
+    ),
+    `const unrelated = { sample: ($) => seq(${intraRuleOperandChoice}, ${intraRuleOperandChoice}) };`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/intra-rule-shared-choice
+      sample: ($) => seq(${intraRuleOperandChoice}, ${intraRuleOperandChoice}),
+    });`,
+    `export default () => ({ sample: ($) => seq(
+      ${intraRuleOperandChoice},
+      // oxlint-disable-next-line rule-to-test/intra-rule-shared-choice
+      ${intraRuleOperandChoice},
+    ) });`,
+  ],
+  invalid: [
+    {
+      name: "BUFFER-COMPARE operands keep distinct caller field names",
+      code: `export default () => ({ __buffer_compare_when_phrase: ($) => seq($._kw_when, field("field", ${intraRuleOperandChoice}), field("operator", $._comparison_operator), field("value", ${intraRuleOperandChoice}), $._kw_then, field("action", $._statement)) });`,
+      errors: [{ message: /same rule.*Keep caller fields, aliases and precedence/ }],
+    },
+    {
+      name: "identical aliases are part of the shared choice",
+      code: intraRuleChoiceGrammar("choice(alias($.a, $.item), $.b)"),
+      errors: [{ message: /exact choice of 2 alternatives/ }],
+    },
+    {
+      name: "identical static precedence wrappers",
+      code: intraRuleChoiceGrammar(`prec.right("operand", ${intraRuleOperandChoice})`),
+      errors: [{ message: /precedence wrappers in place/ }],
+    },
+    {
+      name: "three duplicates produce one suggestion",
+      code: `export default grammar({ rules: { sample: ($) => seq(${intraRuleOperandChoice}, ${intraRuleOperandChoice}, ${intraRuleOperandChoice}) } });`,
+      errors: [{ message: /private non-nullable choice helper/ }],
+    },
+  ],
+});
 
 const choiceSuffixGrammar =
   'export default () => ({root: ($) => seq($.direction, $.__argument_body), __argument_body: ($) => seq(choice(field("name", $.identifier), seq($.marker, field("name", $.expression))), optional($.__passing))});';
