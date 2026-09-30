@@ -77,8 +77,7 @@ export default ({ kw }) => ({
   __dataset_parent_fields_before_phrase: ($) =>
     seq(kw("PARENT-FIELDS-BEFORE"), "(", $.__dataset_parent_fields_before, ")"),
   __dataset_parent_fields_before: ($) =>
-    seq(field("before_field", $.identifier), optional($.__dataset_parent_fields_before_tail)),
-  __dataset_parent_fields_before_tail: ($) => seq(",", $.__dataset_parent_fields_before),
+    seq(field("before_field", $.identifier), optional(seq(",", $.__dataset_parent_fields_before))),
   __dataset_parent_fields_after_phrase: ($) =>
     seq(kw("PARENT-FIELDS-AFTER"), "(", $.__dataset_parent_fields_after, ")"),
   __dataset_parent_fields_after: ($) =>
