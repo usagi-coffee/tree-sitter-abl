@@ -80,16 +80,10 @@ export default ({ kw }) => ({
     seq(field("before_field", $.identifier), optional($.__dataset_parent_fields_before_tail)),
   __dataset_parent_fields_before_tail: ($) => seq(",", $.__dataset_parent_fields_before),
   __dataset_parent_fields_after_phrase: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
-    seq(
-      kw("PARENT-FIELDS-AFTER"),
-      "(",
-      field("after_field", $.identifier),
-      optional($.__dataset_parent_fields_after_tail),
-      ")",
-    ),
-  __dataset_parent_fields_after_tail: ($) =>
-    seq(",", field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
+    seq(kw("PARENT-FIELDS-AFTER"), "(", $.__dataset_parent_fields_after, ")"),
+  __dataset_parent_fields_after: ($) =>
+    seq(field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
+  __dataset_parent_fields_after_tail: ($) => seq(",", $.__dataset_parent_fields_after),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __dataset_modifier: ($) =>
     choice(
