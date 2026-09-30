@@ -21,6 +21,7 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
   _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _class_type: ($) => seq(optional($._kw_class), field("type", $._type_or_string)),
   _as_like: ($) =>
     choice(
