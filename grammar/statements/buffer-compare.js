@@ -59,10 +59,11 @@ export default ({ kw }) => ({
   __buffer_compare_when_phrase: ($) =>
     seq(
       $._kw_when,
-      field("field", choice($._primary_expression, $.argument_reference)),
+      field("field", $.__buffer_compare_when_operand),
       field("operator", $._comparison_operator),
-      field("value", choice($._primary_expression, $.argument_reference)),
+      field("value", $.__buffer_compare_when_operand),
       $._kw_then,
       field("action", $._statement),
     ),
+  __buffer_compare_when_operand: ($) => choice($._primary_expression, $.argument_reference),
 });
