@@ -19,9 +19,9 @@ export default ({ kw }) => ({
     token(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        /[_\p{L}][\p{L}\p{N}_-]*/i,
+        /[_A-Za-z][A-Za-z0-9_-]*/,
         // oxlint-disable-next-line tree-sitter-optimize/recurse
-        repeat(seq(choice(".", "+"), /[_\p{L}][\p{L}\p{N}_-]*/i)),
+        repeat(seq(choice(".", "+"), /[_A-Za-z][A-Za-z0-9_-]*/)),
         optional(seq(".", "*")),
       ),
     ),

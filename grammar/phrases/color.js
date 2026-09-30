@@ -29,5 +29,5 @@ export default ({ kw }) => ({
       ),
     ),
   __color_prefixed_identifier: ($) =>
-    token(/(BLINK-|BRIGHT-|RVV-|UNDERLINE-)[_\p{L}][\p{L}\p{N}_-]*/i),
+    token(new RustRegex("(?i:BLINK-|BRIGHT-|RVV-|UNDERLINE-)[_A-Za-z][A-Za-z0-9_-]*")),
 });

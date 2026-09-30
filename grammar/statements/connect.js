@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       repeat(
         seq(
           "-",
-          field("parameter", alias(token.immediate(/[\p{L}\p{N}_]+/i), $.identifier)),
+          field("parameter", alias(token.immediate(/[A-Za-z0-9_]+/), $.identifier)),
           optional(field("value", choice($.identifier, $.string_literal, $.number_literal))),
         ),
       ),

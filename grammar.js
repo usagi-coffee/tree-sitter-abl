@@ -39,11 +39,10 @@ const SYSTEM_HANDLE_WORDS = [
 ];
 
 const MACRO = `\\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\\}`;
-const NAME_CHARS = `[\\p{L}\\p{N}_\\-&#%$]`;
+const NAME_CHARS = `[A-Za-z0-9_\\-&#%$]`;
 const MACRO_CONCATENATED_NAME = new RegExp(
-  `[_\\p{L}]${NAME_CHARS}*(?:${MACRO}${NAME_CHARS}*)+` +
+  `[_A-Za-z]${NAME_CHARS}*(?:${MACRO}${NAME_CHARS}*)+` +
     `|(?:${MACRO})+${NAME_CHARS}+(?:${MACRO}${NAME_CHARS}*)*`,
-  "i",
 );
 
 export default grammar({
@@ -320,7 +319,7 @@ export default grammar({
           "=",
           field("value", $._include_argument_value),
         ),
-      __include_argument_name: ($) => token(/[\p{L}\p{N}_\-.&#%$!]+/),
+      __include_argument_name: ($) => token(/[A-Za-z0-9_\-.&#%$!]+/),
       // oxlint-disable-next-line tree-sitter-optimize/body-extraction
       _include_argument_value: ($) =>
         choice(
@@ -882,7 +881,7 @@ export default grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+      identifier: ($) => token(/[_A-Za-z][A-Za-z0-9_\-&#%$!]*/),
 
       // Routine names accept initials and operators that remain illegal in data identifiers.
       // oxlint-disable-next-line tree-sitter-optimize/shared-symbol-alias-choice-inline
@@ -893,16 +892,15 @@ export default grammar({
           alias($.__symbolic_name, $.identifier),
           alias($.__operator_name, $.identifier),
         ),
-      __symbolic_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
+      __symbolic_name: ($) => token(/[!#$%][A-Za-z0-9_\-&#%$!]*/),
 
       _numeric_identifier: ($) => numeric_identifier(),
 
-      __numeric_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+      __numeric_name: ($) => token(/[0-9][0-9\-]*[A-Za-z][A-Za-z0-9_\-&#%$!]*/),
 
-      __operator_name: ($) =>
-        token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
+      __operator_name: ($) => token(/[_A-Za-z][A-Za-z0-9_\-&#%$!]*[*+\/][A-Za-z0-9_\-&#%$!*+\/]*/),
 
-      __dash_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+      __dash_name: ($) => token(/-[A-Za-z][A-Za-z0-9_\-&#%$!]*/),
 
       _unquoted_name_initial: ($) =>
         choice(alias($.__symbolic_name, $.identifier), alias($.__numeric_name, $.identifier)),
@@ -920,7 +918,7 @@ export default grammar({
           alias($._colon, ":"),
         ),
       // `!` is excluded after `.` and `:` because it is legal only in routine names.
-      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
+      _identifier_immediate: ($) => token.immediate(/[_A-Za-z][A-Za-z0-9_\-&#%$]*/),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       // oxlint-disable-next-line tree-sitter-optimize/recursive-choice-item-extraction
