@@ -81,8 +81,7 @@ export default ({ kw }) => ({
   __dataset_parent_fields_after_phrase: ($) =>
     seq(kw("PARENT-FIELDS-AFTER"), "(", $.__dataset_parent_fields_after, ")"),
   __dataset_parent_fields_after: ($) =>
-    seq(field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
-  __dataset_parent_fields_after_tail: ($) => seq(",", $.__dataset_parent_fields_after),
+    seq(field("after_field", $.identifier), optional(seq(",", $.__dataset_parent_fields_after))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __dataset_modifier: ($) =>
     choice(
