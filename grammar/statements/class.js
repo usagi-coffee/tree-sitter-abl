@@ -256,6 +256,7 @@ export default ({ kw }) => ({
       seq(
         $.__class_property_class_modifier,
         optional($._member_access_modifier),
+        // oxlint-disable-next-line tree-sitter-optimize/intra-rule-shared-choice
         optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
       $.__class_property_modifier_tail,
