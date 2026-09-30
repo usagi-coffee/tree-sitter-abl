@@ -305,7 +305,7 @@ export default ({ kw }) => ({
       field("type", alias($._kw_void, $.identifier)),
       seq($._class_type, optional($.__class_method_return_extent_phrase)),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/single-use-sequence
   __class_method_return_extent_phrase: ($) =>
     seq($._kw_extent, optional(field("size", $._extent_size))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
