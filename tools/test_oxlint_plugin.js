@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  privatePrecedenceSymbolInline,
   optionalSelectorBodyInline,
   intraRuleSharedChoice,
   choiceSuffixHoist,
@@ -89,6 +90,148 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const precedenceSymbolGrammar =
+  'export default () => ({ __sample_value: ($) => prec.right($._expression), first: ($) => seq($._kw_font, field("font", $.__sample_value)), second: ($) => seq($._kw_row, field("row", $.__sample_value)) });';
+new RuleTester().run("private-precedence-symbol-inline", privatePrecedenceSymbolInline, {
+  valid: [
+    precedenceSymbolGrammar.replaceAll("__sample_value", "sample_value"),
+    precedenceSymbolGrammar.replaceAll("__sample_value", "_sample_value"),
+    precedenceSymbolGrammar.replace("prec.right($._expression)", "$._expression"),
+    precedenceSymbolGrammar.replace("prec.right($._expression)", "prec.dynamic(1, $._expression)"),
+    precedenceSymbolGrammar.replace(
+      "prec.right($._expression)",
+      'prec("priority", prec.dynamic(1, $._expression))',
+    ),
+    precedenceSymbolGrammar.replace(
+      "prec.right($._expression)",
+      "prec.right(priority, $._expression)",
+    ),
+    precedenceSymbolGrammar.replace("prec.right($._expression)", "prec($._expression)"),
+    precedenceSymbolGrammar.replace(
+      "prec.right($._expression)",
+      'prec.right(seq("(", $._expression, ")"))',
+    ),
+    precedenceSymbolGrammar.replace(
+      "prec.right($._expression)",
+      'prec.right(field("value", $._expression))',
+    ),
+    precedenceSymbolGrammar.replace("prec.right($._expression)", "prec.right($.__sample_value)"),
+    precedenceSymbolGrammar.replace(
+      'second: ($) => seq($._kw_row, field("row", $.__sample_value))',
+      "second: ($) => $.other",
+    ),
+    precedenceSymbolGrammar.replace(
+      'field("row", $.__sample_value)',
+      'field("row", $["__sample_value"])',
+    ),
+    precedenceSymbolGrammar.replace('field("row", $.__sample_value)', 'field("row", $[selected])'),
+    ...["alias", "token", "token.immediate", "prec.dynamic", "custom"].map((wrapper) =>
+      precedenceSymbolGrammar.replace(
+        'field("row", $.__sample_value)',
+        `${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}$.__sample_value${wrapper === "alias" ? ", $.value" : ""})`,
+      ),
+    ),
+    precedenceSymbolGrammar.replace(
+      'field("row", $.__sample_value)',
+      "prec.right(priority, $.__sample_value)",
+    ),
+    precedenceSymbolGrammar
+      .replace("__sample_value:", "bridge: ($) => $.__sample_value, __sample_value:")
+      .replace("prec.right($._expression)", "prec.right($.bridge)"),
+    precedenceSymbolGrammar.replace(
+      "__sample_value:",
+      "\n// oxlint-disable-next-line rule-to-test/private-precedence-symbol-inline\n__sample_value:",
+    ),
+    ...["inline", "conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+      precedenceSymbolGrammar
+        .replace(
+          "export default () => ({",
+          `export default grammar({${metadata}: ($) => [$.__sample_value], rules: {`,
+        )
+        .replace("});", "}});"),
+    ),
+    precedenceSymbolGrammar.replace("export default () =>", "const unrelated ="),
+  ],
+  invalid: [
+    {
+      code: precedenceSymbolGrammar,
+      errors: [{ message: /__sample_value.*2 unaliased local uses.*grammar.inline/ }],
+    },
+    {
+      code: precedenceSymbolGrammar.replace(
+        "prec.right($._expression)",
+        'prec.left("option", $._expression)',
+      ),
+      errors: [
+        { message: /Preserve the complete precedence chain, associativity and caller fields/ },
+      ],
+    },
+    {
+      code: precedenceSymbolGrammar.replace(
+        "prec.right($._expression)",
+        'prec("option", prec.right($._expression))',
+      ),
+      errors: [{ message: /static precedence.*measure parser counts and bytes/ }],
+    },
+    {
+      code: precedenceSymbolGrammar.replace(
+        'field("row", $.__sample_value)',
+        'repeat(seq($.__sample_value, optional(",")))',
+      ),
+      errors: [{ message: /2 unaliased local uses/ }],
+    },
+    {
+      code: precedenceSymbolGrammar
+        .replace("export default () => ({", "export default grammar({rules: {")
+        .replace("});", "}});"),
+      errors: [{ message: /static precedence/ }],
+    },
+  ],
+});
+
+const precedenceSymbolFixture = mkdtempSync(join(tmpdir(), "abl-precedence-symbol-lint-"));
+try {
+  writeFileSync(
+    join(precedenceSymbolFixture, "grammar.js"),
+    `export default grammar({
+    // $.__sample_value is not metadata.
+    inline: ($) => [$.__already_inline],
+    conflicts: ($) => [[$.__ambiguous, $.other]],
+    precedences: ($) => [[$.__ordered, $.other]],
+    rules: {},
+  });`,
+  );
+  const fixture = {
+    cwd: precedenceSymbolFixture,
+    filename: join(precedenceSymbolFixture, "grammar", "browse.js"),
+  };
+  new RuleTester().run(
+    "private-precedence-symbol-inline cross-file metadata",
+    privatePrecedenceSymbolInline,
+    {
+      valid: ["__already_inline", "__ambiguous", "__ordered"].map((name) => ({
+        ...fixture,
+        code: precedenceSymbolGrammar.replaceAll("__sample_value", name),
+      })),
+      invalid: [
+        {
+          ...fixture,
+          name: "BROWSE repeatedly used expression precedence adapter",
+          code: precedenceSymbolGrammar.replaceAll("__sample_value", "__browse_option_expression"),
+          errors: [{ message: /__browse_option_expression.*grammar.inline/ }],
+        },
+        {
+          ...fixture,
+          code: precedenceSymbolGrammar,
+          errors: [{ message: /__sample_value.*static precedence/ }],
+        },
+      ],
+    },
+  );
+} finally {
+  rmSync(precedenceSymbolFixture, { recursive: true, force: true });
+}
 
 const optionalSelectorBodyGrammar =
   "export default () => ({__color_prefix: ($) => seq($._kw_color, optional($.__color_body)), __color_body: ($) => seq(optional(choice(alias($._kw_display, $.display), $._kw_prompt)), $.__color_tail)});";
