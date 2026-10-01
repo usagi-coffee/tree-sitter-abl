@@ -628,12 +628,14 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       __additive_operator: ($) => prec("add", choice("+", "-")),
       // binary_expression without `=` comparison.
-      // Keep additive tokens in the statement form's boundary for error recovery.
+      // Keep additive tokens in the statement boundary so malformed macro comments
+      // preserve recovery into a following assignment.
       binary_expression_no_eq: ($) =>
         binary_expression(
           $,
           $._statement_expression,
           $._comparison_operator_no_eq,
+          // oxlint-disable-next-line tree-sitter-optimize/shared-choice
           choice("+", "-"),
         ),
 
