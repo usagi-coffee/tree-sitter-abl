@@ -7,6 +7,7 @@ import { RuleTester } from "oxlint/plugins-dev";
 import {
   optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
+  multiUsePrivateKeywordChoiceInline,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
@@ -97,6 +98,146 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const privateKeywordChoiceBody = 'choice($._kw_column, kw("COLUMNS"), kw("COL"))';
+const privateKeywordChoiceFixture = (
+  body = privateKeywordChoiceBody,
+  uses = 'choice(seq(field("column", $.number_literal), $.__keyword_selector), seq($.__keyword_selector, field("column", $._expression)))',
+  metadata = "",
+) => `export default grammar({ ${metadata} rules: {
+  __keyword_selector: ($) => ${body},
+  option: ($) => ${uses},
+} });`;
+new RuleTester().run(
+  "multi-use-private-keyword-choice-inline",
+  multiUsePrivateKeywordChoiceInline,
+  {
+    valid: [
+      privateKeywordChoiceFixture().replaceAll("__keyword_selector", "keyword_selector"),
+      privateKeywordChoiceFixture().replaceAll("__keyword_selector", "_keyword_selector"),
+      privateKeywordChoiceFixture(undefined, "$.__keyword_selector"),
+      privateKeywordChoiceFixture(undefined, "$.other"),
+      privateKeywordChoiceFixture("choice($._kw_column, $._kw_row)"),
+      privateKeywordChoiceFixture('choice(kw("COLUMNS"), kw("COL"))'),
+      privateKeywordChoiceFixture('choice($.identifier, kw("COL"))'),
+      privateKeywordChoiceFixture("choice($._kw_column, kw(keyword))"),
+      privateKeywordChoiceFixture('choice($._kw_column, kw("COL", options))'),
+      privateKeywordChoiceFixture('choice($._kw_column, alias(kw("COL"), $.column))'),
+      privateKeywordChoiceFixture('choice($._kw_column, $.__keyword_selector, kw("COL"))'),
+      privateKeywordChoiceFixture('prec.right(choice($._kw_column, kw("COL")))'),
+      privateKeywordChoiceFixture('choice($._kw_column, kw("COL"), ...keywords)'),
+      privateKeywordChoiceFixture(
+        'choice($._kw_column, kw("A"), kw("B"), kw("C"), kw("D"), kw("E"))',
+      ),
+      privateKeywordChoiceFixture(undefined, 'seq($.__keyword_selector, $["__keyword_selector"])'),
+      ...["alias", "token", "token.immediate", "prec.dynamic", "custom"].map((wrapper) =>
+        privateKeywordChoiceFixture(
+          undefined,
+          `seq($.__keyword_selector, ${wrapper}($.__keyword_selector, $.value))`,
+        ),
+      ),
+      privateKeywordChoiceFixture(
+        undefined,
+        "seq($.__keyword_selector, prec.right(priority, $.__keyword_selector))",
+      ),
+      ...["inline", "conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+        privateKeywordChoiceFixture(
+          undefined,
+          undefined,
+          `${metadata}: ($) => [$.__keyword_selector],`,
+        ),
+      ),
+      privateKeywordChoiceFixture().replace(
+        "  __keyword_selector:",
+        "  // oxlint-disable-next-line rule-to-test/multi-use-private-keyword-choice-inline\n  __keyword_selector:",
+      ),
+      privateKeywordChoiceFixture().replace(
+        "  option:",
+        "  // oxlint-disable-next-line rule-to-test/multi-use-private-keyword-choice-inline\n  option:",
+      ),
+      `const value = { __keyword_selector: ($) => ${privateKeywordChoiceBody}, option: ($) => seq($.__keyword_selector, $.__keyword_selector) };`,
+    ],
+    invalid: [
+      {
+        name: "original FRAME COLUMN selector before and after a field",
+        filename: join(process.cwd(), "grammar.js"),
+        code: `export default ({ kw }) => ({
+        __frame_option: ($) => choice(
+          seq(field("column", $.number_literal), $.__frame_column_keyword),
+          seq($.__frame_column_keyword, field("column", $.__frame_expression)),
+        ),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        __frame_column_keyword: ($) => choice($._kw_column, kw("COLUMNS"), kw("COL")),
+      });`,
+        errors: [
+          { message: /__frame_column_keyword has 2 unaliased local uses.*private selector/ },
+        ],
+      },
+      {
+        code: privateKeywordChoiceFixture(),
+        errors: [{ message: /try adding it to grammar.inline/ }],
+      },
+      {
+        name: "keyword abbreviation options and field scopes remain exact",
+        code: privateKeywordChoiceFixture(
+          'choice(kw("COLUMNS", {alias: "COL", offset: 3}), $._kw_column)',
+          'seq(field("first", $.__keyword_selector), optional(field("second", $.__keyword_selector)))',
+        ),
+        errors: [{ message: /abbreviation options, alternative order and caller fields/ }],
+      },
+      {
+        name: "static caller precedence and multiple rule uses",
+        code: privateKeywordChoiceFixture(
+          undefined,
+          "prec.right(seq($.__keyword_selector, $.value))",
+        ).replace("} });", "second: ($) => optional($.__keyword_selector), } });"),
+        errors: [{ message: /compare action costs against state and byte savings/ }],
+      },
+    ],
+  },
+);
+const privateKeywordChoiceMetadata = mkdtempSync(join(tmpdir(), "abl-private-keyword-choice-"));
+try {
+  writeFileSync(
+    join(privateKeywordChoiceMetadata, "grammar.js"),
+    "export default grammar({ inline: ($) => [$.__keyword_selector], rules: {} });",
+  );
+  new RuleTester().run("private keyword choice root metadata", multiUsePrivateKeywordChoiceInline, {
+    valid: [
+      {
+        cwd: privateKeywordChoiceMetadata,
+        filename: join(privateKeywordChoiceMetadata, "grammar", "frame.js"),
+        code: privateKeywordChoiceFixture(),
+      },
+    ],
+    invalid: [],
+  });
+  writeFileSync(
+    join(privateKeywordChoiceMetadata, "grammar.js"),
+    "export default grammar({ rules: {} });",
+  );
+  mkdirSync(join(privateKeywordChoiceMetadata, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(privateKeywordChoiceMetadata, "grammar", "precedences", "frame.js"),
+    "export default ($) => [[$.binary_expression, $.__keyword_selector]];",
+  );
+  new RuleTester().run(
+    "private keyword choice declared precedence",
+    multiUsePrivateKeywordChoiceInline,
+    {
+      valid: [
+        {
+          cwd: privateKeywordChoiceMetadata,
+          filename: join(privateKeywordChoiceMetadata, "grammar", "frame.js"),
+          code: privateKeywordChoiceFixture(),
+        },
+      ],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(privateKeywordChoiceMetadata, { recursive: true, force: true });
+}
 
 const nestedFieldBody =
   'seq(field("object", $._qualified_identifier), optional($.__on_database_event_tail), choice($.__on_revert_action, $._statement))';
