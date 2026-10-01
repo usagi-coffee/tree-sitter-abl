@@ -39,6 +39,7 @@ export default ({ kw }) => ({
       ),
       $.__open_query_max_rows_option,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-keyword-field-inline
   __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
   __open_query_record_tail: ($) =>
     seq(
