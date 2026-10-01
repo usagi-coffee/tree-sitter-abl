@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  nestedEventHeadExtraction,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
@@ -93,6 +94,76 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const nestedEventHeadFixture = (
+  head = 'field("event", $._kw_delete)',
+  marker = "$._kw_of",
+  shared = "$.__action",
+  ordinary = 'field("event", choice($._kw_create, $._kw_find))',
+) => `export default () => ({
+  on_statement: ($) => prec.right(seq($._kw_on, choice(
+    seq(${head}, ${marker}, choice(${shared}, seq(field("widget", $.widget), optional($.anywhere), $._statement))),
+    seq(${ordinary}, $._kw_of, $.__action),
+  ))),
+});`;
+new RuleTester().run("nested-event-head-extraction", nestedEventHeadExtraction, {
+  valid: [
+    nestedEventHeadFixture().replaceAll('field("event",', "alias("),
+    nestedEventHeadFixture().replace('field("event", choice', 'field("other", choice'),
+    nestedEventHeadFixture("$._kw_delete"),
+    nestedEventHeadFixture('field("event", $.identifier)'),
+    nestedEventHeadFixture('field("event", kw(keyword))'),
+    nestedEventHeadFixture(undefined, "$._kw_on"),
+    nestedEventHeadFixture(undefined, undefined, "$.__different"),
+    nestedEventHeadFixture(
+      undefined,
+      undefined,
+      undefined,
+      'field("event", choice($._kw_delete, $._kw_find))',
+    ),
+    nestedEventHeadFixture(
+      undefined,
+      undefined,
+      undefined,
+      'field("event", choice($.identifier, $._kw_find))',
+    ),
+    nestedEventHeadFixture()
+      .replace("choice($.__action, seq(", "choice(seq(")
+      .replace("$._statement))),", "$._statement), $.__action)),"),
+    nestedEventHeadFixture().replace("prec.right(", "prec.dynamic(1, "),
+    nestedEventHeadFixture().replace("prec.right(", "token("),
+    nestedEventHeadFixture().replace("prec.right(", "prec.right(priority, "),
+    nestedEventHeadFixture().replace(
+      'seq(field("widget", $.widget), optional($.anywhere), $._statement)',
+      "seq(optional($.widget), optional($.action))",
+    ),
+    nestedEventHeadFixture().replace(
+      "on_statement:",
+      "// oxlint-disable-next-line rule-to-test/nested-event-head-extraction\non_statement:",
+    ),
+    nestedEventHeadFixture()
+      .replace(
+        "choice(\n",
+        "choice(\n// oxlint-disable-next-line rule-to-test/nested-event-head-extraction\n",
+      )
+      .replace(
+        "seq($._kw_on, choice(",
+        "seq($._kw_on,\n// oxlint-disable-next-line rule-to-test/nested-event-head-extraction\nchoice(",
+      ),
+    'const value = choice(seq(field("event", $._kw_delete), $._kw_of, choice($.__action, seq($.widget, $.action))), seq(field("event", choice($._kw_create, $._kw_find)), $._kw_of, $.__action));',
+  ],
+  invalid: [
+    { code: nestedEventHeadFixture(), errors: [{ message: /hidden head helper/ }] },
+    {
+      code: nestedEventHeadFixture('field("event", kw("DELETE", {offset: 3}))'),
+      errors: [{ message: /preserve its priority/ }],
+    },
+    {
+      code: nestedEventHeadFixture().replaceAll("$._kw_of", 'kw("OF")'),
+      errors: [{ message: /exact field and marker/ }],
+    },
+  ],
+});
 
 const privateKeywordAliasChoiceFixture = (
   body = 'choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PUBLIC", {offset: 3}), $.access_modifier), $.preprocessor_name)',
