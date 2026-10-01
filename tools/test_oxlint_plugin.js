@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
   privatePrecedenceSymbolInline,
@@ -92,6 +93,119 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const privateKeywordAliasChoiceFixture = (
+  body = 'choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PUBLIC", {offset: 3}), $.access_modifier), $.preprocessor_name)',
+  uses = 'seq(optional($.__accessor_modifier), "GET", optional($.__accessor_modifier), "SET")',
+  metadata = "",
+) => `export default grammar({
+  ${metadata}
+  rules: {
+    __accessor_modifier: ($) => ${body},
+    item: ($) => ${uses},
+  },
+});`;
+new RuleTester().run(
+  "multi-use-private-keyword-alias-choice-inline",
+  multiUsePrivateKeywordAliasChoiceInline,
+  {
+    valid: [
+      privateKeywordAliasChoiceFixture().replaceAll("__accessor_modifier", "accessor_modifier"),
+      privateKeywordAliasChoiceFixture().replaceAll("__accessor_modifier", "_accessor_modifier"),
+      privateKeywordAliasChoiceFixture(undefined, "$.__accessor_modifier"),
+      privateKeywordAliasChoiceFixture(undefined, "$.other"),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw("PRIVATE"), $.access_modifier), $.preprocessor_name)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PUBLIC"), $.access_modifier))',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw(keyword), $.access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.preprocessor_name)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw("PRIVATE", options), $.access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.preprocessor_name)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias($._kw_private, $.access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.preprocessor_name)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw("PRIVATE"), $._access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.preprocessor_name)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.__accessor_modifier)',
+      ),
+      privateKeywordAliasChoiceFixture(
+        'prec.right(choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PUBLIC"), $.access_modifier), $.preprocessor_name))',
+      ),
+      privateKeywordAliasChoiceFixture(
+        undefined,
+        'seq($.__accessor_modifier, $["__accessor_modifier"])',
+      ),
+      ...["alias", "field", "token", "token.immediate", "prec.dynamic", "custom"].map((wrapper) =>
+        privateKeywordAliasChoiceFixture(
+          undefined,
+          `seq($.__accessor_modifier, ${wrapper}($.__accessor_modifier, $.value))`,
+        ),
+      ),
+      ...["inline", "conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+        privateKeywordAliasChoiceFixture(
+          undefined,
+          undefined,
+          `${metadata}: ($) => [$.__accessor_modifier],`,
+        ),
+      ),
+      privateKeywordAliasChoiceFixture().replace(
+        "    __accessor_modifier:",
+        "    // oxlint-disable-next-line rule-to-test/multi-use-private-keyword-alias-choice-inline\n    __accessor_modifier:",
+      ),
+    ],
+    invalid: [
+      {
+        code: privateKeywordAliasChoiceFixture(),
+        errors: [{ message: /__accessor_modifier has 2 unaliased local uses/ }],
+      },
+      {
+        code: privateKeywordAliasChoiceFixture(
+          undefined,
+          'choice(seq("GET", optional($.__accessor_modifier)), seq("SET", optional($.__accessor_modifier)))',
+        ),
+        errors: [{ message: /preserve keyword identity, alternative order and alias visibility/ }],
+      },
+      {
+        code: privateKeywordAliasChoiceFixture(
+          'choice($.preprocessor_name, alias(kw("PRIVATE"), $.access_modifier), alias(kw("STATIC"), $.static_modifier))',
+        ),
+        errors: [{ message: /try adding it to grammar.inline/ }],
+      },
+    ],
+  },
+);
+const privateKeywordAliasChoiceMetadata = mkdtempSync(
+  join(tmpdir(), "abl-private-keyword-alias-choice-"),
+);
+try {
+  writeFileSync(
+    join(privateKeywordAliasChoiceMetadata, "grammar.js"),
+    "export default grammar({ inline: ($) => [$.__accessor_modifier], rules: {} });",
+  );
+  new RuleTester().run(
+    "multi-use-private-keyword-alias-choice-inline cross-file metadata",
+    multiUsePrivateKeywordAliasChoiceInline,
+    {
+      valid: [
+        {
+          cwd: privateKeywordAliasChoiceMetadata,
+          filename: join(privateKeywordAliasChoiceMetadata, "grammar", "class.js"),
+          code: privateKeywordAliasChoiceFixture(),
+        },
+      ],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(privateKeywordAliasChoiceMetadata, { recursive: true, force: true });
+}
 
 const privateKeywordFieldFixture = (
   body = 'seq($._kw_page_size, field("page_size", $._expression))',
