@@ -58,5 +58,6 @@ export default ({ kw }) => ({
     ),
   __dde_item_time_body: ($) =>
     seq(kw("ITEM"), field("item", $._expression), optional($.__dde_time_phrase)),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-keyword-field-inline
   __dde_time_phrase: ($) => seq(kw("TIME"), field("time", $._expression)),
 });
