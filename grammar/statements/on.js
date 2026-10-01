@@ -97,14 +97,7 @@ export default ({ kw }) => ({
         choice(
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           choice(
-            seq(
-              $.__on_database_event_head,
-              seq(
-                field("object", $._qualified_identifier),
-                optional($.__on_database_event_tail),
-                choice($.__on_revert_action, $._statement),
-              ),
-            ),
+            seq($.__on_database_event_head, $.__on_database_event_body),
             seq(
               field("event", $._kw_delete),
               $._kw_of,
@@ -129,6 +122,12 @@ export default ({ kw }) => ({
     seq(
       field("event", choice($._kw_delete, $._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
       $._kw_of,
+    ),
+  __on_database_event_body: ($) =>
+    seq(
+      field("object", $._qualified_identifier),
+      optional($.__on_database_event_tail),
+      choice($.__on_revert_action, $._statement),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event_target: ($) =>
