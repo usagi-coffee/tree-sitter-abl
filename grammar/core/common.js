@@ -175,7 +175,8 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // Keep the modifier symbol available to the DEFINE conflict sets.
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _buffer_query_modifier: ($) =>
     choice(
       $._definition_scope_modifier,
