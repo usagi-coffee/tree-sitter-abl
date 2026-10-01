@@ -20,5 +20,6 @@ export default ({ kw }) => ({
       seq(alias($._kw_new, $.new), optional($.__load_base_key_option)),
       $.__load_base_key_option,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-keyword-field-inline
   __load_base_key_option: ($) => seq(kw("BASE-KEY"), field("base_key", $._expression)),
 });
