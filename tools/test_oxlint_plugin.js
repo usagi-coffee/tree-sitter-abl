@@ -16,6 +16,7 @@ import {
   intraRuleSharedChoice,
   choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
+  contextualInfixBoundary,
   inlineDispatcherBoundary,
   inlineValuedChoiceBoundary,
   inlineLiteralChoiceBoundary,
@@ -7493,4 +7494,189 @@ try {
   RuleTester.it = scopedHeadPreviousIt;
   resetSharingCandidates();
   rmSync(scopedHeadDirectory, { recursive: true, force: true });
+}
+
+const contextualInfixDirectory = mkdtempSync(join(tmpdir(), "abl-contextual-infix-"));
+const originalInfixFactory = `export default grammar({
+  inline: ($) => [$.__additive_operator],
+  rules: {
+    binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
+    // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+    __additive_operator: ($) => choice("+", "-"),
+    binary_expression_no_eq: ($) =>
+      binary_expression($, $._statement_expression, $._comparison_operator_no_eq),
+  },
+});
+function binary_expression($, expression, comparison_operator) {
+  return choice(
+    prec.left("multiplication", seq(expression, $.__multiplicative_operator, expression)),
+    prec.left("add", seq(expression, $.__additive_operator, expression)),
+    prec.left("compare", seq(expression, comparison_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression)),
+  );
+}`;
+const contextualInfixCase = (name, code) => ({
+  name,
+  code,
+  cwd: contextualInfixDirectory,
+  filename: join(contextualInfixDirectory, "grammar.js"),
+});
+const contextualInfixMessage =
+  /__additive_operator expands an infix literal choice in binary_expression across 2 operand contexts.*existing named precedence "add".*including error recovery/;
+try {
+  new RuleTester().run("contextual-infix-boundary", contextualInfixBoundary, {
+    invalid: [
+      {
+        ...contextualInfixCase(
+          "original additive operator and binary factory sources",
+          originalInfixFactory,
+        ),
+        errors: [{ message: contextualInfixMessage }],
+      },
+      {
+        ...contextualInfixCase(
+          "other punctuation family and named associativity",
+          originalInfixFactory
+            .replace('choice("+", "-")', 'choice("*", "/", "%")')
+            .replace('prec.left("add",', 'prec.right("add",'),
+        ),
+        errors: [{ message: contextualInfixMessage }],
+      },
+    ],
+    valid: [
+      contextualInfixCase(
+        "retained helper",
+        originalInfixFactory.replace("[$.__additive_operator]", "[]"),
+      ),
+      contextualInfixCase(
+        "same operand context at both instantiations",
+        originalInfixFactory.replace("$._statement_expression", "$._expression"),
+      ),
+      contextualInfixCase(
+        "one factory instantiation",
+        originalInfixFactory.replace(/    binary_expression_no_eq:[\s\S]*?operator_no_eq\),\n/, ""),
+      ),
+      contextualInfixCase(
+        "keyword selectors are a different shape",
+        originalInfixFactory.replace('choice("+", "-")', 'choice("AND", "OR")'),
+      ),
+      contextualInfixCase(
+        "nullable selector",
+        originalInfixFactory.replace('choice("+", "-")', 'choice("+", optional("-"))'),
+      ),
+      contextualInfixCase(
+        "packed tokens",
+        originalInfixFactory.replace('choice("+", "-")', 'token(choice("+", "-"))'),
+      ),
+      contextualInfixCase(
+        "already precedence-wrapped helper",
+        originalInfixFactory.replace('choice("+", "-")', 'prec("add", choice("+", "-"))'),
+      ),
+      contextualInfixCase(
+        "public operator helper",
+        originalInfixFactory.replaceAll("__additive_operator", "additive_operator"),
+      ),
+      ...["alias", "field", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+        contextualInfixCase(
+          `${wrapper} wraps the selector`,
+          originalInfixFactory.replace(
+            "seq(expression, $.__additive_operator, expression)",
+            `seq(expression, ${wrapper}(${wrapper === "prec.dynamic" ? "1, " : wrapper === "field" ? '"operator", ' : ""}$.__additive_operator${wrapper === "alias" ? ", $.operator" : ""}), expression)`,
+          ),
+        ),
+      ),
+      contextualInfixCase(
+        "different operands in one infix sequence",
+        originalInfixFactory.replace(
+          "seq(expression, $.__additive_operator, expression)",
+          "seq(expression, $.__additive_operator, comparison_operator)",
+        ),
+      ),
+      contextualInfixCase(
+        "numeric precedence",
+        originalInfixFactory.replace('prec.left("add",', "prec.left(1,"),
+      ),
+      contextualInfixCase(
+        "dynamic precedence",
+        originalInfixFactory.replace('prec.left("add",', 'prec.dynamic("add",'),
+      ),
+      contextualInfixCase(
+        "factory used outside grammar rules",
+        originalInfixFactory +
+          "\nconst expanded = binary_expression($, $._other, $._comparison_operator);",
+      ),
+      contextualInfixCase(
+        "factory result has a named alias",
+        originalInfixFactory.replace(
+          "binary_expression($, $._expression, $._comparison_operator)",
+          "alias(binary_expression($, $._expression, $._comparison_operator), $.binary)",
+        ),
+      ),
+      contextualInfixCase(
+        "field-wrapped operand argument",
+        originalInfixFactory.replace(
+          "binary_expression($, $._statement_expression,",
+          'binary_expression($, field("value", $._statement_expression),',
+        ),
+      ),
+      contextualInfixCase(
+        "factory with other statements",
+        originalInfixFactory.replace("  return choice(", "  const extra = 1;\n  return choice("),
+      ),
+      contextualInfixCase(
+        "exported factory",
+        originalInfixFactory.replace(
+          "function binary_expression(",
+          "export function binary_expression(",
+        ),
+      ),
+      contextualInfixCase(
+        "computed helper reference",
+        originalInfixFactory.replace(
+          "seq(expression, $.__additive_operator,",
+          'seq(expression, $["__additive_operator"],',
+        ),
+      ),
+      contextualInfixCase(
+        "unknown dynamic symbol reference",
+        originalInfixFactory + "\nconst unknown = $[selected];",
+      ),
+      contextualInfixCase(
+        "helper has another alias use",
+        originalInfixFactory.replace(
+          "  rules: {",
+          "  rules: { other: ($) => alias($.__additive_operator, $.operator),",
+        ),
+      ),
+      ...["conflicts", "supertypes", "externals", "precedences"].map((metadata) =>
+        contextualInfixCase(
+          `${metadata} depends on helper identity`,
+          originalInfixFactory.replace(
+            "  rules: {",
+            `  ${metadata}: ($) => [[$.__additive_operator]],\n  rules: {`,
+          ),
+        ),
+      ),
+      contextualInfixCase(
+        "rule-specific suppression",
+        originalInfixFactory.replace(
+          "    __additive_operator:",
+          "    // oxlint-disable-next-line rule-to-test/contextual-infix-boundary\n    __additive_operator:",
+        ),
+      ),
+    ],
+  });
+  mkdirSync(join(contextualInfixDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(contextualInfixDirectory, "grammar", "precedences", "binary.js"),
+    "export default ($) => [[$.__additive_operator, $.__unary_sign]];",
+  );
+  new RuleTester().run("contextual-infix-boundary", contextualInfixBoundary, {
+    valid: [
+      contextualInfixCase("external precedence depends on helper identity", originalInfixFactory),
+    ],
+    invalid: [],
+  });
+} finally {
+  rmSync(contextualInfixDirectory, { recursive: true, force: true });
 }
