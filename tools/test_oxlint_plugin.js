@@ -23,6 +23,7 @@ import {
   recursiveItemExtraction,
   recursiveChoiceItemExtraction,
   optionalBlockBodyExtraction,
+  nestedFieldBodyExtraction,
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
   sharedClosingDelimiterInline,
@@ -96,6 +97,138 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const nestedFieldBody =
+  'seq(field("object", $._qualified_identifier), optional($.__on_database_event_tail), choice($.__on_revert_action, $._statement))';
+const nestedFieldBodyFixture = (body = nestedFieldBody, head = "$.__on_database_event_head") =>
+  `export default () => ({ on_statement: ($) => seq(${head}, ${body}) });`;
+const originalNestedDatabaseEventSource = `export default ({ kw }) => ({
+  on_statement: ($) =>
+    prec.right(
+      seq(
+        $._kw_on,
+        choice(
+          seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
+          choice(
+            seq(
+              $.__on_database_event_head,
+              seq(
+                field("object", $._qualified_identifier),
+                optional($.__on_database_event_tail),
+                choice($.__on_revert_action, $._statement),
+              ),
+            ),
+            seq(
+              field("event", $._kw_delete),
+              $._kw_of,
+              field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
+              // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+              optional(alias(kw("ANYWHERE"), $.anywhere)),
+              $.__on_trigger_action,
+            ),
+          ),
+          seq(
+            field("event", $.__on_key_label),
+            field("function", alias($.__on_key_function, $.key_function)),
+            $._terminator,
+          ),
+          $.__on_web_notify_branch,
+        ),
+      ),
+    ),
+});`;
+new RuleTester().run("nested-field-body-extraction", nestedFieldBodyExtraction, {
+  valid: [
+    nestedFieldBodyFixture("$.__on_database_event_body"),
+    nestedFieldBodyFixture(undefined, "$.head"),
+    nestedFieldBodyFixture(undefined, 'kw("ON")'),
+    nestedFieldBodyFixture(
+      nestedFieldBody.replace(
+        'field("object", $._qualified_identifier)',
+        "$._qualified_identifier",
+      ),
+    ),
+    nestedFieldBodyFixture(nestedFieldBody.replace('field("object",', "field(name,")),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$._qualified_identifier", "$._kw_on")),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$._qualified_identifier", "$.on_statement")),
+    nestedFieldBodyFixture(
+      nestedFieldBody.replace("$._qualified_identifier", "optional($.identifier)"),
+    ),
+    nestedFieldBodyFixture(
+      nestedFieldBody.replace("optional($.__on_database_event_tail)", "$.__on_database_event_tail"),
+    ),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$.__on_database_event_tail", "$.options")),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$.__on_revert_action", "$.revert")),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$._statement", "$.statement")),
+    nestedFieldBodyFixture(
+      nestedFieldBody.replace(
+        "$.__on_revert_action, $._statement",
+        "$._statement, $.__on_revert_action",
+      ),
+    ),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$._statement)", "$._statement, $.other)")),
+    nestedFieldBodyFixture(nestedFieldBody.replace("$.__on_database_event_tail", "dynamic($)")),
+    nestedFieldBodyFixture(`prec.right(${nestedFieldBody})`),
+    nestedFieldBodyFixture().replace(
+      "seq($.__on_database_event_head,",
+      "seq($.marker, $.__on_database_event_head,",
+    ),
+    ...["token", "token.immediate", "prec.dynamic", "alias", "field"].map((wrapper) =>
+      nestedFieldBodyFixture()
+        .replace(
+          "=> seq(",
+          `=> ${wrapper}(${wrapper === "prec.dynamic" ? "1, " : wrapper === "field" ? '\"body\", ' : ""}seq(`,
+        )
+        .replace(")) });", `))${wrapper === "alias" ? ", $.body" : ""}) });`),
+    ),
+    nestedFieldBodyFixture()
+      .replace("=> seq(", "=> prec.right(priority, seq(")
+      .replace(")) });", "))) });"),
+    nestedFieldBodyFixture().replace(
+      "on_statement:",
+      "// oxlint-disable-next-line rule-to-test/nested-field-body-extraction\non_statement:",
+    ),
+    nestedFieldBodyFixture().replace(
+      nestedFieldBody,
+      `\n// oxlint-disable-next-line rule-to-test/nested-field-body-extraction\n${nestedFieldBody}`,
+    ),
+    `const value = seq($.__head, ${nestedFieldBody});`,
+  ],
+  invalid: [
+    {
+      name: "original ON database event branch",
+      code: originalNestedDatabaseEventSource,
+      errors: [{ message: /object-led body.*private non-empty body helper/ }],
+    },
+    { code: nestedFieldBodyFixture(), errors: [{ message: /option order, action alternatives/ }] },
+    {
+      name: "other field and private rule names",
+      code: nestedFieldBodyFixture()
+        .replaceAll("object", "record")
+        .replaceAll("__on_database_event", "__trigger")
+        .replaceAll("__on_revert_action", "__trigger_special_action"),
+      errors: [{ message: /record-led body/ }],
+    },
+    {
+      code: nestedFieldBodyFixture()
+        .replace("seq($.__on_database_event_head,", "seq($.marker, seq($.__on_database_event_head,")
+        .replace(")) });", "))) });"),
+      errors: [{ message: /statement action choice/ }],
+    },
+    {
+      code: nestedFieldBodyFixture()
+        .replace("=> seq(", "=> prec.right(seq(")
+        .replace(")) });", "))) });"),
+      errors: [{ message: /all surrounding precedence/ }],
+    },
+    {
+      code: nestedFieldBodyFixture()
+        .replace("=> seq(", "=> prec(2, seq(")
+        .replace(")) });", "))) });"),
+      errors: [{ message: /validate complete trees/ }],
+    },
+  ],
+});
 
 const optionalPrefixHeadFixture = (
   prefix = "optional($.__modifier)",

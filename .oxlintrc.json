@@ -91,6 +91,7 @@
         "tree-sitter-optimize/non-empty-tail-extraction": "warn",
         "tree-sitter-optimize/optional-body-extraction": "warn",
         "tree-sitter-optimize/optional-block-body-extraction": "warn",
+        "tree-sitter-optimize/nested-field-body-extraction": "warn",
         "tree-sitter-optimize/prefix-extraction": "warn",
         "tree-sitter-optimize/single-use-choice": "warn",
         "tree-sitter-optimize/single-use-shared-choice-inline": "warn",
