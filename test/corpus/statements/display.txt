@@ -617,6 +617,34 @@ DISPLAY "label" x 1 WITH BROWSE b1.
     browse: (identifier)))
 
 ================================================================================
+DISPLAY - MENU identifier aggregates and widget qualification
+================================================================================
+
+DISPLAY menu (TOTAL).
+DISPLAY x IN MENU myMenu.
+DISPLAY x IN MENU {&MENU-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier)
+      (aggregate_phrase
+        operation: (aggregate_operation))))
+  (display_statement
+    (field
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier))))
+  (display_statement
+    (field
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (preprocessor_name
+          (identifier))))))
+
+================================================================================
 DISPLAY - bare SKIP between fields and function calls
 ================================================================================
 

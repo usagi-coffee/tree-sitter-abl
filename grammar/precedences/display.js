@@ -36,5 +36,5 @@ export default ($) => [
   [$.frame_phrase, $.identifier],
   // Purpose: treat MENU as identifier in display fields, not widget keyword.
   // Example: DISPLAY menu.
-  [$.__display_keyword_identifier, $._widgets],
+  ["display_menu_identifier", $._widgets],
 ];
