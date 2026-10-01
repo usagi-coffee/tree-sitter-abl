@@ -97,7 +97,14 @@ export default ({ kw }) => ({
         choice(
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           choice(
-            seq($.__on_database_event_head, $.__on_database_event_action),
+            seq(
+              $.__on_database_event_head,
+              seq(
+                field("object", $._qualified_identifier),
+                optional($.__on_database_event_tail),
+                choice($.__on_revert_action, $._statement),
+              ),
+            ),
             seq(
               field("event", $._kw_delete),
               $._kw_of,
@@ -138,12 +145,6 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
-  __on_database_event_action: ($) =>
-    seq(
-      field("object", $._qualified_identifier),
-      optional($.__on_database_event_tail),
-      choice($.__on_revert_action, $._statement),
-    ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_database_event_tail: ($) =>
     choice(
