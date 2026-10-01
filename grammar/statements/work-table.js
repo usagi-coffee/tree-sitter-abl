@@ -1,6 +1,8 @@
 export default ({ kw }) => ({
   work_table_definition: ($) => seq($.__work_table_prefix, $._terminator),
 
+  // Retain this declaration boundary to limit specialization of the shared table body.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __work_table_prefix: ($) => seq($._define_scope_prefix, kw("WORK-TABLE"), $._work_table_body),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
