@@ -1,6 +1,8 @@
 export default ({ kw }) => ({
   frame_definition: ($) => seq($.__frame_prefix, $._terminator),
 
+  // Retain this declaration boundary to limit specialization of the frame body.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __frame_prefix: ($) =>
     seq(
       $._define_scope_prefix,
