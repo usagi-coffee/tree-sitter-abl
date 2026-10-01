@@ -97,23 +97,14 @@ export default ({ kw }) => ({
         choice(
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           choice(
+            seq($.__on_database_event_head, $.__on_database_event_action),
             seq(
               field("event", $._kw_delete),
               $._kw_of,
-              choice(
-                $.__on_database_event_action,
-                seq(
-                  field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
-                  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-                  optional(alias(kw("ANYWHERE"), $.anywhere)),
-                  $.__on_trigger_action,
-                ),
-              ),
-            ),
-            seq(
-              field("event", choice($._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
-              $._kw_of,
-              $.__on_database_event_action,
+              field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
+              // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+              optional(alias(kw("ANYWHERE"), $.anywhere)),
+              $.__on_trigger_action,
             ),
           ),
           seq(
@@ -124,6 +115,11 @@ export default ({ kw }) => ({
           $.__on_web_notify_branch,
         ),
       ),
+    ),
+  __on_database_event_head: ($) =>
+    seq(
+      field("event", choice($._kw_delete, $._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
+      $._kw_of,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event_target: ($) =>

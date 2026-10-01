@@ -661,3 +661,90 @@ ON "F4" OF hb PERSISTENT RUN chx IN THIS-PROCEDURE.
     procedure: (identifier)
     (in_phrase
       context: (identifier))))
+
+================================================================================
+ON - database event heads preserve DELETE widget and event-list alternatives
+================================================================================
+
+ON DELETE OF Customer REVERT.
+ON CREATE OF Customer REVERT.
+ON FIND OF Customer OVERRIDE REVERT.
+ON WRITE OF Customer NEW newCustomer OLD oldCustomer OVERRIDE REVERT.
+ON ASSIGN OF Customer.Name OLD VALUE oldName REVERT.
+ON DELETE OF FRAME F1 ANYWHERE DO: END.
+ON DELETE OF BROWSE {&BROWSE-NAME} ANYWHERE DO: END.
+ON DELETE OF MENU main ANYWHERE REVERT.
+ON DELETE OF SUB-MENU child REVERT.
+ON WINDOW-CLOSE, ENDKEY OF {&WINDOW-NAME} ANYWHERE DO: END.
+ON CHOOSE OF btn1 OR LEAVE OF btn2 ANYWHERE REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (revert))
+  (on_statement
+    object: (identifier)
+    (revert))
+  (on_statement
+    object: (identifier)
+    (override)
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (override)
+    (revert))
+  (on_statement
+    object: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (referencing_phrase
+      old_field: (identifier))
+    (revert))
+  (on_statement
+    widget: (widget_phrase
+      frame: (identifier))
+    (anywhere)
+    (do_statement
+      (body)))
+  (on_statement
+    widget: (widget_phrase
+      browse: (preprocessor_name
+        (identifier)))
+    (anywhere)
+    (do_statement
+      (body)))
+  (on_statement
+    widget: (widget_phrase
+      menu: (identifier))
+    (anywhere)
+    (revert))
+  (on_statement
+    widget: (widget_phrase
+      menu: (identifier))
+    (revert))
+  (on_statement
+    event: (identifier)
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (preprocessor_name
+          (identifier))))
+    (anywhere)
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    (revert)))
