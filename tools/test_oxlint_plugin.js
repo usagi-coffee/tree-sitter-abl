@@ -18,6 +18,7 @@ import {
   sharedSymbolAliasChoiceInline,
   inlineDispatcherBoundary,
   inlineValuedChoiceBoundary,
+  inlineLiteralChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -6776,6 +6777,110 @@ new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
     },
   ],
 });
+
+const originalFormatScalarChoice = `choice(
+  $.string_literal,
+  $.number_literal,
+  alias($._signed_number_literal, $.number_literal),
+  $.boolean_literal,
+  $.null_literal,
+)`;
+const literalBoundaryFixture = (
+  body = originalFormatScalarChoice,
+  name = "__format_radio_set_value",
+  inline = true,
+) =>
+  `export default grammar({ inline: ($) => [${inline ? `$.${name}` : ""}], rules: { ${name}: ($) => ${body} } });`;
+new RuleTester().run("inline-literal-choice-boundary", inlineLiteralChoiceBoundary, {
+  valid: [
+    literalBoundaryFixture(undefined, undefined, false),
+    literalBoundaryFixture(undefined, "scalar_value"),
+    literalBoundaryFixture("choice($.string_literal, $.number_literal, $.boolean_literal)"),
+    literalBoundaryFixture(
+      "choice($.string_literal, alias($._signed_number_literal, $.number_literal))",
+    ),
+    literalBoundaryFixture(
+      "choice($.a_literal, $.b_literal, $.c_literal, $.d_literal, $.e_literal, $.f_literal, $.g_literal, alias($._signed_literal, $.number_literal))",
+    ),
+    literalBoundaryFixture(originalFormatScalarChoice.replace("$.null_literal", "$.identifier")),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$._signed_number_literal", "$.signed_number_literal"),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$._signed_number_literal", "token(/-?[0-9]+/)"),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$._signed_number_literal", '$["_signed_number_literal"]'),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$.number_literal)", "$._number_literal)"),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$.number_literal)", '"number_literal")'),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$.boolean_literal", "prec.dynamic(1, $.boolean_literal)"),
+    ),
+    literalBoundaryFixture(
+      originalFormatScalarChoice.replace("$.boolean_literal", 'field("value", $.boolean_literal)'),
+    ),
+    literalBoundaryFixture().replace(
+      "__format_radio_set_value: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-literal-choice-boundary\n__format_radio_set_value: ($)",
+    ),
+    literalBoundaryFixture().replace(
+      "=> choice(",
+      "=>\n// oxlint-disable-next-line rule-to-test/inline-literal-choice-boundary\nchoice(",
+    ),
+    `const unrelated = ${originalFormatScalarChoice};`,
+  ],
+  invalid: [
+    {
+      code: literalBoundaryFixture(),
+      errors: [{ message: /__format_radio_set_value expands a literal-node choice/ }],
+    },
+    {
+      code: literalBoundaryFixture(undefined, "_scalar_value"),
+      errors: [{ message: /compare action savings against state and byte costs/ }],
+    },
+    {
+      code: literalBoundaryFixture(
+        "choice($.string_literal, $.number_literal, alias($._signed_number_literal, $.number_literal))",
+      ),
+      errors: [{ message: /Preserve literal aliases, branch order and caller fields/ }],
+    },
+  ],
+});
+const literalBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-literal-boundary-lint-"));
+try {
+  writeFileSync(
+    join(literalBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$.__format_radio_set_value], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-literal-choice-boundary cross-file metadata",
+    inlineLiteralChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: literalBoundaryDirectory,
+          filename: join(literalBoundaryDirectory, "grammar", "phrases", "format.js"),
+          code: `export default () => ({ __other_value: ($) => ${originalFormatScalarChoice} });`,
+        },
+      ],
+      invalid: [
+        {
+          cwd: literalBoundaryDirectory,
+          filename: join(literalBoundaryDirectory, "grammar", "phrases", "format.js"),
+          code: `export default () => ({ __format_radio_set_value: ($) => ${originalFormatScalarChoice} });`,
+          errors: [{ message: /retain a hidden scalar boundary/ }],
+        },
+      ],
+    },
+  );
+} finally {
+  rmSync(literalBoundaryDirectory, { recursive: true, force: true });
+}
 
 const valuedInlineChoice =
   'choice($._as_like, seq($._kw_bgcolor, field("bgcolor", $._expression)), $._colon_to, seq(kw("COLUMN-LABEL"), field("column_label", $._expression)), seq($._kw_dcolor, field("dcolor", $._expression)), $._format, $._label, $._validate)';

@@ -30,6 +30,7 @@
         "tree-sitter-optimize/shared-symbol-alias-choice-inline": "warn",
         "tree-sitter-optimize/inline-dispatcher-boundary": "warn",
         "tree-sitter-optimize/inline-valued-choice-boundary": "warn",
+        "tree-sitter-optimize/inline-literal-choice-boundary": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
         "tree-sitter-optimize/recursive-item-inline": "warn",
