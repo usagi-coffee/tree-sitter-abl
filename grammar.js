@@ -240,6 +240,7 @@ export default grammar({
     $.__temp_table_like_name,
     $.__browse_flag_option,
     $.__browse_option_expression,
+    $.__class_property_accessor_modifier,
     $.__compile_page_size_option,
     $.__compile_page_width_option,
     $.__prompt_for_font_option,
