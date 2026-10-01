@@ -1,8 +1,7 @@
 export default ({ kw }) => ({
   buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
 
-  __buffer_prefix: ($) =>
-    seq($._kw_define, optional($._buffer_query_modifier), $._kw_buffer, $.__buffer_body),
+  __buffer_prefix: ($) => seq($._define_buffer_query_prefix, $._kw_buffer, $.__buffer_body),
 
   __buffer_body: ($) =>
     seq(

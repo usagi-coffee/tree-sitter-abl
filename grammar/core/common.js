@@ -164,6 +164,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq($._kw_define, optional(alias(kw("PRIVATE"), $.access_modifier))),
   _define_scope_prefix: ($) => seq($._kw_define, optional($._definition_scope_modifier)),
+  _define_buffer_query_prefix: ($) => seq($._kw_define, optional($._buffer_query_modifier)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _definition_scope_modifier: ($) =>
     choice(
