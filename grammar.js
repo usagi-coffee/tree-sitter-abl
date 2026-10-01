@@ -217,7 +217,6 @@ export default grammar({
     $._generic_type_arguments_tail,
     $._simple_type_name,
     $._identifier_or_string_literal,
-    $._as_like,
     $._as_type_name_phrase,
     $.__additive_operator,
     $._window_handle,
