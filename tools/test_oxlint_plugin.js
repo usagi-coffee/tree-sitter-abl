@@ -19,6 +19,7 @@ import {
   inlineDispatcherBoundary,
   inlineValuedChoiceBoundary,
   inlineLiteralChoiceBoundary,
+  inlinePrecedenceValuedChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -6777,6 +6778,140 @@ new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
     },
   ],
 });
+
+const originalColorFontChoice = `choice(
+  seq($._kw_bgcolor, field("bgcolor", $._expression)),
+  seq($._kw_dcolor, field("dcolor", $._expression)),
+  seq($._kw_fgcolor, field("fgcolor", $._expression)),
+  seq($._kw_font, field("font", $._expression)),
+  seq($._kw_pfcolor, field("pfcolor", $._expression)),
+)`;
+const precedenceValuedChoiceFixture = (
+  body = `prec("color_font_value", ${originalColorFontChoice})`,
+  name = "_color_font_option",
+  inline = true,
+) =>
+  `export default grammar({ inline: ($) => [${inline ? `$.${name}` : ""}], rules: { ${name}: ($) => ${body} } });`;
+new RuleTester().run(
+  "inline-precedence-valued-choice-boundary",
+  inlinePrecedenceValuedChoiceBoundary,
+  {
+    valid: [
+      precedenceValuedChoiceFixture(undefined, undefined, false),
+      precedenceValuedChoiceFixture(undefined, "color_font_option"),
+      precedenceValuedChoiceFixture(originalColorFontChoice),
+      precedenceValuedChoiceFixture(`prec.dynamic(1, ${originalColorFontChoice})`),
+      precedenceValuedChoiceFixture(`prec(priority, ${originalColorFontChoice})`),
+      precedenceValuedChoiceFixture(`prec($.priority, ${originalColorFontChoice})`),
+      precedenceValuedChoiceFixture(`prec(${originalColorFontChoice})`),
+      precedenceValuedChoiceFixture(`prec.right(1, 2, ${originalColorFontChoice})`),
+      precedenceValuedChoiceFixture(`prec("value", prec.right(${originalColorFontChoice}))`),
+      precedenceValuedChoiceFixture(
+        'prec("value", choice(seq($._kw_bgcolor, field("bgcolor", $.value)), seq($._kw_font, field("font", $.value))))',
+      ),
+      precedenceValuedChoiceFixture('prec("value", choice(...options))'),
+      precedenceValuedChoiceFixture(
+        `prec("value", choice(${Array.from({ length: 9 }, (_, index) => `seq(kw("OPTION${index}"), field("value${index}", $.value))`).join(", ")}))`,
+      ),
+      ...[
+        "$._other",
+        'optional(seq($._kw_font, field("font", $._expression)))',
+        'seq($.identifier, field("font", $._expression))',
+        'seq(kw(keyword), field("font", $._expression))',
+        'seq(kw("FONT", options), field("font", $._expression))',
+        'seq(token(/FONT/i), field("font", $._expression))',
+        "seq($._kw_font, field(name, $._expression))",
+        'seq($._kw_font, field("font", $.number_literal))',
+        'seq($._kw_font, field("font", $._color_font_option))',
+        'seq($._kw_font, field("font", alias($._expression, $.value)))',
+        'seq($._kw_font, field("font", $["_expression"]))',
+        'seq($._kw_font, field("font", $._expression), optional($.flag))',
+      ].map((branch) =>
+        precedenceValuedChoiceFixture(undefined).replace(
+          'seq($._kw_font, field("font", $._expression))',
+          branch,
+        ),
+      ),
+      precedenceValuedChoiceFixture().replace(
+        "_color_font_option: ($)",
+        "// oxlint-disable-next-line rule-to-test/inline-precedence-valued-choice-boundary\n_color_font_option: ($)",
+      ),
+      precedenceValuedChoiceFixture().replace(
+        '=> prec("color_font_value",',
+        '=>\n// oxlint-disable-next-line rule-to-test/inline-precedence-valued-choice-boundary\nprec("color_font_value",',
+      ),
+      precedenceValuedChoiceFixture().replace(
+        'prec("color_font_value", choice(',
+        'prec("color_font_value",\n// oxlint-disable-next-line rule-to-test/inline-precedence-valued-choice-boundary\nchoice(',
+      ),
+      `const unrelated = { _color_font_option: ($) => prec("color_font_value", ${originalColorFontChoice}) };`,
+    ],
+    invalid: [
+      {
+        name: "original shared color/font option retains expression precedence and all five fields",
+        code: precedenceValuedChoiceFixture(),
+        errors: [
+          { message: /_color_font_option expands a precedence-wrapped choice of keyword fields/ },
+        ],
+      },
+      {
+        name: "private options with static keyword arguments and named right precedence",
+        code: precedenceValuedChoiceFixture(
+          'prec.right("option_value", choice(seq(kw("WIDTH", {offset: 3}), field("width", $.value)), seq(kw("HEIGHT"), field("height", $.value)), seq(kw("SIZE"), field("size", $.value))))',
+          "__dimension_options",
+        ),
+        errors: [
+          {
+            message: /Preserve the complete precedence wrapper, keywords, fields and branch order/,
+          },
+        ],
+      },
+      {
+        name: "numeric left precedence",
+        code: precedenceValuedChoiceFixture(`prec.left(2, ${originalColorFontChoice})`),
+        errors: [{ message: /compare action savings against state and byte costs/ }],
+      },
+      {
+        name: "implicit right precedence",
+        code: precedenceValuedChoiceFixture(`prec.right(${originalColorFontChoice})`),
+        errors: [{ message: /retain a hidden valued-option boundary/ }],
+      },
+    ],
+  },
+);
+const precedenceValuedChoiceDirectory = mkdtempSync(
+  join(tmpdir(), "abl-precedence-valued-boundary-"),
+);
+try {
+  writeFileSync(
+    join(precedenceValuedChoiceDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._color_font_option], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-precedence-valued-choice-boundary cross-file metadata",
+    inlinePrecedenceValuedChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: precedenceValuedChoiceDirectory,
+          filename: join(precedenceValuedChoiceDirectory, "grammar", "core", "common.js"),
+          code: `export default () => ({ _other_options: ($) => prec("value", ${originalColorFontChoice}) });`,
+        },
+      ],
+      invalid: [
+        {
+          name: "original common module finds its inline entry in the root grammar",
+          cwd: precedenceValuedChoiceDirectory,
+          filename: join(precedenceValuedChoiceDirectory, "grammar", "core", "common.js"),
+          code: `export default ({ kw }) => ({ _color_font_option: ($) => prec("color_font_value", ${originalColorFontChoice}) });`,
+          errors: [{ message: /retain a hidden valued-option boundary/ }],
+        },
+      ],
+    },
+  );
+} finally {
+  rmSync(precedenceValuedChoiceDirectory, { recursive: true, force: true });
+}
 
 const originalFormatScalarChoice = `choice(
   $.string_literal,
