@@ -189,7 +189,7 @@ export default ({ kw }) => ({
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,
-      // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
+      // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction, tree-sitter-optimize/shared-choice
       seq($.__class_property_accessor_body, optional(choice($._kw_get, $._kw_set)), $._terminator),
     ),
 
