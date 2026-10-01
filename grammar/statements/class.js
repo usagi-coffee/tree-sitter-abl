@@ -208,6 +208,7 @@ export default ({ kw }) => ({
       alias(kw("PUBLIC"), $.access_modifier),
       $.preprocessor_name,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
