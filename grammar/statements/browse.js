@@ -1,6 +1,8 @@
 export default ({ kw }) => ({
   browse_definition: ($) => seq($.__browse_prefix, $._terminator),
 
+  // Retain this declaration boundary to limit specialization of the browse body.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __browse_prefix: ($) => seq($._define_scope_prefix, $._kw_browse, $.__browse_body),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/sequence-subset
