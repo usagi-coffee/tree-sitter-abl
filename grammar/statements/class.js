@@ -160,6 +160,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __class_property_accessor_head: ($) =>
     seq(optional($.__class_property_accessor_modifier), choice($._kw_get, $._kw_set)),
 
