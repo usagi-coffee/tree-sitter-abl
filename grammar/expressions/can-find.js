@@ -73,6 +73,6 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
   __record_query_lock_phrase: ($) => kw("NO-LOCK"),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/multi-use-private-keyword-field-inline
   __record_query_use_index: ($) => seq($._kw_use_index, field("index", $._qualified_identifier)),
 });
