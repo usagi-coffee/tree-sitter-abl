@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
   privatePrecedenceSymbolInline,
   optionalSelectorBodyInline,
@@ -91,6 +92,92 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const privateKeywordFieldFixture = (
+  body = 'seq($._kw_page_size, field("page_size", $._expression))',
+  uses = "choice(seq($.__page_size, optional($.width)), seq($.width, optional($.__page_size)))",
+  metadata = "",
+) => `export default grammar({
+  ${metadata}
+  rules: {
+    __page_size: ($) => ${body},
+    item: ($) => ${uses},
+  },
+});`;
+new RuleTester().run("multi-use-private-keyword-field-inline", multiUsePrivateKeywordFieldInline, {
+  valid: [
+    privateKeywordFieldFixture().replaceAll("__page_size", "page_size"),
+    privateKeywordFieldFixture().replaceAll("__page_size", "_page_size"),
+    privateKeywordFieldFixture(undefined, "$.__page_size"),
+    privateKeywordFieldFixture(undefined, "$.other"),
+    privateKeywordFieldFixture('seq($._expression, field("page_size", $._expression))'),
+    privateKeywordFieldFixture('seq(kw(keyword), field("page_size", $._expression))'),
+    privateKeywordFieldFixture('seq(kw("PAGE-SIZE", options), field("page_size", $._expression))'),
+    privateKeywordFieldFixture('seq($._kw_page_size, optional(field("page_size", $._expression)))'),
+    privateKeywordFieldFixture('seq($._kw_page_size, field("page_size", choice($.a, $.b)))'),
+    privateKeywordFieldFixture("seq($._kw_page_size, field(name, $._expression))"),
+    privateKeywordFieldFixture('seq($._kw_page_size, field("page_size", $.__page_size))'),
+    privateKeywordFieldFixture(
+      'prec.right(seq($._kw_page_size, field("page_size", $._expression)))',
+    ),
+    ...["alias", "field", "token", "token.immediate", "prec.dynamic", "custom"].map((wrapper) =>
+      privateKeywordFieldFixture(
+        undefined,
+        `seq($.__page_size, ${wrapper}($.__page_size, $.value))`,
+      ),
+    ),
+    privateKeywordFieldFixture(undefined, 'seq($.__page_size, $["__page_size"])'),
+    ...["inline", "conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+      privateKeywordFieldFixture(undefined, undefined, `${metadata}: ($) => [$.__page_size],`),
+    ),
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/multi-use-private-keyword-field-inline
+      __page_size: ($) => seq($._kw_page_size, field("page_size", $._expression)),
+      item: ($) => seq($.__page_size, $.__page_size),
+    });`,
+  ],
+  invalid: [
+    {
+      code: privateKeywordFieldFixture(),
+      errors: [{ message: /__page_size has 2 unaliased local uses/ }],
+    },
+    {
+      code: privateKeywordFieldFixture('seq(kw("PAGE-SIZE"), field("page_size", $._expression))'),
+      errors: [{ message: /private keyword-plus-field sequence/ }],
+    },
+    {
+      code: `export default () => ({
+        __page_size: ($) => seq($._kw_page_size, field("page_size", $._expression)),
+        first: ($) => seq("A", $.__page_size),
+        second: ($) => seq("B", optional($.__page_size)),
+      });`,
+      errors: [{ message: /__page_size has 2 unaliased local uses/ }],
+    },
+  ],
+});
+const privateKeywordFieldMetadata = mkdtempSync(join(tmpdir(), "abl-private-keyword-field-"));
+try {
+  writeFileSync(
+    join(privateKeywordFieldMetadata, "grammar.js"),
+    "export default grammar({ inline: ($) => [$.__page_size], rules: {} });",
+  );
+  new RuleTester().run(
+    "multi-use-private-keyword-field-inline cross-file metadata",
+    multiUsePrivateKeywordFieldInline,
+    {
+      valid: [
+        {
+          cwd: privateKeywordFieldMetadata,
+          filename: join(privateKeywordFieldMetadata, "grammar", "compile.js"),
+          code: privateKeywordFieldFixture(),
+        },
+      ],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(privateKeywordFieldMetadata, { recursive: true, force: true });
+}
 
 const keywordAliasGrammar = (
   body = "alias($._kw_menu, $.identifier)",
