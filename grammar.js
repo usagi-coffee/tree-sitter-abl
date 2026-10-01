@@ -231,7 +231,6 @@ export default grammar({
     $._format_validate,
     $._collate_body,
     $._identifier_or_access,
-    $.__format_radio_set_value,
     $._format_format,
     $._color_font_option,
     $._object_access_handle_prefix,
