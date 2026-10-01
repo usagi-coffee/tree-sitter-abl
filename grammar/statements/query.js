@@ -1,6 +1,8 @@
 export default ({ kw }) => ({
   query_definition: ($) => seq($.__query_prefix, $._terminator),
 
+  // Retain this declaration boundary to limit specialization of the query body.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __query_prefix: ($) => seq($._define_buffer_query_prefix, $._kw_query, $.__query_body),
 
   __query_body: ($) =>
