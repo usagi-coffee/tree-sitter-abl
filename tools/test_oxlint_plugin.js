@@ -16,6 +16,7 @@ import {
   choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
   inlineDispatcherBoundary,
+  inlineValuedChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -6501,6 +6502,104 @@ new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
     },
   ],
 });
+
+const valuedInlineChoice =
+  'choice($._as_like, seq($._kw_bgcolor, field("bgcolor", $._expression)), $._colon_to, seq(kw("COLUMN-LABEL"), field("column_label", $._expression)), seq($._kw_dcolor, field("dcolor", $._expression)), $._format, $._label, $._validate)';
+const originalFormatFieldOptions = `choice(
+  $._as_like,
+  seq($._kw_bgcolor, field("bgcolor", $.__format_expression)),
+  $._format_colon_to,
+  seq(kw("COLUMN-LABEL"), field("column_label", $.__format_expression)),
+  seq($._kw_dcolor, field("dcolor", $.__format_expression)),
+  seq($._kw_fgcolor, field("fgcolor", $.__format_expression)),
+  seq($._kw_font, field("font", $.__format_expression)),
+  $._format_format,
+  seq($._kw_help, field("help", $.__format_expression)),
+  $._format_label,
+  seq($._kw_pfcolor, field("pfcolor", $.__format_expression)),
+  $._format_validate,
+  $._format_view_as,
+  seq($._kw_widget_id, field("widget_id", $.__format_expression)),
+)`;
+const valuedBoundaryFixture = (body = valuedInlineChoice, name = "_options", inline = true) =>
+  `export default grammar({ inline: ($) => [${inline ? `$.${name}` : ""}], rules: { ${name}: ($) => ${body} } });`;
+new RuleTester().run("inline-valued-choice-boundary", inlineValuedChoiceBoundary, {
+  valid: [
+    valuedBoundaryFixture(undefined, undefined, false),
+    valuedBoundaryFixture(originalFormatFieldOptions, "_format_field_option", false),
+    valuedBoundaryFixture(undefined, "options"),
+    valuedBoundaryFixture("choice($.a, $.b, $.c, $.d, $.e, $.f, $.g, $.h)"),
+    valuedBoundaryFixture(
+      'choice(seq(kw("VALUE"), field("value", $.value)), $.a, $.b, $.c, $.d, $.e, $.f, $.g)',
+    ),
+    valuedBoundaryFixture(valuedInlineChoice.replace(", $._validate", "")),
+    valuedBoundaryFixture(
+      valuedInlineChoice.replace(
+        'seq(kw("COLUMN-LABEL"), field("column_label", $._expression))',
+        'seq(kw(keyword), field("column_label", $._expression))',
+      ),
+    ),
+    valuedBoundaryFixture(
+      valuedInlineChoice.replace(
+        'seq(kw("COLUMN-LABEL"), field("column_label", $._expression))',
+        'seq(kw("COLUMN-LABEL"), optional(field("column_label", $._expression)))',
+      ),
+    ),
+    valuedBoundaryFixture(
+      valuedInlineChoice.replace("$._validate", 'token(seq("(", $.value, ")"))'),
+    ),
+    valuedBoundaryFixture(valuedInlineChoice.replace("$._validate", "prec.dynamic(1, $.value)")),
+    valuedBoundaryFixture(valuedInlineChoice.replace("$._validate", "prec(priority, $.value)")),
+    valuedBoundaryFixture().replace(
+      "_options: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-valued-choice-boundary\n_options: ($)",
+    ),
+    `const value = ${valuedInlineChoice};`,
+  ],
+  invalid: [
+    {
+      code: valuedBoundaryFixture(originalFormatFieldOptions, "_format_field_option"),
+      errors: [{ message: /_format_field_option mixes valued keyword clauses/ }],
+    },
+    { code: valuedBoundaryFixture(), errors: [{ message: /mixes valued keyword clauses/ }] },
+    {
+      code: valuedBoundaryFixture(
+        valuedInlineChoice.replace('kw("COLUMN-LABEL")', 'kw("COLUMN-LABEL", { offset: 6 })'),
+      ),
+      errors: [{ message: /field scope, alias and precedence/ }],
+    },
+    {
+      code: valuedBoundaryFixture(
+        valuedInlineChoice.replace("$._validate", "prec(1, alias($._validate, $.validate_phrase))"),
+      ),
+      errors: [{ message: /compare action counts against state and byte costs/ }],
+    },
+  ],
+});
+const valuedBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-valued-boundary-lint-"));
+try {
+  writeFileSync(
+    join(valuedBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._options], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-valued-choice-boundary cross-file metadata",
+    inlineValuedChoiceBoundary,
+    {
+      valid: [],
+      invalid: [
+        {
+          cwd: valuedBoundaryDirectory,
+          filename: join(valuedBoundaryDirectory, "grammar", "phrases", "format.js"),
+          code: `export default () => ({ _options: ($) => ${valuedInlineChoice} });`,
+          errors: [{ message: /hidden option boundary/ }],
+        },
+      ],
+    },
+  );
+} finally {
+  rmSync(valuedBoundaryDirectory, { recursive: true, force: true });
+}
 
 const broadInlineChoice =
   "choice(prec(-2, $.macro), prec(-1, $.name), $.a, $.b, $.c, $.d, $.e, alias($.include, $.reference))";
