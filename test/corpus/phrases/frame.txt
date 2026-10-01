@@ -1,4 +1,33 @@
 ================================================================================
+FRAME phrase - COLUMN keyword variants and value order
+================================================================================
+
+DEFINE FRAME singular WITH COLUMN 3.
+DEFINE FRAME plural WITH COLUMNS 4.
+DEFINE FRAME abbreviated WITH COL 5.
+DEFINE FRAME trailing WITH 6 COLUMN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      column: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      column: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      column: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      column: (number_literal))))
+
+================================================================================
 FRAME phrase
 ================================================================================
 

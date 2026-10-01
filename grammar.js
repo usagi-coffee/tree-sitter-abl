@@ -195,6 +195,7 @@ export default grammar({
     $.__frame_identifier,
     $._frame_name,
     $.__frame_color_value,
+    $.__frame_column_keyword,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
     $._table_handle_value,
