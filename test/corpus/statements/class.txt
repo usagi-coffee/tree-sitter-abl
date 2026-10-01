@@ -448,6 +448,43 @@ END CLASS.
     name: (identifier)))
 
 ================================================================================
+PROPERTY - paired accessor headers preserve modifiers and parameter bodies
+================================================================================
+
+CLASS Accessors:
+  DEFINE PUBLIC PROPERTY Value AS CHARACTER NO-UNDO
+    PROTECTED GET():
+      RETURN "value".
+    END GET.
+    PRIVATE SET(INPUT newValue AS CHARACTER):
+      Value = newValue.
+    END SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (access_modifier)
+      (return_statement
+        value: (string_literal))
+      (access_modifier)
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier)))))
+
+================================================================================
 PROPERTY - accessor with empty parentheses
 ================================================================================
 

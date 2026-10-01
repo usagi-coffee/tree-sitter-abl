@@ -153,22 +153,15 @@ export default ({ kw }) => ({
       $.__class_property_definition_prefix,
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1(
-        choice(
-          seq(
-            optional($.__class_property_accessor_modifier),
-            $._kw_get,
-            optional($.__class_property_accessor_parameters),
-            $.__class_property_accessor_tail,
-          ),
-          seq(
-            optional($.__class_property_accessor_modifier),
-            $._kw_set,
-            optional($.__class_property_accessor_parameters),
-            $.__class_property_accessor_tail,
-          ),
+        seq(
+          $.__class_property_accessor_head,
+          optional($.__class_property_accessor_parameters),
+          $.__class_property_accessor_tail,
         ),
       ),
     ),
+  __class_property_accessor_head: ($) =>
+    seq(optional($.__class_property_accessor_modifier), choice($._kw_get, $._kw_set)),
 
   __class_property_definition_prefix: ($) =>
     seq(
