@@ -232,7 +232,6 @@ export default grammar({
     $._collate_body,
     $._identifier_or_access,
     $._format_format,
-    $._color_font_option,
     $._object_access_handle_prefix,
     $._object_access_widget_prefix,
     $._format_colon_to,
