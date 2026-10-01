@@ -887,3 +887,46 @@ DEFINE OUTPUT PARAMETER prubrique-pxr AS DECIMAL DECIMALS 4 EXTENT 3 NO-UNDO.
     (extent_phrase
       size: (number_literal))
     (no_undo)))
+
+================================================================================
+TABLE-HANDLE name clause - parameter and routine field scopes
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE-HANDLE source BY-VALUE.
+FUNCTION copyTable RETURNS LOGICAL (INPUT TABLE-HANDLE source BY-VALUE, OUTPUT TABLE-HANDLE result BIND) FORWARD.
+CLASS Example:
+  METHOD PUBLIC VOID Copy(INPUT TABLE-HANDLE source BY-VALUE, OUTPUT TABLE-HANDLE result BIND):
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table_handle: (identifier)
+        (by_value))
+      (parameter
+        table_handle: (identifier)
+        (bind)))
+    (forward))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          table_handle: (identifier)
+          (by_value))
+        (parameter
+          table_handle: (identifier)
+          (bind)))
+      (body))))

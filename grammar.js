@@ -198,7 +198,6 @@ export default grammar({
     $.__frame_column_keyword,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
-    $._table_handle_value,
     $._parenthesized_value,
     $._display_space_phrase,
     $._serialization_modifier,
