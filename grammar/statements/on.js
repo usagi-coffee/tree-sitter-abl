@@ -116,6 +116,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // The head boundary reduces specialization across database-event and DELETE widget branches.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-choice-sequence
   __on_database_event_head: ($) =>
     seq(
       field("event", choice($._kw_delete, $._kw_create, $._kw_find, $._kw_write, $._kw_assign)),
