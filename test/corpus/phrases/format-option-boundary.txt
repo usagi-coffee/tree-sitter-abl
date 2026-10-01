@@ -1,0 +1,50 @@
+================================================================================
+FORMAT - valued option fields across DISPLAY and FRAME contexts
+================================================================================
+
+DISPLAY x AS CHARACTER BGCOLOR 1 COLON 12 COLUMN-LABEL "C" DCOLOR 2 FGCOLOR 3 FONT 4 FORMAT "x(8)" HELP "H" LABEL "L" PFCOLOR 5 VALIDATE(x > 0, "Bad") VIEW-AS TEXT WIDGET-ID 7.
+DEFINE FRAME f x AS CHARACTER BGCOLOR 1 COLON 12 COLUMN-LABEL "C" DCOLOR 2 FGCOLOR 3 FONT 4 FORMAT "x(8)" HELP "H" LABEL "L" PFCOLOR 5 VALIDATE(x > 0, "Bad") VIEW-AS TEXT WIDGET-ID 7.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      type: (identifier)
+      bgcolor: (number_literal)
+      colon: (number_literal)
+      column_label: (string_literal)
+      dcolor: (number_literal)
+      fgcolor: (number_literal)
+      font: (number_literal)
+      format: (string_literal)
+      help: (string_literal)
+      label: (string_literal)
+      pfcolor: (number_literal)
+      condition: (binary_expression
+        (identifier)
+        (number_literal))
+      message: (string_literal)
+      widget_id: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      type: (identifier)
+      bgcolor: (number_literal)
+      colon: (number_literal)
+      column_label: (string_literal)
+      dcolor: (number_literal)
+      fgcolor: (number_literal)
+      font: (number_literal)
+      format: (string_literal)
+      help: (string_literal)
+      label: (string_literal)
+      pfcolor: (number_literal)
+      condition: (binary_expression
+        (identifier)
+        (number_literal))
+      message: (string_literal)
+      widget_id: (number_literal))))
