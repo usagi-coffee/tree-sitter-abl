@@ -34,6 +34,7 @@
         "tree-sitter-optimize/inline-literal-choice-boundary": "warn",
         "tree-sitter-optimize/inline-precedence-valued-choice-boundary": "warn",
         "tree-sitter-optimize/inline-clause-choice-boundary": "warn",
+        "tree-sitter-optimize/inline-keyword-name-boundary": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
         "tree-sitter-optimize/recursive-item-inline": "warn",

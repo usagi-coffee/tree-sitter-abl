@@ -22,6 +22,7 @@ import {
   inlineLiteralChoiceBoundary,
   inlinePrecedenceValuedChoiceBoundary,
   inlineClauseChoiceBoundary,
+  inlineKeywordNameBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -7679,4 +7680,169 @@ try {
   });
 } finally {
   rmSync(contextualInfixDirectory, { recursive: true, force: true });
+}
+
+const originalKeywordNameBody = 'seq($._kw_table_handle, field("table_handle", $.identifier))';
+const keywordNameBoundaryFixture = (
+  body = originalKeywordNameBody,
+  name = "_table_handle_value",
+  inline = true,
+  metadata = "",
+  extra = "",
+) => `export default grammar({
+  inline: ($) => [${inline ? `$.${name}` : ""}], ${metadata}
+  rules: { ${name}: ($) => ${body}, ${extra} }
+});`;
+new RuleTester().run("inline-keyword-name-boundary", inlineKeywordNameBoundary, {
+  valid: [
+    keywordNameBoundaryFixture(undefined, undefined, false),
+    keywordNameBoundaryFixture(undefined, "table_handle_value"),
+    keywordNameBoundaryFixture(`prec.right(${originalKeywordNameBody})`),
+    keywordNameBoundaryFixture(`prec("name_clause", ${originalKeywordNameBody})`),
+    keywordNameBoundaryFixture('seq($.identifier, field("name", $.identifier))'),
+    keywordNameBoundaryFixture('seq(kw(keyword), field("name", $.identifier))'),
+    keywordNameBoundaryFixture('seq(kw("NAME", options), field("name", $.identifier))'),
+    keywordNameBoundaryFixture('seq(token(/NAME/i), field("name", $.identifier))'),
+    keywordNameBoundaryFixture("seq($._kw_table_handle, field(label, $.identifier))"),
+    keywordNameBoundaryFixture('seq($._kw_table_handle, field("name", $._qualified_identifier))'),
+    keywordNameBoundaryFixture('seq($._kw_table_handle, field("name", $._expression))'),
+    keywordNameBoundaryFixture('seq($._kw_table_handle, field("name", $.number_literal))'),
+    keywordNameBoundaryFixture(
+      'seq($._kw_table_handle, field("name", alias($.identifier, $.name)))',
+    ),
+    keywordNameBoundaryFixture('seq($._kw_table_handle, optional(field("name", $.identifier)))'),
+    keywordNameBoundaryFixture(
+      'seq($._kw_table_handle, field("name", $.identifier), optional($.flag))',
+    ),
+    keywordNameBoundaryFixture('seq($._kw_table_handle, field("name", $["identifier"]))'),
+    keywordNameBoundaryFixture("seq(...parts)"),
+    keywordNameBoundaryFixture('field("name", $.identifier)'),
+    keywordNameBoundaryFixture('seq($._kw_self, field("name", $.identifier))', "_kw_self"),
+    ...["conflicts", "precedences", "supertypes", "externals", "word"].map((key) =>
+      keywordNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        `${key}: ($) => [[$._table_handle_value]],`,
+      ),
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      keywordNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        `root: ($) => ${wrapper}($._table_handle_value, $.name),`,
+      ),
+    ),
+    keywordNameBoundaryFixture(
+      undefined,
+      undefined,
+      true,
+      "",
+      'root: ($) => $["_table_handle_value"],',
+    ),
+    keywordNameBoundaryFixture().replace(
+      "_table_handle_value: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-keyword-name-boundary\n_table_handle_value: ($)",
+    ),
+    keywordNameBoundaryFixture().replace(
+      "=> seq(",
+      "=>\n// oxlint-disable-next-line rule-to-test/inline-keyword-name-boundary\nseq(",
+    ),
+    `const unrelated = { _table_handle_value: ($) => ${originalKeywordNameBody} };`,
+  ],
+  invalid: [
+    {
+      name: "original TABLE-HANDLE keyword and identifier field",
+      code: keywordNameBoundaryFixture(),
+      errors: [
+        { message: /_table_handle_value expands a keyword followed by an identifier field/ },
+      ],
+    },
+    {
+      name: "private keyword name clause retains static keyword options and caller fields",
+      code: keywordNameBoundaryFixture(
+        'seq(kw("NAME", {offset: 2}), field("target", $.identifier))',
+        "__local_name",
+        true,
+        "",
+        'root: ($) => field("clause", optional($.__local_name)),',
+      ),
+      errors: [{ message: /compare action savings against state and byte costs/ }],
+    },
+    {
+      name: "metadata-like comments and strings do not suppress a static rule",
+      code: `const note = "conflicts: ($) => [[$._table_handle_value]]";
+        // precedences: ($) => [[$._table_handle_value]]
+        ${keywordNameBoundaryFixture()}`,
+      errors: [{ message: /validate complete trees including error recovery/ }],
+    },
+  ],
+});
+const keywordNameBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-name-boundary-"));
+try {
+  const commonPath = join(keywordNameBoundaryDirectory, "grammar", "core", "common.js");
+  const originalModule = `export default ({ kw }) => ({
+    // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
+    _table_handle_value: ($) => ${originalKeywordNameBody},
+  });`;
+  writeFileSync(
+    join(keywordNameBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._table_handle_value], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-keyword-name-boundary cross-file inline",
+    inlineKeywordNameBoundary,
+    {
+      valid: [
+        {
+          cwd: keywordNameBoundaryDirectory,
+          filename: commonPath,
+          code: originalModule.replace("_table_handle_value:", "_other:"),
+        },
+      ],
+      invalid: [
+        {
+          cwd: keywordNameBoundaryDirectory,
+          filename: commonPath,
+          code: originalModule,
+          errors: [
+            { message: /_table_handle_value expands a keyword followed by an identifier field/ },
+          ],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(keywordNameBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._table_handle_value], conflicts: ($) => [[$._table_handle_value]], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-keyword-name-boundary cross-file metadata",
+    inlineKeywordNameBoundary,
+    {
+      valid: [{ cwd: keywordNameBoundaryDirectory, filename: commonPath, code: originalModule }],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(keywordNameBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._table_handle_value], rules: {} });",
+  );
+  mkdirSync(join(keywordNameBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordNameBoundaryDirectory, "grammar", "precedences", "names.js"),
+    "export default ($) => [[$.other, $._table_handle_value]];",
+  );
+  new RuleTester().run(
+    "inline-keyword-name-boundary precedence module",
+    inlineKeywordNameBoundary,
+    {
+      valid: [{ cwd: keywordNameBoundaryDirectory, filename: commonPath, code: originalModule }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordNameBoundaryDirectory, { recursive: true, force: true });
 }
