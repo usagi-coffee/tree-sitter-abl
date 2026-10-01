@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/precedence-keyword-alias-inline": "warn",
         "tree-sitter-optimize/private-precedence-symbol-inline": "warn",
         "tree-sitter-optimize/optional-selector-body-inline": "warn",
         "tree-sitter-optimize/intra-rule-shared-choice": "warn",

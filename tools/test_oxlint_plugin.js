@@ -1,10 +1,11 @@
-import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  precedenceKeywordAliasInline,
   privatePrecedenceSymbolInline,
   optionalSelectorBodyInline,
   intraRuleSharedChoice,
@@ -90,6 +91,128 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const keywordAliasGrammar = (
+  body = "alias($._kw_menu, $.identifier)",
+  use = "$.__keyword_id",
+) => `export default grammar({
+  precedences: ($) => [[$.__keyword_id, $._widgets]],
+  rules: {
+    __keyword_id: ($) => ${body},
+    item: ($) => seq("DISPLAY", ${use}),
+  },
+});`;
+new RuleTester().run("precedence-keyword-alias-inline", precedenceKeywordAliasInline, {
+  valid: [
+    keywordAliasGrammar().replace("[[$.__keyword_id, $._widgets]]", "[]"),
+    keywordAliasGrammar().replaceAll("__keyword_id", "keyword_id"),
+    keywordAliasGrammar().replaceAll("__keyword_id", "_keyword_id"),
+    keywordAliasGrammar("alias($.identifier, $.name)"),
+    keywordAliasGrammar("alias($.__lexical_token, $.identifier)"),
+    keywordAliasGrammar("alias(token(/MENU/i), $.identifier)"),
+    keywordAliasGrammar("alias($._kw_menu, $._private_target)"),
+    keywordAliasGrammar('prec("menu_identifier", alias($._kw_menu, $.identifier))'),
+    keywordAliasGrammar("alias(kw(keyword), $.identifier)"),
+    keywordAliasGrammar('alias(kw("MENU", options), $.identifier)'),
+    keywordAliasGrammar(undefined, "$.other"),
+    ...["alias", "token", "token.immediate", "prec.dynamic", "custom"].map((wrapper) =>
+      keywordAliasGrammar(
+        undefined,
+        `${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}$.__keyword_id${wrapper === "alias" ? ", $.value" : ""})`,
+      ),
+    ),
+    keywordAliasGrammar(undefined, '$["__keyword_id"]'),
+    keywordAliasGrammar(undefined, "$[selected]"),
+    keywordAliasGrammar(undefined, "prec.right(priority, $.__keyword_id)"),
+    ...["inline", "conflicts", "supertypes", "externals"].map((metadata) =>
+      keywordAliasGrammar().replace("rules:", `${metadata}: ($) => [$.__keyword_id], rules:`),
+    ),
+    keywordAliasGrammar().replace(
+      "__keyword_id:",
+      "// oxlint-disable-next-line rule-to-test/precedence-keyword-alias-inline\n__keyword_id:",
+    ),
+    keywordAliasGrammar().replace("export default grammar(", "const unrelated = custom("),
+  ],
+  invalid: [
+    {
+      name: "transfer the keyword-only ordering before inlining",
+      code: keywordAliasGrammar(),
+      errors: [
+        { message: /declared rule precedence.*transferring every ordering.*exact alias branch/ },
+      ],
+    },
+    {
+      name: "retain keyword abbreviation options and caller fields",
+      code: keywordAliasGrammar(
+        'alias(kw("MENU", { offset: 2 }), $.identifier)',
+        'field("name", optional($.__keyword_id))',
+      ),
+      errors: [{ message: /Preserve keyword options, aliases, caller fields/ }],
+    },
+    {
+      name: "report once for repeated uses and both directions of precedence",
+      code: keywordAliasGrammar(undefined, "choice($.__keyword_id, $.__keyword_id)").replace(
+        "[[$.__keyword_id, $._widgets]]",
+        "[[$.higher, $.__keyword_id], [$.__keyword_id, $._widgets]]",
+      ),
+      errors: [{ message: /2 local uses.*every ordering.*all competing rules/ }],
+    },
+  ],
+});
+
+const keywordAliasFixture = mkdtempSync(join(tmpdir(), "abl-keyword-alias-lint-"));
+try {
+  mkdirSync(join(keywordAliasFixture, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordAliasFixture, "grammar.js"),
+    `export default grammar({
+      inline: ($) => [$.__already_inline],
+      conflicts: ($) => [[$.__ambiguous, $.other]],
+      precedences: ($) => [[$.__root_ordered, $._widgets]],
+      rules: {},
+    });`,
+  );
+  writeFileSync(
+    join(keywordAliasFixture, "grammar", "precedences", "display.js"),
+    `// $.__commented is not an ordering.
+    /* $.__block_commented is not an ordering. */
+    const text = "$.__string";
+    const template = \`$.__template\`;
+    export default ($) => [
+      [$.__ordered, $._widgets],
+      [$.__already_inline, $._widgets],
+      [$.__ambiguous, $._widgets],
+    ];`,
+  );
+  const fixture = {
+    cwd: keywordAliasFixture,
+    filename: join(keywordAliasFixture, "grammar", "statements", "display.js"),
+  };
+  const externalAlias = (name) =>
+    `export default () => ({ ${name}: ($) => alias($._kw_menu, $.identifier), item: ($) => seq("DISPLAY", $.${name}) });`;
+  new RuleTester().run(
+    "precedence-keyword-alias-inline cross-file metadata",
+    precedenceKeywordAliasInline,
+    {
+      valid: [
+        "__already_inline",
+        "__ambiguous",
+        "__commented",
+        "__block_commented",
+        "__string",
+        "__template",
+        "__not_ordered",
+      ].map((name) => ({ ...fixture, code: externalAlias(name) })),
+      invalid: ["__ordered", "__root_ordered"].map((name) => ({
+        ...fixture,
+        code: externalAlias(name),
+        errors: [{ message: /declared rule precedence.*named precedence.*grammar.inline/ }],
+      })),
+    },
+  );
+} finally {
+  rmSync(keywordAliasFixture, { recursive: true, force: true });
+}
 
 const precedenceSymbolGrammar =
   'export default () => ({ __sample_value: ($) => prec.right($._expression), first: ($) => seq($._kw_font, field("font", $.__sample_value)), second: ($) => seq($._kw_row, field("row", $.__sample_value)) });';
