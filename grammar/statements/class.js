@@ -187,6 +187,7 @@ export default ({ kw }) => ({
     ),
 
   __class_property_accessor_body: ($) => seq(alias($._colon, ":"), $._compound_body),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,
