@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateKeywordFieldInline,
@@ -94,6 +95,80 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const optionalPrefixHeadFixture = (
+  prefix = "optional($.__modifier)",
+  secondPrefix = prefix,
+  marker = "$._kw_set",
+  suffix = "optional($.__parameters), $.__tail",
+) => `export default () => ({
+  property_definition: ($) => seq($.__prefix, repeat1(choice(
+    seq(${prefix}, $._kw_get, optional($.__parameters), $.__tail),
+    seq(${secondPrefix}, ${marker}, ${suffix}),
+  ))),
+});`;
+new RuleTester().run("optional-prefix-head-extraction", optionalPrefixHeadExtraction, {
+  valid: [
+    optionalPrefixHeadFixture("$.__modifier"),
+    optionalPrefixHeadFixture("optional($.__modifier)", "optional($.__other)"),
+    optionalPrefixHeadFixture(undefined, undefined, "$._kw_get"),
+    optionalPrefixHeadFixture(undefined, undefined, "$.identifier"),
+    optionalPrefixHeadFixture(undefined, undefined, "kw(keyword)"),
+    optionalPrefixHeadFixture(undefined, undefined, "alias($._kw_set, $.setter)"),
+    optionalPrefixHeadFixture(
+      undefined,
+      undefined,
+      undefined,
+      "optional($.__parameters), $.__other_tail",
+    ),
+    optionalPrefixHeadFixture().replaceAll(
+      "optional($.__parameters), $.__tail",
+      "optional($.__parameters), optional($.__tail)",
+    ),
+    optionalPrefixHeadFixture().replaceAll("optional($.__parameters), $.__tail", "$.__tail"),
+    optionalPrefixHeadFixture()
+      .replace("repeat1(choice(", "repeat1(token(choice(")
+      .replace("  ))),", "  )))),"),
+    optionalPrefixHeadFixture()
+      .replace("repeat1(choice(", "repeat1(alias(choice(")
+      .replace("  ))),", "  ), $.accessor))),"),
+    optionalPrefixHeadFixture()
+      .replace("repeat1(choice(", "repeat1(prec.dynamic(1, choice(")
+      .replace("  ))),", "  )))),"),
+    optionalPrefixHeadFixture()
+      .replace("repeat1(choice(", "repeat1(prec.right(priority, choice(")
+      .replace("  ))),", "  )))),"),
+    optionalPrefixHeadFixture().replace(
+      "property_definition:",
+      "// oxlint-disable-next-line rule-to-test/optional-prefix-head-extraction\nproperty_definition:",
+    ),
+    optionalPrefixHeadFixture().replace(
+      "repeat1(choice(",
+      "repeat1(\n// oxlint-disable-next-line rule-to-test/optional-prefix-head-extraction\nchoice(",
+    ),
+    "const value = choice(seq(optional($.__modifier), $._kw_get, optional($.__parameters), $.__tail), seq(optional($.__modifier), $._kw_set, optional($.__parameters), $.__tail));",
+  ],
+  invalid: [
+    { code: optionalPrefixHeadFixture(), errors: [{ message: /non-empty hidden header/ }] },
+    {
+      code: optionalPrefixHeadFixture(undefined, undefined, 'kw("SET", {offset: 3})'),
+      errors: [{ message: /ordered keyword choice/ }],
+    },
+    {
+      code: optionalPrefixHeadFixture()
+        .replace("repeat1(choice(", "repeat1(prec.right(choice(")
+        .replace("  ))),", "  )))),"),
+      errors: [{ message: /complete trees/ }],
+    },
+    {
+      code: optionalPrefixHeadFixture().replace(
+        "  ))),",
+        "    seq(optional($.__modifier), $._kw_other, optional($.__parameters), $.__tail),\n  ))),",
+      ),
+      errors: [{ message: /distinct keywords/ }],
+    },
+  ],
+});
 
 const nestedEventHeadFixture = (
   head = 'field("event", $._kw_delete)',

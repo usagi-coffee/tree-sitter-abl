@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/optional-prefix-head-extraction": "warn",
         "tree-sitter-optimize/nested-event-head-extraction": "warn",
         "tree-sitter-optimize/precedence-keyword-alias-inline": "warn",
         "tree-sitter-optimize/private-precedence-symbol-inline": "warn",
