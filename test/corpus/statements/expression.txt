@@ -360,3 +360,55 @@ x = NEW List<List<CHARACTER>>():Count.
             (identifier)))
         (arguments))
       right: (identifier))))
+
+================================================================================
+Additive operators - expression and statement boundaries
+================================================================================
+
+result = a + b * c - -d.
+a - b + c.
+EXPORT a - {&offset}.
+MESSAGE a + -b c - d.
+RUN Consume(a - -b).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (binary_expression
+          (identifier)
+          (identifier)))
+      (unary_expression
+        (identifier))))
+  (expression_statement
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (identifier)))
+  (export_statement
+    (binary_expression
+      (identifier)
+      (preprocessor_name
+        (identifier))))
+  (message_statement
+    (binary_expression
+      (identifier)
+      (unary_expression
+        (identifier)))
+    (binary_expression
+      (identifier)
+      (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (binary_expression
+          (identifier)
+          (unary_expression
+            (identifier)))))))

@@ -218,7 +218,6 @@ export default grammar({
     $._simple_type_name,
     $._identifier_or_string_literal,
     $._as_type_name_phrase,
-    $.__additive_operator,
     $._window_handle,
     $._block_option,
     $._echo_phrase,
@@ -625,11 +624,18 @@ export default grammar({
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
       __multiplicative_operator: ($) => choice("*", "/", kw("MOD"), kw("MODULO")),
+      // Preserve the binary form's precedence when its operator reduces separately.
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      __additive_operator: ($) => choice("+", "-"),
+      __additive_operator: ($) => prec("add", choice("+", "-")),
       // binary_expression without `=` comparison.
+      // Keep additive tokens in the statement form's boundary for error recovery.
       binary_expression_no_eq: ($) =>
-        binary_expression($, $._statement_expression, $._comparison_operator_no_eq),
+        binary_expression(
+          $,
+          $._statement_expression,
+          $._comparison_operator_no_eq,
+          choice("+", "-"),
+        ),
 
       // Accessors
       _object_access_plain_prefix: ($) =>
@@ -973,10 +979,15 @@ function escape_regex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function binary_expression($, expression, comparison_operator) {
+function binary_expression(
+  $,
+  expression,
+  comparison_operator,
+  additive_operator = $.__additive_operator,
+) {
   return choice(
     prec.left("multiplication", seq(expression, $.__multiplicative_operator, expression)),
-    prec.left("add", seq(expression, $.__additive_operator, expression)),
+    prec.left("add", seq(expression, additive_operator, expression)),
     prec.left("compare", seq(expression, comparison_operator, expression)),
     prec.left("logical", seq(expression, $._logical_operator, expression)),
   );
