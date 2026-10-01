@@ -40,6 +40,7 @@ import {
   singleUseFieldSequence,
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
+  sharedScopedDeclarationHead,
   sharedAssignmentClause,
   shortKeywordHelperName,
   shortSharedCategoryName,
@@ -7295,4 +7296,201 @@ try {
   });
 } finally {
   rmSync(boundaryFixture, { recursive: true, force: true });
+}
+
+const scopedHeadDirectory = mkdtempSync(join(tmpdir(), "abl-scoped-head-"));
+const scopedHeadPreviousIt = RuleTester.it;
+RuleTester.it = (_name, run) => run();
+const originalScopedWorkTable = `export default ({ kw }) => ({
+  work_table_definition: ($) => seq($.__work_table_prefix, $._terminator),
+  __work_table_prefix: ($) =>
+    seq($._kw_define, optional($._definition_scope_modifier), kw("WORK-TABLE"), $._work_table_body),
+});`;
+const originalScopedWorkfile = `export default ({ kw }) => ({
+  // Workfile is equivalent to WORK-TABLE
+  workfile_definition: ($) => seq($.__workfile_prefix, $._terminator),
+  __workfile_prefix: ($) =>
+    seq($._kw_define, optional($._definition_scope_modifier), kw("WORKFILE"), $._work_table_body),
+});`;
+const scopedHeadPair = (
+  name,
+  code,
+  diagnostic = false,
+  seed = originalScopedWorkTable,
+  candidateFile = "workfile.js",
+  metadata = "",
+) => {
+  resetSharingCandidates();
+  writeFileSync(
+    join(scopedHeadDirectory, "grammar.js"),
+    `export default grammar({ ${metadata} rules: {} });`,
+  );
+  const candidate = {
+    name,
+    cwd: scopedHeadDirectory,
+    filename: join(scopedHeadDirectory, "grammar", "statements", candidateFile),
+    code,
+  };
+  new RuleTester().run("shared-scoped-declaration-head", sharedScopedDeclarationHead, {
+    valid: [
+      {
+        cwd: scopedHeadDirectory,
+        filename: join(scopedHeadDirectory, "grammar", "statements", "work-table.js"),
+        code: seed,
+      },
+      ...(diagnostic ? [] : [candidate]),
+    ],
+    invalid: diagnostic
+      ? [
+          {
+            ...candidate,
+            errors: [
+              {
+                message:
+                  /__workfile_prefix repeats the keyword and optional shared modifier head.*preserve modifier aliases, fields and ordering/,
+              },
+            ],
+          },
+        ]
+      : [],
+  });
+};
+try {
+  scopedHeadPair(
+    "original cross-file WORKFILE and WORK-TABLE sources",
+    originalScopedWorkfile,
+    true,
+  );
+  scopedHeadPair(
+    "different body remains at its caller",
+    originalScopedWorkfile.replace("$._work_table_body)", "$.__workfile_body)"),
+    true,
+  );
+  scopedHeadPair(
+    "static keyword options retain exact prefix identity",
+    originalScopedWorkfile.replace("$._kw_define", 'kw("DEFINE", {offset: 3})'),
+    true,
+    originalScopedWorkTable.replace("$._kw_define", 'kw("DEFINE", {offset: 3})'),
+  );
+  for (const [name, replacement] of [
+    ["required modifier", "$._definition_scope_modifier"],
+    ["different shared modifier", "optional($._buffer_query_modifier)"],
+    ["private modifier cannot be shared across files", "optional($.__workfile_modifier)"],
+    ["keyword modifier is outside this shape", "optional($._kw_private)"],
+    ["compound optional selector", "optional(choice($._definition_scope_modifier, $.other))"],
+    ["field-wrapped optional selector", 'optional(field("scope", $._definition_scope_modifier))'],
+    ["computed modifier", 'optional($["_definition_scope_modifier"])'],
+  ])
+    scopedHeadPair(
+      name,
+      originalScopedWorkfile.replace("optional($._definition_scope_modifier)", replacement),
+    );
+  for (const [name, code] of [
+    [
+      "already shared head",
+      originalScopedWorkfile.replace(
+        "$._kw_define, optional($._definition_scope_modifier)",
+        "$._define_scope_prefix",
+      ),
+    ],
+    [
+      "public declaration helper",
+      originalScopedWorkfile.replaceAll("__workfile_prefix", "workfile_prefix"),
+    ],
+    ["same declaration noun", originalScopedWorkfile.replace('kw("WORKFILE")', 'kw("WORK-TABLE")')],
+    ["different initial keyword", originalScopedWorkfile.replace("$._kw_define", "$._kw_create")],
+    ["dynamic keyword", originalScopedWorkfile.replace('kw("WORKFILE")', "kw(noun)")],
+    [
+      "dynamic keyword options",
+      originalScopedWorkfile.replace('kw("WORKFILE")', 'kw("WORKFILE", options)'),
+    ],
+    ["public body", originalScopedWorkfile.replace("$._work_table_body)", "$.work_table_body)")],
+    [
+      "extra optional suffix",
+      originalScopedWorkfile.replace(
+        "$._work_table_body)",
+        "$._work_table_body, optional($.flag))",
+      ),
+    ],
+    [
+      "static precedence stays outside this shape",
+      originalScopedWorkfile
+        .replace("seq($._kw_define", "prec.right(seq($._kw_define")
+        .replace("$._work_table_body),", "$._work_table_body)),"),
+    ],
+    [
+      "recursive head",
+      originalScopedWorkfile.replace("$._work_table_body)", "$.__workfile_prefix)"),
+    ],
+    [
+      "property suppression",
+      originalScopedWorkfile.replace(
+        "  __workfile_prefix:",
+        "  // oxlint-disable-next-line rule-to-test/shared-scoped-declaration-head\n  __workfile_prefix:",
+      ),
+    ],
+    [
+      "sequence suppression",
+      originalScopedWorkfile.replace(
+        "    seq($._kw_define",
+        "    // oxlint-disable-next-line rule-to-test/shared-scoped-declaration-head\n    seq($._kw_define",
+      ),
+    ],
+    [
+      "unrelated object",
+      originalScopedWorkfile
+        .replace("export default ({ kw }) => (", "const unrelated = ")
+        .replace("});", "};"),
+    ],
+  ])
+    scopedHeadPair(name, code);
+  for (const use of [
+    "alias($.__workfile_prefix, $.head)",
+    "token($.__workfile_prefix)",
+    "token.immediate($.__workfile_prefix)",
+    "prec.dynamic(1, $.__workfile_prefix)",
+    '$["__workfile_prefix"]',
+  ])
+    scopedHeadPair(
+      `restricted caller ${use}`,
+      originalScopedWorkfile.replace(
+        "  // Workfile is equivalent to WORK-TABLE",
+        `  extra: ($) => ${use},`,
+      ),
+    );
+  for (const metadata of ["inline", "conflicts", "precedences", "supertypes", "externals", "word"])
+    scopedHeadPair(
+      `root ${metadata} metadata`,
+      originalScopedWorkfile,
+      false,
+      undefined,
+      undefined,
+      `${metadata}: ($) => [$.__workfile_prefix],`,
+    );
+  scopedHeadPair(
+    "same-file sharing belongs to local-prefix-helper",
+    originalScopedWorkfile,
+    false,
+    undefined,
+    "work-table.js",
+  );
+  scopedHeadPair(
+    "disabled first occurrence does not seed candidates",
+    originalScopedWorkfile,
+    false,
+    originalScopedWorkTable.replace(
+      "  __work_table_prefix:",
+      "  // oxlint-disable-next-line rule-to-test/shared-scoped-declaration-head\n  __work_table_prefix:",
+    ),
+  );
+  scopedHeadPair(
+    "keyword abbreviation options cannot merge",
+    originalScopedWorkfile.replace("$._kw_define", 'kw("DEFINE", {offset: 4})'),
+    false,
+    originalScopedWorkTable.replace("$._kw_define", 'kw("DEFINE", {offset: 3})'),
+  );
+} finally {
+  RuleTester.it = scopedHeadPreviousIt;
+  resetSharingCandidates();
+  rmSync(scopedHeadDirectory, { recursive: true, force: true });
 }

@@ -54,6 +54,7 @@
         "tree-sitter-optimize/short-aliased-lexical-name": "warn",
         "tree-sitter-optimize/shared-assignment-clause": "warn",
         "tree-sitter-optimize/shared-delimiter-field-prefix": "warn",
+        "tree-sitter-optimize/shared-scoped-declaration-head": "warn",
         "tree-sitter-optimize/recursive-continuation-inline": "warn",
         "tree-sitter-optimize/single-use-field-choice": "warn",
         "tree-sitter-optimize/nullable-slot-list": "warn",
