@@ -20,6 +20,7 @@ import {
   inlineValuedChoiceBoundary,
   inlineLiteralChoiceBoundary,
   inlinePrecedenceValuedChoiceBoundary,
+  inlineClauseChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -6778,6 +6779,144 @@ new RuleTester().run("short-keyword-helper-name", shortKeywordHelperName, {
     },
   ],
 });
+
+const originalAsLikeChoice = `choice(
+  seq($._kw_as, $._class_type),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  seq($._kw_like, field("like", $._qualified_identifier)),
+)`;
+const clauseBoundaryFixture = (
+  body = originalAsLikeChoice,
+  name = "_as_like",
+  inline = true,
+  metadata = "",
+  extra = "",
+) =>
+  `export default grammar({ inline: ($) => [${inline ? `$.${name}` : ""}], ${metadata} rules: { ${name}: ($) => ${body}, ${extra} } });`;
+new RuleTester().run("inline-clause-choice-boundary", inlineClauseChoiceBoundary, {
+  valid: [
+    clauseBoundaryFixture(undefined, undefined, false),
+    clauseBoundaryFixture(undefined, "as_like"),
+    clauseBoundaryFixture(`prec.right(${originalAsLikeChoice})`),
+    clauseBoundaryFixture("choice(seq($._kw_as, $._class_type))"),
+    clauseBoundaryFixture("choice(seq($._kw_as, $._class_type), seq($._kw_like, $._record))"),
+    clauseBoundaryFixture(
+      'choice(seq($._kw_as, field("type", $.identifier)), seq($._kw_like, field("like", $.identifier)))',
+    ),
+    clauseBoundaryFixture("choice(...clauses)"),
+    ...[
+      "$._record",
+      'seq($.identifier, field("like", $._qualified_identifier))',
+      'seq(kw(keyword), field("like", $._qualified_identifier))',
+      'seq(kw("LIKE", options), field("like", $._qualified_identifier))',
+      'seq(token(/LIKE/i), field("like", $._qualified_identifier))',
+      "seq($._kw_like, field(name, $._qualified_identifier))",
+      'seq($._kw_like, field("like", alias($._qualified_identifier, $.identifier)))',
+      'seq($._kw_like, field("like", $._as_like))',
+      'seq($._kw_like, field("like", $["_qualified_identifier"]))',
+      'seq($._kw_like, field("like", $._qualified_identifier), optional($.flag))',
+    ].map((branch) =>
+      clauseBoundaryFixture(
+        originalAsLikeChoice.replace(
+          'seq($._kw_like, field("like", $._qualified_identifier))',
+          branch,
+        ),
+      ),
+    ),
+    ...["conflicts", "precedences", "supertypes", "externals", "word"].map((key) =>
+      clauseBoundaryFixture(undefined, undefined, true, `${key}: ($) => [[$._as_like]],`),
+    ),
+    ...[
+      "alias($._as_like, $.clause)",
+      "token($._as_like)",
+      "token.immediate($._as_like)",
+      "prec.dynamic(1, $._as_like)",
+      '$["_as_like"]',
+    ].map((use) => clauseBoundaryFixture(undefined, undefined, true, "", `root: ($) => ${use},`)),
+    clauseBoundaryFixture().replace(
+      "_as_like: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-clause-choice-boundary\n_as_like: ($)",
+    ),
+    clauseBoundaryFixture().replace(
+      "=> choice(",
+      "=>\n// oxlint-disable-next-line rule-to-test/inline-clause-choice-boundary\nchoice(",
+    ),
+    `const unrelated = { _as_like: ($) => ${originalAsLikeChoice} };`,
+  ],
+  invalid: [
+    {
+      name: "original AS/LIKE choice retains class-type helper and like field",
+      code: clauseBoundaryFixture(),
+      errors: [
+        {
+          message:
+            /_as_like expands a small keyword-clause choice mixing hidden bodies and direct fields/,
+        },
+      ],
+    },
+    {
+      name: "static keyword options and caller fields are retained",
+      code: clauseBoundaryFixture(
+        'choice(seq(kw("AS", {offset: 2}), $.__type_body), seq(kw("LIKE"), field("like", $.identifier)))',
+        "__parameter_clause",
+        true,
+        "",
+        'root: ($) => field("clause", optional($.__parameter_clause)),',
+      ),
+      errors: [{ message: /Preserve each keyword, helper, field and branch order/ }],
+    },
+  ],
+});
+const clauseBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-clause-boundary-"));
+try {
+  const commonPath = join(clauseBoundaryDirectory, "grammar", "core", "common.js");
+  writeFileSync(
+    join(clauseBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._as_like], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-clause-choice-boundary cross-file inline",
+    inlineClauseChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: clauseBoundaryDirectory,
+          filename: commonPath,
+          code: `export default () => ({ _other: ($) => ${originalAsLikeChoice} });`,
+        },
+      ],
+      invalid: [
+        {
+          name: "original shared AS/LIKE module reads its root inline entry",
+          cwd: clauseBoundaryDirectory,
+          filename: commonPath,
+          code: `export default ({ kw }) => ({ _as_like: ($) => ${originalAsLikeChoice} });`,
+          errors: [{ message: /compare action savings against state and byte costs/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(clauseBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._as_like], conflicts: ($) => [[$._as_like]], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-clause-choice-boundary cross-file metadata",
+    inlineClauseChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: clauseBoundaryDirectory,
+          filename: commonPath,
+          code: `export default () => ({ _as_like: ($) => ${originalAsLikeChoice} });`,
+        },
+      ],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(clauseBoundaryDirectory, { recursive: true, force: true });
+}
 
 const originalColorFontChoice = `choice(
   seq($._kw_bgcolor, field("bgcolor", $._expression)),
