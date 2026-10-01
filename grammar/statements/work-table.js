@@ -1,8 +1,7 @@
 export default ({ kw }) => ({
   work_table_definition: ($) => seq($.__work_table_prefix, $._terminator),
 
-  __work_table_prefix: ($) =>
-    seq($._kw_define, optional($._definition_scope_modifier), kw("WORK-TABLE"), $._work_table_body),
+  __work_table_prefix: ($) => seq($._define_scope_prefix, kw("WORK-TABLE"), $._work_table_body),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _work_table_body: ($) =>
