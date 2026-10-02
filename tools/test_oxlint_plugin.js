@@ -23,6 +23,7 @@ import {
   inlinePrecedenceValuedChoiceBoundary,
   inlineClauseChoiceBoundary,
   inlineKeywordNameBoundary,
+  inlineMixedSymbolChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -8134,4 +8135,158 @@ try {
   RuleTester.it = modifierAliasPreviousIt;
   resetSharingCandidates();
   rmSync(modifierAliasDirectory, { recursive: true, force: true });
+}
+
+const originalMixedSelectorBody = "choice($._type_name, $.string_literal)";
+const mixedSelectorFixture = (
+  body = originalMixedSelectorBody,
+  name = "_type_or_string",
+  inline = true,
+  metadata = "",
+  extra = "",
+) => `export default grammar({
+  inline: ($) => [${inline ? `$.${name}` : ""}], ${metadata}
+  rules: { ${name}: ($) => ${body}, ${extra} }
+});`;
+new RuleTester().run("inline-mixed-symbol-choice-boundary", inlineMixedSymbolChoiceBoundary, {
+  valid: [
+    mixedSelectorFixture(undefined, undefined, false),
+    mixedSelectorFixture(undefined, "type_or_string"),
+    mixedSelectorFixture(undefined, "_kw_selector"),
+    mixedSelectorFixture("choice($.identifier, $.string_literal)"),
+    mixedSelectorFixture("choice($._type_name, $._qualified_identifier)"),
+    mixedSelectorFixture("choice($._kw_input, $.identifier)"),
+    mixedSelectorFixture("choice($._type_or_string, $.identifier)"),
+    mixedSelectorFixture("choice($._type_name)"),
+    mixedSelectorFixture("choice($._type_name, $.identifier, $.identifier)"),
+    mixedSelectorFixture("choice($._a, $.b, $.c, $.d, $.e, $.f, $.g, $.h)"),
+    mixedSelectorFixture("choice($._type_name, $[literal])"),
+    mixedSelectorFixture("choice($._type_name, getLiteral($))"),
+    mixedSelectorFixture("choice($._type_name, ...literals)"),
+    mixedSelectorFixture("choice($._type_name, alias($.string_literal, $.type))"),
+    mixedSelectorFixture('choice(field("type", $._type_name), $.string_literal)'),
+    mixedSelectorFixture('choice($._type_name, "STRING")'),
+    mixedSelectorFixture('choice($._type_name, seq("(", $.identifier, ")"))'),
+    mixedSelectorFixture(`prec.right(${originalMixedSelectorBody})`),
+    mixedSelectorFixture(`token(${originalMixedSelectorBody})`),
+    ...["conflicts", "precedences", "supertypes", "externals", "word"].map((key) =>
+      mixedSelectorFixture(undefined, undefined, true, `${key}: ($) => [[$._type_or_string]],`),
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      mixedSelectorFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        `root: ($) => ${wrapper}($._type_or_string, $.value),`,
+      ),
+    ),
+    mixedSelectorFixture(undefined, undefined, true, "", 'root: ($) => $["_type_or_string"],'),
+    mixedSelectorFixture().replace(
+      "_type_or_string: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-mixed-symbol-choice-boundary\n_type_or_string: ($)",
+    ),
+    mixedSelectorFixture().replace(
+      "=> choice(",
+      "=>\n// oxlint-disable-next-line rule-to-test/inline-mixed-symbol-choice-boundary\nchoice(",
+    ),
+    `const unrelated = { _type_or_string: ($) => ${originalMixedSelectorBody} };`,
+  ],
+  invalid: [
+    {
+      name: "original type-or-string selector with field callers",
+      code: mixedSelectorFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        `
+        _class_type: ($) => seq(optional($._kw_class), field("type", $._type_or_string)),
+        __event_signature: ($) => seq(kw("DELEGATE"), optional($._kw_class), field("delegate_type", $._type_or_string)),
+      `,
+      ),
+      errors: [
+        { message: /_type_or_string expands a compact choice of hidden and public symbols/ },
+      ],
+    },
+    {
+      name: "private selector nested under static precedence and a field",
+      code: mixedSelectorFixture(
+        "choice($.identifier, $.__scoped_name, $.string_literal)",
+        "__type_value",
+        true,
+        "",
+        'root: ($) => prec.right(field("type", optional($.__type_value))),',
+      ),
+      errors: [{ message: /required-field metadata/ }],
+    },
+    {
+      name: "metadata-looking comments and strings do not restrict the selector",
+      code: `const note = "conflicts: ($) => [[$._type_or_string]]";
+        // precedences: ($) => [[$._type_or_string]]
+        ${mixedSelectorFixture()}`,
+      errors: [{ message: /complete trees including error recovery/ }],
+    },
+  ],
+});
+const mixedSelectorDirectory = mkdtempSync(join(tmpdir(), "abl-mixed-selector-boundary-"));
+try {
+  const modulePath = join(mixedSelectorDirectory, "grammar", "core", "common.js");
+  const originalModule = `export default ({kw}) => ({ _type_or_string: ($) => ${originalMixedSelectorBody} });`;
+  writeFileSync(
+    join(mixedSelectorDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._type_or_string], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-mixed-symbol-choice-boundary cross-file inline",
+    inlineMixedSymbolChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: mixedSelectorDirectory,
+          filename: modulePath,
+          code: originalModule.replace("_type_or_string:", "_other:"),
+        },
+      ],
+      invalid: [
+        {
+          cwd: mixedSelectorDirectory,
+          filename: modulePath,
+          code: originalModule,
+          errors: [{ message: /retain a hidden selector boundary/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(mixedSelectorDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._type_or_string], conflicts: ($) => [[$._type_or_string]], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-mixed-symbol-choice-boundary cross-file conflicts",
+    inlineMixedSymbolChoiceBoundary,
+    {
+      valid: [{ cwd: mixedSelectorDirectory, filename: modulePath, code: originalModule }],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(mixedSelectorDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._type_or_string], rules: {} });",
+  );
+  mkdirSync(join(mixedSelectorDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(mixedSelectorDirectory, "grammar", "precedences", "types.js"),
+    "export default ($) => [[$.other, $._type_or_string]];",
+  );
+  new RuleTester().run(
+    "inline-mixed-symbol-choice-boundary cross-file precedence",
+    inlineMixedSymbolChoiceBoundary,
+    {
+      valid: [{ cwd: mixedSelectorDirectory, filename: modulePath, code: originalModule }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(mixedSelectorDirectory, { recursive: true, force: true });
 }

@@ -35,6 +35,7 @@
         "tree-sitter-optimize/inline-precedence-valued-choice-boundary": "warn",
         "tree-sitter-optimize/inline-clause-choice-boundary": "warn",
         "tree-sitter-optimize/inline-keyword-name-boundary": "warn",
+        "tree-sitter-optimize/inline-mixed-symbol-choice-boundary": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/shared-modifier-alias-sequence": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
