@@ -117,7 +117,7 @@ export default ({ kw }) => ({
         choice($.number_literal, $.preprocessor_name),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+  // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-mixed-symbol-choice-boundary
   __temp_table_like_name: ($) => choice($._qualified_identifier, $.array_access),
   __temp_table_label_list: ($) =>
     seq($.string_literal, optional(seq(",", $.__temp_table_label_list))),
