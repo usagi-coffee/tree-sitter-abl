@@ -200,7 +200,6 @@ export default grammar({
     $._list_items_phrase,
     $._parenthesized_value,
     $._display_space_phrase,
-    $._serialization_modifier,
     $._position_length,
     $._except_fields,
     $._initial_value,
