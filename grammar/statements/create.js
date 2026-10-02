@@ -75,7 +75,7 @@ export default ({ kw }) => ({
       kw("WIDGET-POOL"),
       optional(
         seq(
-          field("pool", $._identifier_or_string_literal),
+          field("pool", $._identifier_or_string_literal_value),
           optional(alias(kw("PERSISTENT"), $.persistent)),
         ),
       ),

@@ -7,6 +7,6 @@ export default ({ kw }) => ({
       $._kw_delete,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("WIDGET-POOL"),
-      optional(field("pool", $._identifier_or_string_literal)),
+      optional(field("pool", $._identifier_or_string_literal_value)),
     ),
 });
