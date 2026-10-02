@@ -60,13 +60,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __variable_modifier: ($) =>
     choice(
-      seq(
-        alias($._kw_new, $.new_modifier),
-        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        optional(alias(kw("GLOBAL"), $.scope_modifier)),
-        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      $._new_global_shared_modifier,
       // A {&NEWGLOBAL}-style macro can stand in for the whole "NEW GLOBAL"
       // phrase, with SHARED still spelled out afterward.
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

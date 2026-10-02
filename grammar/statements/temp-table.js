@@ -127,12 +127,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __temp_table_modifier: ($) =>
     choice(
-      seq(
-        alias($._kw_new, $.new_modifier),
-        optional(alias(kw("GLOBAL"), $.scope_modifier)),
-        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      $._new_global_shared_modifier,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARED"), $.scope_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

@@ -1,0 +1,35 @@
+================================================================================
+Shared declaration modifiers - aliases and interleaved comments
+================================================================================
+
+DEFINE NEW /* global variable */ GLOBAL SHARED VARIABLE sharedValue AS CHARACTER NO-UNDO.
+DEFINE NEW GLOBAL /* shared table */ SHARED TEMP-TABLE sharedTable FIELD id AS INTEGER.
+DEFINE NEW GLOBAL SHARED STREAM sharedStream.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (new_modifier)
+    (comment
+      (block_comment))
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (temp_table_definition
+    (new_modifier)
+    (scope_modifier)
+    (comment
+      (block_comment))
+    (scope_modifier)
+    name: (identifier)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)))
