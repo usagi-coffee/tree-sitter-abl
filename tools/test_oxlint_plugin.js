@@ -24,6 +24,7 @@ import {
   inlineClauseChoiceBoundary,
   inlineKeywordNameBoundary,
   inlineMixedSymbolChoiceBoundary,
+  inlineKeywordAliasChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -8289,4 +8290,162 @@ try {
   );
 } finally {
   rmSync(mixedSelectorDirectory, { recursive: true, force: true });
+}
+
+const keywordAliasFamilyBody =
+  'choice(alias(kw("SERIALIZABLE"), $.serialization_modifier), alias(kw("NON-SERIALIZABLE"), $.serialization_modifier))';
+const keywordAliasFamilyFixture = (
+  body = keywordAliasFamilyBody,
+  name = "_flag_family",
+  inlined = true,
+  metadata = "",
+  callers = "",
+) => `export default grammar({
+  ${inlined ? `inline: ($) => [$.${name}],` : ""}
+  ${metadata}
+  rules: {
+    ${name}: ($) => ${body},
+    root: ($) => seq(optional($.${name}), $.identifier),
+    ${callers}
+  },
+});`;
+new RuleTester().run("inline-keyword-alias-choice-boundary", inlineKeywordAliasChoiceBoundary, {
+  valid: [
+    keywordAliasFamilyFixture(undefined, undefined, false),
+    keywordAliasFamilyFixture(undefined, "flags"),
+    keywordAliasFamilyFixture(undefined, "_kw_flags"),
+    keywordAliasFamilyFixture('choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE"))'),
+    keywordAliasFamilyFixture("choice(alias($.first, $.flag), alias($.second, $.flag))"),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $.first), alias(kw("B"), $.second))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $._flag), alias(kw("B"), $._flag))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), "flag"), alias(kw("B"), "flag"))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $.flag))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $.flag), alias(kw("A"), $.flag))'),
+    keywordAliasFamilyFixture(
+      `choice(${Array.from({ length: 9 }, (_, index) => `alias(kw("K${index}"), $.flag)`).join(",")})`,
+    ),
+    keywordAliasFamilyFixture('choice(alias(kw(keyword), $.flag), alias(kw("B"), $.flag))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A", options), $.flag), alias(kw("B"), $.flag))'),
+    keywordAliasFamilyFixture("choice(alias(token(/A/), $.flag), alias(token(/B/), $.flag))"),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $.flag), field("flag", kw("B")))'),
+    keywordAliasFamilyFixture('choice(alias(kw("A"), $.flag), $.identifier)'),
+    keywordAliasFamilyFixture("choice(...flags)"),
+    keywordAliasFamilyFixture(`prec.right(${keywordAliasFamilyBody})`),
+    keywordAliasFamilyFixture(`token(${keywordAliasFamilyBody})`),
+    ...["conflicts", "precedences", "supertypes", "externals", "word"].map((key) =>
+      keywordAliasFamilyFixture(undefined, undefined, true, `${key}: ($) => [[$._flag_family]],`),
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      keywordAliasFamilyFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        `other: ($) => ${wrapper}($._flag_family, $.value),`,
+      ),
+    ),
+    keywordAliasFamilyFixture(undefined, undefined, true, "", 'other: ($) => $["_flag_family"],'),
+    keywordAliasFamilyFixture().replace(
+      "_flag_family: ($)",
+      "// oxlint-disable-next-line rule-to-test/inline-keyword-alias-choice-boundary\n_flag_family: ($)",
+    ),
+    keywordAliasFamilyFixture().replace(
+      "=> choice(",
+      "=>\n// oxlint-disable-next-line rule-to-test/inline-keyword-alias-choice-boundary\nchoice(",
+    ),
+    `const unrelated = { _flag_family: ($) => ${keywordAliasFamilyBody} };`,
+  ],
+  invalid: [
+    {
+      name: "original shared serialization modifier family",
+      code: keywordAliasFamilyFixture(undefined, "_serialization_modifier"),
+      errors: [
+        {
+          message:
+            /_serialization_modifier expands a keyword family aliased as serialization_modifier/,
+        },
+      ],
+    },
+    {
+      name: "private keyword family with field and static precedence callers",
+      code: keywordAliasFamilyFixture(
+        'choice(alias(kw("FIRST", { offset: 3 }), $.flag), alias(kw("SECOND", { alias: "OTHER" }), $.flag))',
+        "__flag_family",
+        true,
+        "",
+        'other: ($) => prec.right(field("modifier", optional($.__flag_family))),',
+      ),
+      errors: [
+        { message: /Preserve keyword options, alias targets, alternative order and caller fields/ },
+      ],
+    },
+    {
+      name: "metadata-looking comments and strings remain opaque",
+      code: `const note = "conflicts: ($) => [[$._flag_family]]";
+        // precedences: ($) => [[$._flag_family]]
+        ${keywordAliasFamilyFixture()}`,
+      errors: [{ message: /complete trees, error recovery and required-field metadata/ }],
+    },
+  ],
+});
+const keywordAliasBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-alias-boundary-"));
+try {
+  const modulePath = join(keywordAliasBoundaryDirectory, "grammar", "core", "common.js");
+  const module = `export default ({kw}) => ({ _flag_family: ($) => ${keywordAliasFamilyBody} });`;
+  writeFileSync(
+    join(keywordAliasBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._flag_family], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-keyword-alias-choice-boundary cross-file inline",
+    inlineKeywordAliasChoiceBoundary,
+    {
+      valid: [
+        {
+          cwd: keywordAliasBoundaryDirectory,
+          filename: modulePath,
+          code: module.replace("_flag_family:", "_other:"),
+        },
+      ],
+      invalid: [
+        {
+          cwd: keywordAliasBoundaryDirectory,
+          filename: modulePath,
+          code: module,
+          errors: [{ message: /retain a hidden flag boundary/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(keywordAliasBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._flag_family], conflicts: ($) => [[$._flag_family]], rules: {} });",
+  );
+  new RuleTester().run(
+    "inline-keyword-alias-choice-boundary cross-file conflicts",
+    inlineKeywordAliasChoiceBoundary,
+    {
+      valid: [{ cwd: keywordAliasBoundaryDirectory, filename: modulePath, code: module }],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(keywordAliasBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._flag_family], rules: {} });",
+  );
+  mkdirSync(join(keywordAliasBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordAliasBoundaryDirectory, "grammar", "precedences", "flags.js"),
+    "export default ($) => [[$.other, $._flag_family]];",
+  );
+  new RuleTester().run(
+    "inline-keyword-alias-choice-boundary cross-file precedence",
+    inlineKeywordAliasChoiceBoundary,
+    {
+      valid: [{ cwd: keywordAliasBoundaryDirectory, filename: modulePath, code: module }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordAliasBoundaryDirectory, { recursive: true, force: true });
 }
