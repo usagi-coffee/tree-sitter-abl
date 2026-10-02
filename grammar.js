@@ -881,6 +881,7 @@ export default grammar({
         ),
       __widget_qualified_name_separator: ($) => $._kw_in,
 
+      // oxlint-disable-next-line tree-sitter-optimize/inline-mixed-symbol-choice-boundary
       _window_handle: ($) =>
         choice(
           $._qualified_identifier,
