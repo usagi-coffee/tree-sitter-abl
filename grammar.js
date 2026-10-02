@@ -536,7 +536,7 @@ export default grammar({
         choice(alias($._kw_buffer, $.identifier), alias($._kw_table_handle, $.identifier)),
       // oxlint-disable-next-line tree-sitter-optimize/short-shared-category-name, tree-sitter-optimize/inline-mixed-symbol-choice-boundary
       _identifier_or_array_access: ($) => choice($._qualified_identifier, $.array_access),
-      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/inline-mixed-symbol-choice-boundary
       _identifier_or_access: ($) =>
         choice($._qualified_identifier, $.array_access, $.object_access),
       // oxlint-disable-next-line tree-sitter-optimize/short-shared-category-name
