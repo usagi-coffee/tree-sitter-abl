@@ -25,6 +25,7 @@ import {
   inlineKeywordNameBoundary,
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordAliasChoiceBoundary,
+  contextualScalarNameBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -8448,4 +8449,167 @@ try {
   );
 } finally {
   rmSync(keywordAliasBoundaryDirectory, { recursive: true, force: true });
+}
+
+const scalarNameBoundaryFixture = (
+  body = "choice($.identifier, $.string_literal)",
+  name = "_identifier_or_string_literal",
+  inlined = true,
+  metadata = "",
+  callers = `item: ($) => seq(kw("LABEL"), field("label", $.${name})),`,
+) => `export default grammar({
+  inline: ($) => [${inlined ? `$.${name}` : ""}],
+  ${metadata}
+  rules: {
+    ${name}: ($) => ${body},
+    ${callers}
+  },
+});`;
+new RuleTester().run("contextual-scalar-name-boundary", contextualScalarNameBoundary, {
+  valid: [
+    scalarNameBoundaryFixture(undefined, undefined, false),
+    scalarNameBoundaryFixture(undefined, "scalar_name"),
+    scalarNameBoundaryFixture(undefined, "_kw_scalar_name"),
+    scalarNameBoundaryFixture("choice($.identifier, $._expression)"),
+    scalarNameBoundaryFixture("choice($.string_literal, $.number_literal)"),
+    scalarNameBoundaryFixture("choice($.identifier, $.preprocessor_name)"),
+    scalarNameBoundaryFixture("choice($.identifier, alias($._string, $.string_literal))"),
+    scalarNameBoundaryFixture("choice($.identifier, $.identifier, $.string_literal)"),
+    scalarNameBoundaryFixture("choice($.identifier)"),
+    scalarNameBoundaryFixture("choice($.identifier, ...literals)"),
+    scalarNameBoundaryFixture("prec.right(choice($.identifier, $.string_literal))"),
+    scalarNameBoundaryFixture("token(choice($.identifier, $.string_literal))"),
+    scalarNameBoundaryFixture(
+      `choice($.identifier, ${Array.from({ length: 7 }, (_, index) => `$.value${index}_literal`).join(",")})`,
+    ),
+    ...["conflicts", "precedences", "supertypes", "externals", "word"].map((key) =>
+      scalarNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        `${key}: ($) => [[$._identifier_or_string_literal]],`,
+      ),
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      scalarNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        `item: ($) => ${wrapper}($._identifier_or_string_literal, $.value),`,
+      ),
+    ),
+    scalarNameBoundaryFixture(
+      undefined,
+      undefined,
+      true,
+      "",
+      'item: ($) => $["_identifier_or_string_literal"],',
+    ),
+    scalarNameBoundaryFixture(
+      undefined,
+      undefined,
+      true,
+      "",
+      `_identifier_or_string_literal_value: ($) => $._identifier_or_string_literal,
+       item: ($) => field("pool", $._identifier_or_string_literal_value),
+       other: ($) => field("label", $._identifier_or_string_literal),`,
+    ),
+    scalarNameBoundaryFixture().replace(
+      "_identifier_or_string_literal: ($)",
+      "// oxlint-disable-next-line rule-to-test/contextual-scalar-name-boundary\n_identifier_or_string_literal: ($)",
+    ),
+    scalarNameBoundaryFixture().replace(
+      "=> choice(",
+      "=>\n// oxlint-disable-next-line rule-to-test/contextual-scalar-name-boundary\nchoice(",
+    ),
+    "const unrelated = { _value: ($) => choice($.identifier, $.string_literal) };",
+  ],
+  invalid: [
+    {
+      name: "original shared identifier/string selector",
+      code: scalarNameBoundaryFixture(),
+      errors: [{ message: /_identifier_or_string_literal expands identifiers and literal nodes/ }],
+    },
+    {
+      name: "scalar selector with several literal alternatives",
+      code: scalarNameBoundaryFixture(
+        "choice($.identifier, $.string_literal, $.number_literal)",
+        "__item_value",
+      ),
+      errors: [{ message: /Measure caller groups separately/ }],
+    },
+    {
+      name: "inlined forwarding helper retains no boundary",
+      code: scalarNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        "_value: ($) => $._identifier_or_string_literal,",
+      ).replace("[$._identifier_or_string_literal]", "[$._identifier_or_string_literal, $._value]"),
+      errors: [
+        { message: /try a non-inlined hidden forwarding helper at selected name\/value fields/ },
+      ],
+    },
+    {
+      name: "public forwarding rule cannot hide the wrapper node",
+      code: scalarNameBoundaryFixture(
+        undefined,
+        undefined,
+        true,
+        "",
+        "value: ($) => $._identifier_or_string_literal,",
+      ),
+      errors: [
+        { message: /Preserve token identities, alternative order, field scopes and metadata/ },
+      ],
+    },
+    {
+      name: "metadata-looking comments and strings are opaque",
+      code: `const note = "conflicts: ($) => [[$._identifier_or_string_literal]]";
+        // precedences: ($) => [[$._identifier_or_string_literal]]
+        ${scalarNameBoundaryFixture()}`,
+      errors: [{ message: /punctuation visibility and malformed-value recovery/ }],
+    },
+  ],
+});
+const scalarNameBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-scalar-name-boundary-"));
+try {
+  const filename = join(scalarNameBoundaryDirectory, "grammar", "core", "common.js"),
+    code =
+      "export default ({kw}) => ({ _scalar_name: ($) => choice($.identifier, $.string_literal) });";
+  writeFileSync(
+    join(scalarNameBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._scalar_name], rules: {} });",
+  );
+  new RuleTester().run(
+    "contextual-scalar-name-boundary cross-file inline",
+    contextualScalarNameBoundary,
+    {
+      valid: [],
+      invalid: [
+        {
+          cwd: scalarNameBoundaryDirectory,
+          filename,
+          code,
+          errors: [{ message: /selected name\/value fields/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(scalarNameBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._scalar_name], conflicts: ($) => [[$._scalar_name]], rules: {} });",
+  );
+  new RuleTester().run(
+    "contextual-scalar-name-boundary cross-file conflict",
+    contextualScalarNameBoundary,
+    {
+      valid: [{ cwd: scalarNameBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(scalarNameBoundaryDirectory, { recursive: true, force: true });
 }
