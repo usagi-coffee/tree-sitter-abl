@@ -43,6 +43,7 @@ import {
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
   sharedScopedDeclarationHead,
+  sharedModifierAliasSequence,
   sharedAssignmentClause,
   shortKeywordHelperName,
   shortSharedCategoryName,
@@ -7845,4 +7846,292 @@ try {
   );
 } finally {
   rmSync(keywordNameBoundaryDirectory, { recursive: true, force: true });
+}
+
+const modifierAliasDirectory = mkdtempSync(join(tmpdir(), "abl-modifier-alias-"));
+const modifierAliasPreviousIt = RuleTester.it;
+RuleTester.it = (_name, run) => run();
+const originalStreamModifier = `export default ({ kw }) => ({
+  stream_definition: ($) => seq($.__stream_prefix, $._terminator),
+
+  __stream_prefix: ($) =>
+    seq($._kw_define, optional($.__stream_modifier), $._kw_stream, field("name", $.identifier)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  __stream_modifier: ($) =>
+    choice(
+      seq(
+        alias($._kw_new, $.new_modifier),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("PRIVATE"), $.access_modifier),
+    ),
+});`;
+const originalVariableModifier = `export default ({ kw }) => ({
+  variable_definition: ($) => seq($.__variable_prefix, $._terminator),
+
+  __variable_prefix: ($) =>
+    seq(
+      $._kw_define,
+      optional($.__variable_modifier),
+      kw("VARIABLE", { offset: 3 }),
+      $.__variable_body,
+    ),
+
+  __variable_body: ($) =>
+    seq(
+      field("name", $.identifier),
+      optional($.__variable_extents),
+      optional(alias($._kw_no_undo, $.no_undo)),
+      choice(
+        seq($._kw_as, $._class_type),
+        seq($._kw_like, field("like", $._identifier_or_array_access)),
+      ),
+
+      optional($.__variable_options),
+    ),
+  __variable_options: ($) => prec.right(seq($.__variable_option, optional($.__variable_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  __variable_option: ($) =>
+    choice(
+      alias($.__variable_extent_phrase, $.extent_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      seq(kw("SERIALIZE-NAME"), field("serialize_name", $._identifier_or_string_literal)),
+      alias($._format_string, $.format_phrase),
+      $._color_font_option,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      seq(kw("COLUMN-LABEL"), field("column_label", $._format_labels)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      seq($._kw_context_help_id, field("context_help_id", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      seq($._kw_decimals, field("decimals", $.number_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("DROP-TARGET"), $.drop_target),
+      seq($._kw_label, field("label", $._format_labels)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
+      $._initial_phrase,
+      $.view_as_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
+      alias($._kw_no_undo, $.no_undo),
+      $.trigger_phrase,
+    ),
+
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  __variable_extent_phrase: ($) => seq($._kw_extent, optional(field("size", $._extent_size))),
+  __variable_extents: ($) =>
+    prec.right(
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
+      seq(alias($.__variable_extent_phrase, $.extent_phrase), optional($.__variable_extents)),
+    ),
+
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  __variable_modifier: ($) =>
+    choice(
+      seq(
+        alias($._kw_new, $.new_modifier),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      // A {&NEWGLOBAL}-style macro can stand in for the whole "NEW GLOBAL"
+      // phrase, with SHARED still spelled out afterward.
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      seq($.preprocessor_name, alias(kw("SHARED"), $.scope_modifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+      seq(
+        $._member_access_modifier,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        optional(alias(kw("STATIC"), $.static_modifier)),
+        optional($._serialization_modifier),
+      ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        alias(kw("STATIC"), $.static_modifier),
+        optional($._member_access_modifier),
+        optional($._serialization_modifier),
+      ),
+      $._serialization_modifier,
+    ),
+});`;
+const modifierAliasPair = (
+  name,
+  code,
+  diagnostic = false,
+  seed = originalStreamModifier,
+  metadata = "",
+) => {
+  resetSharingCandidates();
+  writeFileSync(
+    join(modifierAliasDirectory, "grammar.js"),
+    `export default grammar({ ${metadata} rules: {} });`,
+  );
+  const filename = (file) => join(modifierAliasDirectory, "grammar", "statements", file);
+  const candidate = { name, cwd: modifierAliasDirectory, filename: filename("variable.js"), code };
+  new RuleTester().run("shared-modifier-alias-sequence", sharedModifierAliasSequence, {
+    valid: [
+      { cwd: modifierAliasDirectory, filename: filename("stream.js"), code: seed },
+      ...(diagnostic ? [] : [candidate]),
+    ],
+    invalid: diagnostic
+      ? [
+          {
+            ...candidate,
+            errors: [
+              {
+                message:
+                  /repeats the required\/optional\/required keyword-alias sequence.*measured subset.*missing-prefix recovery.*node-schema required flags/,
+              },
+            ],
+          },
+        ]
+      : [],
+  });
+};
+try {
+  modifierAliasPair("original STREAM and VARIABLE clauses", originalVariableModifier, true);
+  modifierAliasPair(
+    "outer conflict helpers remain at callers",
+    originalVariableModifier,
+    true,
+    originalStreamModifier,
+    "conflicts: ($) => [[$.__variable_modifier, $.__temp_table_modifier]],",
+  );
+  modifierAliasPair(
+    "static keyword options compare exactly",
+    originalVariableModifier.replaceAll('kw("GLOBAL")', 'kw("GLOBAL", { offset: 4 })'),
+    true,
+    originalStreamModifier.replaceAll('kw("GLOBAL")', 'kw("GLOBAL", { offset: 4 })'),
+  );
+  modifierAliasPair(
+    "other keyword and modifier alias family",
+    originalVariableModifier
+      .replaceAll("new_modifier", "storage_modifier")
+      .replaceAll("scope_modifier", "lifetime_modifier")
+      .replaceAll('kw("GLOBAL")', 'kw("OTHER")'),
+    true,
+    originalStreamModifier
+      .replaceAll("new_modifier", "storage_modifier")
+      .replaceAll("scope_modifier", "lifetime_modifier")
+      .replaceAll('kw("GLOBAL")', 'kw("OTHER")'),
+  );
+  for (const [name, code] of [
+    [
+      "already shared branch",
+      originalVariableModifier.replace(
+        /seq\(\s*alias\(\$\._kw_new, \$\.new_modifier\),[\s\S]*?\n      \),/,
+        "$._new_global_shared_modifier,",
+      ),
+    ],
+    [
+      "one expanded recovery caller and a shared helper",
+      'export default () => ({ _new_global_shared_modifier: ($) => seq(alias($._kw_new, $.new_modifier), optional(alias(kw("GLOBAL"), $.scope_modifier)), alias(kw("SHARED"), $.scope_modifier)) });',
+    ],
+    [
+      "required middle changes ordering",
+      originalVariableModifier.replace(
+        'optional(alias(kw("GLOBAL"), $.scope_modifier))',
+        'alias(kw("GLOBAL"), $.scope_modifier)',
+      ),
+    ],
+    [
+      "repeatable middle changes cardinality",
+      originalVariableModifier.replace(
+        'optional(alias(kw("GLOBAL"), $.scope_modifier))',
+        'repeat(alias(kw("GLOBAL"), $.scope_modifier))',
+      ),
+    ],
+    [
+      "different alias target",
+      originalVariableModifier.replace(
+        'optional(alias(kw("GLOBAL"), $.scope_modifier))',
+        'optional(alias(kw("GLOBAL"), $.global_modifier))',
+      ),
+    ],
+    [
+      "different keyword option",
+      originalVariableModifier.replace('kw("GLOBAL")', 'kw("GLOBAL", { offset: 4 })'),
+    ],
+    [
+      "computed keyword source",
+      originalVariableModifier.replace(
+        "alias($._kw_new, $.new_modifier)",
+        'alias($["_kw_new"], $.new_modifier)',
+      ),
+    ],
+    [
+      "field-wrapped fragment",
+      originalVariableModifier.replace(
+        'optional(alias(kw("GLOBAL"), $.scope_modifier))',
+        'optional(field("scope", alias(kw("GLOBAL"), $.scope_modifier)))',
+      ),
+    ],
+    [
+      "lexical fragment",
+      originalVariableModifier
+        .replace(
+          "__variable_modifier: ($) =>\n    choice(",
+          "__variable_modifier: ($) =>\n    token(choice(",
+        )
+        .replace(
+          "      $._serialization_modifier,\n    ),",
+          "      $._serialization_modifier,\n    )),",
+        ),
+    ],
+    [
+      "dynamic precedence",
+      originalVariableModifier
+        .replace(
+          "__variable_modifier: ($) =>\n    choice(",
+          "__variable_modifier: ($) =>\n    prec.dynamic(1, choice(",
+        )
+        .replace(
+          "      $._serialization_modifier,\n    ),",
+          "      $._serialization_modifier,\n    )),",
+        ),
+    ],
+    [
+      "rule suppression",
+      originalVariableModifier.replace(
+        "  __variable_modifier:",
+        "  // oxlint-disable-next-line rule-to-test/shared-modifier-alias-sequence\n  __variable_modifier:",
+      ),
+    ],
+    [
+      "branch suppression",
+      originalVariableModifier.replace(
+        "      seq(\n        alias($._kw_new",
+        "      // oxlint-disable-next-line rule-to-test/shared-modifier-alias-sequence\n      seq(\n        alias($._kw_new",
+      ),
+    ],
+  ])
+    modifierAliasPair(name, code);
+  for (const metadata of ["inline", "externals", "supertypes", "precedences"])
+    modifierAliasPair(
+      `${metadata} preserves owner identity`,
+      originalVariableModifier,
+      false,
+      originalStreamModifier,
+      `${metadata}: ($) => [[$.__variable_modifier]],`,
+    );
+  modifierAliasPair(
+    "different keyword families do not match",
+    originalVariableModifier,
+    false,
+    originalStreamModifier.replaceAll('kw("GLOBAL")', 'kw("OTHER")'),
+  );
+} finally {
+  RuleTester.it = modifierAliasPreviousIt;
+  resetSharingCandidates();
+  rmSync(modifierAliasDirectory, { recursive: true, force: true });
 }
