@@ -1,0 +1,45 @@
+================================================================================
+TYPE selectors - quoted classes, generics and delegates
+================================================================================
+
+DEFINE VARIABLE objectValue AS CLASS "Progress.Lang.Object" NO-UNDO.
+DEFINE VARIABLE items AS Progress.Collections.List<CHARACTER> NO-UNDO.
+CLASS Example:
+  DEFINE EVENT onQuoted DELEGATE CLASS "System.EventHandler".
+  DEFINE EVENT onTyped DELEGATE CLASS System.EventHandler.
+  DEFINE EVENT onData SIGNATURE VOID (INPUT value AS CLASS "Progress.Lang.Object").
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (string_literal)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (identifier))
+    (no_undo))
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (string_literal)))
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (string_literal)))))
