@@ -640,6 +640,7 @@ export default grammar({
       // Accessors
       _object_access_plain_prefix: ($) =>
         field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-mixed-symbol-choice-boundary
       _object_access_plain_left: ($) =>
         choice(
           $._qualified_identifier,
