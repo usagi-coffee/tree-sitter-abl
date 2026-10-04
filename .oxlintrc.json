@@ -103,6 +103,7 @@
         "tree-sitter-optimize/optional-body-extraction": "warn",
         "tree-sitter-optimize/optional-block-body-extraction": "warn",
         "tree-sitter-optimize/literal-compound-alias-boundary": "warn",
+        "tree-sitter-optimize/leading-keyword-field-boundary": "warn",
         "tree-sitter-optimize/nested-field-body-extraction": "warn",
         "tree-sitter-optimize/optional-flag-marker-prefix": "warn",
         "tree-sitter-optimize/prefix-extraction": "warn",

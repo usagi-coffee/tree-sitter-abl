@@ -36,6 +36,7 @@ import {
   nestedFieldBodyExtraction,
   optionalFlagMarkerPrefix,
   literalCompoundAliasBoundary,
+  leadingKeywordFieldBoundary,
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
   sharedClosingDelimiterInline,
@@ -9024,4 +9025,158 @@ try {
   );
 } finally {
   rmSync(keywordChoiceBoundaryDirectory, { recursive: true, force: true });
+}
+
+const beforeAvailableKeywordBoundary = readFileSync(
+  new URL("./fixtures/available-leading-keywords.js", import.meta.url),
+  "utf8",
+);
+const keywordFieldBoundaryFixture = (
+  head = 'choice(kw("START", { offset: 3 }), $._kw_stop)',
+  field = 'field("target", $._target)',
+  metadata = "",
+  wrapper = (body) => body,
+) => `export default grammar({ ${metadata} rules: {
+  statement: ($) => ${wrapper(`seq(${head}, ${field}, optional($.arguments))`)}
+} });`;
+new RuleTester().run("leading-keyword-field-boundary", leadingKeywordFieldBoundary, {
+  valid: [
+    'export default ({kw}) => ({ expression: ($) => seq($.__keywords, field("record", $._record)), __keywords: ($) => choice(kw("FIRST"), kw("LAST")) });',
+    keywordFieldBoundaryFixture("$.__keywords"),
+    keywordFieldBoundaryFixture('choice(kw("START"))'),
+    keywordFieldBoundaryFixture('choice(kw("START"), kw("START"))'),
+    keywordFieldBoundaryFixture('choice(kw("START"), $.identifier)'),
+    keywordFieldBoundaryFixture('choice(kw("START"), "STOP")'),
+    keywordFieldBoundaryFixture('choice(kw("START"), alias($._kw_stop, $.flag))'),
+    keywordFieldBoundaryFixture("choice(kw(name), $._kw_stop)"),
+    keywordFieldBoundaryFixture('choice(kw("START", options), $._kw_stop)'),
+    keywordFieldBoundaryFixture(undefined, 'optional(field("target", $._target))'),
+    keywordFieldBoundaryFixture(undefined, 'field("target", optional($._target))'),
+    keywordFieldBoundaryFixture(undefined, 'field("target", seq($.first, $.last))'),
+    keywordFieldBoundaryFixture(undefined, 'field("target", choice($._target, "DEFAULT"))'),
+    keywordFieldBoundaryFixture(undefined, "field(dynamicField, $._target)"),
+    keywordFieldBoundaryFixture(undefined, undefined, "inline: ($) => [$.statement],"),
+    keywordFieldBoundaryFixture(undefined, undefined, "conflicts: ($) => [[$.statement]],"),
+    keywordFieldBoundaryFixture(
+      undefined,
+      undefined,
+      "precedences: ($) => [[$.statement, $.other]],",
+    ),
+    keywordFieldBoundaryFixture(undefined, undefined, "supertypes: ($) => [$.statement],"),
+    keywordFieldBoundaryFixture(undefined, undefined, "externals: ($) => [$.statement],"),
+    keywordFieldBoundaryFixture(undefined, undefined, "word: ($) => $.statement,"),
+    keywordFieldBoundaryFixture(undefined, undefined, 'conflicts: ($) => [[$["statement"]]],'),
+    keywordFieldBoundaryFixture(undefined, undefined, "conflicts: ($) => [[$[unknown]]],"),
+    keywordFieldBoundaryFixture(undefined, undefined, "", (body) => `token(${body})`),
+    keywordFieldBoundaryFixture(undefined, undefined, "", (body) => `token.immediate(${body})`),
+    keywordFieldBoundaryFixture(undefined, undefined, "", (body) => `alias(${body}, $.phrase)`),
+    keywordFieldBoundaryFixture(undefined, undefined, "", (body) => `prec.dynamic(1, ${body})`),
+    beforeAvailableKeywordBoundary.replace(
+      "  available_expression:",
+      "  // oxlint-disable-next-line rule-to-test/leading-keyword-field-boundary\n  available_expression:",
+    ),
+    beforeAvailableKeywordBoundary.replace(
+      "export default",
+      "// oxlint-disable rule-to-test/leading-keyword-field-boundary\nexport default",
+    ),
+    beforeAvailableKeywordBoundary.replace(
+      'seq(choice(kw("AVAIL"), kw("AVAILABLE")),',
+      'seq(kw("AVAIL"),',
+    ),
+  ],
+  invalid: [
+    {
+      name: "actual available expression before the measured optimization",
+      code: beforeAvailableKeywordBoundary,
+      errors: [{ message: /required record field/ }],
+    },
+    {
+      name: "other keyword options and symbols with an optional suffix",
+      code: keywordFieldBoundaryFixture(),
+      errors: [{ message: /distinct tokens, keyword options/ }],
+    },
+    {
+      name: "required field with multiple value alternatives",
+      code: keywordFieldBoundaryFixture(
+        undefined,
+        'field("target", choice($.identifier, $._access))',
+      ),
+      errors: [{ message: /complete field and suffix at the caller/ }],
+    },
+    {
+      name: "static enclosing precedence stays at the caller",
+      code: keywordFieldBoundaryFixture(
+        undefined,
+        undefined,
+        "",
+        (body) => `prec.right("binding", ${body})`,
+      ),
+      errors: [{ message: /enclosing precedence/ }],
+    },
+    {
+      name: "metadata-looking comments and strings do not restrict the owner",
+      code: `const note = "conflicts: ($) => [[$.statement]]";
+        // inline: ($) => [$.statement]
+        ${keywordFieldBoundaryFixture()}`,
+      errors: [{ message: /competing reductions/ }],
+    },
+  ],
+});
+const keywordFieldBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-field-boundary-"));
+try {
+  const filename = join(keywordFieldBoundaryDirectory, "grammar", "expressions", "query.js");
+  writeFileSync(
+    join(keywordFieldBoundaryDirectory, "grammar.js"),
+    "export default grammar({ rules: {} });",
+  );
+  new RuleTester().run(
+    "leading-keyword-field-boundary cross-file candidate",
+    leadingKeywordFieldBoundary,
+    {
+      valid: [],
+      invalid: [
+        {
+          cwd: keywordFieldBoundaryDirectory,
+          filename,
+          code: beforeAvailableKeywordBoundary,
+          errors: [{ message: /leading keyword choice/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(keywordFieldBoundaryDirectory, "grammar.js"),
+    "export default grammar({ conflicts: ($) => [[$.available_expression]], rules: {} });",
+  );
+  new RuleTester().run(
+    "leading-keyword-field-boundary cross-file conflict",
+    leadingKeywordFieldBoundary,
+    {
+      valid: [
+        { cwd: keywordFieldBoundaryDirectory, filename, code: beforeAvailableKeywordBoundary },
+      ],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(keywordFieldBoundaryDirectory, "grammar.js"),
+    "export default grammar({ rules: {} });",
+  );
+  mkdirSync(join(keywordFieldBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordFieldBoundaryDirectory, "grammar", "precedences", "query.js"),
+    "export default ($) => [[$.available_expression, $.value]];",
+  );
+  new RuleTester().run(
+    "leading-keyword-field-boundary cross-file precedence",
+    leadingKeywordFieldBoundary,
+    {
+      valid: [
+        { cwd: keywordFieldBoundaryDirectory, filename, code: beforeAvailableKeywordBoundary },
+      ],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordFieldBoundaryDirectory, { recursive: true, force: true });
 }
