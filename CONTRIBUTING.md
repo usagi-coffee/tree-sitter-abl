@@ -63,6 +63,19 @@ generic test-pass summaries or corpus counts; every commit is expected to pass t
 required tests. Mention validation details only when they clarify the change or a
 focused regression covered.
 
+Use this complete template for lint rejections:
+
+```text
+lint: <short description of lint rejection>
+
+<brief explanation of the rejection>
+
+ACTION_COUNT: <delta>
+STATE_COUNT: <delta>
+LARGE_STATE_COUNT: <delta>
+PARSER_C_SIZE_BYTES: <delta>
+```
+
 ## Tests
 
 Every commit should ideally include a test that covers the change.
