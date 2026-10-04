@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -34,6 +34,7 @@ import {
   optionalBlockBodyExtraction,
   nestedFieldBodyExtraction,
   optionalFlagMarkerPrefix,
+  literalCompoundAliasBoundary,
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
   sharedClosingDelimiterInline,
@@ -109,6 +110,166 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const literalAliasBoundaryFixture = (
+  literal = "$.number_literal",
+  aliased = "alias($.__example_bracketed_value, $.bracketed_value)",
+  definition = 'seq("[", $.number_literal, "]")',
+) => `export default ({ kw }) => ({
+  __example: ($) => seq(kw("EXAMPLE"), field("value", choice($.identifier, ${literal}, ${aliased})), $._terminator),
+  __example_bracketed_value: ($) => ${definition},
+});`;
+const beforeNewTypeChoice = readFileSync(
+  new URL("./fixtures/new-embedded-type-choice.js", import.meta.url),
+  "utf8",
+);
+new RuleTester().run("literal-compound-alias-boundary", literalCompoundAliasBoundary, {
+  valid: [
+    literalAliasBoundaryFixture("$.identifier"),
+    literalAliasBoundaryFixture("$._number_literal"),
+    literalAliasBoundaryFixture(undefined, "$.__example_bracketed_value"),
+    literalAliasBoundaryFixture(
+      undefined,
+      "alias($.__example_bracketed_value, $._bracketed_value)",
+    ),
+    literalAliasBoundaryFixture(undefined, "alias(token(/value/), $.bracketed_value)"),
+    literalAliasBoundaryFixture(undefined, "alias($[source], $.bracketed_value)"),
+    literalAliasBoundaryFixture(undefined, "alias($._shared_value, $.bracketed_value)"),
+    literalAliasBoundaryFixture(undefined, undefined, 'token(seq("[", /value/, "]"))'),
+    literalAliasBoundaryFixture(undefined, undefined, 'seq("[", $.number_literal, ")")'),
+    literalAliasBoundaryFixture(undefined, undefined, 'seq(kw("VALUE"), $.number_literal)'),
+    literalAliasBoundaryFixture(undefined, undefined, 'seq("[", $.__example, "]")'),
+    literalAliasBoundaryFixture(undefined, undefined, 'seq("[", $.__example_bracketed_value, "]")'),
+    literalAliasBoundaryFixture().replace(
+      "  __example_bracketed_value: ($) =>",
+      "  __missing_value: ($) =>",
+    ),
+    literalAliasBoundaryFixture().replace('field("value", choice(', "field(label, choice("),
+    literalAliasBoundaryFixture().replace("$.identifier, $.number_literal", "$.number_literal"),
+    literalAliasBoundaryFixture().replace(
+      "$.number_literal, alias(",
+      "$.number_literal, $.identifier, alias(",
+    ),
+    literalAliasBoundaryFixture()
+      .replace('field("value", choice(', 'field("value", prec.right(choice(')
+      .replace(")), $._terminator", "))), $._terminator"),
+    literalAliasBoundaryFixture()
+      .replace("seq(kw", "token(seq(kw")
+      .replace("$._terminator),", "$._terminator)),"),
+    literalAliasBoundaryFixture()
+      .replace("seq(kw", "alias(seq(kw")
+      .replace("$._terminator),", "$._terminator), $.item),"),
+    literalAliasBoundaryFixture()
+      .replace("seq(kw", "prec.dynamic(1, seq(kw")
+      .replace("$._terminator),", "$._terminator)),"),
+    literalAliasBoundaryFixture().replace("export default ({ kw }) => (", "const unrelated = ("),
+    literalAliasBoundaryFixture().replace(
+      "  __example:",
+      "  // oxlint-disable-next-line rule-to-test/literal-compound-alias-boundary\n  __example:",
+    ),
+    literalAliasBoundaryFixture().replace(
+      "choice($.identifier",
+      "choice(\n// oxlint-disable-next-line rule-to-test/literal-compound-alias-boundary\n$.identifier",
+    ),
+    literalAliasBoundaryFixture().replace(
+      "  __example_bracketed_value:",
+      "  // oxlint-disable-next-line rule-to-test/literal-compound-alias-boundary\n  __example_bracketed_value:",
+    ),
+    literalAliasBoundaryFixture().replace(
+      "$.number_literal, alias",
+      "\n// oxlint-disable-next-line rule-to-test/literal-compound-alias-boundary\n$.number_literal, alias",
+    ),
+    literalAliasBoundaryFixture().replace(
+      "alias($.__example_bracketed_value",
+      "\n// oxlint-disable-next-line rule-to-test/literal-compound-alias-boundary\nalias($.__example_bracketed_value",
+    ),
+    `// oxlint-disable rule-to-test/literal-compound-alias-boundary
+${literalAliasBoundaryFixture()}`,
+    `export default grammar({ inline: ($) => [$[symbol]], rules: {
+      __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.number_literal, alias($.__example_bracketed_value, $.bracketed_value))), $._terminator),
+      __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+    } });`,
+    `export default grammar({ inline: ($) => [$["__example"]], rules: {
+      __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.number_literal, alias($.__example_bracketed_value, $.bracketed_value))), $._terminator),
+      __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+    } });`,
+    ...["inline", "conflicts", "precedences", "supertypes", "externals"].flatMap((metadata) =>
+      ["__example", "__example_bracketed_value"].map(
+        (name) =>
+          `export default grammar({ ${metadata}: ($) => [$.${name}], rules: {
+          __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.number_literal, alias($.__example_bracketed_value, $.bracketed_value))), $._terminator),
+          __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+        } });`,
+      ),
+    ),
+    `export default grammar({ rules: { nested: {
+      __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.number_literal, alias($.__example_bracketed_value, $.bracketed_value))), $._terminator),
+      __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+    } } });`,
+    `export default ({ kw }) => ({
+      __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.__example_literal_or_bracketed_value)), $._terminator),
+      __example_literal_or_bracketed_value: ($) => choice($.number_literal, alias($.__example_bracketed_value, $.bracketed_value)),
+      __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+    });`,
+  ],
+  invalid: [
+    {
+      code: beforeNewTypeChoice,
+      errors: [{ message: /type choice contains adjacent literal and named generic_type/ }],
+    },
+    {
+      code: literalAliasBoundaryFixture(),
+      errors: [{ message: /value choice contains adjacent literal and named bracketed_value/ }],
+    },
+    {
+      code: literalAliasBoundaryFixture(
+        "alias($.__example_bracketed_value, $.bracketed_value)",
+        "$.number_literal",
+      ),
+      errors: [{ message: /value choice contains adjacent literal and named bracketed_value/ }],
+    },
+    {
+      code: literalAliasBoundaryFixture(
+        "$.string_literal",
+        undefined,
+        'seq($.identifier, "<", $.identifier, ">")',
+      ),
+      errors: [{ message: /value choice contains adjacent literal/ }],
+    },
+    {
+      code: literalAliasBoundaryFixture()
+        .replace("seq(kw", 'prec.right("example", seq(kw')
+        .replace("$._terminator),", "$._terminator)),"),
+      errors: [{ message: /value choice contains adjacent literal/ }],
+    },
+    {
+      code: `export default grammar({ rules: {
+      __example: ($) => seq("EXAMPLE", field("value", choice($.identifier, $.number_literal, alias($.__example_bracketed_value, $.bracketed_value))), $._terminator),
+      __example_bracketed_value: ($) => seq("[", $.number_literal, "]"),
+    } });`,
+      errors: [{ message: /value choice contains adjacent literal/ }],
+    },
+  ],
+});
+
+const literalAliasDirectory = mkdtempSync(join(tmpdir(), "abl-literal-compound-alias-"));
+try {
+  const filename = join(literalAliasDirectory, "new.js");
+  writeFileSync(
+    join(literalAliasDirectory, "grammar.js"),
+    "export default grammar({ conflicts: ($) => [[$.__new_generic_type]], rules: {} });",
+  );
+  new RuleTester().run(
+    "literal-compound-alias-boundary cross-file metadata",
+    literalCompoundAliasBoundary,
+    {
+      valid: [{ cwd: literalAliasDirectory, filename, code: beforeNewTypeChoice }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(literalAliasDirectory, { recursive: true, force: true });
+}
 
 const optionalFlagMarkerFixture = (
   flag = 'optional(alias(kw("EXPLICIT"), $.explicit))',
