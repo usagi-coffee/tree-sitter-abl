@@ -1,17 +1,43 @@
 ---
 name: tree-sitter-optimize
-description: Optimize tree-sitter grammar cost metrics such as ACTION_COUNT, STATE_COUNT, LARGE_STATE_COUNT, or expensive parser symbols. Use when asked to reduce parser size, squeeze action count, optimize costly grammar rules, or run a measured refactoring pass on a tree-sitter grammar.
+description: Optimize Tree-sitter grammar memory, size, or speed through measured refactoring. Use for parser or Wasm memory reduction, smaller generated tables, costly grammar rules, or parsing performance work.
 ---
 
 # Tree-sitter Optimize
 
 Use this skill to run a measured parser-cost reduction pass on a tree-sitter grammar.
 
+## Metrics and Scenarios
+
+Choose metrics according to the project's current bottleneck.
+
+| Metric                                              | Meaning and effect                                                                                               |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `LARGE_STATE_COUNT`                                 | Dense parse-table rows; each occupies `2 * SYMBOL_COUNT` bytes.                                                  |
+| `SYMBOL_COUNT`                                      | Tokens and nonterminals, including hidden/generated symbols; each column occupies `2 * LARGE_STATE_COUNT` bytes. |
+| `STATE_COUNT`                                       | Total parse states; affects parse-table storage, per-state metadata, and generation cost.                        |
+| `ACTION_COUNT`                                      | Highest referenced `ACTIONS(n)` index; proxy for action-table storage.                                           |
+| `TOKEN_COUNT`, `EXTERNAL_TOKEN_COUNT`               | Token counts; affect lexer tables/code and external-scanner table width.                                         |
+| `ALIAS_COUNT`, `FIELD_COUNT`, `PRODUCTION_ID_COUNT` | Counts of alias symbols, fields, and production metadata; affect metadata-table sizes.                           |
+| `PARSER_C_SIZE_BYTES`                               | Generated C text bytes; source footprint and compiler workload.                                                  |
+
+Dense rows allow direct lookups; sparse rows save row space but require symbol-group searches.
+
+## Reducing Symbol Count
+
+- Remove redundant forwarding/duplicate hidden rules; measure selective `inline`
+  for small unaliased helpers. Hiding or renaming a rule does not remove its symbol.
+- Reuse identical tokens and hidden structures, preserving lexical precedence,
+  fields, aliases, and scanner behavior. Preserve distinct visible tokens/nodes.
+- Inlining can increase states/actions. Compare the relevant metrics and measured
+  outcome for the project's current objective; preserve behavior and tree shape.
+
 ## Workflow
 
-1. Establish the baseline by regenerating `src/parser.c` with the project's normal generation command, then record `ACTION_COUNT`, `STATE_COUNT`, and `LARGE_STATE_COUNT`.
+1. Establish the baseline by regenerating `src/parser.c` with the project's normal generation command, then record `LARGE_STATE_COUNT`, `SYMBOL_COUNT`, `STATE_COUNT`, `ACTION_COUNT`, `DENSE_TABLE_SIZE_BYTES`, and `PARSER_C_SIZE_BYTES`.
    Prefer a project command that already prints these metrics when one exists.
-   Otherwise derive them from the generated `src/parser.c`.
+   Derive missing metrics from the generated `src/parser.c`.
+   For Wasm-memory work, also measure a fresh build's `dylink.0.memory_size`.
 2. Identify the hotspot before editing.
    Use the project's state-reporting workflow such as `tree-sitter generate --report-states-for-rule -` when available.
    Treat the largest rules as candidates, not automatic problems.
@@ -23,7 +49,7 @@ Use this skill to run a measured parser-cost reduction pass on a tree-sitter gra
    Otherwise derive them from `src/parser.c`.
 6. Run the relevant grammar validation or test workflow immediately after that single change.
    Do not queue multiple edits before measurement or validation.
-7. Compare the result to the last accepted baseline and revert neutral-to-worse changes quickly.
+7. Compare the result to the last accepted baseline against the project's current objective and revert neutral-to-worse changes quickly.
 8. On slow grammars, remember the last accepted checkpoint counts and avoid re-measuring immediately after a pure revert.
 9. Run the normal test workflow after the kept changes.
 10. Always note every state change between runs.
@@ -61,12 +87,14 @@ Before applying any optimization, verify that your changes:
 Example measurement loop:
 
 ```text
-baseline: ACTION_COUNT 65278
-change A: ACTION_COUNT 65170
-change B: ACTION_COUNT 65293
+          LARGE_STATE_COUNT  SYMBOL_COUNT  STATE_COUNT  ACTION_COUNT
+baseline: 16320              2100          44191        65278
+change A: 16300              2100          44200        65300
+change B: 16340              2100          44000        65100
 ```
 
-Keep change A. Revert change B immediately.
+A reduces dense-table bytes; B reduces state/action counts. Accept or revert using the
+project's current objective and relevant compiled-memory or benchmark measurements.
 
 ## Deriving Parser Metrics
 
@@ -76,20 +104,23 @@ After each generation pass, prefer any project-provided command that already pri
 
 If the project does not provide one, derive the metrics directly from `src/parser.c`.
 
-- `STATE_COUNT` and `LARGE_STATE_COUNT` are emitted as macros in `src/parser.c`.
-- `ACTION_COUNT` is not emitted directly as a macro in the generated parser. Derive it by scanning all `ACTIONS(<n>)` occurrences and taking the highest value.
+- `STATE_COUNT`, `LARGE_STATE_COUNT`, and `SYMBOL_COUNT` are emitted as macros in `src/parser.c`.
+- `ACTION_COUNT` is not emitted directly as a macro in the generated parser. Derive it by scanning all `ACTIONS(<n>)` occurrences and taking the highest value. This offset is not the exact array length.
+- Derive `DENSE_TABLE_SIZE_BYTES` as `2 * LARGE_STATE_COUNT * SYMBOL_COUNT`; measure `PARSER_C_SIZE_BYTES` from the file's byte size.
+- Read Wasm memory from a fresh build's `dylink.0` memory-info subsection, not file length. Use the same toolchain/options for comparisons.
 
 Example `src/parser.c` macros:
 
 ```c
 #define STATE_COUNT 44191
 #define LARGE_STATE_COUNT 16320
+#define SYMBOL_COUNT 2100
 ```
 
 Example extraction command:
 
 ```sh
-perl -ne 'if (/^#define (STATE_COUNT|LARGE_STATE_COUNT) \d+/) { print } while (/ACTIONS\((\d+)\)/g) { $m = $1 if !defined($m) || $1 > $m } END { print "#define ACTION_COUNT $m\n\n" if defined $m }' src/parser.c
+perl -ne 'if (/^#define (STATE_COUNT|LARGE_STATE_COUNT|SYMBOL_COUNT) (\d+)/) { $v{$1} = $2; print } while (/ACTIONS\((\d+)\)/g) { $m = $1 if !defined($m) || $1 > $m } END { print "#define ACTION_COUNT $m\n" if defined $m; print "#define DENSE_TABLE_SIZE_BYTES ", 2 * $v{LARGE_STATE_COUNT} * $v{SYMBOL_COUNT}, "\n" }' src/parser.c
 ```
 
 Treat the extracted output as the baseline and comparison source for optimization passes.
@@ -97,12 +128,12 @@ Treat the extracted output as the baseline and comparison source for optimizatio
 ## Validation
 
 - Re-run the parser generation command after every optimization step.
-- Recompute or re-read `ACTION_COUNT`, `STATE_COUNT`, and `LARGE_STATE_COUNT` after every kept change.
+- Recompute or re-read all baseline metrics after every change, before accepting it.
   Prefer a project command that already prints them.
   Otherwise derive them from `src/parser.c`.
 - Re-run the grammar test suite after the kept changes.
 - Verify the kept change does not alter the output tree shape or node visibility for existing parses.
-- If one metric improves but others regress badly, compare against the previous baseline before keeping the change.
+- Resolve tradeoffs against the project's current objective. For Wasm-memory work, verify reduced compiled static-data memory; dense-table savings can be offset by other tables.
 
 ## Optimization technique catalog
 
