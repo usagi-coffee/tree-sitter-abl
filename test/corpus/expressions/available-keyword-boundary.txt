@@ -1,0 +1,96 @@
+================================================================================
+AVAILABLE - keyword spelling and record fields
+================================================================================
+
+a = AVAIL t.
+b = available (t).
+c = AVAILABLE Pkg.t.
+d = NOT AVAIL (Pkg.t).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (available_expression
+      record: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (available_expression
+      record: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (available_expression
+      record: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (available_expression
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+AVAILABLE - keyword and parenthesis CST visibility
+:cst
+================================================================================
+a = AVAIL t.
+b = AVAILABLE (t).
+
+--------------------------------------------------------------------------------
+
+0:0  - 2:0    source_code
+0:0  - 0:12     assignment_statement
+0:0  - 0:1        left: identifier `a`
+0:2  - 0:3        operator: assignment_operator
+0:2  - 0:3          "="
+0:4  - 0:11       right: available_expression
+0:4  - 0:9          "AVAIL"
+0:10 - 0:11         record: identifier `t`
+1:0  - 1:18     assignment_statement
+1:0  - 1:1        left: identifier `b`
+1:2  - 1:3        operator: assignment_operator
+1:2  - 1:3          "="
+1:4  - 1:17       right: available_expression
+1:4  - 1:13         "AVAILABLE"
+1:14 - 1:15         "("
+1:15 - 1:16         record: identifier `t`
+1:16 - 1:17         ")"
+
+================================================================================
+AVAILABLE - reject a missing record
+:error
+================================================================================
+
+v = AVAILABLE.
+w = 1.
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+AVAILABLE - reject an empty parenthesized record
+:error
+================================================================================
+
+v = AVAIL().
+w = 1.
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+AVAILABLE - reject a string record
+:error
+================================================================================
+
+v = AVAILABLE "t".
+w = 1.
+
+--------------------------------------------------------------------------------

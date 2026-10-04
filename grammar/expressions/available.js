@@ -1,4 +1,5 @@
 export default ({ kw }) => ({
   available_expression: ($) =>
-    seq(choice(kw("AVAIL"), kw("AVAILABLE")), field("record", $._record_or_parenthesized_record)),
+    seq($.__available_keyword, field("record", $._record_or_parenthesized_record)),
+  __available_keyword: ($) => choice(kw("AVAIL"), kw("AVAILABLE")),
 });
