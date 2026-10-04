@@ -4,12 +4,12 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("record", $._qualified_identifier),
-      optional($.__record_field_list_preprocessor_tail),
+      optional($.__record_field_selection),
       optional($.__record_options),
     ),
   __record_options: ($) => prec.right(seq($.__record_option, optional($.__record_options))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
-  __record_field_list_preprocessor_tail: ($) =>
+  __record_field_selection: ($) =>
     choice(
       seq(alias($.__record_field_list, $.field_list), optional($.preprocessor_name)),
       $.preprocessor_name,
