@@ -47,6 +47,8 @@ export default ({ kw }) => ({
 
   __run_stored_procedure_param: ($) =>
     seq(
+      // Stored-procedure directions keep their local precedence boundary against INPUT expressions.
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("direction", choice($._kw_input, $._kw_output, $._kw_input_output))),
       optional(seq(kw("PARAM"), field("name", $.identifier), "=")),
       field("value", $._expression),
