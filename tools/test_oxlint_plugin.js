@@ -33,6 +33,7 @@ import {
   recursiveChoiceItemExtraction,
   optionalBlockBodyExtraction,
   nestedFieldBodyExtraction,
+  optionalFlagMarkerPrefix,
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
   sharedClosingDelimiterInline,
@@ -108,6 +109,114 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const optionalFlagMarkerFixture = (
+  flag = 'optional(alias(kw("EXPLICIT"), $.explicit))',
+  marker = "$.__block_marker",
+  delimiter = 'alias($._colon, ":")',
+  end = "$._kw_end",
+  definition = 'alias(kw("COMPARES"), $.compares)',
+) => `export default ({ kw }) => ({
+  __block: ($) => seq(${flag}, ${marker}, ${delimiter}, $.__clauses, optional($.__block_marker), ${end}),
+  __block_marker: ($) => ${definition},
+});`;
+new RuleTester().run("optional-flag-marker-prefix", optionalFlagMarkerPrefix, {
+  valid: [
+    optionalFlagMarkerFixture("optional($.identifier)"),
+    optionalFlagMarkerFixture('alias(kw("EXPLICIT"), $.explicit)'),
+    optionalFlagMarkerFixture("optional(alias(kw(flag), $.explicit))"),
+    optionalFlagMarkerFixture('optional(alias(kw("EXPLICIT", options), $.explicit))'),
+    optionalFlagMarkerFixture('optional(alias(kw("EXPLICIT"), $._explicit))'),
+    optionalFlagMarkerFixture(undefined, "$.block_marker"),
+    optionalFlagMarkerFixture(undefined, '$["__block_marker"]'),
+    optionalFlagMarkerFixture(undefined, "$.__missing_marker"),
+    optionalFlagMarkerFixture(undefined, undefined, '":"'),
+    optionalFlagMarkerFixture(undefined, undefined, 'alias($._colon, "{")'),
+    optionalFlagMarkerFixture(undefined, undefined, 'alias($._namedot, ":")'),
+    optionalFlagMarkerFixture(undefined, undefined, undefined, "$._terminator"),
+    optionalFlagMarkerFixture(undefined, undefined, undefined, undefined, "$.identifier"),
+    optionalFlagMarkerFixture(undefined, undefined, undefined, undefined, 'kw("COMPARES")'),
+    optionalFlagMarkerFixture(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      'alias(kw("COMPARES"), $._compares)',
+    ),
+    optionalFlagMarkerFixture(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      "alias(token(/COMPARES/i), $.compares)",
+    ),
+    optionalFlagMarkerFixture()
+      .replace("__block: ($) => seq(", "__block: ($) => token(seq(")
+      .replace("$._kw_end),", "$._kw_end)),"),
+    optionalFlagMarkerFixture().replace(
+      "  __block:",
+      "  // oxlint-disable-next-line rule-to-test/optional-flag-marker-prefix\n  __block:",
+    ),
+    optionalFlagMarkerFixture().replace(
+      "  __block_marker:",
+      "  // oxlint-disable-next-line rule-to-test/optional-flag-marker-prefix\n  __block_marker:",
+    ),
+    optionalFlagMarkerFixture().replace(
+      "seq(optional(alias",
+      "seq(\n// oxlint-disable-next-line rule-to-test/optional-flag-marker-prefix\noptional(alias",
+    ),
+    optionalFlagMarkerFixture().replace("export default ({ kw }) => (", "const unrelated = ("),
+    `export default ({ kw }) => ({
+      __block: ($) => seq($.__opener, alias($._colon, ":"), $.__clauses, $._kw_end),
+      __opener: ($) => seq(optional(alias(kw("EXPLICIT"), $.explicit)), $.__block_marker),
+      __block_marker: ($) => alias(kw("COMPARES"), $.compares),
+    });`,
+    optionalFlagMarkerFixture()
+      .replace("__block: ($) => seq(", "__block: ($) => prec.dynamic(1, seq(")
+      .replace("$._kw_end),", "$._kw_end)),"),
+    `export default grammar({ rules: {
+      __block: ($) => seq(optional(alias(kw("EXPLICIT"), $.explicit)), $.__block_marker, alias($._colon, ":"), $.__clauses, $._kw_end),
+      other: { __block_marker: ($) => alias(kw("COMPARES"), $.compares) },
+    } });`,
+  ],
+  invalid: [
+    {
+      name: "original COMPARES block with optional EXPLICIT marker",
+      code: optionalFlagMarkerFixture(),
+      errors: [
+        {
+          message:
+            /__block starts an END-closed block.*extracting only the flag and marker.*Keep the colon at its original caller/,
+        },
+      ],
+    },
+    {
+      name: "keyword abbreviation options and existing aliases remain exact",
+      code: optionalFlagMarkerFixture('optional(alias(kw("EXPLICIT", { offset: 3 }), $.explicit))'),
+      errors: [{ message: /retain every alias, keyword option, field scope and closing tail/ }],
+    },
+    {
+      name: "shared keyword aliases remain eligible",
+      code: optionalFlagMarkerFixture(
+        "optional(alias($._kw_explicit, $.explicit))",
+        undefined,
+        undefined,
+        undefined,
+        "alias($._kw_compares, $.compares)",
+      ),
+      errors: [
+        { message: /compare complete valid and error trees and node-schema required flags/ },
+      ],
+    },
+    {
+      name: "static outer precedence stays with the block",
+      code: optionalFlagMarkerFixture()
+        .replace("__block: ($) => seq(", '__block: ($) => prec.right("block", seq(')
+        .replace("$._kw_end),", "$._kw_end)),"),
+      errors: [{ message: /non-empty hidden prefix/ }],
+    },
+  ],
+});
 
 const privateKeywordChoiceBody = 'choice($._kw_column, kw("COLUMNS"), kw("COL"))';
 const privateKeywordChoiceFixture = (
