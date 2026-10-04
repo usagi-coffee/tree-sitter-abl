@@ -30,3 +30,55 @@ SUPER().
     (function_call
       function: (identifier)
       (arguments))))
+
+================================================================================
+NEW expression - quoted and generic constructor types keep fields and aliases
+================================================================================
+
+obj = NEW "MyClass"(1) NO-ERROR.
+consume(NEW "MyClass"(), NEW List<CHARACTER>()).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (string_literal)
+      (arguments
+        (argument
+          name: (number_literal))))
+    (no_error))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (new_expression
+            type: (string_literal)
+            (arguments)))
+        (argument
+          name: (new_expression
+            type: (generic_type
+              (identifier)
+              (identifier))
+            (arguments)))))))
+
+================================================================================
+NEW expression - reject a quoted constructor type without arguments
+:error
+================================================================================
+
+obj = NEW "MyClass".
+
+--------------------------------------------------------------------------------
+
+================================================================================
+NEW expression - reject a generic constructor with a trailing type separator
+:error
+================================================================================
+
+obj = NEW List<INTEGER,>().
+
+--------------------------------------------------------------------------------

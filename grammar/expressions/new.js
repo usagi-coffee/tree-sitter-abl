@@ -7,12 +7,7 @@ export default ({ kw }) => ({
         seq(
           field(
             "type",
-            choice(
-              $.scoped_name,
-              $._qualified_identifier,
-              $.string_literal,
-              alias($.__new_generic_type, $.generic_type),
-            ),
+            choice($.scoped_name, $._qualified_identifier, $.__new_literal_or_generic_type),
           ),
           $.arguments,
         ),
@@ -22,6 +17,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  __new_literal_or_generic_type: ($) =>
+    choice($.string_literal, alias($.__new_generic_type, $.generic_type)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __new_record_opener: ($) => seq("(", field("record", $._qualified_identifier)),
   // Keep generic constructor names local to NEW to limit parser state growth.
