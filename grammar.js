@@ -243,7 +243,6 @@ export default grammar({
     $._identifier_or_array_access,
     $._unquoted_name_initial,
     $._routine_name_initial,
-    $._parameter_direction,
     $._dos_unix_command,
     $.__buffer_compare_compares,
     $.__call_argument,
@@ -759,7 +758,12 @@ export default grammar({
         seq(",", optional($.argument), optional($.__arguments_comma_tail)),
       argument: ($) =>
         seq(
-          optional(prec.dynamic(1, field("direction", $._parameter_direction))),
+          optional(
+            prec.dynamic(
+              1,
+              field("direction", choice($._kw_input, $._kw_output, $._kw_input_output)),
+            ),
+          ),
           $.__argument_body,
         ),
       __argument_body: ($) =>

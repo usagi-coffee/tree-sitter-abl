@@ -1,0 +1,135 @@
+================================================================================
+Parameter directions - declarations and value argument contexts
+================================================================================
+
+DEFINE INPUT PARAMETER a AS INTEGER.
+DEFINE OUTPUT PARAMETER b AS INTEGER.
+DEFINE INPUT-O PARAMETER c AS INTEGER.
+FUNCTION f RETURNS INTEGER (INPUT x AS INTEGER, OUTPUT y AS INTEGER, INPUT-OUTPUT z AS INTEGER) FORWARD.
+CLASS C:
+  DEFINE EVENT E SIGNATURE VOID (INPUT x AS INTEGER, OUTPUT y AS INTEGER, INPUT-O z AS INTEGER).
+  METHOD PUBLIC VOID M(INPUT x AS INTEGER, OUTPUT y AS INTEGER, INPUT-OUTPUT z AS INTEGER):
+  END METHOD.
+  CONSTRUCTOR PUBLIC C(INPUT-O x AS INTEGER):
+  END CONSTRUCTOR.
+  DEFINE PROPERTY p AS INTEGER GET. SET(OUTPUT v AS INTEGER).
+END CLASS.
+f(INPUT x, OUTPUT y, INPUT-O z, INPUT FRAME fr x).
+RUN STORED-PROCEDURE p(INPUT x, OUTPUT y, INPUT-OUTPUT z).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier))
+      (parameter
+        name: (identifier)
+        type: (identifier))
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward))
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier))
+        (parameter
+          name: (identifier)
+          type: (identifier))
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body))
+    (constructor_definition
+      (access_modifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body))
+    (property_definition
+      name: (identifier)
+      type: (identifier)
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (identifier))
+        (argument
+          name: (identifier))
+        (argument
+          name: (input_expression
+            frame: (identifier)
+            field: (identifier))))))
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    (parameter_list
+      value: (identifier)
+      value: (identifier)
+      value: (identifier))))
+
+================================================================================
+Parameter directions - reject a missing PARAMETER keyword
+:error
+================================================================================
+
+DEFINE INPUT x AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Parameter directions - reject stacked event directions
+:error
+================================================================================
+
+CLASS C:
+ DEFINE EVENT E SIGNATURE VOID (INPUT OUTPUT x AS INTEGER).
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Parameter directions - reject an unnamed definition parameter
+:error
+================================================================================
+
+FUNCTION f RETURNS INTEGER (OUTPUT AS INTEGER): END FUNCTION.
+
+--------------------------------------------------------------------------------

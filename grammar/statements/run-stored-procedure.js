@@ -47,7 +47,7 @@ export default ({ kw }) => ({
 
   __run_stored_procedure_param: ($) =>
     seq(
-      optional(field("direction", $._parameter_direction)),
+      optional(field("direction", choice($._kw_input, $._kw_output, $._kw_input_output))),
       optional(seq(kw("PARAM"), field("name", $.identifier), "=")),
       field("value", $._expression),
     ),
