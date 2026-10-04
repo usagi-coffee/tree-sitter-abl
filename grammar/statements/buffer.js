@@ -1,7 +1,6 @@
 export default ({ kw }) => ({
   buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
 
-  // Retain this declaration boundary to limit specialization of the buffer body.
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __buffer_prefix: ($) => seq($._define_buffer_query_prefix, $._kw_buffer, $.__buffer_body),
 

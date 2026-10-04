@@ -1,7 +1,6 @@
 export default ({ kw }) => ({
   menu_definition: ($) => seq($.__menu_prefix, $._terminator),
 
-  // Retain this declaration boundary to limit specialization of the menu body.
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __menu_prefix: ($) => seq($._define_scope_prefix, $._kw_menu, $.__menu_body),
 

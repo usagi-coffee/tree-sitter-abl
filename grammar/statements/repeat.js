@@ -35,7 +35,6 @@ export default ({ kw }) => ({
     ),
   __repeat_body_after_transaction: ($) => choice(seq($._block_options, $.body), $.body),
 
-  // Inline condition keywords avoid an extra reduction and dense-table column.
   // oxlint-disable-next-line tree-sitter-optimize/leading-keyword-field-boundary
   __repeat_condition_phrase: ($) =>
     seq(choice($._kw_while, kw("UNTIL")), field("condition", $._expression)),

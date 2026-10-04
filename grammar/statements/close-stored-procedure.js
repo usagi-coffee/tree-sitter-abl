@@ -5,7 +5,6 @@ export default ({ kw }) => ({
   __close_stored_procedure_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      // An inline keyword choice avoids an extra reduction and dense-table column.
       // oxlint-disable-next-line tree-sitter-optimize/leading-keyword-field-boundary
       choice($._kw_stored_procedure, kw("STORED-PROC")),
       field("procedure", $._qualified_identifier),

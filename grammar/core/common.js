@@ -181,7 +181,6 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PRIVATE"), $.access_modifier),
     ),
-  // Keep the modifier symbol available to the DEFINE conflict sets.
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _buffer_query_modifier: ($) =>
     choice(
@@ -498,7 +497,6 @@ export default ({ kw }) => ({
   _aggregate_label_phrase: ($) => seq($._kw_label, field("label", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")),
-  // Call argument directions keep their local reduction boundary against INPUT screen-buffer expressions.
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   _parameter_direction: ($) => choice($._kw_input, $._kw_output, $._kw_input_output),
 
