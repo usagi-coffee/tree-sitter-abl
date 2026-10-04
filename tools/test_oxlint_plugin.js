@@ -26,6 +26,7 @@ import {
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordAliasChoiceBoundary,
   contextualScalarNameBoundary,
+  contextualKeywordChoiceBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -8882,4 +8883,145 @@ try {
   );
 } finally {
   rmSync(scalarNameBoundaryDirectory, { recursive: true, force: true });
+}
+
+const keywordChoiceBoundaryFixture = (
+  body = "choice($._kw_first, $._kw_last, $._kw_next)",
+  metadata = "inline: ($) => [$._selector],",
+  use = 'optional(prec.dynamic(1, field("direction", $._selector)))',
+) => `export default grammar({
+  ${metadata}
+  rules: {
+    root: ($) => seq(${use}, $.value),
+    _selector: ($) => ${body},
+  },
+});`;
+const beforeParameterDirectionBoundary = readFileSync(
+  new URL("./fixtures/parameter-direction-inline.js", import.meta.url),
+  "utf8",
+);
+new RuleTester().run("contextual-keyword-choice-boundary", contextualKeywordChoiceBoundary, {
+  valid: [
+    keywordChoiceBoundaryFixture(undefined, ""),
+    keywordChoiceBoundaryFixture().replaceAll("_selector", "selector"),
+    keywordChoiceBoundaryFixture().replaceAll("_selector", "_kw_selector"),
+    keywordChoiceBoundaryFixture("choice($._kw_first)"),
+    keywordChoiceBoundaryFixture("choice($._kw_first, $._kw_first)"),
+    keywordChoiceBoundaryFixture("choice($._kw_first, $.identifier)"),
+    keywordChoiceBoundaryFixture('choice($._kw_first, kw("LAST"))'),
+    keywordChoiceBoundaryFixture("choice(alias($._kw_first, $.first), $._kw_last)"),
+    keywordChoiceBoundaryFixture("prec.right(choice($._kw_first, $._kw_last))"),
+    keywordChoiceBoundaryFixture(
+      `choice(${Array.from({ length: 8 }, (_, index) => `$._kw_k${index}`).join(", ")})`,
+    ),
+    ...["conflicts", "supertypes", "externals", "precedences"].map((metadata) =>
+      keywordChoiceBoundaryFixture(
+        undefined,
+        `inline: ($) => [$._selector], ${metadata}: ($) => [$._selector],`,
+      ),
+    ),
+    keywordChoiceBoundaryFixture(
+      undefined,
+      "inline: ($) => [$._selector], word: ($) => $._selector,",
+    ),
+    keywordChoiceBoundaryFixture(
+      undefined,
+      "inline: ($) => [$._selector], conflicts: ($) => [[$[unknown]]],",
+    ),
+    keywordChoiceBoundaryFixture(undefined, undefined, "token($._selector)"),
+    keywordChoiceBoundaryFixture(undefined, undefined, "token.immediate($._selector)"),
+    keywordChoiceBoundaryFixture(undefined, undefined, "alias($._selector, $.flag)"),
+    keywordChoiceBoundaryFixture().replace(
+      "_selector: ($)",
+      "// oxlint-disable-next-line rule-to-test/contextual-keyword-choice-boundary\n_selector: ($)",
+    ),
+    keywordChoiceBoundaryFixture().replace(
+      "_selector: ($)",
+      "// oxlint-disable rule-to-test/contextual-keyword-choice-boundary\n_selector: ($)",
+    ),
+    beforeParameterDirectionBoundary.replace("    $._parameter_direction,\n", ""),
+  ],
+  invalid: [
+    {
+      name: "original parameter selector, argument dynamic field and function declaration",
+      code: beforeParameterDirectionBoundary,
+      errors: [{ message: /_parameter_direction expands a bare keyword family/ }],
+    },
+    {
+      name: "different bare keyword family and dynamic caller remain measurable",
+      code: keywordChoiceBoundaryFixture(),
+      errors: [{ message: /expression\/value and dynamic-precedence contexts/ }],
+    },
+    {
+      name: "two-keyword selector without a dynamic caller",
+      code: keywordChoiceBoundaryFixture(
+        "choice($._kw_start, $._kw_stop)",
+        undefined,
+        'field("mode", $._selector)',
+      ),
+      errors: [{ message: /caller fields and precedence/ }],
+    },
+    {
+      name: "comments and strings cannot supply metadata",
+      code: `const note = "conflicts: ($) => [[$._selector]]";
+        // precedences: ($) => [[$._selector]]
+        ${keywordChoiceBoundaryFixture()}`,
+      errors: [{ message: /without changing the ambiguity policy/ }],
+    },
+  ],
+});
+const keywordChoiceBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-choice-boundary-"));
+try {
+  const filename = join(keywordChoiceBoundaryDirectory, "grammar", "core", "common.js"),
+    code = "export default ({kw}) => ({ _selector: ($) => choice($._kw_first, $._kw_last) });";
+  writeFileSync(
+    join(keywordChoiceBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._selector], rules: {} });",
+  );
+  new RuleTester().run(
+    "contextual-keyword-choice-boundary cross-file inline",
+    contextualKeywordChoiceBoundary,
+    {
+      valid: [],
+      invalid: [
+        {
+          cwd: keywordChoiceBoundaryDirectory,
+          filename,
+          code,
+          errors: [{ message: /bare keyword family/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(keywordChoiceBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._selector], conflicts: ($) => [[$._selector]], rules: {} });",
+  );
+  new RuleTester().run(
+    "contextual-keyword-choice-boundary cross-file conflict",
+    contextualKeywordChoiceBoundary,
+    {
+      valid: [{ cwd: keywordChoiceBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+  mkdirSync(join(keywordChoiceBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordChoiceBoundaryDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._selector], rules: {} });",
+  );
+  writeFileSync(
+    join(keywordChoiceBoundaryDirectory, "grammar", "precedences", "selector.js"),
+    "export default ($) => [[$._selector, $.value]];",
+  );
+  new RuleTester().run(
+    "contextual-keyword-choice-boundary cross-file precedence",
+    contextualKeywordChoiceBoundary,
+    {
+      valid: [{ cwd: keywordChoiceBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordChoiceBoundaryDirectory, { recursive: true, force: true });
 }
