@@ -17,6 +17,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __new_literal_or_generic_type: ($) =>
     choice($.string_literal, alias($.__new_generic_type, $.generic_type)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
