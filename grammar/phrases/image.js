@@ -2,6 +2,8 @@ export default ({ kw }) => ({
   image_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // The inline FILE/FILENAME choice avoids an extra dense-table column.
+      // oxlint-disable-next-line tree-sitter-optimize/leading-keyword-field-boundary
       choice($._kw_file, kw("FILENAME")),
       field("file", $._expression),
       optional(
