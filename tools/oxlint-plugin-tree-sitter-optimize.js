@@ -1268,127 +1268,6 @@ export const shortSharedCategoryName = rule((context) => {
   };
 }, "Suggest concise semantic names for shared hidden symbol-choice categories");
 
-export const compositeSelectionName = rule((context) => {
-  const properties = [],
-    exposed = rootMetadataSymbols(context, ["externals", "supertypes", "word"]);
-  let dynamicReference = false;
-  const symbol = (node) =>
-    memberName(node) ??
-    (node?.type === "MemberExpression" &&
-    node.computed &&
-    node.object.name === "$" &&
-    node.property.type === "Literal" &&
-    typeof node.property.value === "string"
-      ? node.property.value
-      : null);
-  return {
-    Property(node) {
-      if (isRuleProperty(node)) properties.push(node);
-    },
-    MemberExpression(node) {
-      if (node.object.type !== "Identifier" || node.object.name !== "$") return;
-      const name = symbol(node);
-      if (!name) dynamicReference = true;
-      for (let parent = node.parent; parent && !enclosingRule(node); parent = parent.parent) {
-        if (
-          parent.type === "Property" &&
-          ["externals", "supertypes", "word"].includes(ruleName(parent))
-        ) {
-          if (name) exposed.add(name);
-          break;
-        }
-      }
-    },
-    CallExpression(node) {
-      if (callName(node) === "alias" && node.arguments.length === 2) {
-        const target = symbol(node.arguments[1]);
-        if (target) exposed.add(target);
-      }
-    },
-    "Program:exit"() {
-      if (dynamicReference) return;
-      for (const property of properties) {
-        const name = ruleName(property),
-          body = property.value.body;
-        if (
-          property.computed ||
-          !name.startsWith("__") ||
-          exposed.has(name) ||
-          isRuleDisabled(context, property) ||
-          isRuleDisabled(context, body) ||
-          callName(body) !== "choice" ||
-          body.arguments.length !== 2 ||
-          !isStaticDsl(body)
-        )
-          continue;
-        for (let index = 0; index < 2; index++) {
-          const sequence = body.arguments[index],
-            fallback = body.arguments[1 - index];
-          const placeholder = memberName(fallback);
-          if (
-            !placeholder ||
-            placeholder.startsWith("_") ||
-            !/(?:^|_)(?:preprocessor|macro)(?:_|$)/.test(placeholder) ||
-            callName(sequence) !== "seq" ||
-            sequence.arguments.length !== 2
-          )
-            continue;
-          let [head, continuation] = sequence.arguments;
-          const originalHead = head;
-          if (
-            callName(continuation) !== "optional" ||
-            continuation.arguments.length !== 1 ||
-            dslSignature(continuation.arguments[0]) !== dslSignature(fallback)
-          )
-            continue;
-          if (
-            callName(head) === "field" &&
-            head.arguments.length === 2 &&
-            head.arguments[0].type === "Literal" &&
-            typeof head.arguments[0].value === "string"
-          )
-            head = head.arguments[1];
-          if (callName(head) !== "alias" || head.arguments.length !== 2) continue;
-          const source = memberName(head.arguments[0]),
-            target = memberName(head.arguments[1]);
-          if (
-            !source?.startsWith("__") ||
-            !target ||
-            target.startsWith("_") ||
-            !/_(?:list|phrase)$/.test(target) ||
-            !/(?:^|_)(?:fields?|columns?|filter|projection|selection)(?:_|$)/.test(target) ||
-            !source.endsWith(`_${target}`)
-          )
-            continue;
-          const domain = source.slice(0, -target.length - 1);
-          if (!/^__[A-Za-z][A-Za-z0-9_]*$/.test(domain)) continue;
-          const roles = new Set([
-            placeholder,
-            placeholder.replace(/_(?:name|reference|placeholder)$/, ""),
-          ]);
-          if (![...roles].some((role) => name === `${domain}_${target}_${role}_tail`)) continue;
-          const suggested = `${domain}_${target.replace(/_(?:list|phrase)$/, "")}_selection`;
-          if (
-            properties.some((other) => ruleName(other) === suggested) ||
-            referencedSymbols(body).includes(name) ||
-            [sequence, fallback, continuation, originalHead, head, ...head.arguments].some((node) =>
-              isRuleDisabled(context, node),
-            )
-          )
-            continue;
-          report(
-            context,
-            property,
-            "composite-selection-name",
-            `${name} names a selection clause and its expansion placeholder as implementation parts; consider ${suggested} to express their common selection role while retaining the owning domain qualifier. Preserve the complete body, clause alias, fields, option order and token owners, check all references, metadata, exposure and collisions, then measure emitted parser bytes and compare complete trees. This only shortens hidden symbol text; it does not improve parser counts or runtime.`,
-          );
-          break;
-        }
-      }
-    },
-  };
-}, "Suggest semantic domain-qualified names for private selection clauses with expansion placeholders");
-
 export const shortPrivatePrefix = rule((context) => {
   const properties = [],
     aliasTargets = new Set();
@@ -5093,14 +4972,6 @@ function rootMetadataSymbols(context, properties) {
   const code = tokens.filter((part) => !part.startsWith("//") && !part.startsWith("/*"));
   const names = new Set();
   for (let i = 0; i < code.length - 6; i++) {
-    if (
-      properties.includes(code[i]) &&
-      code.slice(i + 1, i + 8).join(" ") === ": ( $ ) => $ ." &&
-      /^[$A-Z_a-z][$\w]*$/.test(code[i + 8] ?? "")
-    ) {
-      names.add(code[i + 8]);
-      continue;
-    }
     if (!properties.includes(code[i]) || code.slice(i + 1, i + 7).join(" ") !== ": ( $ ) => [")
       continue;
     let depth = 1;
@@ -7403,7 +7274,6 @@ export default {
     "short-keyword-helper-name": shortKeywordHelperName,
     "short-shared-category-name": shortSharedCategoryName,
     "short-private-prefix": shortPrivatePrefix,
-    "composite-selection-name": compositeSelectionName,
     "short-aliased-lexical-name": shortAliasedLexicalName,
     "shared-declaration-tail": sharedDeclarationTail,
     "shared-block-close": sharedBlockClose,
