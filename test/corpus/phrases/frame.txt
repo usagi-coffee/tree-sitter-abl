@@ -1,4 +1,39 @@
 ================================================================================
+FRAME phrase - qualifier WITH and DISPLAY BROWSE endings
+================================================================================
+
+DISPLAY x WITH BROWSE grid NO-ERROR.
+DISPLAY x WITH FRAME panel WITH ROW 1 NO-ERROR.
+FORM x WITH BROWSE grid WITH ROW 2.
+FORM x WITH FRAME 1a WITH TITLE "Ready".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    browse: (identifier)
+    (no_error))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal))
+    (no_error))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      browse: (identifier)
+      row: (number_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      title: (string_literal))))
+
+================================================================================
 FRAME phrase - COLUMN keyword variants and value order
 ================================================================================
 

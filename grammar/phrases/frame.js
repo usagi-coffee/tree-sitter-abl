@@ -49,7 +49,7 @@ export default ({ kw }) => ({
       alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ACCUM"), $.accum),
-      $.__frame_with_identifier,
+      prec.right(seq($.__frame_with_identifier, optional($._kw_with))),
       seq($._kw_row, field("row", $.__frame_expression)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("WIDTH"), field("width", $.__frame_expression)),
@@ -114,15 +114,13 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __frame_color_value: ($) => choice($._kw_normal, $._kw_input, $._kw_messages, $.color_phrase),
 
+  // DISPLAY's WITH BROWSE form must continue into a following NO-ERROR.
   __frame_with_identifier: ($) =>
     prec.right(
-      seq(
-        choice(
-          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-          seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
-          seq($._kw_browse, field("browse", $.__frame_identifier)),
-        ),
-        optional($._kw_with),
+      choice(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        seq(kw("FRAME", { offset: 4 }), field("frame", $._frame_name)),
+        seq($._kw_browse, field("browse", $.__frame_identifier)),
       ),
     ),
 });
