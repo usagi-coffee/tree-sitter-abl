@@ -21,6 +21,7 @@ export default ({ kw }) => ({
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("DROP-TARGET"), $.drop_target),
           seq(kw("IMAGE-DOWN"), field("image_down", $.image_phrase)),
+          // oxlint-disable-next-line tree-sitter-optimize/contextual-keyword-prefix-boundary
           seq($._kw_image, field("image", $.image_phrase)),
           seq(kw("IMAGE-UP"), field("image_up", $.image_phrase)),
           seq(kw("IMAGE-INSENSITIVE"), field("image_insensitive", $.image_phrase)),
