@@ -33,6 +33,6 @@ export default ({ kw }) => ({
       ),
     ),
 
-  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset, tree-sitter-optimize/keyword-reuse
   __put_screen_color_phrase: ($) => seq(kw("COLOR"), field("color", $._expression)),
 });
