@@ -13,6 +13,7 @@ export default ({ kw }) => ({
   __color_tail: ($) =>
     seq(
       field("color", $.color_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/contextual-keyword-prefix-boundary
       optional(seq($._kw_prompt, field("prompt_color", $.color_phrase))),
       $.__color_targets,
       optional($.frame_phrase),
