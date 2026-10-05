@@ -253,7 +253,6 @@ export default grammar({
     $.__for_by_phrase,
     $._find_record_option,
     $._method_modifier_no_abstract,
-    $._aliased_value_expression,
     $._method_definition_signature,
     $.system_handle_identifier,
   ],
@@ -960,6 +959,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/inline-target-forwarding
       _identifier_or_string_literal_value: ($) => $._identifier_or_string_literal,
       _value_expression: ($) => seq($._value_expression_opener, ")"),
+      // oxlint-disable-next-line tree-sitter-optimize/alias-forwarding-inline
       _aliased_value_expression: ($) => alias($._value_expression, $.value_expression),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _value_expression_opener: ($) => seq($._kw_value, "(", field("value", $._expression)),
