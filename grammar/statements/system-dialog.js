@@ -7,7 +7,7 @@ export default ({ kw }) => ({
   __system_dialog_color_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      $._kw_color,
+      kw("COLOR"),
       field("color", $._expression),
       optional(alias($.__system_dialog_update_phrase, $.update_phrase)),
       optional($.in_window_phrase),

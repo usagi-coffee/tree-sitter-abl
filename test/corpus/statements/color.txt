@@ -88,3 +88,59 @@ COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
     (identifier)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+COLOR - scalar and expression keyword contexts
+================================================================================
+
+COLOR VALUE(palette) field1.
+CHOOSE FIELD field1 COLOR VALUE(palette) WITH FRAME f.
+MESSAGE COLOR VALUE(palette) "text".
+DISPLAY field1 WITH FRAME f COLOR DISPLAY VALUE(palette) PROMPT VALUE(otherColor).
+PUT SCREEN COLOR palette + 1 ROW 1 "text".
+SYSTEM-DIALOG COLOR palette + 1 UPDATE selectedColor.
+PUT-KEY-VALUE COLOR palette + 1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (color_statement
+    color: (color_phrase
+      value: (identifier))
+    (identifier))
+  (choose_statement
+    field: (identifier)
+    color: (color_phrase
+      value: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (message_statement
+    color: (color_phrase
+      value: (identifier))
+    (string_literal))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      color: (color_phrase
+        value: (identifier))
+      prompt_color: (color_phrase
+        value: (identifier))))
+  (put_screen_statement
+    (color_phrase
+      color: (binary_expression
+        (identifier)
+        (number_literal)))
+    row: (number_literal)
+    value: (string_literal))
+  (system_dialog_color_statement
+    color: (binary_expression
+      (identifier)
+      (number_literal))
+    (update_phrase
+      update: (identifier)))
+  (put_key_value_statement
+    number: (binary_expression
+      (identifier)
+      (number_literal))
+    (no_error)))

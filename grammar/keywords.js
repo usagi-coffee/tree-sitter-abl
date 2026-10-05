@@ -58,7 +58,6 @@ export const inline = ($) => [
   $._kw_column_of,
   $._kw_keys,
   $._kw_convert,
-  $._kw_color,
   $._kw_collate,
   $._kw_dcolor,
   $._kw_data_source,
