@@ -43,6 +43,7 @@ import {
   sharedClosingDelimiterInline,
   sharedKeywordFieldInline,
   forwardedAliasReuse,
+  aliasForwardingInline,
   closingDelimiterHoist,
   choiceProductExtraction,
   sharedFieldMarker,
@@ -113,6 +114,189 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const aliasForwardingFixture = readFileSync(
+  new URL("./fixtures/value-alias-forwarding.js", import.meta.url),
+  "utf8",
+);
+const aliasForwardingDirectory = mkdtempSync(join(tmpdir(), "abl-alias-forwarding-inline-"));
+const aliasForwardingCase = (name, code = aliasForwardingFixture) => ({
+  name,
+  code,
+  cwd: aliasForwardingDirectory,
+  filename: join(aliasForwardingDirectory, "grammar.js"),
+});
+const aliasForwardingMessage =
+  /only forwards the named nonterminal alias.*grammar.inline.*retaining the aliased source rule.*dense-table and compiled bytes.*complete valid and error trees/;
+try {
+  new RuleTester().run("alias-forwarding-inline", aliasForwardingInline, {
+    invalid: [
+      {
+        ...aliasForwardingCase("original VALUE expression alias forwarding"),
+        errors: [{ message: aliasForwardingMessage }],
+      },
+      {
+        ...aliasForwardingCase(
+          "private forwarding wrapper under caller fields",
+          aliasForwardingFixture
+            .replaceAll("_aliased_value_expression", "__example_value")
+            .replace(
+              "choice($.__example_value, $.procedure_name)",
+              'seq("RUN", field("procedure", $.__example_value))',
+            ),
+        ),
+        errors: [{ message: aliasForwardingMessage }],
+      },
+      {
+        ...aliasForwardingCase(
+          "shared wrapper with callers in other modules",
+          aliasForwardingFixture.replace(/    _run_target:[\s\S]*?\n  },/, "  },"),
+        ),
+        errors: [{ message: aliasForwardingMessage }],
+      },
+      {
+        ...aliasForwardingCase(
+          "aliased nonterminal retains its own precedence identity",
+          aliasForwardingFixture.replace(
+            "  rules: {",
+            "  conflicts: ($) => [[$._value_expression, $.other]],\n  rules: {",
+          ),
+        ),
+        errors: [{ message: aliasForwardingMessage }],
+      },
+      {
+        ...aliasForwardingCase(
+          "unrelated suppression",
+          aliasForwardingFixture.replace(
+            "    _aliased_value_expression:",
+            "    // oxlint-disable-next-line rule-to-test/other-rule\n    _aliased_value_expression:",
+          ),
+        ),
+        errors: [{ message: aliasForwardingMessage }],
+      },
+    ],
+    valid: [
+      aliasForwardingCase(
+        "optimized metadata inline wrapper",
+        aliasForwardingFixture.replace(
+          "inline: ($) => []",
+          "inline: ($) => [$._aliased_value_expression]",
+        ),
+      ),
+      aliasForwardingCase(
+        "public forwarding rule has visible identity",
+        aliasForwardingFixture.replaceAll("_aliased_value_expression", "aliased_value_expression"),
+      ),
+      aliasForwardingCase(
+        "anonymous alias",
+        aliasForwardingFixture.replace("$.value_expression)", '"VALUE")'),
+      ),
+      aliasForwardingCase(
+        "hidden alias target",
+        aliasForwardingFixture.replace("$.value_expression)", "$._renamed_value)"),
+      ),
+      ...[
+        "token(/[a-z]+/)",
+        "token.immediate(/[a-z]+/)",
+        'kw("VALUE")',
+        "/[a-z]+/",
+        "$._another_rule",
+        "seq($._value_expression_opener, dynamic_value())",
+      ].map((body) =>
+        aliasForwardingCase(
+          `source is lexical, forwarded or dynamic: ${body}`,
+          aliasForwardingFixture.replace('seq($._value_expression_opener, ")")', body),
+        ),
+      ),
+      aliasForwardingCase(
+        "unknown aliased source definition",
+        aliasForwardingFixture.replace(/    _value_expression:.*\n/, ""),
+      ),
+      aliasForwardingCase(
+        "wrapper adds precedence",
+        aliasForwardingFixture.replace(
+          "alias($._value_expression, $.value_expression)",
+          "prec.right(alias($._value_expression, $.value_expression))",
+        ),
+      ),
+      aliasForwardingCase(
+        "mutually recursive wrapper",
+        aliasForwardingFixture.replace(
+          'seq($._value_expression_opener, ")")',
+          'seq($._aliased_value_expression, ")")',
+        ),
+      ),
+      ...[
+        "alias($._aliased_value_expression, $.other)",
+        "token($._aliased_value_expression)",
+        "token.immediate($._aliased_value_expression)",
+        "prec.dynamic(1, $._aliased_value_expression)",
+        "factory($._aliased_value_expression)",
+      ].map((use) =>
+        aliasForwardingCase(
+          `caller depends on wrapper identity: ${use}`,
+          aliasForwardingFixture.replace("  rules: {", `  rules: { caller: ($) => ${use},`),
+        ),
+      ),
+      ...["conflicts", "precedences", "externals", "extras", "supertypes", "word"].map((metadata) =>
+        aliasForwardingCase(
+          `wrapper metadata ${metadata}`,
+          aliasForwardingFixture.replace(
+            "  rules: {",
+            `  ${metadata}: ($) => [$._aliased_value_expression],\n  rules: {`,
+          ),
+        ),
+      ),
+      aliasForwardingCase(
+        "computed reference",
+        aliasForwardingFixture + '\nconst other = $["_aliased_value_expression"];',
+      ),
+      aliasForwardingCase(
+        "dynamic reference",
+        aliasForwardingFixture + "\nconst other = $[selected];",
+      ),
+      aliasForwardingCase(
+        "explicit suppression",
+        aliasForwardingFixture.replace(
+          "    _aliased_value_expression:",
+          "    // oxlint-disable-next-line rule-to-test/alias-forwarding-inline\n    _aliased_value_expression:",
+        ),
+      ),
+      aliasForwardingCase(
+        "alias-body suppression",
+        aliasForwardingFixture.replace(
+          "($) => alias($._value_expression, $.value_expression)",
+          "($) =>\n      // oxlint-disable-next-line rule-to-test/alias-forwarding-inline\n      alias($._value_expression, $.value_expression)",
+        ),
+      ),
+    ],
+  });
+  writeFileSync(
+    join(aliasForwardingDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._aliased_value_expression] });",
+  );
+  new RuleTester().run("alias-forwarding-inline root metadata", aliasForwardingInline, {
+    valid: [
+      {
+        ...aliasForwardingCase("inline metadata in root grammar"),
+        filename: join(aliasForwardingDirectory, "grammar", "values.js"),
+      },
+    ],
+    invalid: [],
+  });
+  rmSync(join(aliasForwardingDirectory, "grammar.js"));
+  mkdirSync(join(aliasForwardingDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(aliasForwardingDirectory, "grammar", "precedences", "values.js"),
+    "export default ($) => [[$._aliased_value_expression, $.other]];",
+  );
+  new RuleTester().run("alias-forwarding-inline external precedence", aliasForwardingInline, {
+    valid: [aliasForwardingCase("precedence module retains wrapper identity")],
+    invalid: [],
+  });
+} finally {
+  rmSync(aliasForwardingDirectory, { recursive: true, force: true });
+}
 
 const retainedInfixFixture = `export default grammar({
   inline: ($) => [],
