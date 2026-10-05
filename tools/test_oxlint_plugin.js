@@ -118,7 +118,7 @@ import {
   sharedSequence,
   sharedRecursion,
   sharedRepetition,
-} from "./oxlint-plugin-tree-sitter-optimize.js";
+} from "../oxlint/index.js";
 
 const valuedChoiceFixture = readFileSync(
   new URL("./fixtures/contextual-valued-choice.js", import.meta.url),

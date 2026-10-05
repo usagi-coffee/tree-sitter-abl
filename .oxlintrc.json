@@ -4,7 +4,7 @@
   "jsPlugins": [
     {
       "name": "tree-sitter-optimize",
-      "specifier": "./tools/oxlint-plugin-tree-sitter-optimize.js"
+      "specifier": "./oxlint/index.js"
     }
   ],
   "rules": {
