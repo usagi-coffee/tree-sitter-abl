@@ -52,6 +52,7 @@
         "tree-sitter-optimize/inline-target-forwarding": "warn",
         "tree-sitter-optimize/closing-delimiter-hoist": "warn",
         "tree-sitter-optimize/choice-suffix-hoist": "warn",
+        "tree-sitter-optimize/precedence-optional-marker-hoist": "warn",
         "tree-sitter-optimize/choice-product-extraction": "warn",
         "tree-sitter-optimize/shared-field-marker": "warn",
         "tree-sitter-optimize/redundant-inherited-field": "warn",

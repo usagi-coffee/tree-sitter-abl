@@ -15,6 +15,7 @@ import {
   optionalSelectorBodyInline,
   intraRuleSharedChoice,
   choiceSuffixHoist,
+  precedenceOptionalMarkerHoist,
   sharedSymbolAliasChoiceInline,
   contextualInfixBoundary,
   infixChoiceInline,
@@ -2057,6 +2058,111 @@ new RuleTester().run("choice-suffix-hoist", choiceSuffixHoist, {
     {
       code: 'export default () => ({root: ($) => seq($.__body, "."), __body: ($) => seq(choice($.a, $.b), optional($.tail))});',
       errors: [{ message: /moving the complete optional suffix/ }],
+    },
+  ],
+});
+
+const precedenceMarkerChoice = `choice(
+  seq(kw("FRAME", {offset: 4}), field("frame", $._frame_name)),
+  seq($._kw_browse, field("browse", $.__frame_identifier)))`;
+const precedenceMarkerBody = `prec.right(seq(${precedenceMarkerChoice}, optional($._kw_with)))`;
+const precedenceMarkerGrammar = (
+  body = precedenceMarkerBody,
+  use = "$.__qualifier",
+  extra = "",
+) => `export default () => ({
+  root: ($) => choice(${use}, $.other),
+  __qualifier: ($) => ${body},
+  ${extra}
+});`;
+const precedenceMarkerError = {
+  message: /optional trailing keyword.*both the helper head and the caller sequence/,
+};
+new RuleTester().run("precedence-optional-marker-hoist", precedenceOptionalMarkerHoist, {
+  valid: [
+    precedenceMarkerGrammar(
+      `prec.right(${precedenceMarkerChoice})`,
+      "prec.right(seq($.__qualifier, optional($._kw_with)))",
+    ),
+    precedenceMarkerGrammar().replaceAll("__qualifier", "qualifier"),
+    precedenceMarkerGrammar().replaceAll("__qualifier", "_qualifier"),
+    precedenceMarkerGrammar(`seq(${precedenceMarkerChoice}, optional($._kw_with))`),
+    precedenceMarkerGrammar(
+      precedenceMarkerBody.replace("prec.right", "prec.dynamic.bind(null, 1)"),
+    ),
+    precedenceMarkerGrammar(
+      `prec.dynamic(1, seq(${precedenceMarkerChoice}, optional($._kw_with)))`,
+    ),
+    precedenceMarkerGrammar(
+      `prec.right(prec.dynamic(1, seq(${precedenceMarkerChoice}, optional($._kw_with))))`,
+    ),
+    precedenceMarkerGrammar(precedenceMarkerBody.replace("optional($._kw_with)", "$._kw_with")),
+    precedenceMarkerGrammar(
+      precedenceMarkerBody.replace("optional($._kw_with)", "optional($.__tail)"),
+    ),
+    precedenceMarkerGrammar(
+      precedenceMarkerBody.replace("optional($._kw_with)", "optional(alias($._kw_with, $.flag))"),
+    ),
+    precedenceMarkerGrammar(
+      precedenceMarkerBody.replace('field("frame", $._frame_name)', "optional($._frame_name)"),
+    ),
+    precedenceMarkerGrammar(precedenceMarkerBody.replace("$._frame_name", "$.__qualifier")),
+    precedenceMarkerGrammar(precedenceMarkerBody.replace('kw("FRAME", {offset: 4})', "kw(value)")),
+    precedenceMarkerGrammar(undefined, "alias($.__qualifier, $.qualifier)"),
+    precedenceMarkerGrammar(undefined, 'field("outer", $.__qualifier)'),
+    precedenceMarkerGrammar(undefined, "token($.__qualifier)"),
+    precedenceMarkerGrammar(undefined, "prec.dynamic(1, $.__qualifier)"),
+    precedenceMarkerGrammar(undefined, "$.__qualifier, $.__qualifier"),
+    precedenceMarkerGrammar(undefined, '$["__qualifier"]'),
+    precedenceMarkerGrammar(undefined, "$[kind]"),
+    precedenceMarkerGrammar(undefined, "$.__qualifier", "other: ($) => $.__qualifier"),
+    precedenceMarkerGrammar().replace(
+      "choice($.__qualifier, $.other)",
+      'field("outer", choice($.__qualifier, $.other))',
+    ),
+    precedenceMarkerGrammar().replace(
+      "  __qualifier:",
+      "  // oxlint-disable-next-line rule-to-test/precedence-optional-marker-hoist\n  __qualifier:",
+    ),
+    precedenceMarkerGrammar().replace(
+      "  root:",
+      "  // oxlint-disable-next-line rule-to-test/precedence-optional-marker-hoist\n  root:",
+    ),
+    precedenceMarkerGrammar().replace(
+      "choice($.__qualifier",
+      "choice(\n// oxlint-disable-next-line rule-to-test/precedence-optional-marker-hoist\n$.__qualifier",
+    ),
+    ...["inline", "conflicts", "precedences", "supertypes", "externals"].map(
+      (metadata) =>
+        `export default grammar({${metadata}: ($) => [$.__qualifier], rules: {
+        root: ($) => choice($.__qualifier, $.other),
+        __qualifier: ($) => ${precedenceMarkerBody},
+      }});`,
+    ),
+    `const data = {root: ($) => choice($.__qualifier, $.other), __qualifier: ($) => ${precedenceMarkerBody}};`,
+  ],
+  invalid: [
+    { code: precedenceMarkerGrammar(), errors: [precedenceMarkerError] },
+    {
+      code: precedenceMarkerGrammar(`prec("qualifier", ${precedenceMarkerBody})`),
+      errors: [precedenceMarkerError],
+    },
+    {
+      code: precedenceMarkerGrammar(
+        precedenceMarkerBody.replace("optional($._kw_with)", 'optional(kw("WITH"))'),
+      ),
+      errors: [precedenceMarkerError],
+    },
+    {
+      code: precedenceMarkerGrammar(
+        precedenceMarkerBody.replace("optional($._kw_with)", 'optional("WITH")'),
+      ),
+      errors: [precedenceMarkerError],
+    },
+    {
+      name: "FRAME and BROWSE qualifier baseline",
+      code: readFileSync(new URL("./fixtures/frame-optional-with.js", import.meta.url), "utf8"),
+      errors: [precedenceMarkerError],
     },
   ],
 });
