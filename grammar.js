@@ -620,6 +620,7 @@ export default grammar({
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
+      // oxlint-disable-next-line tree-sitter-optimize/infix-choice-inline
       __multiplicative_operator: ($) => choice("*", "/", kw("MOD"), kw("MODULO")),
       // Preserve the binary form's precedence when its operator reduces separately.
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
