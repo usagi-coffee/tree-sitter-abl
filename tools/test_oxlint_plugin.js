@@ -8,6 +8,7 @@ import {
   optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
   multiUsePrivateKeywordChoiceInline,
+  sharedLexicalFieldSequenceInline,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
@@ -117,6 +118,223 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const lexicalFieldFixture = readFileSync(
+  new URL("./fixtures/preprocessor-definition-body.js", import.meta.url),
+  "utf8",
+);
+const lexicalFieldDirectory = mkdtempSync(join(tmpdir(), "abl-lexical-field-sequence-"));
+const lexicalFieldCase = (name, code) => ({
+  name,
+  code,
+  cwd: lexicalFieldDirectory,
+  filename: join(lexicalFieldDirectory, "grammar.js"),
+});
+const lexicalFieldMessage =
+  /shares required lexical fields.*public rules.*grammar.inline.*token identity.*field scope and order.*large states before actions.*complete valid and recovery trees/;
+const lexicalFieldMetadata = (property) =>
+  lexicalFieldFixture.replace(
+    '  name: "fixture",',
+    `  name: "fixture",\n  ${property}: ($) => [$.__define_preprocessor_body],`,
+  );
+try {
+  const precedenceRoot = join(lexicalFieldDirectory, "precedence-project");
+  mkdirSync(join(precedenceRoot, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(precedenceRoot, "grammar", "precedences", "definition.js"),
+    "export default ($) => [[$.__define_preprocessor_body, $.other]];",
+  );
+  new RuleTester().run("shared-lexical-field-sequence-inline", sharedLexicalFieldSequenceInline, {
+    valid: [
+      {
+        ...lexicalFieldCase("imported precedence identity", lexicalFieldFixture),
+        cwd: precedenceRoot,
+        filename: join(precedenceRoot, "grammar.js"),
+      },
+      lexicalFieldCase("already inlined", lexicalFieldMetadata("inline")),
+      ...["conflicts", "precedences", "supertypes", "externals"].map((property) =>
+        lexicalFieldCase(`${property} identity`, lexicalFieldMetadata(property)),
+      ),
+      lexicalFieldCase(
+        "word identity",
+        lexicalFieldFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture",\n  word: ($) => $.__define_preprocessor_body,',
+        ),
+      ),
+      lexicalFieldCase(
+        "one caller",
+        lexicalFieldFixture.replace(
+          /    scoped_define_preprocessor_directive: \(\$\) =>\s*seq\(token\(prec\(1, \/&SCOPED-DEFINE\/i\)\), \$\.__define_preprocessor_body\),\n/,
+          "",
+        ),
+      ),
+      lexicalFieldCase(
+        "public helper",
+        lexicalFieldFixture.replaceAll("__define_preprocessor_body", "definition_body"),
+      ),
+      lexicalFieldCase(
+        "an aliased caller",
+        lexicalFieldFixture.replace(
+          "$.__define_preprocessor_body)",
+          "alias($.__define_preprocessor_body, $.definition))",
+        ),
+      ),
+      lexicalFieldCase(
+        "a fielded caller",
+        lexicalFieldFixture.replace(
+          "$.__define_preprocessor_body)",
+          'field("body", $.__define_preprocessor_body))',
+        ),
+      ),
+      lexicalFieldCase(
+        "an optional caller",
+        lexicalFieldFixture.replace(
+          "$.__define_preprocessor_body)",
+          "optional($.__define_preprocessor_body))",
+        ),
+      ),
+      lexicalFieldCase(
+        "a trailing delimiter",
+        lexicalFieldFixture.replace(
+          "$.__define_preprocessor_body)",
+          '$.__define_preprocessor_body, ".")',
+        ),
+      ),
+      lexicalFieldCase(
+        "a nonlexical prefix",
+        lexicalFieldFixture.replace("token(prec(1, /&GLOBAL-DEFINE/i))", "$._expression"),
+      ),
+      lexicalFieldCase(
+        "a private caller",
+        lexicalFieldFixture.replace("global_define_preprocessor_directive:", "__global_define:"),
+      ),
+      lexicalFieldCase(
+        "a dynamic caller precedence",
+        lexicalFieldFixture.replace(
+          "seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body)",
+          "prec.dynamic(1, seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body))",
+        ),
+      ),
+      lexicalFieldCase(
+        "a computed caller",
+        lexicalFieldFixture.replace(
+          "$.__define_preprocessor_body)",
+          '$["__define_preprocessor_body"])',
+        ),
+      ),
+      lexicalFieldCase(
+        "an unknown dynamic use",
+        lexicalFieldFixture.replace("  rules: {", "  rules: {\n    other: ($) => $[name],"),
+      ),
+      lexicalFieldCase(
+        "one field",
+        lexicalFieldFixture.replace(', field("value", $.preprocessor_value)', ""),
+      ),
+      lexicalFieldCase(
+        "an optional field",
+        lexicalFieldFixture.replace(
+          'field("value", $.preprocessor_value)',
+          'optional(field("value", $.preprocessor_value))',
+        ),
+      ),
+      lexicalFieldCase(
+        "a recursive field",
+        lexicalFieldFixture.replace(
+          'field("value", $.preprocessor_value)',
+          'field("value", $.__define_preprocessor_body)',
+        ),
+      ),
+      lexicalFieldCase(
+        "an undefined lexical target",
+        lexicalFieldFixture.replace(
+          'field("value", $.preprocessor_value)',
+          'field("value", $.missing)',
+        ),
+      ),
+      lexicalFieldCase(
+        "a hidden lexical target",
+        lexicalFieldFixture.replaceAll("preprocessor_value", "_preprocessor_value"),
+      ),
+      lexicalFieldCase(
+        "a structured target",
+        lexicalFieldFixture.replace(
+          "preprocessor_value: ($) => token(/[^\\n]+(?:~\\s*\\n[^\\n]+)*/)",
+          'preprocessor_value: ($) => seq($.identifier, ".")',
+        ),
+      ),
+      lexicalFieldCase(
+        "a dynamic token",
+        lexicalFieldFixture.replace(
+          "preprocessor_value: ($) => token(/[^\\n]+(?:~\\s*\\n[^\\n]+)*/)",
+          "preprocessor_value: ($) => token(makePattern())",
+        ),
+      ),
+      lexicalFieldCase(
+        "a field alias",
+        lexicalFieldFixture.replace(
+          'field("value", $.preprocessor_value)',
+          'field("value", alias($.preprocessor_value, $.value))',
+        ),
+      ),
+      lexicalFieldCase(
+        "helper directive",
+        lexicalFieldFixture.replace(
+          "    __define_preprocessor_body:",
+          "    // oxlint-disable-next-line rule-to-test/shared-lexical-field-sequence-inline\n    __define_preprocessor_body:",
+        ),
+      ),
+      lexicalFieldCase(
+        "caller directive",
+        lexicalFieldFixture.replace(
+          "    global_define_preprocessor_directive:",
+          "    // oxlint-disable-next-line rule-to-test/shared-lexical-field-sequence-inline\n    global_define_preprocessor_directive:",
+        ),
+      ),
+    ],
+    invalid: [
+      {
+        ...lexicalFieldCase("pre-optimization GLOBAL/SCOPED DEFINE fixture", lexicalFieldFixture),
+        errors: [{ message: lexicalFieldMessage }],
+      },
+      {
+        ...lexicalFieldCase(
+          "literal prefixes and immediate lexical fields",
+          lexicalFieldFixture
+            .replace("token(prec(1, /&GLOBAL-DEFINE/i))", '"GLOBAL"')
+            .replace("token(prec(1, /&SCOPED-DEFINE/i))", 'kw("SCOPED")')
+            .replace(
+              "preprocessor_value: ($) => token(",
+              "preprocessor_value: ($) => token.immediate(",
+            ),
+        ),
+        errors: [{ message: lexicalFieldMessage }],
+      },
+      {
+        ...lexicalFieldCase(
+          "three required fields",
+          lexicalFieldFixture.replace(
+            'field("value", $.preprocessor_value)',
+            'field("value", $.preprocessor_value), field("unit", $.identifier)',
+          ),
+        ),
+        errors: [{ message: lexicalFieldMessage }],
+      },
+      {
+        ...lexicalFieldCase(
+          "static caller association",
+          lexicalFieldFixture.replace(
+            "seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body)",
+            "prec.right(seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body))",
+          ),
+        ),
+        errors: [{ message: lexicalFieldMessage }],
+      },
+    ],
+  });
+} finally {
+  rmSync(lexicalFieldDirectory, { recursive: true, force: true });
+}
 
 const inlineTargetFixture = readFileSync(
   new URL("./fixtures/scalar-value-forwarding.js", import.meta.url),

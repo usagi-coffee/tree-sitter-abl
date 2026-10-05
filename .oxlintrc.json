@@ -115,6 +115,7 @@
         "tree-sitter-optimize/single-use-choice": "warn",
         "tree-sitter-optimize/single-use-shared-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-choice-inline": "warn",
+        "tree-sitter-optimize/shared-lexical-field-sequence-inline": "warn",
         "tree-sitter-optimize/multi-use-private-keyword-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-keyword-alias-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-keyword-field-inline": "warn",
