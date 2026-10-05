@@ -188,7 +188,7 @@ When optimizing
 - Preserve distinct token identity; avoid token packing.
 - Preserve existing corpus behavior.
 - Optimize one change at a time, measure it, then run focused and full tests. A parser-size improvement is invalid if parsing behavior changes.
-- Favor large state count reductions then action count reductions unless the hit to state count/other metric is relatively very big.
+- Prioritize `LARGE_STATE_COUNT`, then `ACTION_COUNT`. If large states are unchanged, actions must decrease. Normal state count, symbol count, and size savings do not justify regressions in these priorities.
 
 ## Verification
 
