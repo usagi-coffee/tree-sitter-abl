@@ -215,6 +215,7 @@ export default grammar({
     $._generic_type_arguments_tail,
     $._simple_type_name,
     $._identifier_or_string_literal,
+    $._identifier_or_string_literal_value,
     $._as_type_name_phrase,
     $._window_handle,
     $._block_option,
