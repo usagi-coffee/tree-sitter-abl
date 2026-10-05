@@ -563,6 +563,7 @@ export default grammar({
       // Operators
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
+      // oxlint-disable-next-line tree-sitter-optimize/contextual-keyword-choice-boundary
       _logical_operator: ($) => choice($._kw_and, $._kw_or),
       _comparison_operator: ($) => choice("=", ...COMPARISON_OPERATORS),
 
