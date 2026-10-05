@@ -44,6 +44,7 @@ import {
   sharedKeywordFieldInline,
   forwardedAliasReuse,
   aliasForwardingInline,
+  inlineTargetForwarding,
   closingDelimiterHoist,
   choiceProductExtraction,
   sharedFieldMarker,
@@ -114,6 +115,179 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const inlineTargetFixture = readFileSync(
+  new URL("./fixtures/scalar-value-forwarding.js", import.meta.url),
+  "utf8",
+);
+const inlineTargetDirectory = mkdtempSync(join(tmpdir(), "abl-inline-target-forwarding-"));
+const inlineTargetCase = (name, code = inlineTargetFixture) => ({
+  name,
+  code,
+  cwd: inlineTargetDirectory,
+  filename: join(inlineTargetDirectory, "grammar.js"),
+});
+const inlineTargetMessage =
+  /retains a forwarding boundary to already-inline.*grammar.inline.*caller fields.*dense-table and compiled bytes.*complete valid and error trees/;
+try {
+  new RuleTester().run("inline-target-forwarding", inlineTargetForwarding, {
+    invalid: [
+      {
+        ...inlineTargetCase("original scalar value forwarding"),
+        errors: [{ message: inlineTargetMessage }],
+      },
+      {
+        ...inlineTargetCase(
+          "shared wrapper with callers in other modules",
+          inlineTargetFixture.replace(/    create_widget_pool:[\s\S]*?\n  },/, "  },"),
+        ),
+        errors: [{ message: inlineTargetMessage }],
+      },
+      {
+        ...inlineTargetCase(
+          "already-inline structured sequence target",
+          inlineTargetFixture.replace(
+            "choice($.identifier, $.string_literal)",
+            'seq("IN", field("pool", $.identifier))',
+          ),
+        ),
+        errors: [{ message: inlineTargetMessage }],
+      },
+      {
+        ...inlineTargetCase(
+          "unrelated suppression",
+          inlineTargetFixture.replace(
+            "    _identifier_or_string_literal_value:",
+            "    // oxlint-disable-next-line rule-to-test/other-rule\n    _identifier_or_string_literal_value:",
+          ),
+        ),
+        errors: [{ message: inlineTargetMessage }],
+      },
+    ],
+    valid: [
+      inlineTargetCase(
+        "optimized wrapper is inline",
+        inlineTargetFixture.replace(
+          "inline: ($) => [$._identifier_or_string_literal]",
+          "inline: ($) => [$._identifier_or_string_literal, $._identifier_or_string_literal_value]",
+        ),
+      ),
+      inlineTargetCase(
+        "target retains a boundary",
+        inlineTargetFixture.replace(
+          "inline: ($) => [$._identifier_or_string_literal]",
+          "inline: ($) => []",
+        ),
+      ),
+      ...["identifier_or_string_literal_value", "__identifier_or_string_literal_value"].map(
+        (name) =>
+          inlineTargetCase(
+            `public or local forwarding rule ${name}`,
+            inlineTargetFixture.replaceAll("_identifier_or_string_literal_value", name),
+          ),
+      ),
+      ...[
+        "alias($._identifier_or_string_literal, $.value)",
+        'field("value", $._identifier_or_string_literal)',
+        'seq("VALUE", $._identifier_or_string_literal)',
+        "prec.right($._identifier_or_string_literal)",
+      ].map((body) =>
+        inlineTargetCase(
+          `wrapper adds structure: ${body}`,
+          inlineTargetFixture.replace("($) => $._identifier_or_string_literal,", `($) => ${body},`),
+        ),
+      ),
+      ...[
+        "token(/[a-z]+/)",
+        "token.immediate(/[a-z]+/)",
+        'kw("VALUE")',
+        "seq($.identifier, dynamic())",
+      ].map((body) =>
+        inlineTargetCase(
+          `lexical or dynamic target: ${body}`,
+          inlineTargetFixture.replace("choice($.identifier, $.string_literal)", body),
+        ),
+      ),
+      inlineTargetCase(
+        "unknown target definition",
+        inlineTargetFixture.replace(/    _identifier_or_string_literal:.*\n/, ""),
+      ),
+      inlineTargetCase(
+        "mutual recursion through target",
+        inlineTargetFixture.replace(
+          "choice($.identifier, $.string_literal)",
+          "choice($.identifier, $._identifier_or_string_literal_value)",
+        ),
+      ),
+      ...[
+        "alias($._identifier_or_string_literal_value, $.other)",
+        "alias($.identifier, $._identifier_or_string_literal_value)",
+        "token($._identifier_or_string_literal_value)",
+        'token.immediate(field("value", $._identifier_or_string_literal_value))',
+        "prec.dynamic(1, $._identifier_or_string_literal_value)",
+        "factory($._identifier_or_string_literal_value)",
+      ].map((use) =>
+        inlineTargetCase(
+          `caller depends on wrapper identity: ${use}`,
+          inlineTargetFixture.replace("  rules: {", `  rules: { caller: ($) => ${use},`),
+        ),
+      ),
+      ...["conflicts", "precedences", "externals", "extras", "supertypes", "word"].map((metadata) =>
+        inlineTargetCase(
+          `wrapper metadata ${metadata}`,
+          inlineTargetFixture.replace(
+            "  rules: {",
+            `  ${metadata}: ($) => [$._identifier_or_string_literal_value],\n  rules: {`,
+          ),
+        ),
+      ),
+      inlineTargetCase(
+        "computed reference",
+        inlineTargetFixture + '\nconst other = $["_identifier_or_string_literal_value"];',
+      ),
+      inlineTargetCase("dynamic reference", inlineTargetFixture + "\nconst other = $[selected];"),
+      inlineTargetCase(
+        "explicit suppression",
+        inlineTargetFixture.replace(
+          "    _identifier_or_string_literal_value:",
+          "    // oxlint-disable-next-line rule-to-test/inline-target-forwarding\n    _identifier_or_string_literal_value:",
+        ),
+      ),
+      inlineTargetCase(
+        "forwarding body suppression",
+        inlineTargetFixture.replace(
+          "($) => $._identifier_or_string_literal,",
+          "($) =>\n      // oxlint-disable-next-line rule-to-test/inline-target-forwarding\n      $._identifier_or_string_literal,",
+        ),
+      ),
+    ],
+  });
+  writeFileSync(
+    join(inlineTargetDirectory, "grammar.js"),
+    "export default grammar({ inline: ($) => [$._identifier_or_string_literal, $._identifier_or_string_literal_value] });",
+  );
+  new RuleTester().run("inline-target-forwarding root metadata", inlineTargetForwarding, {
+    valid: [
+      {
+        ...inlineTargetCase("root metadata suppresses module wrapper"),
+        filename: join(inlineTargetDirectory, "grammar", "values.js"),
+      },
+    ],
+    invalid: [],
+  });
+  rmSync(join(inlineTargetDirectory, "grammar.js"));
+  mkdirSync(join(inlineTargetDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(inlineTargetDirectory, "grammar", "precedences", "values.js"),
+    "export default ($) => [[$._identifier_or_string_literal_value, $.other]];",
+  );
+  new RuleTester().run("inline-target-forwarding external precedence", inlineTargetForwarding, {
+    valid: [inlineTargetCase("precedence module retains wrapper identity")],
+    invalid: [],
+  });
+} finally {
+  rmSync(inlineTargetDirectory, { recursive: true, force: true });
+}
 
 const aliasForwardingFixture = readFileSync(
   new URL("./fixtures/value-alias-forwarding.js", import.meta.url),
