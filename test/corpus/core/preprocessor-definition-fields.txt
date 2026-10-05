@@ -1,0 +1,25 @@
+================================================================================
+Preprocessor - Definition fields and continued values
+================================================================================
+
+&GLOBAL-DEFINE APP-NAME "Example App"
+&SCOPED-DEFINE VERSION 2
+&SCOPED-DEFINE MULTILINE first ~
+  second
+MESSAGE {&APP-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (global_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (message_statement
+    (preprocessor_name
+      (identifier))))

@@ -254,6 +254,7 @@ export default grammar({
     $._find_record_option,
     $._method_modifier_no_abstract,
     $._method_definition_signature,
+    $.__define_preprocessor_body,
     $.system_handle_identifier,
   ],
 
