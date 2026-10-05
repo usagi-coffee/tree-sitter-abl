@@ -105,6 +105,7 @@ export default ({ kw }) => ({
       alias(kw("NO-MAP"), $.no_map),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/alias-forwarding-inline
   _aliased_menu_item: ($) => alias($._menu_item, $.menu_item),
   _menu_item: ($) =>
     seq(
