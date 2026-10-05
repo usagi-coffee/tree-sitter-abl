@@ -215,7 +215,6 @@ export default grammar({
     $._generic_type_arguments_tail,
     $._simple_type_name,
     $._identifier_or_string_literal,
-    $._identifier_or_string_literal_value,
     $._as_type_name_phrase,
     $._window_handle,
     $._block_option,
@@ -958,6 +957,7 @@ export default grammar({
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/short-shared-category-name, tree-sitter-optimize/contextual-scalar-name-boundary
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-target-forwarding
       _identifier_or_string_literal_value: ($) => $._identifier_or_string_literal,
       _value_expression: ($) => seq($._value_expression_opener, ")"),
       _aliased_value_expression: ($) => alias($._value_expression, $.value_expression),
