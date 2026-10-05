@@ -211,6 +211,7 @@ export default grammar({
     $.__include_file_reference,
     $._format_label,
     $._comparison_operator_no_eq,
+    $._logical_operator,
     $._generic_type_arguments_tail,
     $._simple_type_name,
     $._identifier_or_string_literal,

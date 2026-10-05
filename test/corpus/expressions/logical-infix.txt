@@ -1,0 +1,145 @@
+================================================================================
+Logical infix - mixed operators and comparison precedence
+================================================================================
+
+v = x AND y OR z.
+w = NOT a = b OR c = d AND e <> f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (unary_expression
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (binary_expression
+          (identifier)
+          (identifier)))
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Logical infix - IF and statement operand contexts
+================================================================================
+
+IF a AND b OR NOT c THEN MESSAGE "yes".
+a AND b OR c.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (unary_expression
+        (identifier)))
+    then: (message_statement
+      (string_literal)))
+  (expression_statement
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (identifier))))
+
+================================================================================
+Logical infix - scoped receivers and typed calls
+================================================================================
+
+v = ns::A:one AND obj?:two OR F(x AS Pkg.A).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (object_access
+          left: (scoped_name
+            left: (identifier)
+            right: (identifier))
+          right: (identifier))
+        (object_access
+          left: (identifier)
+          right: (identifier)))
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier)
+            type: (qualified_name
+              left: (identifier)
+              right: (identifier))))))))
+
+================================================================================
+Logical infix - nested conditional operands
+================================================================================
+
+v = IF a AND b THEN x OR y ELSE z AND t.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (conditional_expression
+      (binary_expression
+        (identifier)
+        (identifier))
+      (binary_expression
+        (identifier)
+        (identifier))
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Logical infix - reject missing assignment operand
+:error
+================================================================================
+
+v = x AND.
+w = 1.
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Logical infix - reject missing statement operand
+:error
+================================================================================
+
+x OR.
+w = 1.
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Logical infix - reject missing IF operand
+:error
+================================================================================
+
+IF x AND THEN MESSAGE "bad".
+w = 1.
+
+--------------------------------------------------------------------------------
