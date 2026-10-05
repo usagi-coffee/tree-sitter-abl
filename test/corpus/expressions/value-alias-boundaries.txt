@@ -1,0 +1,37 @@
+================================================================================
+VALUE aliases - procedure and nested value field boundaries
+================================================================================
+
+RUN VALUE("handlers/" + procedureName) (INPUT request) NO-ERROR.
+DEFINE VARIABLE action AS CHARACTER
+  TRIGGERS:
+    ON GO PERSISTENT RUN VALUE(handlerFor(actionName)) IN (h) (1, actionName)
+  END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (value_expression
+      value: (binary_expression
+        (string_literal)
+        (identifier)))
+    (arguments
+      (argument
+        name: (identifier)))
+    (no_error))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (value_expression
+        value: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier)))))
+      handle: (parenthesized_expression
+        (identifier))
+      parameters: (number_literal)
+      parameters: (identifier))))
