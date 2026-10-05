@@ -28,6 +28,7 @@ import {
   inlineKeywordAliasChoiceBoundary,
   contextualScalarNameBoundary,
   contextualKeywordChoiceBoundary,
+  contextualKeywordPrefixBoundary,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -9611,6 +9612,189 @@ try {
   );
 } finally {
   rmSync(keywordChoiceBoundaryDirectory, { recursive: true, force: true });
+}
+
+const beforeColorKeywordBoundary = readFileSync(
+  new URL("./fixtures/contextual-color-keyword.js", import.meta.url),
+  "utf8",
+);
+const keywordPrefixBoundaryFixture = (
+  value = "$.style_phrase",
+  metadata = "inline: ($) => [$._kw_style],",
+  wrap = (body) => body,
+) => `export default grammar({ ${metadata} rules: {
+  _kw_style: ($) => kw("STYLE", {offset: 3}),
+  clause: ($) => ${wrap(`seq($._kw_style, field("style", ${value}), optional($.tail))`)}
+} });`;
+new RuleTester().run("contextual-keyword-prefix-boundary", contextualKeywordPrefixBoundary, {
+  valid: [
+    keywordPrefixBoundaryFixture(undefined, ""),
+    keywordPrefixBoundaryFixture().replaceAll("_kw_style", "style"),
+    keywordPrefixBoundaryFixture().replaceAll("_kw_style", "_style"),
+    keywordPrefixBoundaryFixture("$._expression"),
+    keywordPrefixBoundaryFixture("$.identifier"),
+    keywordPrefixBoundaryFixture("$.__style_phrase"),
+    keywordPrefixBoundaryFixture("choice($.style_phrase, $._expression)"),
+    keywordPrefixBoundaryFixture("choice($.style_phrase, $.other_phrase)"),
+    keywordPrefixBoundaryFixture("choice($.style_phrase, $.style_phrase)"),
+    keywordPrefixBoundaryFixture("choice($.style_phrase, $._kw_normal, $._kw_normal)"),
+    keywordPrefixBoundaryFixture("alias($.style_phrase, $.style)"),
+    keywordPrefixBoundaryFixture().replace('field("style",', "field(dynamicName,"),
+    keywordPrefixBoundaryFixture().replace('kw("STYLE", {offset: 3})', "kw(dynamicKeyword)"),
+    keywordPrefixBoundaryFixture().replace(
+      'kw("STYLE", {offset: 3})',
+      'seq(kw("STYLE"), kw("OF"))',
+    ),
+    keywordPrefixBoundaryFixture().replace(
+      "seq($._kw_style, field(",
+      "seq(alias($._kw_style, $.style), field(",
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      keywordPrefixBoundaryFixture(undefined, undefined, (body) =>
+        wrapper === "alias"
+          ? `alias(${body}, $.option)`
+          : wrapper === "prec.dynamic"
+            ? `prec.dynamic(1, ${body})`
+            : `${wrapper}(${body})`,
+      ),
+    ),
+    ...["conflicts", "precedences", "supertypes", "externals"].map((metadata) =>
+      keywordPrefixBoundaryFixture(
+        undefined,
+        `inline: ($) => [$._kw_style], ${metadata}: ($) => [[$._kw_style]],`,
+      ),
+    ),
+    keywordPrefixBoundaryFixture(
+      undefined,
+      "inline: ($) => [$._kw_style], word: ($) => $._kw_style,",
+    ),
+    keywordPrefixBoundaryFixture(
+      undefined,
+      "inline: ($) => [$._kw_style], conflicts: ($) => [[$[unknown]]],",
+    ),
+    keywordPrefixBoundaryFixture().replace(
+      "clause: ($)",
+      "// oxlint-disable-next-line rule-to-test/contextual-keyword-prefix-boundary\nclause: ($)",
+    ),
+    keywordPrefixBoundaryFixture().replace(
+      "=> seq($._kw_style",
+      "=>\n// oxlint-disable-next-line rule-to-test/contextual-keyword-prefix-boundary\nseq($._kw_style",
+    ),
+    keywordPrefixBoundaryFixture().replace(
+      "clause: ($)",
+      "// oxlint-disable rule-to-test/contextual-keyword-prefix-boundary\nclause: ($)",
+    ),
+    beforeColorKeywordBoundary.replace("[$._kw_color]", "[]"),
+    `// export const inline = ($) => [$._kw_style];
+     const note = "export const inline = ($) => [$._kw_style];";
+     ${keywordPrefixBoundaryFixture(undefined, "")}`,
+  ],
+  invalid: [
+    {
+      name: "original shared COLOR prefix at both phrase callers",
+      code: beforeColorKeywordBoundary,
+      errors: [{ message: /_kw_color expands before the phrase-valued "color" field/ }],
+    },
+    {
+      name: "another inline keyword and phrase field",
+      code: keywordPrefixBoundaryFixture(),
+      errors: [{ message: /keeping the exact keyword expansion before general expressions/ }],
+    },
+    {
+      name: "phrase and bare flag alternatives preserve scalar contexts",
+      code: keywordPrefixBoundaryFixture("choice($._kw_normal, $.style_phrase, $._kw_input)"),
+      errors: [{ message: /prioritize LARGE_STATE_COUNT followed by ACTION_COUNT/ }],
+    },
+    {
+      name: "static precedence does not change the keyword boundary",
+      code: keywordPrefixBoundaryFixture(undefined, undefined, (body) => `prec.right(${body})`),
+      errors: [{ message: /preserve keyword options and field scopes/ }],
+    },
+    {
+      name: "exported keyword inline membership",
+      code: `export const inline = ($) => [$._kw_style]; ${keywordPrefixBoundaryFixture(undefined, "")}`,
+      errors: [{ message: /hidden keyword boundary at phrase callers/ }],
+    },
+    {
+      name: "comments cannot invent a metadata dependency",
+      code: `// conflicts: ($) => [[$._kw_style]]
+        const note = 'precedences: ($) => [[$._kw_style]]';
+        ${keywordPrefixBoundaryFixture()}`,
+      errors: [{ message: /validate complete valid and recovery trees/ }],
+    },
+  ],
+});
+const keywordPrefixBoundaryDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-prefix-boundary-"));
+try {
+  const filename = join(keywordPrefixBoundaryDirectory, "grammar", "statements", "style.js"),
+    code =
+      'export default ({kw}) => ({ clause: ($) => seq($._kw_style, field("style", $.style_phrase)) });';
+  mkdirSync(join(keywordPrefixBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar.js"),
+    'import {inline} from "./grammar/keywords.js"; export default grammar({inline, rules: {}});',
+  );
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar", "keywords.js"),
+    'export const inline = ($) => [$._kw_style]; export default ({kw}) => ({_kw_style: ($) => kw("STYLE")});',
+  );
+  new RuleTester().run(
+    "contextual-keyword-prefix-boundary exported inline module",
+    contextualKeywordPrefixBoundary,
+    {
+      valid: [],
+      invalid: [
+        {
+          cwd: keywordPrefixBoundaryDirectory,
+          filename,
+          code,
+          errors: [{ message: /_kw_style expands before/ }],
+        },
+      ],
+    },
+  );
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar", "keywords.js"),
+    'export const inline = ($) => []; export default ({kw}) => ({_kw_style: ($) => kw("STYLE")});',
+  );
+  new RuleTester().run(
+    "contextual-keyword-prefix-boundary retained boundary",
+    contextualKeywordPrefixBoundary,
+    {
+      valid: [{ cwd: keywordPrefixBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar.js"),
+    "export default grammar({inline: ($) => [$._kw_style], conflicts: ($) => [[$._kw_style]], rules: {}});",
+  );
+  new RuleTester().run(
+    "contextual-keyword-prefix-boundary root conflict",
+    contextualKeywordPrefixBoundary,
+    {
+      valid: [{ cwd: keywordPrefixBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar.js"),
+    "export default grammar({inline: ($) => [$._kw_style], rules: {}});",
+  );
+  writeFileSync(
+    join(keywordPrefixBoundaryDirectory, "grammar", "precedences", "style.js"),
+    "export default ($) => [[$._kw_style, $.value]];",
+  );
+  new RuleTester().run(
+    "contextual-keyword-prefix-boundary external precedence",
+    contextualKeywordPrefixBoundary,
+    {
+      valid: [{ cwd: keywordPrefixBoundaryDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordPrefixBoundaryDirectory, { recursive: true, force: true });
 }
 
 const beforeAvailableKeywordBoundary = readFileSync(

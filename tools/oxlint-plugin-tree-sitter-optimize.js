@@ -5191,6 +5191,37 @@ function rootInlineSymbols(context) {
   return rootMetadataSymbols(context, ["inline"]);
 }
 
+function keywordInlineSymbols(context) {
+  const names = rootInlineSymbols(context),
+    sources = [context.sourceCode.getText()],
+    filename = resolve(context.cwd, "grammar", "keywords.js");
+  try {
+    if (resolve(context.filename) !== filename) sources.push(readFileSync(filename, "utf8"));
+  } catch {}
+  for (const source of sources) {
+    const code = (
+      source.match(
+        /\/\*[\s\S]*?\*\/|\/\/[^\r\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|[$A-Z_a-z][$\w]*|=>|[^\s]/g,
+      ) ?? []
+    ).filter((part) => !part.startsWith("//") && !part.startsWith("/*"));
+    for (let index = 0; index < code.length - 8; index++) {
+      if (code.slice(index, index + 9).join(" ") !== "export const inline = ( $ ) => [") continue;
+      let depth = 1;
+      for (let next = index + 9; next < code.length && depth > 0; next++) {
+        if (code[next] === "[") depth++;
+        if (code[next] === "]") depth--;
+        if (
+          code[next] === "$" &&
+          code[next + 1] === "." &&
+          /^[$A-Z_a-z][$\w]*$/.test(code[next + 2] ?? "")
+        )
+          names.add(code[next + 2]);
+      }
+    }
+  }
+  return names;
+}
+
 function projectPrecedenceSymbols(context) {
   const names = rootMetadataSymbols(context, ["precedences"]);
   try {
@@ -5708,6 +5739,92 @@ export const contextualKeywordChoiceBoundary = rule((context) => {
     },
   };
 }, "Suggest measured declaration boundaries for inlined bare keyword families");
+
+export const contextualKeywordPrefixBoundary = rule((context) => {
+  const inlined = keywordInlineSymbols(context),
+    restricted = rootMetadataSymbols(context, ["conflicts", "supertypes", "externals", "word"]),
+    definitions = new Map(),
+    sequences = [];
+  for (const name of projectPrecedenceSymbols(context)) restricted.add(name);
+  let dynamicReference = false;
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) definitions.set(ruleName(node), node.value.body);
+      if (ruleName(node) === "inline" && node.value?.body?.type === "ArrayExpression") {
+        for (const element of node.value.body.elements) {
+          const name = memberName(element);
+          if (name) inlined.add(name);
+        }
+      }
+    },
+    CallExpression(node) {
+      if (callName(node) === "seq" && enclosingRule(node)) sequences.push(node);
+    },
+    MemberExpression(node) {
+      const name = memberName(node);
+      if (!name) {
+        if (node.computed && node.object.type === "Identifier" && node.object.name === "$")
+          dynamicReference = true;
+        return;
+      }
+      const owner = enclosingRule(node);
+      for (let parent = node.parent; parent && parent !== owner; parent = parent.parent) {
+        if (["alias", "token", "token.immediate", "prec.dynamic"].includes(callName(parent)))
+          restricted.add(name);
+        if (
+          !owner &&
+          parent.type === "Property" &&
+          ["conflicts", "precedences", "supertypes", "externals", "word"].includes(ruleName(parent))
+        )
+          restricted.add(name);
+      }
+    },
+    "Program:exit"() {
+      if (dynamicReference) return;
+      const reported = new Set();
+      for (const node of sequences) {
+        const [keyword, value] = node.arguments,
+          name = memberName(keyword),
+          owner = enclosingRule(node);
+        if (
+          !name?.startsWith("_kw_") ||
+          !inlined.has(name) ||
+          restricted.has(name) ||
+          reported.has(name) ||
+          (definitions.has(name) && !isStaticKeywordCall(definitions.get(name))) ||
+          isRuleDisabled(context, node) ||
+          isRuleDisabled(context, owner) ||
+          callName(value) !== "field" ||
+          value.arguments.length !== 2 ||
+          value.arguments[0].type !== "Literal" ||
+          typeof value.arguments[0].value !== "string"
+        )
+          continue;
+        const body = value.arguments[1],
+          alternatives = callName(body) === "choice" ? body.arguments : [body],
+          symbols = alternatives.map(memberName),
+          phrases = symbols.filter(
+            (symbol) => symbol && !symbol.startsWith("_") && symbol.endsWith("_phrase"),
+          );
+        if (
+          phrases.length !== 1 ||
+          symbols.some(
+            (symbol) => !symbol || (symbol !== phrases[0] && !symbol.startsWith("_kw_")),
+          ) ||
+          new Set(symbols).size !== symbols.length
+        )
+          continue;
+        report(
+          context,
+          node,
+          "contextual-keyword-prefix-boundary",
+          `${name} expands before the phrase-valued ${JSON.stringify(value.arguments[0].value)} field; try retaining its hidden keyword boundary at phrase callers while keeping the exact keyword expansion before general expressions. Check all callers, aliases and metadata, preserve keyword options and field scopes, then prioritize LARGE_STATE_COUNT followed by ACTION_COUNT and validate complete valid and recovery trees.`,
+        );
+        reported.add(name);
+      }
+    },
+  };
+}, "Suggest measured keyword boundaries at phrase-valued clauses while keeping expression callers expanded");
 
 export const inlineMixedSymbolChoiceBoundary = rule((context) => {
   const inlined = rootInlineSymbols(context),
@@ -7624,6 +7741,7 @@ export default {
     "inline-keyword-alias-choice-boundary": inlineKeywordAliasChoiceBoundary,
     "contextual-scalar-name-boundary": contextualScalarNameBoundary,
     "contextual-keyword-choice-boundary": contextualKeywordChoiceBoundary,
+    "contextual-keyword-prefix-boundary": contextualKeywordPrefixBoundary,
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,
