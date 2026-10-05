@@ -956,7 +956,7 @@ export default grammar({
         ),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
-      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/short-shared-category-name
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/short-shared-category-name, tree-sitter-optimize/contextual-scalar-name-boundary
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
       _identifier_or_string_literal_value: ($) => $._identifier_or_string_literal,
       _value_expression: ($) => seq($._value_expression_opener, ")"),
