@@ -15,7 +15,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _format_field_option: ($) =>
     choice(
-      $._as_like,
+      choice(seq($._kw_as, $._class_type), seq($._kw_like, field("like", $._qualified_identifier))),
       seq($._kw_bgcolor, field("bgcolor", $.__format_expression)),
       $._format_colon_to,
       seq(kw("COLUMN-LABEL"), field("column_label", $.__format_expression)),

@@ -1,0 +1,106 @@
+================================================================================
+AS and LIKE - format values with following options
+================================================================================
+
+DISPLAY x AS CLASS Pkg.T<A> LABEL "Name" y LIKE customer.name FORMAT "x(10)" WITH FRAME fr.
+DEFINE FRAME f a AS CHARACTER b LIKE customer.name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      type: (generic_type
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (identifier))
+      label: (string_literal))
+    (field
+      field: (identifier))
+    (format_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      format: (string_literal))
+    (frame_phrase
+      frame: (identifier)))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      type: (identifier))
+    field: (identifier)
+    (format_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+AS and LIKE - retained declaration type boundaries
+================================================================================
+
+DEFINE INPUT PARAMETER p AS CLASS Pkg.T TO target.
+DEFINE OUTPUT PARAMETER q LIKE customer.name NO-UNDO.
+FUNCTION f RETURNS INTEGER (INPUT x AS CLASS Pkg.T<A>, OUTPUT y LIKE customer.name EXTENT 2) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    target: (identifier))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_undo))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (generic_type
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (identifier)))
+      (parameter
+        name: (identifier)
+        like: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        size: (number_literal)))
+    (forward)))
+
+================================================================================
+AS and LIKE - quoted and scoped format types
+================================================================================
+
+DISPLAY x AS "Pkg.T" LABEL "Quoted" y AS Pkg::T FONT 1 WITH FRAME fr.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      type: (string_literal)
+      label: (string_literal))
+    (field
+      field: (identifier))
+    (format_phrase
+      type: (scoped_name
+        left: (identifier)
+        right: (identifier))
+      font: (number_literal))
+    (frame_phrase
+      frame: (identifier))))
