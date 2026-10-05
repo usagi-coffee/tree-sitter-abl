@@ -29,6 +29,7 @@
         "tree-sitter-optimize/intra-rule-shared-choice": "warn",
         "tree-sitter-optimize/shared-symbol-alias-choice-inline": "warn",
         "tree-sitter-optimize/contextual-infix-boundary": "warn",
+        "tree-sitter-optimize/infix-choice-inline": "warn",
         "tree-sitter-optimize/inline-dispatcher-boundary": "warn",
         "tree-sitter-optimize/inline-valued-choice-boundary": "warn",
         "tree-sitter-optimize/inline-literal-choice-boundary": "warn",

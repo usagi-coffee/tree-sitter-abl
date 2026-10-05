@@ -17,6 +17,7 @@ import {
   choiceSuffixHoist,
   sharedSymbolAliasChoiceInline,
   contextualInfixBoundary,
+  infixChoiceInline,
   inlineDispatcherBoundary,
   inlineValuedChoiceBoundary,
   inlineLiteralChoiceBoundary,
@@ -112,6 +113,233 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const retainedInfixFixture = `export default grammar({
+  inline: ($) => [],
+  rules: {
+    _logical_operator: ($) => choice($._kw_and, $._kw_or),
+    binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
+    binary_expression_no_eq: ($) => binary_expression($, $._statement_expression, $._comparison_operator_no_eq, choice("+", "-")),
+  },
+});
+function binary_expression($, expression, comparison_operator, additive_operator = $.__additive_operator) {
+  return choice(
+    prec.left("multiplication", seq(expression, $.__multiplicative_operator, expression)),
+    prec.left("add", seq(expression, additive_operator, expression)),
+    prec.left("compare", seq(expression, comparison_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression)),
+  );
+}`;
+const retainedInfixDirectory = mkdtempSync(join(tmpdir(), "abl-infix-choice-inline-"));
+const retainedInfixCase = (name, code) => ({
+  name,
+  code,
+  cwd: retainedInfixDirectory,
+  filename: join(retainedInfixDirectory, "grammar.js"),
+});
+const retainedInfixMessage =
+  /retains a compact infix choice.*across 2 operand contexts.*large states and actions.*anonymous fields/;
+try {
+  new RuleTester().run("infix-choice-inline", infixChoiceInline, {
+    invalid: [
+      {
+        ...retainedInfixCase(
+          "preoptimization logical selector and complete binary factory",
+          retainedInfixFixture,
+        ),
+        errors: [{ message: retainedInfixMessage }],
+      },
+      {
+        ...retainedInfixCase(
+          "other infix family with punctuation and keyword operands",
+          retainedInfixFixture
+            .replaceAll("_logical_operator", "__join_ops")
+            .replaceAll("binary_expression", "infix_form")
+            .replace("choice($._kw_and, $._kw_or)", 'choice("|", kw("UNION"), kw("INTERSECT"))')
+            .replace('prec.left("logical",', 'prec.right("set_join",'),
+        ),
+        errors: [{ message: retainedInfixMessage }],
+      },
+      {
+        ...retainedInfixCase(
+          "unrelated suppression does not hide the suggestion",
+          retainedInfixFixture.replace(
+            "    _logical_operator:",
+            "    // oxlint-disable-next-line rule-to-test/other-rule\n    _logical_operator:",
+          ),
+        ),
+        errors: [{ message: retainedInfixMessage }],
+      },
+    ],
+    valid: [
+      retainedInfixCase(
+        "already inlined",
+        retainedInfixFixture.replace("inline: ($) => []", "inline: ($) => [$._logical_operator]"),
+      ),
+      retainedInfixCase(
+        "public selector",
+        retainedInfixFixture.replaceAll("_logical_operator", "logical_operator"),
+      ),
+      retainedInfixCase(
+        "same operand contexts",
+        retainedInfixFixture.replace("$._statement_expression", "$._expression"),
+      ),
+      retainedInfixCase(
+        "only one factory caller",
+        retainedInfixFixture.replace(/    binary_expression_no_eq:.*\n/, ""),
+      ),
+      ...[
+        "optional($._kw_or)",
+        "seq($._kw_or, $.value)",
+        "alias($._kw_or, $.operator)",
+        "$._logical_operator",
+        "$.operator",
+        "kw(word)",
+        "...operators",
+        '""',
+      ].map((branch) =>
+        retainedInfixCase(
+          `unsafe choice branch ${branch}`,
+          retainedInfixFixture.replace("$._kw_or)", `${branch})`),
+        ),
+      ),
+      retainedInfixCase(
+        "precedence on selector itself",
+        retainedInfixFixture.replace(
+          "choice($._kw_and, $._kw_or)",
+          'prec("logical", choice($._kw_and, $._kw_or))',
+        ),
+      ),
+      ...["field", "alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+        retainedInfixCase(
+          `wrapped selector ${wrapper}`,
+          retainedInfixFixture.replace(
+            "seq(expression, $._logical_operator, expression)",
+            `seq(expression, ${wrapper}(${wrapper === "field" ? '"operator", ' : wrapper === "prec.dynamic" ? "1, " : ""}$._logical_operator${wrapper === "alias" ? ", $.operator" : ""}), expression)`,
+          ),
+        ),
+      ),
+      retainedInfixCase(
+        "distinct infix operands",
+        retainedInfixFixture.replace(
+          "seq(expression, $._logical_operator, expression)",
+          "seq(expression, $._logical_operator, comparison_operator)",
+        ),
+      ),
+      retainedInfixCase(
+        "numeric precedence",
+        retainedInfixFixture.replace('prec.left("logical",', "prec.left(1,"),
+      ),
+      retainedInfixCase(
+        "dynamic precedence",
+        retainedInfixFixture.replace('prec.left("logical",', "prec.dynamic(1,"),
+      ),
+      retainedInfixCase(
+        "exported factory",
+        retainedInfixFixture.replace(
+          "function binary_expression(",
+          "export function binary_expression(",
+        ),
+      ),
+      retainedInfixCase(
+        "factory has extra statements",
+        retainedInfixFixture.replace("  return choice(", "  const extra = 1;\n  return choice("),
+      ),
+      retainedInfixCase(
+        "aliased factory result",
+        retainedInfixFixture.replace(
+          "binary_expression($, $._expression, $._comparison_operator)",
+          "alias(binary_expression($, $._expression, $._comparison_operator), $.binary)",
+        ),
+      ),
+      retainedInfixCase(
+        "factory used outside grammar",
+        retainedInfixFixture +
+          "\nconst extra = binary_expression($, $._other, $._comparison_operator);",
+      ),
+      retainedInfixCase(
+        "extra alias use of selector",
+        retainedInfixFixture.replace(
+          "  rules: {",
+          "  rules: { extra: ($) => alias($._logical_operator, $.operator),",
+        ),
+      ),
+      retainedInfixCase(
+        "computed reference",
+        retainedInfixFixture.replace(
+          "seq(expression, $._logical_operator,",
+          'seq(expression, $["_logical_operator"],',
+        ),
+      ),
+      retainedInfixCase(
+        "unknown dynamic reference",
+        retainedInfixFixture + "\nconst extra = $[selected];",
+      ),
+      ...["conflicts", "supertypes", "externals", "precedences", "extras", "word"].map((metadata) =>
+        retainedInfixCase(
+          `metadata ${metadata}`,
+          retainedInfixFixture.replace(
+            "  rules: {",
+            `  ${metadata}: ($) => [$._logical_operator],\n  rules: {`,
+          ),
+        ),
+      ),
+      retainedInfixCase(
+        "scalar word metadata",
+        retainedInfixFixture.replace(
+          "  rules: {",
+          "  word: ($) => $._logical_operator,\n  rules: {",
+        ),
+      ),
+      retainedInfixCase(
+        "suppressed selector",
+        retainedInfixFixture.replace(
+          "    _logical_operator:",
+          "    // oxlint-disable-next-line rule-to-test/infix-choice-inline\n    _logical_operator:",
+        ),
+      ),
+      retainedInfixCase(
+        "suppressed caller",
+        retainedInfixFixture.replace(
+          "    binary_expression_no_eq:",
+          "    // oxlint-disable-next-line rule-to-test/infix-choice-inline\n    binary_expression_no_eq:",
+        ),
+      ),
+      retainedInfixCase(
+        "suppressed infix use",
+        retainedInfixFixture.replace(
+          '    prec.left("logical",',
+          '    // oxlint-disable-next-line rule-to-test/infix-choice-inline\n    prec.left("logical",',
+        ),
+      ),
+    ],
+  });
+  writeFileSync(
+    join(retainedInfixDirectory, "grammar.js"),
+    "export default grammar({ word: ($) => $._logical_operator });",
+  );
+  new RuleTester().run("infix-choice-inline cross-file word", infixChoiceInline, {
+    valid: [
+      {
+        ...retainedInfixCase("root scalar word identity", retainedInfixFixture),
+        filename: join(retainedInfixDirectory, "grammar", "operators.js"),
+      },
+    ],
+    invalid: [],
+  });
+  rmSync(join(retainedInfixDirectory, "grammar.js"));
+  mkdirSync(join(retainedInfixDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(retainedInfixDirectory, "grammar", "precedences", "infix.js"),
+    "export default ($) => [[$._logical_operator, $.value]];",
+  );
+  new RuleTester().run("infix-choice-inline external precedence", infixChoiceInline, {
+    valid: [retainedInfixCase("cross-file precedence dependency", retainedInfixFixture)],
+    invalid: [],
+  });
+} finally {
+  rmSync(retainedInfixDirectory, { recursive: true, force: true });
+}
 
 const literalAliasBoundaryFixture = (
   literal = "$.number_literal",
