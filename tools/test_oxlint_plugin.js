@@ -31,6 +31,7 @@ import {
   contextualScalarNameBoundary,
   contextualKeywordChoiceBoundary,
   contextualKeywordPrefixBoundary,
+  contextualValuedChoiceInline,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -118,6 +119,351 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
+
+const valuedChoiceFixture = readFileSync(
+  new URL("./fixtures/contextual-valued-choice.js", import.meta.url),
+  "utf8",
+);
+const valuedChoiceDirectory = mkdtempSync(join(tmpdir(), "abl-contextual-valued-choice-"));
+const valuedChoiceCase = (name, code) => ({
+  name,
+  code,
+  cwd: valuedChoiceDirectory,
+  filename: join(valuedChoiceDirectory, "grammar.js"),
+});
+const valuedChoiceMessage =
+  /required keyword\/value clauses.*only at this caller.*shared helper at other callers.*nested value boundary.*LARGE_STATE_COUNT before ACTION_COUNT.*complete valid and recovery trees/;
+const valuedChoiceExpanded = valuedChoiceFixture.replace(
+  "        $._as_like,",
+  '        choice(seq($._kw_as, $._class_type), seq($._kw_like, field("like", $._qualified_identifier))),',
+);
+try {
+  new RuleTester().run("contextual-valued-choice-inline", contextualValuedChoiceInline, {
+    valid: [
+      valuedChoiceCase("the measured FORMAT-only expansion", valuedChoiceExpanded),
+      valuedChoiceCase(
+        "global inline is outside the contextual suggestion",
+        valuedChoiceFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", inline: ($) => [$._as_like],',
+        ),
+      ),
+      ...["conflicts", "precedences", "supertypes", "externals", "word"].map((metadata) =>
+        valuedChoiceCase(
+          `selector ${metadata} metadata`,
+          valuedChoiceFixture.replace(
+            '  name: "fixture",',
+            `  name: "fixture", ${metadata}: ($) => [$._as_like],`,
+          ),
+        ),
+      ),
+      valuedChoiceCase(
+        "caller metadata",
+        valuedChoiceFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", conflicts: ($) => [[$._format_field_option]],',
+        ),
+      ),
+      valuedChoiceCase("a public selector", valuedChoiceFixture.replaceAll("_as_like", "as_like")),
+      valuedChoiceCase(
+        "a private selector",
+        valuedChoiceFixture.replaceAll("_as_like", "__as_like"),
+      ),
+      valuedChoiceCase(
+        "a selector with only direct fields",
+        valuedChoiceFixture.replace(
+          "seq($._kw_as, $._class_type)",
+          'seq($._kw_as, field("type", $._type_or_string))',
+        ),
+      ),
+      valuedChoiceCase(
+        "undefined nested payload",
+        valuedChoiceFixture.replace("    _class_type:", "    _other_class_type:"),
+      ),
+      valuedChoiceCase(
+        "nullable payload field",
+        valuedChoiceFixture.replace(
+          'field("type", $._type_or_string)',
+          'optional(field("type", $._type_or_string))',
+        ),
+      ),
+      valuedChoiceCase(
+        "recursive selector value",
+        valuedChoiceFixture.replace(
+          'field("like", $._qualified_identifier)',
+          'field("like", $._as_like)',
+        ),
+      ),
+      valuedChoiceCase(
+        "recursive nested payload",
+        valuedChoiceFixture.replace(
+          'field("type", $._type_or_string)',
+          'field("type", $._as_like)',
+        ),
+      ),
+      valuedChoiceCase(
+        "a nullable selector branch",
+        valuedChoiceFixture.replace(
+          'seq($._kw_like, field("like", $._qualified_identifier))',
+          'optional(seq($._kw_like, field("like", $._qualified_identifier)))',
+        ),
+      ),
+      valuedChoiceCase(
+        "duplicate keyword branches",
+        valuedChoiceFixture.replace('$._kw_like, field("like"', '$._kw_as, field("like"'),
+      ),
+      valuedChoiceCase(
+        "dynamic keyword options",
+        valuedChoiceFixture.replace("$._kw_as, $._class_type", 'kw("AS", options), $._class_type'),
+      ),
+      valuedChoiceCase(
+        "too few valued-option alternatives",
+        valuedChoiceFixture.replace(
+          '        seq($._kw_font, field("font", $.__format_expression)),\n',
+          "",
+        ),
+      ),
+      valuedChoiceCase(
+        "insufficient direct valued siblings",
+        valuedChoiceFixture
+          .replace('seq($._kw_fgcolor, field("fgcolor", $.__format_expression))', "$._fgcolor")
+          .replace('seq($._kw_font, field("font", $.__format_expression))', "$._font"),
+      ),
+      ...[
+        "alias($._as_like, $.clause)",
+        'field("clause", $._as_like)',
+        "optional($._as_like)",
+        "token($._as_like)",
+        "token.immediate($._as_like)",
+        "prec.dynamic(1, $._as_like)",
+      ].map((use) =>
+        valuedChoiceCase(
+          `wrapped selector ${use}`,
+          valuedChoiceFixture.replace("        $._as_like,", `        ${use},`),
+        ),
+      ),
+      ...[
+        "alias(BODY, $.clause)",
+        'field("clause", BODY)',
+        "token(BODY)",
+        "token.immediate(BODY)",
+        "prec.dynamic(1, BODY)",
+      ].map((wrapper) => {
+        const body =
+          'choice($._as_like, seq($._kw_a, field("a", $.value)), seq($._kw_b, field("b", $.value)), seq($._kw_c, field("c", $.value)))';
+        return valuedChoiceCase(
+          `wrapped dispatcher ${wrapper}`,
+          valuedChoiceFixture.replace(
+            /    _format_field_option: [\s\S]*?\n    __parameter_variable_type_phrase:/,
+            `    _format_field_option: ($) => ${wrapper.replace("BODY", body)},\n    __parameter_variable_type_phrase:`,
+          ),
+        );
+      }),
+      valuedChoiceCase(
+        "computed reference",
+        valuedChoiceFixture.replace("        $._as_like,", '        $["_as_like"],'),
+      ),
+      valuedChoiceCase(
+        "selector suppression",
+        valuedChoiceFixture.replace(
+          "    _as_like:",
+          "    // oxlint-disable-next-line rule-to-test/contextual-valued-choice-inline\n    _as_like:",
+        ),
+      ),
+      valuedChoiceCase(
+        "caller suppression",
+        valuedChoiceFixture.replace(
+          "    _format_field_option:",
+          "    // oxlint-disable-next-line rule-to-test/contextual-valued-choice-inline\n    _format_field_option:",
+        ),
+      ),
+      valuedChoiceCase(
+        "use suppression",
+        valuedChoiceFixture.replace(
+          "        $._as_like,",
+          "        // oxlint-disable-next-line rule-to-test/contextual-valued-choice-inline\n        $._as_like,",
+        ),
+      ),
+      valuedChoiceCase(
+        "file suppression",
+        "// oxlint-disable rule-to-test/contextual-valued-choice-inline\n" + valuedChoiceFixture,
+      ),
+      valuedChoiceCase(
+        "an unrelated object",
+        valuedChoiceFixture
+          .replace("export default grammar(", "const unrelated = (")
+          .replace("  rules: {", "  content: {"),
+      ),
+    ],
+    invalid: [
+      {
+        ...valuedChoiceCase("AS/LIKE before the measured local expansion", valuedChoiceFixture),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+      {
+        ...valuedChoiceCase(
+          "same-file caller before selector definition",
+          valuedChoiceFixture.replace(
+            /(    _as_like:[\s\S]*?)(    _format_field_option:[\s\S]*?)(    __parameter_variable_type_phrase:)/,
+            "$2$1$3",
+          ),
+        ),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+      {
+        ...valuedChoiceCase(
+          "static caller precedence is preserved",
+          valuedChoiceFixture.replace(
+            /(    _format_field_option: \(\$\) =>\s+)(choice\([\s\S]*?\)),(\n    __parameter_variable_type_phrase:)/,
+            '$1prec.right("option", $2),$3',
+          ),
+        ),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+      {
+        ...valuedChoiceCase(
+          "renamed selectors, callers and fields",
+          valuedChoiceFixture
+            .replaceAll("_as_like", "_mode_clause")
+            .replaceAll("_format_field_option", "__widget_option")
+            .replaceAll('"like"', '"source"'),
+        ),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+      {
+        ...valuedChoiceCase(
+          "static keyword calls retain options",
+          valuedChoiceFixture.replace(
+            "$._kw_as, $._class_type",
+            'kw("AS", { offset: 2 }), $._class_type',
+          ),
+        ),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+      {
+        ...valuedChoiceCase(
+          "an unrelated suppression does not disable the candidate",
+          valuedChoiceFixture.replace(
+            "    _as_like:",
+            "    // oxlint-disable-next-line rule-to-test/single-use-choice\n    _as_like:",
+          ),
+        ),
+        errors: [{ message: valuedChoiceMessage }],
+      },
+    ],
+  });
+
+  const common = `export default ({kw}) => ({
+    _class_type: ($) => seq(optional($._kw_class), field("type", $._type_or_string)),
+    _as_like: ($) => choice(seq($._kw_as, $._class_type), seq($._kw_like, field("like", $._qualified_identifier))),
+  });`;
+  const caller = `export default ({kw}) => ({
+    _format_field_option: ($) => choice($._as_like,
+      seq($._kw_bgcolor, field("bgcolor", $._expression)),
+      seq($._kw_fgcolor, field("fgcolor", $._expression)),
+      seq($._kw_font, field("font", $._expression))),
+  });`;
+  const crossFile = (filename, code) => ({
+    cwd: valuedChoiceDirectory,
+    filename: join(valuedChoiceDirectory, "grammar", filename),
+    code,
+  });
+  writeFileSync(
+    join(valuedChoiceDirectory, "grammar.js"),
+    "export default grammar({ rules: {} });",
+  );
+  for (const reversed of [false, true]) {
+    resetSharingCandidates();
+    const pair = [crossFile("common.js", common), crossFile("format.js", caller)];
+    if (reversed) pair.reverse();
+    new RuleTester().run(
+      `contextual-valued-choice-inline cross-file first ${reversed}`,
+      contextualValuedChoiceInline,
+      { valid: [pair[0]], invalid: [] },
+    );
+    new RuleTester().run(
+      `contextual-valued-choice-inline cross-file match ${reversed}`,
+      contextualValuedChoiceInline,
+      { valid: [], invalid: [{ ...pair[1], errors: [{ message: valuedChoiceMessage }] }] },
+    );
+  }
+  resetSharingCandidates();
+  new RuleTester().run(
+    "contextual-valued-choice-inline revisit seed",
+    contextualValuedChoiceInline,
+    {
+      valid: [crossFile("common.js", common)],
+      invalid: [],
+    },
+  );
+  new RuleTester().run(
+    "contextual-valued-choice-inline initial visit",
+    contextualValuedChoiceInline,
+    {
+      valid: [],
+      invalid: [{ ...crossFile("format.js", caller), errors: [{ message: valuedChoiceMessage }] }],
+    },
+  );
+  const expandedCaller = caller.replace(
+    "choice($._as_like,",
+    'choice(choice(seq($._kw_as, $._class_type), seq($._kw_like, field("like", $._qualified_identifier))),',
+  );
+  new RuleTester().run(
+    "contextual-valued-choice-inline clear stale caller on revisit",
+    contextualValuedChoiceInline,
+    {
+      valid: [crossFile("format.js", expandedCaller), crossFile("common.js", common)],
+      invalid: [],
+    },
+  );
+  new RuleTester().run(
+    "contextual-valued-choice-inline report a restored caller",
+    contextualValuedChoiceInline,
+    {
+      valid: [],
+      invalid: [{ ...crossFile("format.js", caller), errors: [{ message: valuedChoiceMessage }] }],
+    },
+  );
+  resetSharingCandidates();
+  new RuleTester().run(
+    "contextual-valued-choice-inline reset removes other files",
+    contextualValuedChoiceInline,
+    {
+      valid: [crossFile("common.js", common)],
+      invalid: [],
+    },
+  );
+  for (const metadata of ["inline", "conflicts", "precedences"]) {
+    resetSharingCandidates();
+    writeFileSync(
+      join(valuedChoiceDirectory, "grammar.js"),
+      `export default grammar({ ${metadata}: ($) => [$._as_like], rules: {} });`,
+    );
+    new RuleTester().run(
+      `contextual-valued-choice-inline cross-file ${metadata}`,
+      contextualValuedChoiceInline,
+      { valid: [crossFile("common.js", common), crossFile("format.js", caller)], invalid: [] },
+    );
+  }
+  resetSharingCandidates();
+  writeFileSync(
+    join(valuedChoiceDirectory, "grammar.js"),
+    "export default grammar({ rules: {} });",
+  );
+  mkdirSync(join(valuedChoiceDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(valuedChoiceDirectory, "grammar", "precedences", "type.js"),
+    "export default ($) => [[$._as_like, $.expression]];",
+  );
+  new RuleTester().run(
+    "contextual-valued-choice-inline external precedence",
+    contextualValuedChoiceInline,
+    { valid: [crossFile("common.js", common), crossFile("format.js", caller)], invalid: [] },
+  );
+} finally {
+  resetSharingCandidates();
+  rmSync(valuedChoiceDirectory, { recursive: true, force: true });
+}
 
 const lexicalFieldFixture = readFileSync(
   new URL("./fixtures/preprocessor-definition-body.js", import.meta.url),
