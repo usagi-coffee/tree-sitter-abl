@@ -256,6 +256,7 @@ export default grammar({
     $._method_definition_signature,
     $.__define_preprocessor_body,
     $.__var_storage_modifier,
+    $.__display_window_frame_phrases,
     $.system_handle_identifier,
   ],
 

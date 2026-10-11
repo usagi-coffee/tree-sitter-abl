@@ -1,0 +1,38 @@
+==================
+DISPLAY - Stream handles with window and repeated frame options
+==================
+
+DISPLAY STREAM s1 WITH FRAME f1 WITH FRAME f2.
+DISPLAY STREAM s1 IN WINDOW hWin WITH FRAME f1 WITH FRAME f2 NO-ERROR.
+DISPLAY STREAM-HANDLE hStream UNLESS-HIDDEN WITH FRAME f1.
+DISPLAY STREAM-HANDLE hStream UNLESS-HIDDEN IN WINDOW hWin WITH FRAME f1 WITH FRAME f2.
+
+---
+
+(source_code
+  (display_statement
+    stream: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      frame: (identifier))
+    (no_error))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      frame: (identifier))))
