@@ -33,6 +33,7 @@ export default ({ kw }) => ({
         optional($.__repeat_condition_phrase),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-required-tail-choice-inline
   __repeat_body_after_transaction: ($) => choice(seq($._block_options, $.body), $.body),
 
   // oxlint-disable-next-line tree-sitter-optimize/leading-keyword-field-boundary
