@@ -1,0 +1,63 @@
+================================================================================
+RECORD USING - fields retain individual frame selectors
+================================================================================
+
+FOR EACH Customer USING Name AND City NO-LOCK: END.
+FOR EACH Customer USING FRAME f Name AND FRAME g City AND Balance NO-LOCK: END.
+PRESELECT EACH Customer USING FRAME f Customer.Name AND City NO-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      field: (identifier)
+      field: (identifier)
+      (no_lock))
+    (body))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      frame: (identifier)
+      field: (identifier)
+      frame: (identifier)
+      field: (identifier)
+      field: (identifier)
+      (no_lock))
+    (body))
+  (preselect_statement
+    (preselect_record_list
+      (preselect_record
+        (record_phrase
+          record: (identifier)
+          frame: (identifier)
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          field: (identifier)
+          (no_lock))))))
+
+================================================================================
+RECORD USING - reject a frame selector without its first field
+:error
+================================================================================
+
+FOR EACH Customer USING FRAME f : END.
+DISPLAY nextValue.
+
+--------------------------------------------------------------------------------
+
+(source_code)
+
+================================================================================
+RECORD USING - reject an AND continuation without its field
+:error
+================================================================================
+
+FOR EACH Customer USING Name AND FRAME f : END.
+DISPLAY nextValue.
+
+--------------------------------------------------------------------------------
+
+(source_code)

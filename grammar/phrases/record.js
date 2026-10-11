@@ -29,11 +29,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_use_index, field("index", $._qualified_identifier)),
       alias(kw("TABLE-SCAN"), $.table_scan),
-      seq(
-        $._kw_using,
-        field("field", $.__record_using_field),
-        optional($.__record_using_fields_tail),
-      ),
+      seq($._kw_using, $.__record_using_fields),
       $._lock_option,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARE"), $.share),
@@ -43,8 +39,8 @@ export default ({ kw }) => ({
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
   __record_using_field: ($) => seq(optional($._frame_identifier_phrase), $._qualified_identifier),
-  __record_using_fields_tail: ($) =>
-    seq($._kw_and, field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
+  __record_using_fields: ($) =>
+    seq(field("field", $.__record_using_field), optional(seq($._kw_and, $.__record_using_fields))),
 
   __record_field_list: ($) =>
     choice(
