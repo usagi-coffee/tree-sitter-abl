@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  pairedMarkerFieldPrefix,
   keywordListHeadExtraction,
   optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
@@ -10952,3 +10953,102 @@ try {
 } finally {
   rmSync(keywordListHeadDirectory, { recursive: true, force: true });
 }
+
+const pairedMarkerFieldBody = `seq(
+  $._kw_new, optional($._kw_buffer), field("new_record", $.identifier),
+  $._kw_old, optional($._kw_buffer), field("old_record", $.identifier)
+)`;
+const pairedMarkerFieldFixture = (body = pairedMarkerFieldBody) => `
+export default ({kw}) => ({
+  root: ($) => alias($.__demo_reference, $.referencing_phrase),
+  __demo_reference: ($) => choice(
+    ${body},
+    seq($._kw_old, optional($._kw_value), field("old_field", $.identifier))
+  ),
+});`;
+new RuleTester().run("paired-marker-field-prefix", pairedMarkerFieldPrefix, {
+  valid: [
+    pairedMarkerFieldFixture(`seq(
+      $.__demo_new_record, $._kw_old, optional($._kw_buffer), field("old_record", $.identifier)
+    )`),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new", "$._kw_old")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new", "$.identifier")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new", "kw(name)")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new", 'kw("NEW", options)')),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new", "token(/NEW/i)")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_buffer", "$._kw_value")),
+    pairedMarkerFieldFixture(
+      pairedMarkerFieldBody
+        .replaceAll("$._kw_buffer", 'kw("BUFFER", {offset: 3})')
+        .replace("offset: 3", "offset: 4"),
+    ),
+    pairedMarkerFieldFixture(
+      pairedMarkerFieldBody.replace("optional($._kw_buffer)", "$._kw_buffer"),
+    ),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace('"new_record"', '"old_record"')),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace('"new_record"', "fieldName")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$.identifier", "$._expression")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$.identifier", '$["identifier"]')),
+    pairedMarkerFieldFixture(
+      pairedMarkerFieldBody.replaceAll("$.identifier", "$.__demo_reference"),
+    ),
+    pairedMarkerFieldFixture(
+      pairedMarkerFieldBody.replace("$.identifier", "alias($.identifier, $.name)"),
+    ),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("$._kw_new, ", "")),
+    pairedMarkerFieldFixture(pairedMarkerFieldBody.replace("seq(", 'seq("EXTRA", ')),
+    ...["alias", "field", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      pairedMarkerFieldFixture(`${wrapper}(${pairedMarkerFieldBody}, $.label)`),
+    ),
+    pairedMarkerFieldFixture(`prec(level, ${pairedMarkerFieldBody})`),
+    pairedMarkerFieldFixture("seq(...parts)"),
+    pairedMarkerFieldFixture().replace(
+      "__demo_reference: ($)",
+      "// oxlint-disable-next-line rule-to-test/paired-marker-field-prefix\n__demo_reference: ($)",
+    ),
+    pairedMarkerFieldFixture(
+      `// oxlint-disable-next-line rule-to-test/paired-marker-field-prefix\n${pairedMarkerFieldBody}`,
+    ),
+    pairedMarkerFieldFixture(
+      pairedMarkerFieldBody.replace(
+        "$._kw_new",
+        "// oxlint-disable-next-line rule-to-test/paired-marker-field-prefix\n$._kw_new",
+      ),
+    ),
+    `const unrelated = { reference: ($) => ${pairedMarkerFieldBody} };`,
+  ],
+  invalid: [
+    {
+      name: "original ON NEW and OLD BUFFER clauses",
+      code: pairedMarkerFieldFixture(),
+      errors: [{ message: /extracting the complete new_record prefix into a hidden helper/ }],
+    },
+    {
+      name: "static keyword options and an enclosing precedence remain at their scopes",
+      code: pairedMarkerFieldFixture(
+        `prec.right("reference", ${pairedMarkerFieldBody
+          .replace("$._kw_new", 'kw("NEW", {offset: 2})')
+          .replace("$._kw_old", 'kw("OLD", {offset: 2})')
+          .replaceAll("$._kw_buffer", 'kw("BUFFER", {offset: 3})')})`,
+      ),
+      errors: [
+        { message: /large states before actions and compare complete valid and recovery trees/ },
+      ],
+    },
+    {
+      name: "distinct names with the same compound value symbol",
+      code: pairedMarkerFieldFixture(
+        pairedMarkerFieldBody.replaceAll("$.identifier", "$._qualified_identifier"),
+      ),
+      errors: 1,
+    },
+    {
+      name: "other rule directives do not suppress this suggestion",
+      code: pairedMarkerFieldFixture().replace(
+        "__demo_reference: ($)",
+        "// oxlint-disable-next-line rule-to-test/body-extraction\n__demo_reference: ($)",
+      ),
+      errors: 1,
+    },
+  ],
+});
