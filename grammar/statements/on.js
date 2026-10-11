@@ -267,13 +267,13 @@ export default ({ kw }) => ({
   __on_referencing_phrase: ($) =>
     choice(
       seq(
-        $._kw_new,
-        optional($._kw_buffer),
-        field("new_record", $.identifier),
+        $.__on_referencing_new_record,
         $._kw_old,
         optional($._kw_buffer),
         field("old_record", $.identifier),
       ),
       seq($._kw_old, optional($._kw_value), field("old_field", $.identifier)),
     ),
+  __on_referencing_new_record: ($) =>
+    seq($._kw_new, optional($._kw_buffer), field("new_record", $.identifier)),
 });

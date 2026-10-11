@@ -748,3 +748,40 @@ ON CHOOSE OF btn1 OR LEAVE OF btn2 ANYWHERE REVERT.
         handle: (identifier)))
     (anywhere)
     (revert)))
+
+================================================================================
+ON WRITE - optional BUFFER markers in referencing phrases
+================================================================================
+
+ON WRITE OF Customer NEW newCustomer OLD oldCustomer REVERT.
+ON WRITE OF Customer NEW BUFFER newCustomer OLD oldCustomer REVERT.
+ON WRITE OF Customer NEW newCustomer OLD BUFFER oldCustomer REVERT.
+ON WRITE OF Customer NEW BUFFER newCustomer OLD BUFFER oldCustomer REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (revert)))
