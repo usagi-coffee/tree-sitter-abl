@@ -274,6 +274,7 @@ export default ({ kw }) => ({
       ),
       seq($._kw_old, optional($._kw_value), field("old_field", $.identifier)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __on_referencing_new_record: ($) =>
     seq($._kw_new, optional($._kw_buffer), field("new_record", $.identifier)),
 });
