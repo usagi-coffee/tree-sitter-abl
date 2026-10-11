@@ -38,6 +38,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __record_using_field: ($) => seq(optional($._frame_identifier_phrase), $._qualified_identifier),
   __record_using_fields: ($) =>
     seq(field("field", $.__record_using_field), optional(seq($._kw_and, $.__record_using_fields))),
