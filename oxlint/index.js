@@ -100,6 +100,7 @@ import { sharedLexicalFieldSequenceInline } from "./rules/shared-lexical-field-s
 import { multiUsePrivateKeywordChoiceInline } from "./rules/multi-use-private-keyword-choice-inline.js";
 import { multiUsePrivateKeywordAliasChoiceInline } from "./rules/multi-use-private-keyword-alias-choice-inline.js";
 import { multiUsePrivateFlagChoiceInline } from "./rules/multi-use-private-flag-choice-inline.js";
+import { multiUseRequiredTailChoiceInline } from "./rules/multi-use-required-tail-choice-inline.js";
 import { multiUsePrivateKeywordFieldInline } from "./rules/multi-use-private-keyword-field-inline.js";
 import { sharedKeywordInline } from "./rules/shared-keyword-inline.js";
 import { singleUseSharedSequenceInline } from "./rules/single-use-shared-sequence-inline.js";
@@ -229,6 +230,7 @@ export {
   multiUsePrivateKeywordChoiceInline,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateFlagChoiceInline,
+  multiUseRequiredTailChoiceInline,
   multiUsePrivateKeywordFieldInline,
   singleUseSharedChoiceInline,
   sharedKeywordInline,
@@ -351,6 +353,7 @@ export default {
     "multi-use-private-keyword-choice-inline": multiUsePrivateKeywordChoiceInline,
     "multi-use-private-keyword-alias-choice-inline": multiUsePrivateKeywordAliasChoiceInline,
     "multi-use-private-flag-choice-inline": multiUsePrivateFlagChoiceInline,
+    "multi-use-required-tail-choice-inline": multiUseRequiredTailChoiceInline,
     "multi-use-private-keyword-field-inline": multiUsePrivateKeywordFieldInline,
     "shared-keyword-inline": sharedKeywordInline,
     "single-use-shared-sequence-inline": singleUseSharedSequenceInline,

@@ -123,6 +123,7 @@
         "tree-sitter-optimize/multi-use-private-keyword-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-keyword-alias-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-flag-choice-inline": "warn",
+        "tree-sitter-optimize/multi-use-required-tail-choice-inline": "warn",
         "tree-sitter-optimize/multi-use-private-keyword-field-inline": "warn",
         "tree-sitter-optimize/shared-keyword-inline": "warn",
         "tree-sitter-optimize/single-use-shared-sequence-inline": "warn",

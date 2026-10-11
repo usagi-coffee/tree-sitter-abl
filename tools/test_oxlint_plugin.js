@@ -13,6 +13,7 @@ import {
   sharedLexicalFieldSequenceInline,
   multiUsePrivateKeywordAliasChoiceInline,
   multiUsePrivateFlagChoiceInline,
+  multiUseRequiredTailChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
   privatePrecedenceSymbolInline,
@@ -123,6 +124,190 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "../oxlint/index.js";
+
+const requiredTailFixture = readFileSync(
+  new URL("./fixtures/required-tail-choice.js", import.meta.url),
+  "utf8",
+);
+const requiredTailDirectory = mkdtempSync(join(tmpdir(), "abl-required-tail-choice-"));
+const requiredTailCase = (name, code = requiredTailFixture) => ({
+  name,
+  code,
+  cwd: requiredTailDirectory,
+  filename: join(requiredTailDirectory, "grammar.js"),
+});
+const requiredTailBody = "choice(seq($.in_window_phrase, $._frame_phrases), $._frame_phrases)";
+const requiredTailMessage =
+  /2 unaliased local uses.*prefix with a required tail.*same tail alone.*complete helper to grammar.inline.*both alternatives.*caller fields and precedence.*LARGE_STATE_COUNT before ACTION_COUNT.*complete valid and recovery trees/;
+try {
+  new RuleTester().run("multi-use-required-tail-choice-inline", multiUseRequiredTailChoiceInline, {
+    valid: [
+      ...["inline", "conflicts", "precedences", "supertypes", "externals", "extras"].map(
+        (metadata) =>
+          requiredTailCase(
+            `${metadata} dependency, including the measured DISPLAY inline entry`,
+            requiredTailFixture.replace(
+              '  name: "fixture",',
+              `  name: "fixture", ${metadata}: ($) => [[$.__display_window_frame_phrases]],`,
+            ),
+          ),
+      ),
+      requiredTailCase(
+        "word metadata",
+        requiredTailFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", word: ($) => $.__display_window_frame_phrases,',
+        ),
+      ),
+      ...["display_window_frame_phrases", "_display_window_frame_phrases"].map((name) =>
+        requiredTailCase(
+          `non-private helper ${name}`,
+          requiredTailFixture.replaceAll("__display_window_frame_phrases", name),
+        ),
+      ),
+      requiredTailCase(
+        "one use is covered by the existing single-use choice rule",
+        requiredTailFixture.replace("        $.__display_window_frame_phrases,\n", ""),
+      ),
+      ...[
+        "choice($.in_window_phrase, $._frame_phrases)",
+        "choice(seq($.in_window_phrase, optional($._frame_phrases)), $._frame_phrases)",
+        "choice(seq($.in_window_phrase, $._frame_phrases), $.other)",
+        "choice(seq($.in_window_phrase, $._frame_phrases), $._frame_phrases, $.other)",
+        "choice(seq($.in_window_phrase, $.other, $._frame_phrases), $._frame_phrases)",
+        "choice(seq($._frame_phrases, $._frame_phrases), $._frame_phrases)",
+        "choice(seq($.__display_window_frame_phrases, $._frame_phrases), $._frame_phrases)",
+        "choice(seq($.in_window_phrase, $.__display_window_frame_phrases), $.__display_window_frame_phrases)",
+        'choice(seq(field("window", $.in_window_phrase), $._frame_phrases), $._frame_phrases)',
+        'prec.right("tail", choice(seq($.in_window_phrase, $._frame_phrases), $._frame_phrases))',
+      ].map((body) =>
+        requiredTailCase(
+          `different structure: ${body}`,
+          requiredTailFixture.replace(requiredTailBody, body),
+        ),
+      ),
+      requiredTailCase(
+        "indirect recursion through the tail",
+        requiredTailFixture.replace(
+          "  rules: {",
+          "  rules: { _frame_phrases: ($) => $.__display_window_frame_phrases,",
+        ),
+      ),
+      ...[
+        "alias($.__display_window_frame_phrases, $.frames)",
+        "token($.__display_window_frame_phrases)",
+        "token.immediate($.__display_window_frame_phrases)",
+        "prec.dynamic(1, $.__display_window_frame_phrases)",
+        "prec(level, $.__display_window_frame_phrases)",
+        "custom($.__display_window_frame_phrases)",
+        "condition ? $.__display_window_frame_phrases : $.other",
+        '$["__display_window_frame_phrases"]',
+        "$[helper]",
+      ].map((use) =>
+        requiredTailCase(
+          `unsafe reference: ${use}`,
+          requiredTailFixture.replace(
+            "        $.__display_window_frame_phrases,",
+            `        ${use},`,
+          ),
+        ),
+      ),
+      requiredTailCase(
+        "another rule map also references the helper",
+        `${requiredTailFixture}\nconst other = {rules: {root: ($) => $.__display_window_frame_phrases}};`,
+      ),
+      requiredTailCase(
+        "non-grammar code",
+        requiredTailFixture.replace("  rules: {", "  values: {"),
+      ),
+      ...[
+        "    __display_window_frame_phrases:",
+        "      choice(seq($.in_window_phrase",
+        "    __display_stream_frame_tail:",
+        "        seq(alias",
+        "        $.__display_window_frame_phrases,",
+      ].map((source, index) =>
+        requiredTailCase(
+          `suppression at a relevant construct ${index}`,
+          requiredTailFixture.replace(
+            source,
+            `// oxlint-disable-next-line rule-to-test/multi-use-required-tail-choice-inline\n${source}`,
+          ),
+        ),
+      ),
+    ],
+    invalid: [
+      {
+        ...requiredTailCase("original DISPLAY window/frame helper"),
+        errors: [{ message: requiredTailMessage }],
+      },
+      {
+        ...requiredTailCase(
+          "caller fields and static precedence remain at the caller",
+          requiredTailFixture.replace(
+            "        $.__display_window_frame_phrases,",
+            '        optional(field("frames", prec.right("frames", $.__display_window_frame_phrases))),',
+          ),
+        ),
+        errors: 1,
+      },
+      {
+        ...requiredTailCase(
+          "separate local callers",
+          requiredTailFixture.replace(
+            "        $.__display_window_frame_phrases,\n      ),",
+            "      ),\n    other: ($) => $.__display_window_frame_phrases,",
+          ),
+        ),
+        errors: 1,
+      },
+      {
+        ...requiredTailCase(
+          "a required named tail",
+          requiredTailFixture.replaceAll("$._frame_phrases", "$.body"),
+        ),
+        errors: 1,
+      },
+      {
+        ...requiredTailCase(
+          "an unrelated suppression",
+          requiredTailFixture.replace(
+            "    __display_window_frame_phrases:",
+            "// oxlint-disable-next-line rule-to-test/choice-subset\n    __display_window_frame_phrases:",
+          ),
+        ),
+        errors: 1,
+      },
+    ],
+  });
+  const externalRequiredTailCase = {
+    code: requiredTailFixture,
+    cwd: requiredTailDirectory,
+    filename: join(requiredTailDirectory, "grammar", "statements", "display.js"),
+  };
+  for (const metadata of ["inline", "conflicts", "supertypes", "externals", "extras"]) {
+    writeFileSync(
+      join(requiredTailDirectory, "grammar.js"),
+      `export default grammar({${metadata}: ($) => [$.__display_window_frame_phrases]});`,
+    );
+    new RuleTester().run(`required tail external ${metadata}`, multiUseRequiredTailChoiceInline, {
+      valid: [externalRequiredTailCase],
+      invalid: [],
+    });
+  }
+  writeFileSync(join(requiredTailDirectory, "grammar.js"), "export default grammar({});");
+  mkdirSync(join(requiredTailDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(requiredTailDirectory, "grammar", "precedences", "fixture.js"),
+    "export default ($) => [[$.__display_window_frame_phrases, $.other]];",
+  );
+  new RuleTester().run("required tail external precedence", multiUseRequiredTailChoiceInline, {
+    valid: [externalRequiredTailCase],
+    invalid: [],
+  });
+} finally {
+  rmSync(requiredTailDirectory, { recursive: true, force: true });
+}
 
 const privateFlagFixture = readFileSync(
   new URL("./fixtures/private-flag-choice.js", import.meta.url),
