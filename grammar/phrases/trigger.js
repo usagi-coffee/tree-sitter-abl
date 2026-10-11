@@ -34,6 +34,7 @@ export default ({ kw }) => ({
       ),
       $.__trigger_body_after_loop,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/multi-use-required-tail-choice-inline
   __trigger_body_after_loop: ($) =>
     choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
   __trigger_body_block: ($) => seq(":", $._compound_body, "."),
