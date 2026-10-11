@@ -1,0 +1,54 @@
+================================================================================
+VAR - Storage flags retain aliases with and without access modifiers
+================================================================================
+
+CLASS FlagHolder:
+  VAR STATIC INT counterA.
+  VAR SERIALIZABLE INT counterB.
+  VAR NON-SERIALIZABLE INT counterC.
+  VAR PRIVATE STATIC INT counterD = 1.
+  VAR PUBLIC SERIALIZABLE INT counterE = 2.
+  VAR PROTECTED NON-SERIALIZABLE INT counterF = 3.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (var_statement
+      (static_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)))
+    (var_statement
+      (serialization_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)))
+    (var_statement
+      (serialization_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)))
+    (var_statement
+      (access_modifier)
+      (static_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)
+        initializer: (number_literal)))
+    (var_statement
+      (access_modifier)
+      (serialization_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)
+        initializer: (number_literal)))
+    (var_statement
+      (access_modifier)
+      (serialization_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)
+        initializer: (number_literal)))))
