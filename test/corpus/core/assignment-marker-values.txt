@@ -1,0 +1,80 @@
+================================================================================
+Assignment marker values preserve qualifiers and widget fields
+:cst
+================================================================================
+x = Buffer.
+x = TABLE-HANDLE.
+x = BUFFER hbuf:HANDLE.
+x = BUFFER {&BUFFER-NAME}buf:HANDLE.
+x = Buffer FIELD Customer.Name IN FRAME f.
+y = Buffer:SomeProp.
+
+--------------------------------------------------------------------------------
+
+0:0  - 6:0    source_code
+0:0  - 0:11     assignment_statement
+0:0  - 0:1        left: identifier `x`
+0:2  - 0:3        operator: assignment_operator
+0:2  - 0:3          "="
+0:4  - 0:10       right: identifier `Buffer`
+1:0  - 1:17     assignment_statement
+1:0  - 1:1        left: identifier `x`
+1:2  - 1:3        operator: assignment_operator
+1:2  - 1:3          "="
+1:4  - 1:16       right: identifier `TABLE-HANDLE`
+2:0  - 2:23     assignment_statement
+2:0  - 2:1        left: identifier `x`
+2:2  - 2:3        operator: assignment_operator
+2:2  - 2:3          "="
+2:4  - 2:22       right: object_access
+2:4  - 2:10         handle: identifier `BUFFER`
+2:11 - 2:15         name: identifier `hbuf`
+2:16 - 2:22         right: identifier `HANDLE`
+3:0  - 3:36     assignment_statement
+3:0  - 3:1        left: identifier `x`
+3:2  - 3:3        operator: assignment_operator
+3:2  - 3:3          "="
+3:4  - 3:35       right: object_access
+3:4  - 3:10         handle: identifier `BUFFER`
+3:11 - 3:28         name: macro_concatenated_name `{&BUFFER-NAME}buf`
+3:29 - 3:35         right: identifier `HANDLE`
+4:0  - 4:42     assignment_statement
+4:0  - 4:1        left: identifier `x`
+4:2  - 4:3        operator: assignment_operator
+4:2  - 4:3          "="
+4:4  - 4:10       right: identifier `Buffer`
+4:11 - 4:41       widget_phrase
+4:11 - 4:16         "FIELD"
+4:17 - 4:30         field: qualified_name
+4:17 - 4:25           left: identifier `Customer`
+4:26 - 4:30           right: identifier `Name`
+4:31 - 4:33         "IN"
+4:34 - 4:39         "FRAME"
+4:40 - 4:41         frame: identifier `f`
+5:0  - 5:20     assignment_statement
+5:0  - 5:1        left: identifier `y`
+5:2  - 5:3        operator: assignment_operator
+5:2  - 5:3          "="
+5:4  - 5:19       right: object_access
+5:4  - 5:10         left: identifier `Buffer`
+5:11 - 5:19         right: identifier `SomeProp`
+
+================================================================================
+Assignment marker values reject an incomplete handle attribute
+:error
+================================================================================
+
+x = BUFFER hbuf:.
+y = 1.
+
+--------------------------------------------------------------------------------
+
+================================================================================
+Assignment marker values reject an incomplete widget field
+:error
+================================================================================
+
+x = Buffer FIELD .
+y = 1.
+
+--------------------------------------------------------------------------------

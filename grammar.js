@@ -575,8 +575,22 @@ export default grammar({
         seq(
           field("left", $._assignable),
           field("operator", $.assignment_operator),
-          field("right", choice($._assignment_value, $._bare_marker_identifier)),
-          optional($.widget_phrase),
+          choice(
+            seq(field("right", $._assignment_value), optional($.widget_phrase)),
+            prec(
+              "assignment_marker_value",
+              seq(
+                field(
+                  "right",
+                  choice(
+                    alias($._kw_buffer, $.identifier),
+                    alias($._kw_table_handle, $.identifier),
+                  ),
+                ),
+                optional($.widget_phrase),
+              ),
+            ),
+          ),
         ),
 
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
