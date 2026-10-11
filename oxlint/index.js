@@ -19,6 +19,7 @@ import { contextualScalarNameBoundary } from "./rules/contextual-scalar-name-bou
 import { contextualKeywordChoiceBoundary } from "./rules/contextual-keyword-choice-boundary.js";
 import { contextualKeywordPrefixBoundary } from "./rules/contextual-keyword-prefix-boundary.js";
 import { contextualValuedChoiceInline } from "./rules/contextual-valued-choice-inline.js";
+import { contextualKeywordAliasTailInline } from "./rules/contextual-keyword-alias-tail-inline.js";
 import { sharedRepeatedSignature } from "./rules/shared-repeated-signature.js";
 import { leftRecursiveList } from "./rules/left-recursive-list.js";
 import { recursiveItemInline } from "./rules/recursive-item-inline.js";
@@ -208,6 +209,7 @@ export {
   contextualKeywordChoiceBoundary,
   contextualKeywordPrefixBoundary,
   contextualValuedChoiceInline,
+  contextualKeywordAliasTailInline,
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordNameBoundary,
   inlineClauseChoiceBoundary,
@@ -262,6 +264,7 @@ export default {
     "contextual-keyword-choice-boundary": contextualKeywordChoiceBoundary,
     "contextual-keyword-prefix-boundary": contextualKeywordPrefixBoundary,
     "contextual-valued-choice-inline": contextualValuedChoiceInline,
+    "contextual-keyword-alias-tail-inline": contextualKeywordAliasTailInline,
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,

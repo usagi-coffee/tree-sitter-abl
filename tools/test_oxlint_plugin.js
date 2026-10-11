@@ -32,6 +32,7 @@ import {
   contextualKeywordChoiceBoundary,
   contextualKeywordPrefixBoundary,
   contextualValuedChoiceInline,
+  contextualKeywordAliasTailInline,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -10619,4 +10620,156 @@ try {
   );
 } finally {
   rmSync(keywordFieldBoundaryDirectory, { recursive: true, force: true });
+}
+
+const beforeAssignmentMarkerContext = readFileSync(
+  new URL("./fixtures/assignment-marker-context.js", import.meta.url),
+  "utf8",
+);
+const keywordAliasTailFixture = (
+  metadata = "precedences: ($) => [[$._qualifier, $._markers]],",
+  wrap = (body) => body,
+) => `export default grammar({ ${metadata} rules: {
+  _markers: ($) => choice(alias(kw("START", {offset: 3}), $.identifier), alias($._kw_stop, $.identifier)),
+  clause: ($) => ${wrap('seq("SET", field("value", choice($._expression, $._markers)), optional($.suffix))')},
+  other: ($) => choice($._markers, $.string_literal)
+} });`;
+new RuleTester().run("contextual-keyword-alias-tail-inline", contextualKeywordAliasTailInline, {
+  valid: [
+    keywordAliasTailFixture(""),
+    keywordAliasTailFixture().replaceAll("_markers", "markers"),
+    keywordAliasTailFixture().replaceAll("_markers", "__markers"),
+    keywordAliasTailFixture().replace(
+      "alias($._kw_stop, $.identifier)",
+      "alias($._kw_stop, $.stop)",
+    ),
+    keywordAliasTailFixture().replaceAll("$.identifier", "$._identifier"),
+    keywordAliasTailFixture().replace("alias($._kw_stop, $.identifier)", "$.identifier"),
+    keywordAliasTailFixture().replace("$._kw_stop", 'kw("START", {offset: 3})'),
+    keywordAliasTailFixture().replace('kw("START", {offset: 3})', "kw(keyword)"),
+    keywordAliasTailFixture().replace('kw("START", {offset: 3})', 'kw("START", options)'),
+    keywordAliasTailFixture().replace(
+      'choice(alias(kw("START", {offset: 3}), $.identifier), alias($._kw_stop, $.identifier))',
+      "choice(alias($._kw_stop, $.identifier))",
+    ),
+    keywordAliasTailFixture().replace(
+      "choice($._expression, $._markers)",
+      "choice($._expression, $._markers, $.number_literal)",
+    ),
+    keywordAliasTailFixture().replace(
+      "choice($._expression, $._markers)",
+      "choice($._markers, $._markers)",
+    ),
+    keywordAliasTailFixture().replace('field("value",', "field(fieldName,"),
+    keywordAliasTailFixture().replace("optional($.suffix)", "$.suffix"),
+    keywordAliasTailFixture().replace("optional($.suffix)", "optional(seq($.suffix, $.end))"),
+    keywordAliasTailFixture().replace("optional($.suffix)", "optional($._markers)"),
+    keywordAliasTailFixture().replace("optional($.suffix))", "optional($.suffix), $.end)"),
+    keywordAliasTailFixture().replace("choice($._markers, $.string_literal)", "$.string_literal"),
+    ...["inline", "conflicts", "supertypes", "externals", "word"].map((metadata) =>
+      keywordAliasTailFixture(
+        `precedences: ($) => [[$._qualifier, $._markers]], ${metadata}: ($) => [$._markers],`,
+      ),
+    ),
+    keywordAliasTailFixture(
+      "precedences: ($) => [[$._qualifier, $._markers]], conflicts: ($) => [[$.clause]],",
+    ),
+    keywordAliasTailFixture(
+      "precedences: ($) => [[$._qualifier, $._markers], [$.clause, $.other]],",
+    ),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      keywordAliasTailFixture(undefined, (body) =>
+        wrapper === "alias"
+          ? `alias(${body}, $.option)`
+          : wrapper === "prec.dynamic"
+            ? `prec.dynamic(1, ${body})`
+            : `${wrapper}(${body})`,
+      ),
+    ),
+    keywordAliasTailFixture().replace("$.string_literal", "$[unknown]"),
+    keywordAliasTailFixture().replace(
+      "clause: ($)",
+      "// oxlint-disable-next-line rule-to-test/contextual-keyword-alias-tail-inline\nclause: ($)",
+    ),
+    keywordAliasTailFixture().replace(
+      "_markers: ($)",
+      "// oxlint-disable-next-line rule-to-test/contextual-keyword-alias-tail-inline\n_markers: ($)",
+    ),
+    keywordAliasTailFixture().replace(
+      "export default",
+      "// oxlint-disable rule-to-test/contextual-keyword-alias-tail-inline\nexport default",
+    ),
+    keywordAliasTailFixture().replace(
+      'field("value", choice($._expression, $._markers)), optional($.suffix)',
+      'choice(seq(field("value", $._expression), optional($.suffix)), prec("marker_value", seq(field("value", choice(alias(kw("START", {offset: 3}), $.identifier), alias($._kw_stop, $.identifier))), optional($.suffix))))',
+    ),
+  ],
+  invalid: [
+    {
+      name: "standalone assignment marker choice before the proven expansion",
+      code: beforeAssignmentMarkerContext,
+      errors: [{ message: /_bare_marker_identifier joins another value in the right field/ }],
+    },
+    {
+      name: "another keyword family retains spelling options and its identifier alias",
+      code: keywordAliasTailFixture(),
+      errors: [{ message: /complete optional suffix/ }],
+    },
+    {
+      name: "static caller precedence remains around the expanded branches",
+      code: keywordAliasTailFixture(undefined, (body) => `prec.right("clause", ${body})`),
+      errors: [{ message: /Transfer every helper precedence ordering/ }],
+    },
+    {
+      name: "the marker branch may precede the general value branch",
+      code: keywordAliasTailFixture().replace(
+        "choice($._expression, $._markers)",
+        "choice($._markers, $._expression)",
+      ),
+      errors: [{ message: /alternative order/ }],
+    },
+    {
+      name: "metadata-looking comments and strings do not restrict the selector",
+      code: `// inline: ($) => [$._markers]
+        const note = "conflicts: ($) => [[$._markers]]";
+        ${keywordAliasTailFixture()}`,
+      errors: [{ message: /complete valid and recovery trees/ }],
+    },
+  ],
+});
+const keywordAliasTailDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-alias-tail-"));
+try {
+  const filename = join(keywordAliasTailDirectory, "grammar", "statements", "set.js"),
+    code = keywordAliasTailFixture("");
+  mkdirSync(join(keywordAliasTailDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordAliasTailDirectory, "grammar.js"),
+    "export default grammar({rules: {}});",
+  );
+  writeFileSync(
+    join(keywordAliasTailDirectory, "grammar", "precedences", "markers.js"),
+    "export default ($) => [[$._qualifier, $._markers]];",
+  );
+  new RuleTester().run(
+    "contextual-keyword-alias-tail-inline external precedence",
+    contextualKeywordAliasTailInline,
+    {
+      valid: [],
+      invalid: [{ cwd: keywordAliasTailDirectory, filename, code, errors: 1 }],
+    },
+  );
+  writeFileSync(
+    join(keywordAliasTailDirectory, "grammar.js"),
+    "export default grammar({conflicts: ($) => [[$._markers]], rules: {}});",
+  );
+  new RuleTester().run(
+    "contextual-keyword-alias-tail-inline external conflict",
+    contextualKeywordAliasTailInline,
+    {
+      valid: [{ cwd: keywordAliasTailDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordAliasTailDirectory, { recursive: true, force: true });
 }

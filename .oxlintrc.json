@@ -42,6 +42,7 @@
         "tree-sitter-optimize/contextual-keyword-choice-boundary": "warn",
         "tree-sitter-optimize/contextual-keyword-prefix-boundary": "warn",
         "tree-sitter-optimize/contextual-valued-choice-inline": "warn",
+        "tree-sitter-optimize/contextual-keyword-alias-tail-inline": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/shared-modifier-alias-sequence": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
