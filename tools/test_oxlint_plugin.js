@@ -12,6 +12,7 @@ import {
   multiUsePrivateKeywordChoiceInline,
   sharedLexicalFieldSequenceInline,
   multiUsePrivateKeywordAliasChoiceInline,
+  multiUsePrivateFlagChoiceInline,
   multiUsePrivateKeywordFieldInline,
   precedenceKeywordAliasInline,
   privatePrecedenceSymbolInline,
@@ -122,6 +123,217 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "../oxlint/index.js";
+
+const privateFlagFixture = readFileSync(
+  new URL("./fixtures/private-flag-choice.js", import.meta.url),
+  "utf8",
+);
+const privateFlagDirectory = mkdtempSync(join(tmpdir(), "abl-private-flag-choice-"));
+const privateFlagCase = (name, code = privateFlagFixture) => ({
+  name,
+  code,
+  cwd: privateFlagDirectory,
+  filename: join(privateFlagDirectory, "grammar.js"),
+});
+const privateFlagMessage =
+  /2 unaliased local uses.*entirely of named keyword flags.*grammar.inline.*complete helper.*keyword options, alias targets, alternative order and caller fields.*LARGE_STATE_COUNT before ACTION_COUNT.*complete valid and recovery trees/;
+try {
+  new RuleTester().run("multi-use-private-flag-choice-inline", multiUsePrivateFlagChoiceInline, {
+    valid: [
+      privateFlagCase(
+        "the measured VAR inline entry",
+        privateFlagFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", inline: ($) => [$.__var_storage_modifier],',
+        ),
+      ),
+      ...["conflicts", "precedences", "supertypes", "externals", "extras"].map((metadata) =>
+        privateFlagCase(
+          `${metadata} dependency`,
+          privateFlagFixture.replace(
+            '  name: "fixture",',
+            `  name: "fixture", ${metadata}: ($) => [[$.__var_storage_modifier]],`,
+          ),
+        ),
+      ),
+      privateFlagCase(
+        "word dependency",
+        privateFlagFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", word: ($) => $.__var_storage_modifier,',
+        ),
+      ),
+      ...["storage_modifier", "_storage_modifier"].map((name) =>
+        privateFlagCase(
+          `non-private helper ${name}`,
+          privateFlagFixture.replaceAll("__var_storage_modifier", name),
+        ),
+      ),
+      privateFlagCase(
+        "a single use",
+        privateFlagFixture.replace("        $.__var_storage_modifier,\n", ""),
+      ),
+      ...[
+        "$.static_modifier",
+        'kw("STATIC")',
+        'alias(kw("STATIC"), $._static_modifier)',
+        'alias(kw("STATIC"), "STATIC")',
+        "alias($.identifier, $.static_modifier)",
+        "alias(kw(keyword), $.static_modifier)",
+        'alias(kw("STATIC", options), $.static_modifier)',
+        "alias(token(/STATIC/i), $.static_modifier)",
+        'alias(prec(1, kw("STATIC")), $.static_modifier)',
+        "alias($.__var_storage_modifier, $.static_modifier)",
+        "...flags",
+      ].map((branch) =>
+        privateFlagCase(
+          `not a static named keyword flag: ${branch}`,
+          privateFlagFixture.replace('alias(kw("STATIC"), $.static_modifier)', branch),
+        ),
+      ),
+      ...[
+        "alias($.__var_storage_modifier, $.modifier)",
+        "token($.__var_storage_modifier)",
+        "token.immediate($.__var_storage_modifier)",
+        "prec.dynamic(1, $.__var_storage_modifier)",
+        "prec(level, $.__var_storage_modifier)",
+        "custom($.__var_storage_modifier)",
+        "condition ? $.__var_storage_modifier : $.identifier",
+      ].map((use) =>
+        privateFlagCase(
+          `unsafe caller: ${use}`,
+          privateFlagFixture.replace("optional($.__var_storage_modifier)", `optional(${use})`),
+        ),
+      ),
+      privateFlagCase(
+        "computed helper reference",
+        privateFlagFixture.replace(
+          "optional($.__var_storage_modifier)",
+          'optional($["__var_storage_modifier"])',
+        ),
+      ),
+      privateFlagCase(
+        "dynamic reference may use the helper",
+        privateFlagFixture.replace("$._member_access_modifier", "$[modifier]"),
+      ),
+      privateFlagCase(
+        "a reference in another rule map",
+        `${privateFlagFixture}\nconst other = {rules: {root: ($) => $.__var_storage_modifier}};`,
+      ),
+      privateFlagCase(
+        "non-grammar code",
+        privateFlagFixture
+          .replace("export default grammar({", "const unrelated = ({")
+          .replace("  rules: {", "  values: {"),
+      ),
+      ...[
+        "    __var_storage_modifier:",
+        "      choice(\n        alias",
+        '        alias(kw("STATIC")',
+        "    __var_modifier:",
+        "        $.__var_storage_modifier,",
+      ].map((source, index) =>
+        privateFlagCase(
+          `suppression at a relevant construct ${index}`,
+          privateFlagFixture.replace(
+            source,
+            `// oxlint-disable-next-line rule-to-test/multi-use-private-flag-choice-inline\n${source}`,
+          ),
+        ),
+      ),
+      privateFlagCase(
+        "only one flag alternative",
+        privateFlagFixture
+          .replace('        alias(kw("SERIALIZABLE"), $.serialization_modifier),\n', "")
+          .replace('        alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),\n', ""),
+      ),
+    ],
+    invalid: [
+      {
+        ...privateFlagCase("original VAR storage flag choice"),
+        errors: [{ message: privateFlagMessage }],
+      },
+      {
+        ...privateFlagCase(
+          "keyword abbreviation and alias options remain intact",
+          privateFlagFixture.replace('kw("STATIC")', 'kw("STATIC", {offset: 4, alias: "STAT"})'),
+        ),
+        errors: 1,
+      },
+      {
+        ...privateFlagCase(
+          "shared keyword symbols remain named flags",
+          privateFlagFixture.replace('kw("STATIC")', "$._kw_static"),
+        ),
+        errors: 1,
+      },
+      {
+        ...privateFlagCase(
+          "a single public alias target",
+          privateFlagFixture.replaceAll("$.static_modifier", "$.serialization_modifier"),
+        ),
+        errors: 1,
+      },
+      {
+        ...privateFlagCase(
+          "caller field and static precedence stay at their scopes",
+          privateFlagFixture.replace(
+            "optional($.__var_storage_modifier)",
+            'optional(field("modifier", prec.right("modifier", $.__var_storage_modifier)))',
+          ),
+        ),
+        errors: 1,
+      },
+      {
+        ...privateFlagCase(
+          "uses in two separate local rules",
+          privateFlagFixture.replace(
+            "        $.__var_storage_modifier,\n      ),",
+            "      ),\n    another: ($) => $.__var_storage_modifier,",
+          ),
+        ),
+        errors: 1,
+      },
+      {
+        ...privateFlagCase(
+          "unrelated directive does not suppress the candidate",
+          privateFlagFixture.replace(
+            "    __var_storage_modifier:",
+            "    // oxlint-disable-next-line rule-to-test/choice-subset\n    __var_storage_modifier:",
+          ),
+        ),
+        errors: 1,
+      },
+    ],
+  });
+  const externalFlagCase = {
+    code: privateFlagFixture,
+    cwd: privateFlagDirectory,
+    filename: join(privateFlagDirectory, "grammar", "statements", "var.js"),
+  };
+  for (const metadata of ["inline", "conflicts", "supertypes", "externals", "extras", "word"]) {
+    writeFileSync(
+      join(privateFlagDirectory, "grammar.js"),
+      `export default grammar({${metadata}: ($) => ${metadata === "word" ? "$.__var_storage_modifier" : "[$.__var_storage_modifier]"}});`,
+    );
+    new RuleTester().run(`private flag external ${metadata}`, multiUsePrivateFlagChoiceInline, {
+      valid: [externalFlagCase],
+      invalid: [],
+    });
+  }
+  writeFileSync(join(privateFlagDirectory, "grammar.js"), "export default grammar({});");
+  mkdirSync(join(privateFlagDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(privateFlagDirectory, "grammar", "precedences", "fixture.js"),
+    "export default ($) => [[$.__var_storage_modifier, $.other]];",
+  );
+  new RuleTester().run("private flag external precedence", multiUsePrivateFlagChoiceInline, {
+    valid: [externalFlagCase],
+    invalid: [],
+  });
+} finally {
+  rmSync(privateFlagDirectory, { recursive: true, force: true });
+}
 
 const valuedChoiceFixture = readFileSync(
   new URL("./fixtures/contextual-valued-choice.js", import.meta.url),
