@@ -1,3 +1,4 @@
+import { keywordListHeadExtraction } from "./rules/keyword-list-head-extraction.js";
 import { optionalPrefixHeadExtraction } from "./rules/optional-prefix-head-extraction.js";
 import { nestedEventHeadExtraction } from "./rules/nested-event-head-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
@@ -124,6 +125,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  keywordListHeadExtraction,
   aliasPromotion,
   phraseAliasExtraction,
   nullableSlotList,
@@ -243,6 +245,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "keyword-list-head-extraction": keywordListHeadExtraction,
     "optional-prefix-head-extraction": optionalPrefixHeadExtraction,
     "nested-event-head-extraction": nestedEventHeadExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,

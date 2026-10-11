@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  keywordListHeadExtraction,
   optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
   multiUsePrivateKeywordChoiceInline,
@@ -10772,4 +10773,182 @@ try {
   );
 } finally {
   rmSync(keywordAliasTailDirectory, { recursive: true, force: true });
+}
+
+const beforeKeywordListHead = readFileSync(
+  new URL("./fixtures/keyword-list-head.js", import.meta.url),
+  "utf8",
+);
+const keywordListHeadFixture = (
+  item = 'field("value", $.__demo_value)',
+  separator = "$._kw_and",
+  wrap = (body) => body,
+) => `export default ({kw}) => ({
+  option: ($) => ${wrap(`seq($._kw_using, ${item}, optional($.__demo_tail))`)},
+  __demo_tail: ($) => seq(${separator}, ${item}, optional($.__demo_tail)),
+  __demo_value: ($) => seq(optional($._frame_selector), $._qualified_identifier)
+});`;
+new RuleTester().run("keyword-list-head-extraction", keywordListHeadExtraction, {
+  valid: [
+    `export default ({kw}) => ({
+      option: ($) => seq($._kw_using, $.__demo_fields),
+      __demo_fields: ($) => seq(field("value", $.__demo_value), optional(seq($._kw_and, $.__demo_fields))),
+      __demo_value: ($) => seq(optional($._frame_selector), $._qualified_identifier)
+    });`,
+    keywordListHeadFixture().replaceAll("__demo_tail", "_demo_tail"),
+    keywordListHeadFixture().replaceAll("__demo_tail", "demo_tail"),
+    keywordListHeadFixture(undefined, '","'),
+    keywordListHeadFixture(undefined, "optional($._kw_and)"),
+    keywordListHeadFixture(undefined, 'kw("AND", options)'),
+    keywordListHeadFixture(undefined, "kw(separator)"),
+    keywordListHeadFixture().replace("seq($._kw_using,", 'seq("(",'),
+    keywordListHeadFixture().replace(
+      'seq($._kw_using, field("value",',
+      'seq($._kw_using, field("other",',
+    ),
+    keywordListHeadFixture().replace("seq($._kw_and,", "seq($._kw_and, $.extra,"),
+    keywordListHeadFixture().replace(
+      "optional($.__demo_tail)),\n  __demo_value",
+      "$.__demo_tail),\n  __demo_value",
+    ),
+    keywordListHeadFixture('field("value", optional($.identifier))'),
+    keywordListHeadFixture("alias(optional($.identifier), $.name)"),
+    keywordListHeadFixture('repeat1(field("value", optional($.identifier)))'),
+    keywordListHeadFixture("optional($.identifier), repeat($.other)"),
+    keywordListHeadFixture('field("value", $.__demo_tail)'),
+    keywordListHeadFixture('field("value", prec.dynamic(1, $.identifier))'),
+    keywordListHeadFixture('field("value", token.immediate(/[a-z]+/))'),
+    keywordListHeadFixture().replace(
+      "__demo_value: ($)",
+      "other: ($) => $.__demo_tail, __demo_value: ($)",
+    ),
+    keywordListHeadFixture().replace("$._frame_selector", "$[unknown]"),
+    ...[
+      "alias",
+      "field",
+      "token",
+      "token.immediate",
+      "prec",
+      "prec.left",
+      "prec.right",
+      "prec.dynamic",
+    ].map((wrapper) =>
+      keywordListHeadFixture(undefined, undefined, (body) =>
+        wrapper === "alias"
+          ? `alias(${body}, $.option)`
+          : wrapper === "field"
+            ? `field("option", ${body})`
+            : wrapper.startsWith("prec")
+              ? `${wrapper}(1, ${body})`
+              : `${wrapper}(${body})`,
+      ),
+    ),
+    keywordListHeadFixture().replace(
+      "option: ($)",
+      "// oxlint-disable-next-line rule-to-test/keyword-list-head-extraction\noption: ($)",
+    ),
+    keywordListHeadFixture().replace(
+      "__demo_tail: ($)",
+      "// oxlint-disable-next-line rule-to-test/keyword-list-head-extraction\n__demo_tail: ($)",
+    ),
+    keywordListHeadFixture().replace(
+      "export default",
+      "// oxlint-disable rule-to-test/keyword-list-head-extraction\nexport default",
+    ),
+    keywordListHeadFixture().replace("optional($.__demo_tail))", 'optional($.__demo_tail), ")")'),
+    keywordListHeadFixture()
+      .replace("export default ({kw}) => ({", "const unrelated = {")
+      .replace(/\}\);$/, "};"),
+    ...["inline", "conflicts", "supertypes", "externals", "word", "precedences"].map((metadata) =>
+      keywordListHeadFixture()
+        .replace(
+          "export default ({kw}) => ({",
+          `export default grammar({${metadata}: ($) => [[$.__demo_tail]], rules: {`,
+        )
+        .replace(/\}\);$/, "}});"),
+    ),
+    keywordListHeadFixture()
+      .replace(
+        "export default ({kw}) => ({",
+        "export default grammar({conflicts: ($) => [[$.option]], rules: {",
+      )
+      .replace(/\}\);$/, "}});"),
+  ],
+  invalid: [
+    {
+      name: "the original record USING head and AND tail before the measured rewrite",
+      code: beforeKeywordListHead,
+      errors: [{ message: /non-empty item and continuation in __record_using_fields_tail/ }],
+    },
+    {
+      name: "keyword selectors retain a reused optional frame value and field scope",
+      code: keywordListHeadFixture(),
+      errors: [{ message: /optional sequence of its exact keyword separator and that head/ }],
+    },
+    {
+      name: "literal keyword calls retain abbreviation options",
+      code: keywordListHeadFixture(undefined, 'kw("ALSO", {offset: 3})'),
+      errors: [{ message: /keyword options and order/ }],
+    },
+    {
+      name: "the shared head may contain multiple valued fields and aliases",
+      code: keywordListHeadFixture(
+        'field("left", $.identifier), field("right", alias($._name, $.identifier))',
+      ),
+      errors: [{ message: /preserve item fields, aliases/ }],
+    },
+    {
+      name: "an optional keyword list keeps its outer wrapper",
+      code: keywordListHeadFixture(undefined, undefined, (body) => `optional(${body})`),
+      errors: 1,
+    },
+    {
+      name: "metadata-looking comments and strings do not restrict the tail",
+      code: `// inline: ($) => [$.__demo_tail]
+        const note = "conflicts: ($) => [[$.__demo_tail]]";
+        ${keywordListHeadFixture()}`,
+      errors: [{ message: /complete valid and recovery trees/ }],
+    },
+  ],
+});
+const keywordListHeadDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-list-head-"));
+try {
+  const filename = join(keywordListHeadDirectory, "grammar", "phrases", "record.js"),
+    code = keywordListHeadFixture();
+  mkdirSync(join(keywordListHeadDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(keywordListHeadDirectory, "grammar.js"),
+    "export default grammar({rules: {}});",
+  );
+  new RuleTester().run("keyword-list-head-extraction external grammar", keywordListHeadExtraction, {
+    valid: [],
+    invalid: [{ cwd: keywordListHeadDirectory, filename, code, errors: 1 }],
+  });
+  writeFileSync(
+    join(keywordListHeadDirectory, "grammar", "precedences", "record.js"),
+    "export default ($) => [[$.__demo_tail, $.other]];",
+  );
+  new RuleTester().run(
+    "keyword-list-head-extraction external precedence",
+    keywordListHeadExtraction,
+    {
+      valid: [{ cwd: keywordListHeadDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+  rmSync(join(keywordListHeadDirectory, "grammar", "precedences", "record.js"));
+  writeFileSync(
+    join(keywordListHeadDirectory, "grammar.js"),
+    "export default grammar({conflicts: ($) => [[$.__demo_tail]], rules: {}});",
+  );
+  new RuleTester().run(
+    "keyword-list-head-extraction external conflict",
+    keywordListHeadExtraction,
+    {
+      valid: [{ cwd: keywordListHeadDirectory, filename, code }],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(keywordListHeadDirectory, { recursive: true, force: true });
 }
