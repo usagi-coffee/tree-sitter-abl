@@ -14,6 +14,7 @@ export default ({ kw }) => ({
       optional($.__copy_lob_conversion),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __copy_lob_conversion: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
