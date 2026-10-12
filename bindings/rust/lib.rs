@@ -20,6 +20,9 @@
 
 use tree_sitter_language::LanguageFn;
 
+#[cfg(all(test, feature = "wasm-test"))]
+mod wasm_tests;
+
 extern "C" {
     fn tree_sitter_abl() -> *const ();
 }

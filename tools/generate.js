@@ -5,6 +5,7 @@ import { $ } from "bun";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { existsSync, readFileSync } from "node:fs";
+import { estimateWasmMemory } from "./parser_memory.js";
 
 const hasher = new Bun.CryptoHasher("sha256");
 
@@ -143,6 +144,7 @@ console.log(`#define ACTION_COUNT ${highest}`);
 await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
 console.log(`#define PARSER_C_SIZE_BYTES ${parserSizeBytes}`);
 console.log(`#define PARSER_C_SIZE_MIB ${parserSizeMiB}`);
+console.log(`#define WASM_MEMORY_ESTIMATE_MIB ${estimateWasmMemory(text).mib.toFixed(2)}`);
 
 if ((testOut + testErr).trim() === "") {
   console.error(
