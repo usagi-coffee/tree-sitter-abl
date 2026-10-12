@@ -22,6 +22,7 @@ import { contextualKeywordChoiceBoundary } from "./rules/contextual-keyword-choi
 import { contextualKeywordPrefixBoundary } from "./rules/contextual-keyword-prefix-boundary.js";
 import { contextualValuedChoiceInline } from "./rules/contextual-valued-choice-inline.js";
 import { contextualKeywordAliasTailInline } from "./rules/contextual-keyword-alias-tail-inline.js";
+import { standaloneFlagTailInline } from "./rules/standalone-flag-tail-inline.js";
 import { sharedRepeatedSignature } from "./rules/shared-repeated-signature.js";
 import { leftRecursiveList } from "./rules/left-recursive-list.js";
 import { recursiveItemInline } from "./rules/recursive-item-inline.js";
@@ -216,6 +217,7 @@ export {
   contextualKeywordPrefixBoundary,
   contextualValuedChoiceInline,
   contextualKeywordAliasTailInline,
+  standaloneFlagTailInline,
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordNameBoundary,
   inlineClauseChoiceBoundary,
@@ -275,6 +277,7 @@ export default {
     "contextual-keyword-prefix-boundary": contextualKeywordPrefixBoundary,
     "contextual-valued-choice-inline": contextualValuedChoiceInline,
     "contextual-keyword-alias-tail-inline": contextualKeywordAliasTailInline,
+    "standalone-flag-tail-inline": standaloneFlagTailInline,
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,

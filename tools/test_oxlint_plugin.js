@@ -37,6 +37,7 @@ import {
   contextualKeywordPrefixBoundary,
   contextualValuedChoiceInline,
   contextualKeywordAliasTailInline,
+  standaloneFlagTailInline,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -124,6 +125,233 @@ import {
   sharedRecursion,
   sharedRepetition,
 } from "../oxlint/index.js";
+
+const flagTailFixture = readFileSync(
+  new URL("./fixtures/standalone-flag-tail.js", import.meta.url),
+  "utf8",
+);
+const flagTailDirectory = mkdtempSync(join(tmpdir(), "abl-standalone-flag-tail-"));
+const flagTailCase = (name, code = flagTailFixture) => ({
+  name,
+  code,
+  cwd: flagTailDirectory,
+  filename: join(flagTailDirectory, "grammar.js"),
+});
+const standaloneFlagTailUse = "        $.__class_property_modifier_tail,";
+const expandedFlagTail = `        seq(
+          alias(kw("OVERRIDE"), $.override_modifier),
+          optional($._member_access_modifier),
+          optional($._serialization_modifier),
+        ),`;
+const flagTailMessage =
+  /standalone choice branch.*optional tail after other prefixes.*complete flag-led sequence only in the standalone branch.*retaining the helper in every prefixed optional branch.*named flag, ordered optional suffixes and nested boundaries.*LARGE_STATE_COUNT before ACTION_COUNT.*complete valid and recovery trees/;
+try {
+  new RuleTester().run("standalone-flag-tail-inline", standaloneFlagTailInline, {
+    valid: [
+      flagTailCase(
+        "measured standalone expansion retains both optional uses",
+        flagTailFixture.replace(standaloneFlagTailUse, expandedFlagTail),
+      ),
+      flagTailCase(
+        "optional uses alone",
+        flagTailFixture.replace(`${standaloneFlagTailUse}\n`, ""),
+      ),
+      flagTailCase(
+        "prefixed uses are required",
+        flagTailFixture.replaceAll(
+          "optional(choice($.__class_property_modifier_tail, $._serialization_modifier))",
+          "choice($.__class_property_modifier_tail, $._serialization_modifier)",
+        ),
+      ),
+      flagTailCase(
+        "prefixes are entirely optional",
+        flagTailFixture
+          .replace(
+            "          $._member_access_modifier,",
+            "          optional($._member_access_modifier),",
+          )
+          .replace(
+            "          $.__class_property_class_modifier,",
+            "          optional($.__class_property_class_modifier),",
+          ),
+      ),
+      ...[
+        "optional($.__class_property_modifier_tail)",
+        "alias($.__class_property_modifier_tail, $.modifiers)",
+        'field("modifiers", $.__class_property_modifier_tail)',
+        "repeat($.__class_property_modifier_tail)",
+        "token($.__class_property_modifier_tail)",
+        "token.immediate($.__class_property_modifier_tail)",
+        "prec.dynamic(1, $.__class_property_modifier_tail)",
+        "custom($.__class_property_modifier_tail)",
+        '$["__class_property_modifier_tail"]',
+        "$[helper]",
+      ].map((use) =>
+        flagTailCase(
+          `no direct standalone branch: ${use}`,
+          flagTailFixture.replace(standaloneFlagTailUse, `        ${use},`),
+        ),
+      ),
+      flagTailCase(
+        "aliased optional use retains node identity",
+        flagTailFixture.replace(
+          "choice($.__class_property_modifier_tail, $._serialization_modifier)",
+          "choice(alias($.__class_property_modifier_tail, $.modifiers), $._serialization_modifier)",
+        ),
+      ),
+      ...["_class_property_modifier_tail", "class_property_modifier_tail"].map((name) =>
+        flagTailCase(
+          `non-private helper ${name}`,
+          flagTailFixture.replaceAll("__class_property_modifier_tail", name),
+        ),
+      ),
+      ...[
+        'kw("OVERRIDE")',
+        "alias(token(/override/i), $.override_modifier)",
+        'alias(kw("OVERRIDE"), $._override_modifier)',
+        'field("override", kw("OVERRIDE"))',
+      ].map((flag) =>
+        flagTailCase(
+          `different leading structure: ${flag}`,
+          flagTailFixture.replace('alias(kw("OVERRIDE"), $.override_modifier)', flag),
+        ),
+      ),
+      ...[
+        "$._serialization_modifier",
+        "repeat($._serialization_modifier)",
+        "optional(choice($._serialization_modifier, $.other))",
+        'optional(field("modifier", $._serialization_modifier))',
+        "optional($.__class_property_modifier_tail)",
+      ].map((tail) =>
+        flagTailCase(
+          `different or recursive suffix: ${tail}`,
+          flagTailFixture.replace("optional($._serialization_modifier)", tail),
+        ),
+      ),
+      flagTailCase(
+        "indirect recursion through an optional suffix",
+        flagTailFixture.replace(
+          "  rules: {",
+          "  rules: { _serialization_modifier: ($) => $.__class_property_modifier_tail,",
+        ),
+      ),
+      flagTailCase(
+        "another caller also uses the helper",
+        flagTailFixture.replace(
+          "  rules: {",
+          "  rules: { other: ($) => $.__class_property_modifier_tail,",
+        ),
+      ),
+      flagTailCase(
+        "another rule map references the helper",
+        `${flagTailFixture}\nconst other = {rules: {root: ($) => $.__class_property_modifier_tail}};`,
+      ),
+      flagTailCase("non-grammar object", flagTailFixture.replace("  rules: {", "  values: {")),
+      ...["inline", "conflicts", "precedences", "supertypes", "externals", "extras"].flatMap(
+        (metadata) =>
+          ["__class_property_modifier_tail", "__class_property_definition_modifier"].map((name) =>
+            flagTailCase(
+              `${metadata} dependency on ${name}`,
+              flagTailFixture.replace(
+                '  name: "fixture",',
+                `  name: "fixture", ${metadata}: ($) => [[$.${name}]],`,
+              ),
+            ),
+          ),
+      ),
+      flagTailCase(
+        "word metadata",
+        flagTailFixture.replace(
+          '  name: "fixture",',
+          '  name: "fixture", word: ($) => $.__class_property_modifier_tail,',
+        ),
+      ),
+      ...[
+        "    __class_property_definition_modifier:",
+        "      choice(",
+        "        seq(",
+        "          optional(choice($.__class_property_modifier_tail",
+        standaloneFlagTailUse,
+        "    __class_property_modifier_tail:",
+        "      seq(",
+        '        alias(kw("OVERRIDE")',
+        "        optional($._serialization_modifier)",
+      ].map((source, index) =>
+        flagTailCase(
+          `suppression at relevant construct ${index}`,
+          flagTailFixture.replace(
+            source,
+            `// oxlint-disable-next-line rule-to-test/standalone-flag-tail-inline\n${source}`,
+          ),
+        ),
+      ),
+    ],
+    invalid: [
+      {
+        ...flagTailCase("original PROPERTY modifier tail"),
+        errors: [{ message: flagTailMessage, type: "MemberExpression" }],
+      },
+      {
+        ...flagTailCase(
+          "keyword helper retains its named alias",
+          flagTailFixture.replace('kw("OVERRIDE")', "$._kw_override"),
+        ),
+        errors: 1,
+      },
+      {
+        ...flagTailCase(
+          "static keyword options",
+          flagTailFixture.replace('kw("OVERRIDE")', 'kw("OVERRIDE", { offset: 4 })'),
+        ),
+        errors: 1,
+      },
+      {
+        ...flagTailCase(
+          "one ordered optional suffix",
+          flagTailFixture.replace("        optional($._serialization_modifier),\n", ""),
+        ),
+        errors: 1,
+      },
+      {
+        ...flagTailCase(
+          "unrelated suppression",
+          flagTailFixture.replace(
+            "    __class_property_modifier_tail:",
+            "// oxlint-disable-next-line rule-to-test/non-empty-tail-extraction\n    __class_property_modifier_tail:",
+          ),
+        ),
+        errors: 1,
+      },
+    ],
+  });
+  const externalFlagTailCase = {
+    code: flagTailFixture,
+    cwd: flagTailDirectory,
+    filename: join(flagTailDirectory, "grammar", "statements", "class.js"),
+  };
+  for (const metadata of ["inline", "conflicts", "supertypes", "externals", "extras"]) {
+    writeFileSync(
+      join(flagTailDirectory, "grammar.js"),
+      `export default grammar({${metadata}: ($) => [$.__class_property_modifier_tail]});`,
+    );
+    new RuleTester().run(`standalone flag tail external ${metadata}`, standaloneFlagTailInline, {
+      valid: [externalFlagTailCase],
+      invalid: [],
+    });
+  }
+  writeFileSync(join(flagTailDirectory, "grammar.js"), "export default grammar({});");
+  mkdirSync(join(flagTailDirectory, "grammar", "precedences"), { recursive: true });
+  writeFileSync(
+    join(flagTailDirectory, "grammar", "precedences", "fixture.js"),
+    "export default ($) => [[$.__class_property_modifier_tail, $.other]];",
+  );
+  new RuleTester().run("standalone flag tail external precedence", standaloneFlagTailInline, {
+    valid: [externalFlagTailCase],
+    invalid: [],
+  });
+} finally {
+  rmSync(flagTailDirectory, { recursive: true, force: true });
+}
 
 const requiredTailFixture = readFileSync(
   new URL("./fixtures/required-tail-choice.js", import.meta.url),
