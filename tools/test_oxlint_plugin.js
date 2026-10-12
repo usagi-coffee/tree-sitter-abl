@@ -39,6 +39,7 @@ import {
   contextualKeywordAliasTailInline,
   standaloneFlagTailInline,
   optionalFlagChoiceExtraction,
+  optionalAliasTailExtraction,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -11887,4 +11888,269 @@ try {
   );
 } finally {
   rmSync(optionalFlagChoiceDirectory, { recursive: true, force: true });
+}
+
+const optionalAliasTailOriginal = readFileSync(
+  new URL("./fixtures/optional-alias-tail.js", import.meta.url),
+  "utf8",
+);
+const optionalAliasTailChoice = `choice(
+  alias(kw("NO-CONVERT"), $.no_convert),
+  alias($.__demo_convert, $.convert_phrase)
+)`;
+const optionalAliasTailBody = `seq(
+  kw("DEMO"), optional(kw("FROM")), field("source", $._expression),
+  optional(seq(kw("FOR"), field("length", $._expression))),
+  kw("TO"), field("target", $._expression), optional(${optionalAliasTailChoice})
+)`;
+const optionalAliasTailPhrase = `seq(
+  kw("CONVERT"), optional(seq(kw("CODEPAGE"), field("codepage", $._expression)))
+)`;
+const optionalAliasTailFixture = (
+  body = optionalAliasTailBody,
+  phrase = optionalAliasTailPhrase,
+) => `
+export default ({kw}) => ({
+  root: ($) => seq($.__demo_body, "."),
+  __demo_body: ($) => ${body},
+  __demo_convert: ($) => ${phrase},
+});`;
+const optionalAliasTailDirectory = mkdtempSync(join(tmpdir(), "abl-optional-alias-tail-"));
+const optionalAliasTailCase = (code) => ({
+  cwd: optionalAliasTailDirectory,
+  filename: join(optionalAliasTailDirectory, "grammar", "statements", "demo.js"),
+  code,
+});
+try {
+  new RuleTester().run("optional-alias-tail-extraction", optionalAliasTailExtraction, {
+    valid: [
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace(optionalAliasTailChoice, "$.__demo_conversion"),
+      ).replace(/\}\);$/, `__demo_conversion: ($) => ${optionalAliasTailChoice}, });`),
+      optionalAliasTailFixture().replaceAll("__demo_body", "demo_body"),
+      optionalAliasTailFixture().replaceAll("__demo_body", "_demo_body"),
+      optionalAliasTailFixture().replace("seq($.__demo_body,", "seq($.identifier,"),
+      optionalAliasTailFixture(optionalAliasTailBody.replace('kw("DEMO")', "$.identifier")),
+      optionalAliasTailFixture(optionalAliasTailBody.replace('optional(kw("FROM")), ', "")),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace(
+          `optional(${optionalAliasTailChoice})`,
+          optionalAliasTailChoice,
+        ),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace(
+          `optional(${optionalAliasTailChoice})`,
+          `optional(${optionalAliasTailChoice}), kw("END")`,
+        ),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace(optionalAliasTailChoice, "choice(...options)"),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace(
+          "alias($.__demo_convert, $.convert_phrase)",
+          'alias(kw("CONVERT"), $.convert_phrase)',
+        ),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace('kw("NO-CONVERT")', "$.__demo_convert"),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace('alias(kw("NO-CONVERT"), $.no_convert)', 'kw("NO-CONVERT")'),
+      ),
+      optionalAliasTailFixture(optionalAliasTailBody.replace("$.no_convert", "$._no_convert")),
+      optionalAliasTailFixture(optionalAliasTailBody.replace("$.no_convert", "$.convert_phrase")),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace("$.__demo_convert", "$.convert_phrase"),
+      ),
+      optionalAliasTailFixture().replaceAll("__demo_convert", "_demo_convert"),
+      optionalAliasTailFixture().replace("__demo_convert: ($)", "__other_convert: ($)"),
+      optionalAliasTailFixture(optionalAliasTailBody.replace('kw("NO-CONVERT")', "kw(flag)")),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace('kw("NO-CONVERT")', 'kw("NO-CONVERT", options)'),
+      ),
+      optionalAliasTailFixture(
+        optionalAliasTailBody.replace('kw("NO-CONVERT")', "token(/NO-CONVERT/i)"),
+      ),
+      optionalAliasTailFixture(optionalAliasTailBody.replace("$.no_convert", '$["no_convert"]')),
+      optionalAliasTailFixture().replace("$.__demo_body", '$["__demo_body"]'),
+      optionalAliasTailFixture(optionalAliasTailBody.replace("choice(", "choose(")),
+      optionalAliasTailFixture(optionalAliasTailBody.replace('kw("FROM")', "$.__demo_body")),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"), $.__demo_body)'),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"), optional($.__demo_convert))'),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"), $.__demo_other)').replace(
+        /\}\);$/,
+        "__demo_other: ($) => optional($.__demo_convert), });",
+      ),
+      optionalAliasTailFixture(undefined, 'kw("CONVERT")'),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"))'),
+      optionalAliasTailFixture(undefined, 'seq(optional(kw("CONVERT")), optional($.identifier))'),
+      optionalAliasTailFixture(undefined, "seq($.identifier, optional($.identifier))"),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"), dynamicParts())'),
+      optionalAliasTailFixture(undefined, 'seq(kw("CONVERT"), token(/VALUE/i))'),
+      ...["alias", "field", "token", "token.immediate", "prec.dynamic", "prec.right"].flatMap(
+        (wrapper) => [
+          optionalAliasTailFixture(`${wrapper}(${optionalAliasTailBody}, $.value)`),
+          optionalAliasTailFixture(
+            optionalAliasTailBody.replace(
+              optionalAliasTailChoice,
+              `${wrapper}(${optionalAliasTailChoice}, $.value)`,
+            ),
+          ),
+          optionalAliasTailFixture(undefined, `${wrapper}(${optionalAliasTailPhrase}, $.value)`),
+          optionalAliasTailFixture().replace("$.__demo_body", `${wrapper}($.__demo_body, $.value)`),
+        ],
+      ),
+      ...["__demo_body: ($)", "__demo_convert: ($)"].map((target) =>
+        optionalAliasTailFixture().replace(
+          target,
+          `// oxlint-disable-next-line rule-to-test/optional-alias-tail-extraction\n${target}`,
+        ),
+      ),
+      optionalAliasTailFixture(
+        `// oxlint-disable-next-line rule-to-test/optional-alias-tail-extraction\n${optionalAliasTailBody}`,
+      ),
+      ...["optional(choice(", "choice(", 'alias(kw("NO-CONVERT")', "alias($.__demo_convert"].map(
+        (target) =>
+          optionalAliasTailFixture(
+            optionalAliasTailBody.replace(
+              target,
+              `// oxlint-disable-next-line rule-to-test/optional-alias-tail-extraction\n${target}`,
+            ),
+          ),
+      ),
+      `const unrelated = { body: ($) => ${optionalAliasTailBody} };`,
+      ...[
+        "inline",
+        "conflicts",
+        "supertypes",
+        "externals",
+        "precedences",
+        "extras",
+        "word",
+      ].flatMap((key) =>
+        ["__demo_body", "__demo_convert"].map((name) =>
+          optionalAliasTailFixture()
+            .replace(
+              "export default ({kw}) => ({",
+              `export default grammar({${key}: ($) => [[$.${name}]], rules: {`,
+            )
+            .replace(/\}\);$/, "}});"),
+        ),
+      ),
+    ].map(optionalAliasTailCase),
+    invalid: [
+      {
+        ...optionalAliasTailCase(optionalAliasTailOriginal),
+        name: "the original COPY-LOB conversion choice before measured extraction",
+        errors: [
+          {
+            message:
+              /__copy_lob_prefix.*optional choice between a named keyword flag and a named compound phrase/,
+          },
+        ],
+      },
+      {
+        ...optionalAliasTailCase(optionalAliasTailFixture()),
+        name: "a mixed alias choice follows independent optional clauses",
+        errors: [
+          {
+            message:
+              /complete nonempty choice into a hidden helper, leaving optionality at its current site/,
+          },
+        ],
+      },
+      {
+        ...optionalAliasTailCase(
+          optionalAliasTailFixture(
+            optionalAliasTailBody.replace(
+              optionalAliasTailChoice,
+              'choice(alias($.__demo_convert, $.convert_phrase), alias(kw("NO-CONVERT"), $.no_convert))',
+            ),
+          ),
+        ),
+        name: "phrase-first ordering must remain intact",
+        errors: [
+          {
+            message:
+              /Preserve every source rule, alias, field, keyword option and alternative order/,
+          },
+        ],
+      },
+      {
+        ...optionalAliasTailCase(
+          optionalAliasTailFixture(
+            optionalAliasTailBody.replace('kw("NO-CONVERT")', 'kw("NO-CONVERT", {offset: 4})'),
+          ),
+        ),
+        name: "static abbreviation options are preserved",
+        errors: 1,
+      },
+      {
+        ...optionalAliasTailCase(
+          optionalAliasTailFixture(
+            optionalAliasTailBody.replace('kw("NO-CONVERT")', "$._kw_no_convert"),
+            optionalAliasTailPhrase.replace('kw("CONVERT")', "$._kw_convert"),
+          ),
+        ),
+        name: "keyword references can supply the flag and phrase head",
+        errors: 1,
+      },
+      {
+        ...optionalAliasTailCase(
+          optionalAliasTailFixture().replace(
+            "__demo_body: ($)",
+            "// oxlint-disable-next-line rule-to-test/body-extraction\n__demo_body: ($)",
+          ),
+        ),
+        name: "another rule's suppression does not hide this suggestion",
+        errors: [{ message: /LARGE_STATE_COUNT before ACTION_COUNT/ }],
+      },
+      {
+        ...optionalAliasTailCase(
+          '// inline: ($) => [$.__demo_body]\nconst note = "conflicts: ($) => [[$.__demo_convert]]";\n' +
+            optionalAliasTailFixture(),
+        ),
+        name: "metadata-looking comments and strings do not restrict the candidate",
+        errors: [{ message: /complete valid and recovery trees/ }],
+      },
+    ],
+  });
+
+  mkdirSync(join(optionalAliasTailDirectory, "grammar", "precedences"), { recursive: true });
+  for (const key of ["inline", "conflicts", "supertypes", "externals", "precedences", "extras"]) {
+    for (const name of ["__demo_body", "__demo_convert"]) {
+      writeFileSync(
+        join(optionalAliasTailDirectory, "grammar.js"),
+        `export default grammar({${key}: ($) => [[$.${name}]], rules: {}});`,
+      );
+      new RuleTester().run(
+        `optional-alias-tail-extraction external ${key} ${name}`,
+        optionalAliasTailExtraction,
+        {
+          valid: [optionalAliasTailCase(optionalAliasTailFixture())],
+          invalid: [],
+        },
+      );
+    }
+  }
+  writeFileSync(
+    join(optionalAliasTailDirectory, "grammar.js"),
+    "export default grammar({rules: {}});",
+  );
+  writeFileSync(
+    join(optionalAliasTailDirectory, "grammar", "precedences", "demo.js"),
+    "export default ($) => [[$.__demo_convert, $.other]];",
+  );
+  new RuleTester().run(
+    "optional-alias-tail-extraction external precedence file",
+    optionalAliasTailExtraction,
+    {
+      valid: [optionalAliasTailCase(optionalAliasTailFixture())],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(optionalAliasTailDirectory, { recursive: true, force: true });
 }

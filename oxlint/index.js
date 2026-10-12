@@ -24,6 +24,7 @@ import { contextualValuedChoiceInline } from "./rules/contextual-valued-choice-i
 import { contextualKeywordAliasTailInline } from "./rules/contextual-keyword-alias-tail-inline.js";
 import { standaloneFlagTailInline } from "./rules/standalone-flag-tail-inline.js";
 import { optionalFlagChoiceExtraction } from "./rules/optional-flag-choice-extraction.js";
+import { optionalAliasTailExtraction } from "./rules/optional-alias-tail-extraction.js";
 import { sharedRepeatedSignature } from "./rules/shared-repeated-signature.js";
 import { leftRecursiveList } from "./rules/left-recursive-list.js";
 import { recursiveItemInline } from "./rules/recursive-item-inline.js";
@@ -220,6 +221,7 @@ export {
   contextualKeywordAliasTailInline,
   standaloneFlagTailInline,
   optionalFlagChoiceExtraction,
+  optionalAliasTailExtraction,
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordNameBoundary,
   inlineClauseChoiceBoundary,
@@ -281,6 +283,7 @@ export default {
     "contextual-keyword-alias-tail-inline": contextualKeywordAliasTailInline,
     "standalone-flag-tail-inline": standaloneFlagTailInline,
     "optional-flag-choice-extraction": optionalFlagChoiceExtraction,
+    "optional-alias-tail-extraction": optionalAliasTailExtraction,
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,

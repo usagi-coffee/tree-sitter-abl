@@ -47,6 +47,7 @@
         "tree-sitter-optimize/contextual-keyword-alias-tail-inline": "warn",
         "tree-sitter-optimize/standalone-flag-tail-inline": "warn",
         "tree-sitter-optimize/optional-flag-choice-extraction": "warn",
+        "tree-sitter-optimize/optional-alias-tail-extraction": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/shared-modifier-alias-sequence": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
