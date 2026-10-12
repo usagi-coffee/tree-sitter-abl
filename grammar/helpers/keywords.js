@@ -11,7 +11,7 @@ export function kw(word, options) {
     throw new Error(`Unknown keyword lexical precedence: ${precedence}`);
   }
   // alias: false keeps the token available for an enclosing named alias.
-  const finish = (pattern) =>
+  const keywordRule = (pattern) =>
     aliasName === false ? keywordToken(pattern) : alias(keywordToken(pattern), aliasName);
   const keywordToken = (pattern) =>
     token(precedence === undefined ? pattern : prec(lexicalPrecedences[precedence], pattern));
@@ -29,7 +29,7 @@ export function kw(word, options) {
   };
 
   if (off < 0) {
-    return finish(new RegExp(s, "i"));
+    return keywordRule(new RegExp(s, "i"));
   }
 
   const min = Math.min(Math.max(off + 1, 0), s.length); // require up to offset (inclusive)
@@ -37,7 +37,7 @@ export function kw(word, options) {
   const rest = s.slice(min);
 
   const pattern = required + buildProgressiveOptional(rest);
-  return finish(new RegExp(pattern, "i"));
+  return keywordRule(new RegExp(pattern, "i"));
 }
 
 // Utility to grab every keyword from the grammar source code
