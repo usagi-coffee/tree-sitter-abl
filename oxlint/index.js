@@ -1,4 +1,5 @@
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
+import { selectorOptionalHeadExtraction } from "./rules/selector-optional-head-extraction.js";
 import { hoistRulePrecedence } from "./rules/hoist-rule-precedence.js";
 import { keywordListHeadExtraction } from "./rules/keyword-list-head-extraction.js";
 import { pairedMarkerFieldPrefix } from "./rules/paired-marker-field-prefix.js";
@@ -133,6 +134,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  selectorOptionalHeadExtraction,
   pairedMarkerFieldPrefix,
   keywordListHeadExtraction,
   aliasPromotion,
@@ -261,6 +263,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "selector-optional-head-extraction": selectorOptionalHeadExtraction,
     "paired-marker-field-prefix": pairedMarkerFieldPrefix,
     "keyword-list-head-extraction": keywordListHeadExtraction,
     "optional-prefix-head-extraction": optionalPrefixHeadExtraction,

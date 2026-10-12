@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/selector-optional-head-extraction": "warn",
         "tree-sitter-optimize/paired-marker-field-prefix": "warn",
         "tree-sitter-optimize/keyword-list-head-extraction": "warn",
         "tree-sitter-optimize/optional-prefix-head-extraction": "warn",
