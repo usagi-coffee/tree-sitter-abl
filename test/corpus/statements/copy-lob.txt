@@ -50,3 +50,43 @@ COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
     source_file: (identifier)
     target: (identifier)
     (no_error)))
+
+================================================================================
+COPY-LOB - conversion alternatives preserve ordered clauses
+================================================================================
+
+COPY-LOB src TO dst CONVERT.
+COPY-LOB FROM OBJECT src STARTING AT 1 FOR 4 TO OBJECT dst OVERLAY AT 2 TRIM NO-CONVERT NO-ERROR.
+COPY-LOB FILE inputPath FOR 5 TO FILE outputPath APPEND CONVERT TARGET CODEPAGE "UTF-8".
+COPY-LOB FROM FILE inputPath STARTING AT 2 TO dst CONVERT SOURCE CODEPAGE "1250" TARGET CODEPAGE "UTF-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier)
+    (convert_phrase))
+  (copy_lob_statement
+    source: (identifier)
+    starting_at: (number_literal)
+    for_length: (number_literal)
+    target: (identifier)
+    overlay_at: (number_literal)
+    (trim)
+    (no_convert)
+    (no_error))
+  (copy_lob_statement
+    source_file: (identifier)
+    for_length: (number_literal)
+    target_file: (identifier)
+    (append)
+    (convert_phrase
+      target_codepage: (string_literal)))
+  (copy_lob_statement
+    source_file: (identifier)
+    starting_at: (number_literal)
+    target: (identifier)
+    (convert_phrase
+      source_codepage: (string_literal)
+      target_codepage: (string_literal))))

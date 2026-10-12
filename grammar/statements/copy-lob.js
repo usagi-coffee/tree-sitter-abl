@@ -11,13 +11,14 @@ export default ({ kw }) => ({
       optional(seq($._kw_for, field("for_length", $._expression))),
       $._kw_to,
       $.__copy_lob_target,
-      optional(
-        choice(
-          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-          alias(kw("NO-CONVERT"), $.no_convert),
-          alias($.__copy_lob_convert_phrase, $.convert_phrase),
-        ),
-      ),
+      optional($.__copy_lob_conversion),
+    ),
+
+  __copy_lob_conversion: ($) =>
+    choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("NO-CONVERT"), $.no_convert),
+      alias($.__copy_lob_convert_phrase, $.convert_phrase),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
