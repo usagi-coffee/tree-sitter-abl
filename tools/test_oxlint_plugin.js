@@ -38,6 +38,7 @@ import {
   contextualValuedChoiceInline,
   contextualKeywordAliasTailInline,
   standaloneFlagTailInline,
+  optionalFlagChoiceExtraction,
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
@@ -11677,3 +11678,213 @@ new RuleTester().run("paired-marker-field-prefix", pairedMarkerFieldPrefix, {
     },
   ],
 });
+
+const optionalFlagChoiceOriginal = readFileSync(
+  new URL("./fixtures/optional-flag-choice.js", import.meta.url),
+  "utf8",
+);
+const requiredFlagChoice = `choice(
+  seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
+  alias(kw("BY-VALUE"), $.by_value)
+)`;
+const optionalFlagChoiceBody = `seq(optional(alias(kw("APPEND"), $.append)), ${requiredFlagChoice})`;
+const optionalFlagChoiceFixture = (body = optionalFlagChoiceBody) => `
+export default ({kw}) => ({
+  first: ($) => seq("FIRST", optional($.__demo_options)),
+  second: ($) => seq("SECOND", optional($.__demo_options)),
+  __demo_options: ($) => ${body},
+});`;
+const optionalFlagChoiceDirectory = mkdtempSync(join(tmpdir(), "abl-optional-flag-choice-"));
+const optionalFlagChoiceCase = (code) => ({
+  cwd: optionalFlagChoiceDirectory,
+  filename: join(optionalFlagChoiceDirectory, "grammar", "statements", "demo.js"),
+  code,
+});
+try {
+  new RuleTester().run("optional-flag-choice-extraction", optionalFlagChoiceExtraction, {
+    valid: [
+      optionalFlagChoiceFixture('seq(optional(alias(kw("APPEND"), $.append)), $.__demo_passing)'),
+      optionalFlagChoiceFixture().replace("optional($.__demo_options)", "$.identifier"),
+      optionalFlagChoiceFixture().replaceAll("__demo_options", "demo_options"),
+      optionalFlagChoiceFixture().replaceAll("__demo_options", "_demo_options"),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace("optional(alias", 'field("flag", alias'),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'optional(alias(kw("APPEND"), $.append))',
+          'alias(kw("APPEND"), $.append)',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace('alias(kw("APPEND"), $.append)', 'kw("APPEND")'),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace('alias(kw("APPEND"), $.append)', "$.value"),
+      ),
+      optionalFlagChoiceFixture(optionalFlagChoiceBody.replace('kw("APPEND")', "kw(prefix)")),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace('kw("APPEND")', 'kw("APPEND", options)'),
+      ),
+      optionalFlagChoiceFixture(optionalFlagChoiceBody.replace('kw("APPEND")', "token(/APPEND/i)")),
+      optionalFlagChoiceFixture(optionalFlagChoiceBody.replace("$.append", "$._append")),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'optional(alias(kw("BY-VALUE"), $.by_value))',
+          'alias(kw("BY-VALUE"), $.by_value)',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'optional(alias(kw("BY-VALUE"), $.by_value))',
+          'optional(alias(kw("BY-VALUE"), $.different))',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'optional(alias(kw("BY-VALUE"), $.by_value))',
+          'optional(alias(kw("BY-VALUE", {offset: 3}), $.by_value))',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'alias(kw("BIND"), $.bind)',
+          'alias(kw("BY-VALUE"), $.by_value)',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'alias(kw("APPEND"), $.append)',
+          'alias(kw("BIND"), $.bind)',
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        'seq(optional(alias(kw("APPEND"), $.append)), optional($.__demo_passing))',
+      ),
+      optionalFlagChoiceFixture('seq(optional(alias(kw("APPEND"), $.append)), choice(...flags))'),
+      optionalFlagChoiceFixture(`prec.right(${optionalFlagChoiceBody})`),
+      optionalFlagChoiceFixture(
+        `seq("EXTRA", optional(alias(kw("APPEND"), $.append)), ${requiredFlagChoice})`,
+      ),
+      optionalFlagChoiceFixture().replace("$.__demo_options", '$["__demo_options"]'),
+      ...["alias", "field", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+        optionalFlagChoiceFixture().replace(
+          "$.__demo_options",
+          `${wrapper}($.__demo_options, $.value)`,
+        ),
+      ),
+      optionalFlagChoiceFixture().replace(
+        "__demo_options: ($)",
+        "// oxlint-disable-next-line rule-to-test/optional-flag-choice-extraction\n__demo_options: ($)",
+      ),
+      optionalFlagChoiceFixture(
+        `// oxlint-disable-next-line rule-to-test/optional-flag-choice-extraction\n${optionalFlagChoiceBody}`,
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          "choice(",
+          "// oxlint-disable-next-line rule-to-test/optional-flag-choice-extraction\nchoice(",
+        ),
+      ),
+      optionalFlagChoiceFixture(
+        optionalFlagChoiceBody.replace(
+          'optional(alias(kw("APPEND")',
+          '// oxlint-disable-next-line rule-to-test/optional-flag-choice-extraction\noptional(alias(kw("APPEND")',
+        ),
+      ),
+      "const unrelated = { flags: ($) => " + optionalFlagChoiceBody + " };",
+      ...["inline", "conflicts", "supertypes", "externals", "precedences", "extras"].map((key) =>
+        optionalFlagChoiceFixture()
+          .replace(
+            "export default ({kw}) => ({",
+            `export default grammar({${key}: ($) => [[$.__demo_options]], rules: {`,
+          )
+          .replace(/\}\);$/, "}});"),
+      ),
+    ].map(optionalFlagChoiceCase),
+    invalid: [
+      {
+        ...optionalFlagChoiceCase(optionalFlagChoiceOriginal),
+        name: "the original function table parameter flags before the measured extraction",
+        errors: [{ message: /__function_table_options.*4 local uses/ }],
+      },
+      {
+        ...optionalFlagChoiceCase(optionalFlagChoiceFixture()),
+        name: "an optional prefix and a required ordered flag suffix",
+        errors: [{ message: /extracting the complete nonempty choice into a hidden helper/ }],
+      },
+      {
+        ...optionalFlagChoiceCase(
+          optionalFlagChoiceFixture(
+            optionalFlagChoiceBody.replaceAll('kw("BY-VALUE")', 'kw("BY-VALUE", {offset: 3})'),
+          ),
+        ),
+        name: "matching keyword abbreviation options remain exact",
+        errors: [{ message: /Preserve every alias, keyword option, alternative and suffix order/ }],
+      },
+      {
+        ...optionalFlagChoiceCase(
+          optionalFlagChoiceFixture(
+            optionalFlagChoiceBody
+              .replaceAll('kw("BIND")', "$._kw_bind")
+              .replaceAll('kw("BY-VALUE")', "$._kw_by_value"),
+          ),
+        ),
+        name: "inline keyword references may supply the flags",
+        errors: 1,
+      },
+      {
+        ...optionalFlagChoiceCase(
+          optionalFlagChoiceFixture().replace(
+            "__demo_options: ($)",
+            "// oxlint-disable-next-line rule-to-test/body-extraction\n__demo_options: ($)",
+          ),
+        ),
+        name: "a different rule suppression does not hide the candidate",
+        errors: [{ message: /LARGE_STATE_COUNT before ACTION_COUNT/ }],
+      },
+      {
+        ...optionalFlagChoiceCase(
+          '// inline: ($) => [$.__demo_options]\nconst note = "conflicts: ($) => [[$.__demo_options]]";\n' +
+            optionalFlagChoiceFixture(),
+        ),
+        name: "metadata-looking strings and comments do not restrict the helper",
+        errors: [{ message: /complete valid and recovery trees/ }],
+      },
+    ],
+  });
+
+  mkdirSync(join(optionalFlagChoiceDirectory, "grammar", "precedences"), { recursive: true });
+  for (const key of ["inline", "conflicts", "supertypes", "externals", "precedences", "extras"]) {
+    writeFileSync(
+      join(optionalFlagChoiceDirectory, "grammar.js"),
+      `export default grammar({${key}: ($) => [[$.__demo_options]], rules: {}});`,
+    );
+    new RuleTester().run(
+      `optional-flag-choice-extraction external ${key}`,
+      optionalFlagChoiceExtraction,
+      {
+        valid: [optionalFlagChoiceCase(optionalFlagChoiceFixture())],
+        invalid: [],
+      },
+    );
+  }
+  writeFileSync(
+    join(optionalFlagChoiceDirectory, "grammar.js"),
+    "export default grammar({rules: {}});",
+  );
+  writeFileSync(
+    join(optionalFlagChoiceDirectory, "grammar", "precedences", "demo.js"),
+    "export default ($) => [[$.__demo_options, $.other]];",
+  );
+  new RuleTester().run(
+    "optional-flag-choice-extraction external precedence file",
+    optionalFlagChoiceExtraction,
+    {
+      valid: [optionalFlagChoiceCase(optionalFlagChoiceFixture())],
+      invalid: [],
+    },
+  );
+} finally {
+  rmSync(optionalFlagChoiceDirectory, { recursive: true, force: true });
+}
