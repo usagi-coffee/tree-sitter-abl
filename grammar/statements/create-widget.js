@@ -4,6 +4,24 @@ export default ({ kw }) => ({
   __create_widget_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      $.__create_widget_head,
+      optional($.__no_error),
+      optional(
+        seq(
+          choice(
+            seq(
+              alias($.__create_widget_assign_phrase, $.assign_phrase),
+              optional($.trigger_phrase),
+            ),
+            $.trigger_phrase,
+          ),
+          optional($.__no_error),
+        ),
+      ),
+    ),
+
+  __create_widget_head: ($) =>
+    seq(
       choice(
         $._kw_button,
         $._kw_browse,
@@ -28,20 +46,7 @@ export default ({ kw }) => ({
         $._kw_window,
         seq($._kw_value, "(", field("widget_type", $._expression), ")"),
       ),
-      optional($._handle_in_widget_pool),
-      optional($.__no_error),
-      optional(
-        seq(
-          choice(
-            seq(
-              alias($.__create_widget_assign_phrase, $.assign_phrase),
-              optional($.trigger_phrase),
-            ),
-            $.trigger_phrase,
-          ),
-          optional($.__no_error),
-        ),
-      ),
+      optional(seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool))),
     ),
 
   __create_widget_assign_phrase: ($) => seq($._kw_assign, $._assign_pair_list),
