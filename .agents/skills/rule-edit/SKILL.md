@@ -188,7 +188,7 @@ When optimizing
 - Preserve distinct token identity; avoid token packing.
 - Preserve existing corpus behavior.
 - Optimize one change at a time, measure it, then run focused and full tests. A parser-size improvement is invalid if parsing behavior changes.
-- Prioritize `LARGE_STATE_COUNT`, then `ACTION_COUNT`. If large states are unchanged, actions must decrease. Normal state count, symbol count, and size savings do not justify regressions in these priorities.
+- Prioritize `ACTION_COUNT` reduction. Allow state-count and large-state-count increases while `WASM_MEMORY_ESTIMATE_MIB` remains below 120 and representative parsing benchmarks do not meaningfully regress. At or above 120 MiB, prioritize reducing memory before accepting further growth. Action count is a storage metric, not a direct measure of parsing speed; the estimate is not a guaranteed shared-store budget.
 
 ## Verification
 

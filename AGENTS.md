@@ -62,3 +62,4 @@ Strongly prefer using these commands over using `tree-sitter` CLI binary as they
 - Parser generation can take up to 2 minutes so adjust timeout accordingly.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
 
+

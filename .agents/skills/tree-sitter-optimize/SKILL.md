@@ -9,7 +9,15 @@ Use this skill to run a measured parser-cost reduction pass on a tree-sitter gra
 
 ## Metrics and Scenarios
 
-Choose metrics according to the project's current bottleneck.
+Prioritize `ACTION_COUNT` reduction for this repository. Do not reject an action-count
+improvement solely because `STATE_COUNT` or `LARGE_STATE_COUNT` increases while
+`WASM_MEMORY_ESTIMATE_MIB` remains below 120. At or above 120 MiB, prioritize memory
+reduction before accepting further growth. The estimate excludes runtime and
+other grammars; it is not a guarantee that a shared 128 MiB WasmStore will fit.
+
+Action count measures action-table storage, not executed parsing work. Validate
+representative benchmarks and reject meaningful speed regressions. Keep measuring
+all existing counts and the memory estimate for every accepted grammar change.
 
 | Metric                                              | Meaning and effect                                                                                               |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -34,7 +42,7 @@ Dense rows allow direct lookups; sparse rows save row space but require symbol-g
 
 ## Workflow
 
-1. Establish the baseline by regenerating `src/parser.c` with the project's normal generation command, then record `LARGE_STATE_COUNT`, `SYMBOL_COUNT`, `STATE_COUNT`, `ACTION_COUNT`, `DENSE_TABLE_SIZE_BYTES`, and `PARSER_C_SIZE_BYTES`.
+1. Establish the baseline by regenerating `src/parser.c` with the project's normal generation command, then record `LARGE_STATE_COUNT`, `SYMBOL_COUNT`, `STATE_COUNT`, `ACTION_COUNT`, `DENSE_TABLE_SIZE_BYTES`, `PARSER_C_SIZE_BYTES`, and `WASM_MEMORY_ESTIMATE_MIB`.
    Prefer a project command that already prints these metrics when one exists.
    Derive missing metrics from the generated `src/parser.c`.
    For Wasm-memory work, also measure a fresh build's `dylink.0.memory_size`.
