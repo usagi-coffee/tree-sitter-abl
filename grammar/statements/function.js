@@ -131,6 +131,7 @@ export default ({ kw }) => ({
       optional(alias(kw("APPEND"), $.append)),
       $.__function_table_passing,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __function_table_passing: ($) =>
     choice(
       seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
