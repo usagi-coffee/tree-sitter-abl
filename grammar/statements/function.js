@@ -129,11 +129,13 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("APPEND"), $.append)),
-      choice(
-        seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
-        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        alias(kw("BY-VALUE"), $.by_value),
-      ),
+      $.__function_table_passing,
+    ),
+  __function_table_passing: ($) =>
+    choice(
+      seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("BY-VALUE"), $.by_value),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence

@@ -1141,3 +1141,68 @@ END FUNCTION.
         type: (identifier)))
     (return_statement
       value: (identifier))))
+
+================================================================================
+FUNCTION - table passing flags in definitions and prototypes
+================================================================================
+
+FUNCTION tableFlags RETURNS INTEGER (
+  INPUT TABLE tt BIND,
+  OUTPUT TABLE-HANDLE ht APPEND BIND,
+  INPUT DATASET FOR ds BY-VALUE,
+  INPUT-OUTPUT DATASET-HANDLE hd APPEND BY-VALUE
+):
+  RETURN 1.
+END FUNCTION.
+
+FUNCTION tableFlagsForward RETURNS INTEGER (
+  TABLE FOR tt APPEND BIND BY-VALUE,
+  TABLE-HANDLE ht BIND BY-VALUE,
+  DATASET FOR ds APPEND BIND,
+  DATASET-HANDLE hd BIND
+) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table: (identifier)
+        (bind))
+      (parameter
+        table_handle: (identifier)
+        (append)
+        (bind))
+      (parameter
+        dataset: (identifier)
+        (by_value))
+      (parameter
+        dataset_handle: (identifier)
+        (append)
+        (by_value)))
+    (return_statement
+      value: (number_literal)))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table: (identifier)
+        (append)
+        (bind)
+        (by_value))
+      (parameter
+        table_handle: (identifier)
+        (bind)
+        (by_value))
+      (parameter
+        dataset: (identifier)
+        (append)
+        (bind))
+      (parameter
+        dataset_handle: (identifier)
+        (bind)))
+    (forward)))
