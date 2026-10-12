@@ -50,6 +50,7 @@ ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
 PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
+WASM_MEMORY_ESTIMATE_MIB: <before> -> <after> (<delta>)
 ```
 
 Keep the blank lines and metric names exactly as shown. Replace the angle-bracketed
