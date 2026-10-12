@@ -1,0 +1,26 @@
+DEFINE TEMP-TABLE tt NO-UNDO
+  FIELD id AS INTEGER
+  FIELD title AS CHARACTER
+  INDEX primaryKey IS PRIMARY UNIQUE id.
+DEFINE VARIABLE value AS INTEGER
+  NO-UNDO.
+ASSIGN
+  value = 1
+  value = value + 2.
+RUN process (
+  INPUT value,
+  INPUT "text"
+).
+PROCEDURE process:
+  DEFINE INPUT PARAMETER value AS INTEGER NO-UNDO.
+  DEFINE INPUT PARAMETER title AS CHARACTER NO-UNDO.
+  MESSAGE (
+    value + 1
+  ).
+END PROCEDURE.
+DEFINE VARIABLE action AS CHARACTER
+  TRIGGERS:
+    ON GO DO:
+      MESSAGE "triggered".
+    END.
+  END TRIGGERS.

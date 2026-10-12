@@ -8,6 +8,7 @@
       "scope": "source.abl",
       "file-types": ["cls", "p", "i", "w"],
       "highlights": "queries/highlights.scm",
+      "tags": "queries/tags.scm",
       "injection-regex": "^abl$",
       "class-name": "TreeSitterAbl"
     }

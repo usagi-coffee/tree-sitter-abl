@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import argparse
+import json
 import re
 from pathlib import Path
 
@@ -293,6 +295,19 @@ def extract_from_regex(regex_src: str) -> set[str]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Extract Tree-sitter keyword query patterns.")
+    parser.add_argument(
+        "--node-types",
+        type=Path,
+        help="Reconcile source keywords with freshly generated node-types.json: remove "
+        "hidden aliases and include anonymous keywords constructed indirectly.",
+    )
+    parser.add_argument(
+        "--check-highlights",
+        type=Path,
+        help="Fail if a keyword pattern is missing from the highlight query.",
+    )
+    args = parser.parse_args()
     paths = [GRAMMAR_DIR / "grammar.js"]
     paths.extend(sorted((GRAMMAR_DIR / "grammar").rglob("*.js")))
 
@@ -320,10 +335,20 @@ def main() -> int:
                 abs_kw_close = open_paren + 1 + kw_close
                 kw_calls_in_alias.add((abs_kw_open, abs_kw_close))
 
-            # Capture direct alias(kw("..."), $.name) as a named query node.
+            # Capture direct keyword aliases as named query nodes, including
+            # shared keyword rules such as alias($._kw_no_undo, $.no_undo).
             # We intentionally do not emit nodes for broad wrappers like alias(choice(...), $.identifier).
             target_match = re.fullmatch(r"\s*\$\.(\w+)\s*", alias_target)
-            if target_match and alias_first.startswith("kw("):
+            if (
+                target_match
+                and target_match.group(1) != "identifier"
+                and (
+                    alias_first.startswith("kw(")
+                    or re.fullmatch(r"\$\._kw_\w+", alias_first)
+                )
+            ):
+                # Contextual keywords aliased to identifiers must retain the
+                # highlighting of their variable, member, or callable role.
                 aliased_nodes.add(target_match.group(1))
 
         for _, kw_open, kw_close in iter_calls(text, KW_CALL_RE):
@@ -343,10 +368,27 @@ def main() -> int:
         for match in TOKEN_RE.finditer(text):
             keywords.update(extract_from_regex(match.group(1)))
 
-    for node in sorted(aliased_nodes, key=str.upper):
-        print(f"({node})")
-    for keyword in sorted(keywords, key=str.upper):
-        print(f"\"{keyword}\"")
+    if args.node_types:
+        nodes = json.loads(args.node_types.read_text(encoding="utf-8"))
+        named = {node["type"] for node in nodes if node["named"]}
+        anonymous = {node["type"] for node in nodes if not node["named"]}
+        aliased_nodes &= named
+        keywords &= anonymous
+        keywords.update(word for word in anonymous if re.fullmatch(r"&?[A-Z][A-Z0-9_-]*", word))
+
+    patterns = [f"({node})" for node in sorted(aliased_nodes, key=str.upper)]
+    patterns.extend(json.dumps(keyword) for keyword in sorted(keywords, key=str.upper))
+    if args.check_highlights:
+        # Ignore comments so maintenance instructions cannot satisfy coverage.
+        query = re.sub(r"(?m)^\s*;.*$", "", args.check_highlights.read_text(encoding="utf-8"))
+        present = set(re.findall(r'\(\w+\)|"[^"\n]+"', query))
+        missing = [pattern for pattern in patterns if pattern not in present]
+        if missing:
+            print("Missing highlight patterns:\n" + "\n".join(missing))
+            return 1
+        print(f"All {len(patterns)} extracted keyword patterns are highlighted")
+    else:
+        print("\n".join(patterns))
     return 0
 
 

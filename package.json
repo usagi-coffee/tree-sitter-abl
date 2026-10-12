@@ -37,7 +37,7 @@
     "start": "tree-sitter playground",
     "format": "oxfmt",
     "test": "bun run tools/generate.js && bun run tools/test.js",
-    "test:queries": "tree-sitter test",
+    "test:queries": "python3 tools/extract_keywords.py --node-types src/node-types.json --check-highlights queries/highlights.scm && tree-sitter test",
     "test:wasm": "cargo test --features wasm-test --lib",
     "test:metrics": "bun tools/test_parser_memory.js",
     "benchmark:wasm": "cargo test --features wasm-test --lib benchmark_wasm -- --ignored --nocapture",

@@ -1,0 +1,28 @@
+CLASS Example:
+  DEFINE PUBLIC PROPERTY Value AS INTEGER NO-UNDO
+  GET:
+    RETURN 1.
+  END GET.
+  SET:
+    MESSAGE Value.
+  END SET.
+  CONSTRUCTOR PUBLIC Example():
+    MESSAGE "created".
+  END CONSTRUCTOR.
+  METHOD PUBLIC VOID Execute():
+    DO:
+      MESSAGE "executing".
+    END.
+  END METHOD.
+  METHOD PUBLIC ABSTRACT VOID Unimplemented().
+  DESTRUCTOR PUBLIC Example():
+    MESSAGE "destroyed".
+  END DESTRUCTOR.
+END CLASS.
+INTERFACE IExample:
+  METHOD PUBLIC VOID Execute().
+END INTERFACE.
+ENUM State:
+  DEFINE ENUM Ready = 1.
+  DEFINE ENUM Finished = 2.
+END ENUM.
