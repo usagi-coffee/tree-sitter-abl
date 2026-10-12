@@ -255,6 +255,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/intra-rule-shared-choice
         optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("OVERRIDE"), $.override_modifier),
