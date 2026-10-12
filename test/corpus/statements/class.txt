@@ -1010,3 +1010,38 @@ END CLASS.
       (serialization_modifier)
       name: (identifier)
       type: (identifier))))
+
+================================================================================
+CLASS - method AS and LIKE parameters with sized and unsized extents
+================================================================================
+
+CLASS Sample:
+  METHOD PUBLIC VOID M(INPUT a AS INTEGER EXTENT 5, INPUT b AS INTEGER EXTENT, INPUT c LIKE a EXTENT 3, INPUT d LIKE a EXTENT):
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)
+          size: (number_literal))
+        (parameter
+          name: (identifier)
+          type: (identifier))
+        (parameter
+          name: (identifier)
+          like: (identifier)
+          size: (number_literal))
+        (parameter
+          name: (identifier)
+          like: (identifier)))
+      (body))))

@@ -1,4 +1,5 @@
 import "./test_precedence_lint.js";
+import "./test_keyword_helper.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";

@@ -515,9 +515,12 @@ export default ({ kw }) => ({
     choice($._text_operand, alias($._alert_box_title_concatenation, $.binary_expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _alert_box_title_concatenation: ($) =>
-    prec.right(1, seq($._text_operand, $._alert_box_title_concatenation_tail)),
+    prec.right("alert_title", seq($._text_operand, $._alert_box_title_concatenation_tail)),
   _alert_box_title_concatenation_tail: ($) =>
-    prec.right(1, seq("+", $._text_operand, optional($._alert_box_title_concatenation_tail))),
+    prec.right(
+      "alert_title",
+      seq("+", $._text_operand, optional($._alert_box_title_concatenation_tail)),
+    ),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),

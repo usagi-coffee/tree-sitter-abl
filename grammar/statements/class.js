@@ -311,19 +311,32 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/single-use-sequence
   __class_method_return_extent_phrase: ($) =>
     seq($._kw_extent, optional(field("size", $._extent_size))),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // Keep extent associativity scoped to each AS/LIKE parameter alternative.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/body-extraction
   __class_method_variable_type_phrase: ($) =>
     choice(
-      seq($._kw_as, $._class_type, optional($.__class_method_extent_phrase)),
+      seq(
+        $._kw_as,
+        $._class_type,
+        optional(
+          prec.right(
+            "class_method_extent",
+            seq($._kw_extent, optional(field("size", $._extent_size))),
+          ),
+        ),
+      ),
       seq(
         $._kw_like,
         field("like", $._qualified_identifier),
-        optional($.__class_method_extent_phrase),
+        optional(
+          prec.right(
+            "class_method_extent",
+            seq($._kw_extent, optional(field("size", $._extent_size))),
+          ),
+        ),
       ),
     ),
 
-  __class_method_extent_phrase: ($) =>
-    prec.right(seq($._kw_extent, optional(field("size", $._extent_size)))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __class_method_table_parameter: ($) =>
     choice(

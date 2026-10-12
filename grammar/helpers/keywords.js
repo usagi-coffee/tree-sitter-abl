@@ -1,8 +1,20 @@
 // kw("DISPLAY") -> token(/DISPLAY/i)
 // kw("DISPLAY", { offset: 3 }) -> token(/DISP(L(A(Y)?)?)?/i)  // DISP, DISPL, DISPLA, DISPLAY
 // Note: Partial keywords are aliased to the original word
+// Lexical precedence is independent of the named parse-precedence groups.
+// Preferred keywords must beat broad value/identifier tokens in the same lexer state.
+const lexicalPrecedences = { keyword: 1 };
+
 export function kw(word, options) {
-  const { alias: aliasName = word, offset } = options || {};
+  const { alias: aliasName = word, offset, precedence } = options || {};
+  if (precedence !== undefined && !Object.hasOwn(lexicalPrecedences, precedence)) {
+    throw new Error(`Unknown keyword lexical precedence: ${precedence}`);
+  }
+  // alias: false keeps the token available for an enclosing named alias.
+  const finish = (pattern) =>
+    aliasName === false ? keywordToken(pattern) : alias(keywordToken(pattern), aliasName);
+  const keywordToken = (pattern) =>
+    token(precedence === undefined ? pattern : prec(lexicalPrecedences[precedence], pattern));
   const off = Number.isInteger(offset) ? offset - 1 : -1; // default: require full word
 
   const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -17,7 +29,7 @@ export function kw(word, options) {
   };
 
   if (off < 0) {
-    return alias(token(new RegExp(s, "i")), aliasName);
+    return finish(new RegExp(s, "i"));
   }
 
   const min = Math.min(Math.max(off + 1, 0), s.length); // require up to offset (inclusive)
@@ -25,7 +37,7 @@ export function kw(word, options) {
   const rest = s.slice(min);
 
   const pattern = required + buildProgressiveOptional(rest);
-  return alias(token(new RegExp(pattern, "i")), aliasName);
+  return finish(new RegExp(pattern, "i"));
 }
 
 // Utility to grab every keyword from the grammar source code

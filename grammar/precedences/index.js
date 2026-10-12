@@ -35,6 +35,21 @@ import grammar_new from "./new.js";
 // Purpose: compose all precedence groups in a stable, readable order.
 
 export default ($) => [
+  // Keep an optional extent size attached to the method parameter.
+  // Example: METHOD VOID M(INPUT values AS INTEGER EXTENT 5).
+  ["class_method_extent"],
+  // Completed macro references bind before fallback preprocessor expressions.
+  // Example: DISPLAY {&value} + 1.
+  ["macro_reference", "macro", "preprocessor"],
+  // Slash colors consume foreground/background before arithmetic division.
+  // Example: DISPLAY value COLOR white/red.
+  ["color_slash", "multiplication"],
+  // TITLE keeps concatenated text together instead of finishing at the first operand.
+  // Example: MESSAGE "x" VIEW-AS ALERT-BOX TITLE "a" + "b".
+  ["alert_title", $._alert_box_title, $._alert_box_title_value, $._text_operand],
+  // Preserve the explicitly ordered ENTERED operator against ordinary field operands.
+  // Example: IF field NOT ENTERED THEN RETURN.
+  ["entered", $._qualified_identifier],
   ["unary", "multiplication", "add", "compare", "not", "logical"],
   ...grammar_accessors($),
   ...grammar_new($),

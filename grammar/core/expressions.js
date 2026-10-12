@@ -9,11 +9,12 @@ export default ({ kw }) => ({
       $.argument_reference,
     ),
 
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/inline-dispatcher-boundary
+  // Already listed in grammar.inline; this module only contains one of its callers.
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/inline-dispatcher-boundary, tree-sitter-optimize/single-use-shared-choice-inline
   _primary_expression: ($) =>
     choice(
-      prec(-2, $.if_preprocessor_directive),
-      prec(-1, $.preprocessor_name),
+      prec("preprocessor", $.if_preprocessor_directive),
+      prec("macro", $.preprocessor_name),
       $._qualified_identifier,
       $.system_handle_identifier,
       $.widget_qualified_name,

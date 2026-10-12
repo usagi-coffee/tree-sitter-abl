@@ -5,21 +5,22 @@ export default ({ kw }) => ({
       $.number_literal,
       $.string_literal,
       // Legacy foreground/background slash notation, e.g. white/red.
-      prec(
-        2,
-        seq(
-          field(
-            "foreground",
-            choice($.identifier, alias($.__color_prefixed_identifier, $.identifier)),
-          ),
-          "/",
-          field("background", $.identifier),
-        ),
-      ),
+      prec("color_slash", seq($.__color_slash_prefix, field("background", $.identifier))),
       $._value_expression,
       field("foreground", alias($.__color_prefixed_identifier, $.identifier)),
       seq($.__color_prefixes, field("foreground", $.identifier)),
       $.identifier,
+    ),
+  __color_slash_prefix: ($) =>
+    prec(
+      "color_slash",
+      seq(
+        field(
+          "foreground",
+          choice($.identifier, alias($.__color_prefixed_identifier, $.identifier)),
+        ),
+        "/",
+      ),
     ),
   __color_prefixes: ($) =>
     prec.right(

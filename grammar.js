@@ -351,15 +351,15 @@ export default grammar({
 
       // Preprocessor
       global_define_preprocessor_directive: ($) =>
-        seq(token(prec(1, /&GLOBAL-DEFINE/i)), $.__define_preprocessor_body),
+        seq(kw("&GLOBAL-DEFINE", { precedence: "keyword" }), $.__define_preprocessor_body),
       scoped_define_preprocessor_directive: ($) =>
-        seq(token(prec(1, /&SCOPED-DEFINE/i)), $.__define_preprocessor_body),
+        seq(kw("&SCOPED-DEFINE", { precedence: "keyword" }), $.__define_preprocessor_body),
       __define_preprocessor_body: ($) =>
         seq(field("name", $.identifier), field("value", $.preprocessor_value)),
-      if_preprocessor_directive: ($) => seq($.__if_preprocessor_directive_prefix, token(/&ENDIF/i)),
+      if_preprocessor_directive: ($) => seq($.__if_preprocessor_directive_prefix, kw("&ENDIF")),
       __if_preprocessor_directive_prefix: ($) =>
         seq(
-          token(/&IF/i),
+          kw("&IF"),
           $.__if_preprocessor_condition_then,
           field("then_branch", $.__if_preprocessor_branch_values),
           optional($.__if_preprocessor_branches),
@@ -373,29 +373,31 @@ export default grammar({
           alias($.__if_preprocessor_endif_statement, $.endif_branch),
         ),
       __if_preprocessor_if_statement: ($) =>
-        prec.right(seq(token(prec(1, /&IF/i)), field("condition", $._expression))),
-      __if_preprocessor_then_statement: ($) => token(prec(1, /&THEN/i)),
+        prec.right(seq(kw("&IF", { precedence: "keyword" }), field("condition", $._expression))),
+      __if_preprocessor_then_statement: ($) => kw("&THEN", { precedence: "keyword", alias: false }),
       __if_preprocessor_elseif_statement: ($) =>
-        prec.right(seq(token(prec(1, /&ELSEIF/i)), field("condition", $._expression))),
-      __if_preprocessor_else_statement: ($) => token(prec(1, /&ELSE/i)),
-      __if_preprocessor_endif_statement: ($) => token(prec(1, /&ENDIF/i)),
+        prec.right(
+          seq(kw("&ELSEIF", { precedence: "keyword" }), field("condition", $._expression)),
+        ),
+      __if_preprocessor_else_statement: ($) => kw("&ELSE", { precedence: "keyword", alias: false }),
+      __if_preprocessor_endif_statement: ($) =>
+        kw("&ENDIF", { precedence: "keyword", alias: false }),
       __if_preprocessor_branches: ($) =>
         choice(
           seq(
             field(
               "elseif_branch",
               seq(
-                token(/&ELSEIF/i),
+                kw("&ELSEIF"),
                 $.__if_preprocessor_condition_then,
                 field("then_branch", $.__if_preprocessor_branch_values),
               ),
             ),
             optional($.__if_preprocessor_branches),
           ),
-          field("else_branch", seq(token(/&ELSE/i), $.__if_preprocessor_branch_values)),
+          field("else_branch", seq(kw("&ELSE"), $.__if_preprocessor_branch_values)),
         ),
-      __if_preprocessor_condition_then: ($) =>
-        seq(field("condition", $._expression), token(/&THEN/i)),
+      __if_preprocessor_condition_then: ($) => seq(field("condition", $._expression), kw("&THEN")),
       __if_preprocessor_branch_values: ($) =>
         prec.right(
           seq(
@@ -407,18 +409,18 @@ export default grammar({
           ),
         ),
       message_preprocessor_directive: ($) =>
-        seq(token(prec(1, /&MESSAGE/i)), field("value", $.preprocessor_value)),
+        seq(kw("&MESSAGE", { precedence: "keyword" }), field("value", $.preprocessor_value)),
       undefine_preprocessor_directive: ($) =>
-        seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
+        seq(kw("&UNDEFINE", { precedence: "keyword" }), field("name", $.identifier)),
       // AppBuilder region markers carry optional metadata on the same line.
       analyze_suspend_preprocessor_directive: ($) =>
         seq(
-          token(prec(1, /&ANALYZE-SUSPEND/i)),
+          kw("&ANALYZE-SUSPEND", { precedence: "keyword" }),
           optional(field("value", alias($._analyze_preprocessor_value, $.preprocessor_value))),
         ),
       analyze_resume_preprocessor_directive: ($) =>
         seq(
-          token(prec(1, /&ANALYZE-RESUME/i)),
+          kw("&ANALYZE-RESUME", { precedence: "keyword" }),
           optional(field("value", alias($._analyze_preprocessor_value, $.preprocessor_value))),
         ),
       _analyze_preprocessor_value: ($) => token.immediate(/[^\r\n]+(?:~[ \t]*\r?\n[^\r\n]+)*/),
@@ -445,7 +447,14 @@ export default grammar({
                     $.string_literal,
                     $.number_literal,
                     alias($._signed_number_literal, $.number_literal),
-                    alias(token(prec(1, /TRUE|FALSE|YES|NO/i)), $.boolean_literal),
+                    alias(
+                      choice(
+                        ...["TRUE", "FALSE", "YES", "NO"].map((word) =>
+                          kw(word, { precedence: "keyword", alias: false }),
+                        ),
+                      ),
+                      $.boolean_literal,
+                    ),
                     alias($._macro_extra_default, $.preprocessor_value),
                   ),
                 ),
@@ -457,7 +466,7 @@ export default grammar({
         ),
 
       // Constants
-      preprocessor_name: ($) => prec(1, seq($.__preprocessor_name_prefix, "}")),
+      preprocessor_name: ($) => prec("macro_reference", seq($.__preprocessor_name_prefix, "}")),
       __preprocessor_name_prefix: ($) =>
         seq(
           // The external opener signals value contexts; the internal opener
@@ -944,7 +953,9 @@ export default grammar({
         choice($._unquoted_name_initial, alias($.__dash_name, $.identifier)),
       system_handle_identifier: ($) =>
         alias(
-          token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
+          choice(
+            ...SYSTEM_HANDLE_WORDS.map((word) => kw(word, { precedence: "keyword", alias: false })),
+          ),
           $.identifier,
         ),
       _label: ($) =>
@@ -1004,9 +1015,6 @@ export default grammar({
 });
 
 // Helpers
-function escape_regex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
 
 function binary_expression(
   $,

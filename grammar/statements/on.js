@@ -85,10 +85,6 @@ const ON_WIDGET_EVENTS = [
   "WINDOW-CLOSE",
 ];
 
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 export default ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
@@ -232,18 +228,7 @@ export default ({ kw }) => ({
     ),
   __on_web_notify_event: ($) => token(/["']WEB-NOTIFY["']/i),
   __on_ui_event_name: ($) =>
-    token(
-      prec(
-        1,
-        new RegExp(
-          `(${ON_WIDGET_EVENTS.slice()
-            .sort((a, b) => b.length - a.length)
-            .map(escapeRegex)
-            .join("|")})`,
-          "i",
-        ),
-      ),
-    ),
+    choice(...ON_WIDGET_EVENTS.map((word) => kw(word, { precedence: "keyword", alias: false }))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event: ($) => choice($.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
   __on_ui_events: ($) => seq(field("event", $.__on_ui_event), optional(seq(",", $.__on_ui_events))),
