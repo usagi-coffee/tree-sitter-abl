@@ -1,3 +1,5 @@
+import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
+import { hoistRulePrecedence } from "./rules/hoist-rule-precedence.js";
 import { keywordListHeadExtraction } from "./rules/keyword-list-head-extraction.js";
 import { pairedMarkerFieldPrefix } from "./rules/paired-marker-field-prefix.js";
 import { optionalPrefixHeadExtraction } from "./rules/optional-prefix-head-extraction.js";
@@ -222,6 +224,8 @@ export {
   standaloneFlagTailInline,
   optionalFlagChoiceExtraction,
   optionalAliasTailExtraction,
+  noNumericPrecedence,
+  hoistRulePrecedence,
   inlineMixedSymbolChoiceBoundary,
   inlineKeywordNameBoundary,
   inlineClauseChoiceBoundary,
@@ -284,6 +288,8 @@ export default {
     "standalone-flag-tail-inline": standaloneFlagTailInline,
     "optional-flag-choice-extraction": optionalFlagChoiceExtraction,
     "optional-alias-tail-extraction": optionalAliasTailExtraction,
+    "no-numeric-precedence": noNumericPrecedence,
+    "hoist-rule-precedence": hoistRulePrecedence,
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,
