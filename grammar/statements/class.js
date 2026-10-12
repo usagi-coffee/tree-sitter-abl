@@ -255,7 +255,12 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/intra-rule-shared-choice
         optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
-      $.__class_property_modifier_tail,
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        alias(kw("OVERRIDE"), $.override_modifier),
+        optional($._member_access_modifier),
+        optional($._serialization_modifier),
+      ),
       $._serialization_modifier,
     ),
   __class_property_modifier_tail: ($) =>

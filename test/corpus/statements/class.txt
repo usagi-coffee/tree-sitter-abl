@@ -954,3 +954,59 @@ END CLASS.
             right: (identifier)
             right: (identifier))))
       (body))))
+
+================================================================================
+PROPERTY - standalone and prefixed OVERRIDE modifier tails
+================================================================================
+
+CLASS PropertyModifiers:
+  DEFINE OVERRIDE PROPERTY First AS INTEGER GET. SET.
+  DEFINE OVERRIDE PROTECTED PROPERTY Second AS CHARACTER NO-UNDO GET.
+  DEFINE OVERRIDE SERIALIZABLE PROPERTY Third AS INTEGER GET. SET.
+  DEFINE OVERRIDE PROTECTED NON-SERIALIZABLE PROPERTY Fourth AS CHARACTER GET.
+  DEFINE PUBLIC STATIC OVERRIDE PROTECTED SERIALIZABLE PROPERTY Fifth AS INTEGER GET. SET.
+  DEFINE FINAL PUBLIC OVERRIDE PRIVATE NON-SERIALIZABLE PROPERTY Sixth AS INTEGER GET. SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (override_modifier)
+      name: (identifier)
+      type: (identifier))
+    (property_definition
+      (override_modifier)
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (property_definition
+      (override_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier))
+    (property_definition
+      (override_modifier)
+      (access_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier))
+    (property_definition
+      (access_modifier)
+      (static_modifier)
+      (override_modifier)
+      (access_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier))
+    (property_definition
+      (final_modifier)
+      (access_modifier)
+      (override_modifier)
+      (access_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier))))
