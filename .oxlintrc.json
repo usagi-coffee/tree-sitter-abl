@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/shared-ordered-pair-inline": "warn",
         "tree-sitter-optimize/shared-field-optional-tail-inline": "warn",
         "tree-sitter-optimize/right-recursive-clause-reuse": "warn",
         "tree-sitter-optimize/multi-use-private-delimited-field-inline": "warn",
