@@ -226,6 +226,7 @@ export default grammar({
     $._identifier_or_access_or_call,
     $._format_validate,
     $._handle_in_widget_pool,
+    $._selection_after_for,
     $._collate_body,
     $._identifier_or_access,
     $._format_format,
