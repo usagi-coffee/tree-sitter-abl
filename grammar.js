@@ -238,6 +238,7 @@ export default grammar({
     $.__compile_page_size_option,
     $.__compile_page_width_option,
     $.__prompt_for_font_option,
+    $.__put_parenthesized_count,
     $.__system_dialog_initial_dir_option,
     $.__system_dialog_title_option,
     $.__display_keyword_identifier,
