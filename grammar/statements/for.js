@@ -63,7 +63,8 @@ export default ({ kw }) => ({
 
   __for_by_items_tail: ($) =>
     prec.right(seq($._kw_by, $.__for_by_item, optional($.__for_by_items_tail))),
-  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
+  // Keep the item boundary for recovery of malformed GROUP BY and BREAK BY comma lists.
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset, tree-sitter-optimize/single-use-keyword-sequence
   __for_by_item: ($) =>
     seq(
       field("by", $._expression),
