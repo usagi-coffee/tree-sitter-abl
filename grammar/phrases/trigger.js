@@ -62,6 +62,7 @@ export default ({ kw }) => ({
       seq($._kw_in, field("handle", $._expression), optional($.__persistent_trigger_parameters)),
       $.__persistent_trigger_parameters,
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist
+  // Keep a shared parameter-list reduction to limit action-table growth.
+  // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist, tree-sitter-optimize/multi-use-private-delimited-field-inline
   __persistent_trigger_parameters: ($) => seq("(", field("parameters", $._expressions), ")"),
 });
