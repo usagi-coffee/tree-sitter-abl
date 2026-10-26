@@ -236,6 +236,7 @@ export default grammar({
     $.__temp_table_like_name,
     $.__browse_flag_option,
     $.__browse_option_expression,
+    $.__browse_options_phrase,
     $.__class_property_accessor_modifier,
     $.__compile_page_size_option,
     $.__compile_page_width_option,
