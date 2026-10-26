@@ -1,4 +1,5 @@
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
+import { rightRecursiveClauseReuse } from "./rules/right-recursive-clause-reuse.js";
 import { multiUsePrivateDelimitedFieldInline } from "./rules/multi-use-private-delimited-field-inline.js";
 import { prefixedSelectorHeadExtraction } from "./rules/prefixed-selector-head-extraction.js";
 import { selectorOptionalHeadExtraction } from "./rules/selector-optional-head-extraction.js";
@@ -136,6 +137,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  rightRecursiveClauseReuse,
   multiUsePrivateDelimitedFieldInline,
   prefixedSelectorHeadExtraction,
   selectorOptionalHeadExtraction,
@@ -267,6 +269,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "right-recursive-clause-reuse": rightRecursiveClauseReuse,
     "multi-use-private-delimited-field-inline": multiUsePrivateDelimitedFieldInline,
     "prefixed-selector-head-extraction": prefixedSelectorHeadExtraction,
     "selector-optional-head-extraction": selectorOptionalHeadExtraction,

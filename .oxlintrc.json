@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/right-recursive-clause-reuse": "warn",
         "tree-sitter-optimize/multi-use-private-delimited-field-inline": "warn",
         "tree-sitter-optimize/prefixed-selector-head-extraction": "warn",
         "tree-sitter-optimize/selector-optional-head-extraction": "warn",

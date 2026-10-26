@@ -3,6 +3,7 @@ import "./test_keyword_helper.js";
 import "./test_selector_optional_head.js";
 import "./test_prefixed_selector_head.js";
 import "./test_private_delimited_field.js";
+import "./test_right_recursive_clause.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
