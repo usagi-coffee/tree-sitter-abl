@@ -54,12 +54,9 @@ export default ({ kw }) => ({
       $.record_phrase,
     ),
 
-  __for_by_phrase: ($) => prec.right($.__for_by_clause),
-  __for_group_by_phrase: ($) => prec.right(seq($._kw_group, $.__for_by_clause)),
-
-  __for_break_by: ($) => prec.right(seq($._kw_break, $.__for_by_clause)),
-  __for_by_clause: ($) =>
-    seq($._kw_by, prec.right(seq($.__for_by_item, optional($.__for_by_items_tail)))),
+  __for_by_phrase: ($) => prec.right($.__for_by_items_tail),
+  __for_group_by_phrase: ($) => prec.right(seq($._kw_group, $.__for_by_items_tail)),
+  __for_break_by: ($) => prec.right(seq($._kw_break, $.__for_by_items_tail)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-alias-sequence
   __for_with_stream_io_phrase: ($) => seq($._kw_with, alias($._kw_stream_io, $.stream_io)),
