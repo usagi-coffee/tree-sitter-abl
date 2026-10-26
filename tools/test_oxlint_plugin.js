@@ -4,6 +4,7 @@ import "./test_selector_optional_head.js";
 import "./test_prefixed_selector_head.js";
 import "./test_private_delimited_field.js";
 import "./test_right_recursive_clause.js";
+import "./test_shared_field_optional_tail.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
