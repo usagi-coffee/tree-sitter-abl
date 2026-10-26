@@ -1,3 +1,4 @@
+import "./test_private_precedence_ordered_pair.js";
 import "./test_precedence_lint.js";
 import "./test_keyword_helper.js";
 import "./test_selector_optional_head.js";
