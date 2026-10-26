@@ -6,6 +6,7 @@ import "./test_private_delimited_field.js";
 import "./test_right_recursive_clause.js";
 import "./test_shared_field_optional_tail.js";
 import "./test_shared_ordered_pair.js";
+import "./test_private_keyword_optional_tail.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";

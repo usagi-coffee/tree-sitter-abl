@@ -1,4 +1,5 @@
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
+import { multiUsePrivateKeywordOptionalTailInline } from "./rules/multi-use-private-keyword-optional-tail-inline.js";
 import { sharedOrderedPairInline } from "./rules/shared-ordered-pair-inline.js";
 import { sharedFieldOptionalTailInline } from "./rules/shared-field-optional-tail-inline.js";
 import { rightRecursiveClauseReuse } from "./rules/right-recursive-clause-reuse.js";
@@ -139,6 +140,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  multiUsePrivateKeywordOptionalTailInline,
   sharedOrderedPairInline,
   sharedFieldOptionalTailInline,
   rightRecursiveClauseReuse,
@@ -273,6 +275,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "multi-use-private-keyword-optional-tail-inline": multiUsePrivateKeywordOptionalTailInline,
     "shared-ordered-pair-inline": sharedOrderedPairInline,
     "shared-field-optional-tail-inline": sharedFieldOptionalTailInline,
     "right-recursive-clause-reuse": rightRecursiveClauseReuse,
