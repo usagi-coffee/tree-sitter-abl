@@ -168,3 +168,30 @@ END CASE.
         right: (number_literal))))
   (case_statement
     (identifier)))
+
+================================================================================
+CASE with period instead of colon
+================================================================================
+
+CASE cLevel.
+  WHEN "M" THEN RETURN "MEDIUM".
+  WHEN "L" THEN RETURN "LOW".
+  OTHERWISE RETURN "".
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      condition: (string_literal)
+      (return_statement
+        value: (string_literal)))
+    (case_when_phrase
+      condition: (string_literal)
+      (return_statement
+        value: (string_literal)))
+    (case_otherwise_phrase
+      (return_statement
+        value: (string_literal)))))
