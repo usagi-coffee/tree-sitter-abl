@@ -697,3 +697,20 @@ DISPLAY Customer EXCEPT Customer.Balance[1] WITH FRAME f.
       index: (number_literal))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+DISPLAY with frame argument_reference
+================================================================================
+
+DISPLAY cField WITH FRAME {2} 1 DOWN NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (argument_reference)
+      (down
+        value: (number_literal))
+      (no_box))))

@@ -907,7 +907,10 @@ export default grammar({
           ),
           $.__widget_qualified_name_separator,
           choice(
-            seq($._widgets, field("widget", choice($.identifier, $.preprocessor_name))),
+            seq(
+              $._widgets,
+              field("widget", choice($.identifier, $.preprocessor_name, $.argument_reference)),
+            ),
             seq(
               alias(kw("FRAME", { offset: 4 }), $.identifier),
               field("widget", alias($._numeric_identifier, $.identifier)),
