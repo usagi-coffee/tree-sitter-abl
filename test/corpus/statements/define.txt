@@ -1,0 +1,14 @@
+================================================================================
+DEFINE VARIABLE with argument_reference name
+================================================================================
+
+DEF VAR {4} AS CHAR FORMAT "X(50)".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (argument_reference)
+    type: (identifier)
+    (format_phrase
+      format: (string_literal))))
