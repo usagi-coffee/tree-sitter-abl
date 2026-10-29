@@ -189,3 +189,25 @@ UNIX VALUE(SEARCH("quoter")) -d , /tmp/app/DATA.DAT > out.q.
     command_token: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+UNIX with relative parent path
+================================================================================
+
+UNIX SILENT VALUE(SEARCH("quoter")) ../data/input.txt > out.q.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unix_statement
+    (silent)
+    command: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    command_token: (opsys_file)
+    command_token: (shell_token)
+    command_token: (qualified_name
+      left: (identifier)
+      right: (identifier))))
