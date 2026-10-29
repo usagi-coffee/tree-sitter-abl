@@ -131,6 +131,14 @@ static bool macro_has_operator(TSLexer *lexer) {
   }
 }
 
+// Called just past a '.', with the token end already marked: a second '.'
+// followed by '/' means the first period begins a "../" path. Only peeks.
+static bool starts_parent_path(TSLexer *lexer) {
+  if (lexer->lookahead != '.') return false;
+  lexer->advance(lexer, false);
+  return lexer->lookahead == '/';
+}
+
 // Peek across extras, leaving their nodes and ranges to the normal lexer.
 static bool skip_label_trivia(TSLexer *lexer) {
   for (;;) {
@@ -388,7 +396,9 @@ bool tree_sitter_abl_external_scanner_scan(
 
       // An adjacent name character keeps the period inside a name or number,
       // including a leading decimal component in a label reference (.1a).
-      if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead)) {
+      // "../" starts a relative opsys path (UNIX ../dir/file), not a terminator.
+      if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead) &&
+          !starts_parent_path(lexer)) {
         lexer->result_symbol = TERMINATOR_DOT;
         return true;
       }
@@ -471,7 +481,8 @@ bool tree_sitter_abl_external_scanner_scan(
           lexer->result_symbol = NAMEDOT;
           return true;
         }
-        if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead)) {
+        if (valid_symbols[TERMINATOR_DOT] && !label_name_char(lexer->lookahead) &&
+            !starts_parent_path(lexer)) {
           lexer->result_symbol = TERMINATOR_DOT;
           return true;
         }
