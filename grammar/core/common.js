@@ -230,10 +230,15 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _dos_unix_command: ($) =>
     choice(
-      field("command_token", $.identifier),
+      field("command_token", $._qualified_identifier),
       field("command_token", $.string_literal),
+      field("command_token", $.number_literal),
+      field("command_token", $.opsys_file),
+      field("command_token", alias($._dos_unix_shell_token, $.shell_token)),
       seq($._kw_value, "(", field("command", $._expression), ")"),
     ),
+  // Shell-only words: flags (-q, --verbose), redirects (>, >>, 2>, <) and comma separators.
+  _dos_unix_shell_token: ($) => token(/--?[A-Za-z0-9_][^\s.]*|[0-9]?>>?|<|,/),
   _dos_unix_tail: ($) =>
     choice(
       seq(alias($._kw_silent, $.silent), optional($._dos_unix_commands)),
