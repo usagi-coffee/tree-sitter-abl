@@ -373,3 +373,22 @@ OPEN QUERY q FOR EACH Customer,
       by: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+OPEN QUERY - WHERE without expression before BY
+================================================================================
+
+OPEN QUERY q FOR EACH Customer WHERE
+  BY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
