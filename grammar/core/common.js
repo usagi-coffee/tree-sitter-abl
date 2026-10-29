@@ -67,7 +67,19 @@ export default ({ kw }) => ({
   _except_field_names: ($) =>
     prec.right(seq(field("except", $.identifier), optional($._except_field_names))),
   _except_name_list: ($) =>
-    prec.right(seq(field("except", $._qualified_identifier), optional($._except_name_list))),
+    prec.right(
+      seq(
+        field(
+          "except",
+          choice($._qualified_identifier, alias($._except_array_access, $.array_access)),
+        ),
+        optional($._except_name_list),
+      ),
+    ),
+  // Subscripted names only: the general array_access also admits object access
+  // and calls, which make a parenthesized EXCEPT item ambiguous.
+  _except_array_access: ($) =>
+    seq(field("array", $._qualified_identifier), "[", field("index", $._array_subscript), "]"),
   _import_export_except_names: ($) =>
     prec.right(seq($._qualified_identifier, optional($._import_export_except_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline

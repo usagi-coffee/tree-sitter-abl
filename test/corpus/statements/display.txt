@@ -678,3 +678,22 @@ DISPLAY foo(2) SKIP Customer.Name.
       field: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+DISPLAY record EXCEPT array element
+================================================================================
+
+DISPLAY Customer EXCEPT Customer.Balance[1] WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    except: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal))
+    (frame_phrase
+      frame: (identifier))))
