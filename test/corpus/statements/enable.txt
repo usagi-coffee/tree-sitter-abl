@@ -163,3 +163,23 @@ ENABLE ALL WITH FRAME f1.
     (all)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+ENABLE ALL EXCEPT with array elements
+================================================================================
+
+ENABLE ALL EXCEPT nTotal[1] nTotal[2] WITH FRAME fMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (all)
+    except: (array_access
+      array: (identifier)
+      index: (number_literal))
+    except: (array_access
+      array: (identifier)
+      index: (number_literal))
+    (frame_phrase
+      frame: (identifier))))
