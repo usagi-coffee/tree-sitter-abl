@@ -5,8 +5,6 @@ export default ({ kw }) => ({
       $.binary_expression,
       $.unary_expression,
       $._primary_expression,
-      // Bare argument references stay extras instead of starting expression statements.
-      $.argument_reference,
     ),
 
   // Already listed in grammar.inline; this module only contains one of its callers.

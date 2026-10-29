@@ -23,3 +23,43 @@ arr[1 FOR 4].
       array: (identifier)
       start: (number_literal)
       count: (number_literal))))
+
+================================================================================
+ARGUMENT ARRAY ACCESS - argument reference with subscript
+================================================================================
+
+if {4}[wx] <> 0 then return.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (array_access
+        array: (argument_reference)
+        index: (identifier))
+      (number_literal))
+    then: (return_statement)))
+
+================================================================================
+ARGUMENT ARRAY ACCESS - argument qualified name with subscript in ASSIGN
+================================================================================
+
+assign {1}.Total[1] = {2}.Total[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (array_access
+          array: (qualified_name
+            left: (argument_reference)
+            right: (identifier))
+          index: (number_literal))
+        right: (array_access
+          array: (qualified_name
+            left: (argument_reference)
+            right: (identifier))
+          index: (number_literal))))))

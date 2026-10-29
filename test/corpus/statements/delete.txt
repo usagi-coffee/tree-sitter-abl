@@ -274,3 +274,19 @@ DELETE OBJECT h NO-ERROR.
   (delete_object_statement
     name: (identifier)
     (no_error)))
+
+================================================================================
+DELETE with argument reference (preprocessor positional arg as record name)
+================================================================================
+
+DELETE {1}.
+DELETE {2} NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_statement
+    record: (argument_reference))
+  (delete_statement
+    record: (argument_reference)
+    (no_error)))

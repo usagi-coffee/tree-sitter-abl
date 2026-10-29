@@ -896,3 +896,26 @@ DEFINE TEMP-TABLE tt
       type: (identifier)
       extent: (preprocessor_name
         (identifier)))))
+
+================================================================================
+TEMP-TABLE field LIKE with preprocessor argument
+================================================================================
+
+define temp-table ttParam
+    field cName like {1}.Name
+    field cDescr like {1}
+    .
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (temp_table_field
+      name: (identifier)
+      type: (qualified_name
+        left: (argument_reference)
+        right: (identifier)))
+    (temp_table_field
+      name: (identifier)
+      type: (argument_reference))))

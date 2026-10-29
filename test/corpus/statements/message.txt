@@ -626,3 +626,19 @@ MESSAGE "Both" UPDATE answer LIKE otherValue FORMAT "x(10)".
       field: (identifier)
       like: (identifier)
       format: (string_literal))))
+
+================================================================================
+AVAILABLE with argument_reference
+================================================================================
+
+if not avail {2} then return no-apply.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (unary_expression
+      (available_expression
+        record: (argument_reference)))
+    then: (return_statement
+      (no_apply))))
