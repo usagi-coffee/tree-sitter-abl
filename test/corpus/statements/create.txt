@@ -502,3 +502,19 @@ CREATE ALIAS aliasName FOR /* database name */ DATABASE VALUE(getDatabase()).
     value: (function_call
       function: (identifier)
       (arguments))))
+
+================================================================================
+CREATE with argument reference (preprocessor positional arg as table name)
+================================================================================
+
+CREATE {1}.
+CREATE {2} NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (argument_reference))
+  (create_statement
+    table: (argument_reference)
+    (no_error)))

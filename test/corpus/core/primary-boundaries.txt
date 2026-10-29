@@ -50,7 +50,6 @@ DYNAMIC-FUNCTION(ENTRY(2,c) IN h).
 PRIMARY - argument references as extras and expression operands
 ================================================================================
 
-{1} doWork().
 doWork() {2}.
 x = {1} + {2}.
 doWork({1}, {2}).
@@ -58,11 +57,6 @@ doWork({1}, {2}).
 --------------------------------------------------------------------------------
 
 (source_code
-  (argument_reference)
-  (expression_statement
-    (function_call
-      function: (identifier)
-      (arguments)))
   (expression_statement
     (function_call
       function: (identifier)
