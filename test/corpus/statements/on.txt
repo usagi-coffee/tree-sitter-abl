@@ -785,3 +785,28 @@ ON WRITE OF Customer NEW BUFFER newCustomer OLD BUFFER oldCustomer REVERT.
       new_record: (identifier)
       old_record: (identifier))
     (revert)))
+
+================================================================================
+ON event OF argument reference IN FRAME argument reference
+================================================================================
+
+ON RETURN OF {4} IN FRAME {1} DO:
+  ASSIGN a = b.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (argument_reference)
+        frame: (argument_reference)))
+    (do_statement
+      (body
+        (assign_statement
+          (assign_phrase
+            (assign_pair
+              left: (identifier)
+              right: (identifier))))))))

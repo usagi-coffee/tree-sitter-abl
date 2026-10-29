@@ -474,3 +474,19 @@ CREATE BUFFER h FOR TABLE IF c THEN "a" ELSE "b".
       (identifier)
       (string_literal)
       (string_literal))))
+
+================================================================================
+CREATE with argument reference (preprocessor positional arg as table name)
+================================================================================
+
+CREATE {1}.
+CREATE {2} NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (argument_reference))
+  (create_statement
+    table: (argument_reference)
+    (no_error)))

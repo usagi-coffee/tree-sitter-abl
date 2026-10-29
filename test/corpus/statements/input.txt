@@ -146,3 +146,15 @@ INPUT FROM ./report.dat.
     file: (opsys_file))
   (input_statement
     file: (opsys_file)))
+
+================================================================================
+INPUT FROM argument reference
+================================================================================
+
+input from {1}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (argument_reference)))

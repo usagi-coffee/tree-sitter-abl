@@ -86,7 +86,12 @@ export default ({ kw }) => ({
   _initial_phrase: ($) => seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
   _block_opener: ($) => choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
   _frame_name: ($) =>
-    choice($.identifier, alias($._numeric_identifier, $.identifier), $.preprocessor_name),
+    choice(
+      $.identifier,
+      alias($._numeric_identifier, $.identifier),
+      $.preprocessor_name,
+      $.argument_reference,
+    ),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   // VIEW and HIDE are the only users, and both admit a trailing IN WINDOW that
   // the shared widget_phrase cannot be told apart from IN FRAME with a single

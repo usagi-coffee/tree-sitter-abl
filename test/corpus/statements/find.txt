@@ -404,3 +404,27 @@ FIND FIRST interface WHERE interface.ndos = 0 NO-LOCK NO-ERROR.
         (number_literal)))
     (no_lock)
     (no_error)))
+
+================================================================================
+FIND with argument reference (preprocessor positional arg as table name)
+================================================================================
+
+FIND {1} NO-LOCK.
+FIND FIRST {2} WHERE {2}.Name = "X" NO-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (argument_reference)
+    (no_lock))
+  (find_statement
+    (first)
+    table: (argument_reference)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (argument_reference)
+          right: (identifier))
+        (string_literal)))
+    (no_lock)))
