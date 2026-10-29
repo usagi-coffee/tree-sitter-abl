@@ -18,8 +18,9 @@ export default ({ kw }) => ({
     ),
   __enable_body: ($) =>
     choice(
+      // EXCEPT may be left empty: ENABLE ALL EXCEPT WITH FRAME f.
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      seq(alias(kw("ALL"), $.all), optional(seq($._kw_except, $._except_name_list))),
+      seq(alias(kw("ALL"), $.all), optional(seq($._kw_except, optional($._except_name_list)))),
       $.__enable_items_list,
     ),
 

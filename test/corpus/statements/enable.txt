@@ -183,3 +183,17 @@ ENABLE ALL EXCEPT nTotal[1] nTotal[2] WITH FRAME fMain.
       index: (number_literal))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+ENABLE ALL EXCEPT with no fields before WITH FRAME
+================================================================================
+
+ENABLE ALL EXCEPT WITH FRAME fMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier))))
