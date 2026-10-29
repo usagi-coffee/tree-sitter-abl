@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("CASE"),
       $._expression,
-      alias($._colon, ":"),
+      $._block_opener,
       optional($.__case_items),
       optional($.case_otherwise_phrase),
       $._kw_end,
