@@ -122,3 +122,70 @@ UNIX VALUE("cp usr/myfile.").
                 value: (identifier))))))))
   (unix_statement
     command: (string_literal)))
+
+================================================================================
+UNIX SILENT with shell flags and output redirect
+================================================================================
+
+UNIX SILENT unix2dos -q VALUE(cFile).
+UNIX SILENT VALUE(SEARCH("quoter")) data > out.q.
+UNIX SILENT sort -k 2 data 2> err.log.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unix_statement
+    (silent)
+    command_token: (identifier)
+    command_token: (shell_token)
+    command: (identifier))
+  (unix_statement
+    (silent)
+    command: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    command_token: (identifier)
+    command_token: (shell_token)
+    command_token: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (unix_statement
+    (silent)
+    command_token: (identifier)
+    command_token: (shell_token)
+    command_token: (number_literal)
+    command_token: (identifier)
+    command_token: (shell_token)
+    command_token: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+UNIX with absolute paths and comma separator
+================================================================================
+
+UNIX SILENT rm /tmp/app/report.p.
+UNIX VALUE(SEARCH("quoter")) -d , /tmp/app/DATA.DAT > out.q.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unix_statement
+    (silent)
+    command_token: (identifier)
+    command_token: (opsys_file))
+  (unix_statement
+    command: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    command_token: (shell_token)
+    command_token: (shell_token)
+    command_token: (opsys_file)
+    command_token: (shell_token)
+    command_token: (qualified_name
+      left: (identifier)
+      right: (identifier))))
