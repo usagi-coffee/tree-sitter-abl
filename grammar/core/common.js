@@ -72,6 +72,7 @@ export default ({ kw }) => ({
     prec.right(seq($._qualified_identifier, optional($._import_export_except_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _initial_phrase: ($) => seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+  _block_opener: ($) => choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
   _frame_name: ($) =>
     choice($.identifier, alias($._numeric_identifier, $.identifier), $.preprocessor_name),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
