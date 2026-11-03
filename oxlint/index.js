@@ -1,3 +1,4 @@
+import { inlineBranchSeparatorBoundary } from "./rules/inline-branch-separator-boundary.js";
 import { existingAlternativeBodyReuse } from "./rules/existing-alternative-body-reuse.js";
 import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
 import { optionalChoicePrefixHoist } from "./rules/optional-choice-prefix-hoist.js";
@@ -146,6 +147,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  inlineBranchSeparatorBoundary,
   existingAlternativeBodyReuse,
   keywordOptionalMarkerPrefix,
   optionalChoicePrefixHoist,
@@ -287,6 +289,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "inline-branch-separator-boundary": inlineBranchSeparatorBoundary,
     "existing-alternative-body-reuse": existingAlternativeBodyReuse,
     "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
     "optional-choice-prefix-hoist": optionalChoicePrefixHoist,
