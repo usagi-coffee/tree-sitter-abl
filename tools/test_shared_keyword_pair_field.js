@@ -101,7 +101,10 @@ try {
     ],
     invalid: [
       { ...testCase("shared keyword pair and field"), errors: [{ message }] },
-      { ...testCase("measured FOR TENANT helper", fixture), errors: [{ message }] },
+      {
+        ...testCase("measured FOR TENANT helper", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase(
           "renamed keywords, helper and field",
@@ -179,7 +182,10 @@ try {
   new RuleTester().run("shared-keyword-pair-field-inline", sharedKeywordPairFieldInline, {
     valid: [],
     invalid: [
-      { ...moduleCase("comments and strings do not add dependencies"), errors: [{ message }] },
+      {
+        ...moduleCase("comments and strings do not add dependencies"),
+        errors: [{ message }],
+      },
     ],
   });
 } finally {

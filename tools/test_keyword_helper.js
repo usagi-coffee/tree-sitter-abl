@@ -19,7 +19,11 @@ try {
   assert.equal(unaliased.type, "token");
   assert.equal(unaliased.content.type, "prec");
   assert.equal(kw("IF", { alias: false }).type, "token");
-  const partial = kw("DEFINE", { offset: 3, precedence: "keyword", alias: "DEF" });
+  const partial = kw("DEFINE", {
+    offset: 3,
+    precedence: "keyword",
+    alias: "DEF",
+  });
   assert.equal(partial.name, "DEF");
   const pattern = new RegExp(`^(?:${partial.content.content.content.source})$`, "i");
   assert(pattern.test("def"));

@@ -134,7 +134,11 @@ function readNumber(text, start) {
 function readPunctuator(text, start) {
   for (const punctuator of PUNCTUATORS) {
     if (text.startsWith(punctuator, start)) {
-      return { type: "punct", value: punctuator, end: start + punctuator.length };
+      return {
+        type: "punct",
+        value: punctuator,
+        end: start + punctuator.length,
+      };
     }
   }
   return { type: "punct", value: text[start], end: start + 1 };

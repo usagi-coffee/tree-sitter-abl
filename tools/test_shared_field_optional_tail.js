@@ -89,8 +89,14 @@ try {
       ),
     ],
     invalid: [
-      { ...testCase("shared field and optional hidden tail"), errors: [{ message }] },
-      { ...testCase("measured CREATE helper", fixture), errors: [{ message }] },
+      {
+        ...testCase("shared field and optional hidden tail"),
+        errors: [{ message }],
+      },
+      {
+        ...testCase("measured CREATE helper", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase(
           "renamed helper, field and tail",
@@ -168,7 +174,10 @@ try {
   new RuleTester().run("shared-field-optional-tail-inline", sharedFieldOptionalTailInline, {
     valid: [],
     invalid: [
-      { ...moduleCase("comments and strings do not add dependencies"), errors: [{ message }] },
+      {
+        ...moduleCase("comments and strings do not add dependencies"),
+        errors: [{ message }],
+      },
     ],
   });
 } finally {

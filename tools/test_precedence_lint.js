@@ -5,7 +5,11 @@ import { RuleTester } from "oxlint/plugins-dev";
 import { noNumericPrecedence, hoistRulePrecedence } from "../oxlint/index.js";
 
 const directory = mkdtempSync(join(tmpdir(), "abl-precedence-lint-"));
-const fixture = (code) => ({ code, cwd: directory, filename: join(directory, "grammar.js") });
+const fixture = (code) => ({
+  code,
+  cwd: directory,
+  filename: join(directory, "grammar.js"),
+});
 const grammar = (body) => `export default grammar({rules: {${body}}});`;
 const helper = (
   expression = 'prec.right(seq("IN", $.identifier))',
@@ -96,7 +100,10 @@ try {
           },
         ],
       })),
-      { ...fixture(helper('prec.right(seq("IN", field("name", $.identifier)))')), errors: 1 },
+      {
+        ...fixture(helper('prec.right(seq("IN", field("name", $.identifier)))')),
+        errors: 1,
+      },
       {
         ...fixture(helper().replace("parent: ($)", "second: ($) => $.__clause, parent: ($)")),
         errors: [{ message: /second, parent/ }],

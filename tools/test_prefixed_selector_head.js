@@ -95,8 +95,14 @@ try {
       ),
     ],
     invalid: [
-      { ...testCase("keyword family before a required field", before), errors: [{ message }] },
-      { ...testCase("measured CREATE SOCKET shape", fixture), errors: [{ message }] },
+      {
+        ...testCase("keyword family before a required field", before),
+        errors: [{ message }],
+      },
+      {
+        ...testCase("measured CREATE SOCKET shape", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase("inline leading keyword", before.replace("$._kw_drop", 'kw("DROP")')),
         errors: [{ message }],

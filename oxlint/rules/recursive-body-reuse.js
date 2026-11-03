@@ -53,7 +53,11 @@ export const recursiveBodyReuse = rule((context) => {
         const prefix = body.arguments.slice(0, -1);
         if (prefix.every((element) => isNullable(element))) continue;
         if (prefix.some((element) => referencedSymbols(element).includes(name))) continue;
-        helpers.push({ property, name, signature: signature(property.value.body) });
+        helpers.push({
+          property,
+          name,
+          signature: signature(property.value.body),
+        });
       }
       for (const candidate of candidates) {
         const helper = helpers.find(

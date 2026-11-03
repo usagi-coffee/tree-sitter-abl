@@ -353,7 +353,9 @@ try {
     });
   }
   writeFileSync(join(flagTailDirectory, "grammar.js"), "export default grammar({});");
-  mkdirSync(join(flagTailDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(flagTailDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(flagTailDirectory, "grammar", "precedences", "fixture.js"),
     "export default ($) => [[$.__class_property_modifier_tail, $.other]];",
@@ -537,7 +539,9 @@ try {
     });
   }
   writeFileSync(join(requiredTailDirectory, "grammar.js"), "export default grammar({});");
-  mkdirSync(join(requiredTailDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(requiredTailDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(requiredTailDirectory, "grammar", "precedences", "fixture.js"),
     "export default ($) => [[$.__display_window_frame_phrases, $.other]];",
@@ -748,7 +752,9 @@ try {
     });
   }
   writeFileSync(join(privateFlagDirectory, "grammar.js"), "export default grammar({});");
-  mkdirSync(join(privateFlagDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(privateFlagDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(privateFlagDirectory, "grammar", "precedences", "fixture.js"),
     "export default ($) => [[$.__var_storage_modifier, $.other]];",
@@ -1025,7 +1031,10 @@ try {
     new RuleTester().run(
       `contextual-valued-choice-inline cross-file match ${reversed}`,
       contextualValuedChoiceInline,
-      { valid: [], invalid: [{ ...pair[1], errors: [{ message: valuedChoiceMessage }] }] },
+      {
+        valid: [],
+        invalid: [{ ...pair[1], errors: [{ message: valuedChoiceMessage }] }],
+      },
     );
   }
   resetSharingCandidates();
@@ -1042,7 +1051,12 @@ try {
     contextualValuedChoiceInline,
     {
       valid: [],
-      invalid: [{ ...crossFile("format.js", caller), errors: [{ message: valuedChoiceMessage }] }],
+      invalid: [
+        {
+          ...crossFile("format.js", caller),
+          errors: [{ message: valuedChoiceMessage }],
+        },
+      ],
     },
   );
   const expandedCaller = caller.replace(
@@ -1062,7 +1076,12 @@ try {
     contextualValuedChoiceInline,
     {
       valid: [],
-      invalid: [{ ...crossFile("format.js", caller), errors: [{ message: valuedChoiceMessage }] }],
+      invalid: [
+        {
+          ...crossFile("format.js", caller),
+          errors: [{ message: valuedChoiceMessage }],
+        },
+      ],
     },
   );
   resetSharingCandidates();
@@ -1083,7 +1102,10 @@ try {
     new RuleTester().run(
       `contextual-valued-choice-inline cross-file ${metadata}`,
       contextualValuedChoiceInline,
-      { valid: [crossFile("common.js", common), crossFile("format.js", caller)], invalid: [] },
+      {
+        valid: [crossFile("common.js", common), crossFile("format.js", caller)],
+        invalid: [],
+      },
     );
   }
   resetSharingCandidates();
@@ -1091,7 +1113,9 @@ try {
     join(valuedChoiceDirectory, "grammar.js"),
     "export default grammar({ rules: {} });",
   );
-  mkdirSync(join(valuedChoiceDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(valuedChoiceDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(valuedChoiceDirectory, "grammar", "precedences", "type.js"),
     "export default ($) => [[$._as_like, $.expression]];",
@@ -1099,7 +1123,10 @@ try {
   new RuleTester().run(
     "contextual-valued-choice-inline external precedence",
     contextualValuedChoiceInline,
-    { valid: [crossFile("common.js", common), crossFile("format.js", caller)], invalid: [] },
+    {
+      valid: [crossFile("common.js", common), crossFile("format.js", caller)],
+      invalid: [],
+    },
   );
 } finally {
   resetSharingCandidates();
@@ -1126,7 +1153,9 @@ const lexicalFieldMetadata = (property) =>
   );
 try {
   const precedenceRoot = join(lexicalFieldDirectory, "precedence-project");
-  mkdirSync(join(precedenceRoot, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(precedenceRoot, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(precedenceRoot, "grammar", "precedences", "definition.js"),
     "export default ($) => [[$.__define_preprocessor_body, $.other]];",
@@ -1483,7 +1512,9 @@ try {
     invalid: [],
   });
   rmSync(join(inlineTargetDirectory, "grammar.js"));
-  mkdirSync(join(inlineTargetDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(inlineTargetDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(inlineTargetDirectory, "grammar", "precedences", "values.js"),
     "export default ($) => [[$._identifier_or_string_literal_value, $.other]];",
@@ -1666,7 +1697,9 @@ try {
     invalid: [],
   });
   rmSync(join(aliasForwardingDirectory, "grammar.js"));
-  mkdirSync(join(aliasForwardingDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(aliasForwardingDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(aliasForwardingDirectory, "grammar", "precedences", "values.js"),
     "export default ($) => [[$._aliased_value_expression, $.other]];",
@@ -1893,7 +1926,9 @@ try {
     invalid: [],
   });
   rmSync(join(retainedInfixDirectory, "grammar.js"));
-  mkdirSync(join(retainedInfixDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(retainedInfixDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(retainedInfixDirectory, "grammar", "precedences", "infix.js"),
     "export default ($) => [[$._logical_operator, $.value]];",
@@ -2010,18 +2045,30 @@ ${literalAliasBoundaryFixture()}`,
   invalid: [
     {
       code: beforeNewTypeChoice,
-      errors: [{ message: /type choice contains adjacent literal and named generic_type/ }],
+      errors: [
+        {
+          message: /type choice contains adjacent literal and named generic_type/,
+        },
+      ],
     },
     {
       code: literalAliasBoundaryFixture(),
-      errors: [{ message: /value choice contains adjacent literal and named bracketed_value/ }],
+      errors: [
+        {
+          message: /value choice contains adjacent literal and named bracketed_value/,
+        },
+      ],
     },
     {
       code: literalAliasBoundaryFixture(
         "alias($.__example_bracketed_value, $.bracketed_value)",
         "$.number_literal",
       ),
-      errors: [{ message: /value choice contains adjacent literal and named bracketed_value/ }],
+      errors: [
+        {
+          message: /value choice contains adjacent literal and named bracketed_value/,
+        },
+      ],
     },
     {
       code: literalAliasBoundaryFixture(
@@ -2149,7 +2196,11 @@ new RuleTester().run("optional-flag-marker-prefix", optionalFlagMarkerPrefix, {
     {
       name: "keyword abbreviation options and existing aliases remain exact",
       code: optionalFlagMarkerFixture('optional(alias(kw("EXPLICIT", { offset: 3 }), $.explicit))'),
-      errors: [{ message: /retain every alias, keyword option, field scope and closing tail/ }],
+      errors: [
+        {
+          message: /retain every alias, keyword option, field scope and closing tail/,
+        },
+      ],
     },
     {
       name: "shared keyword aliases remain eligible",
@@ -2161,7 +2212,9 @@ new RuleTester().run("optional-flag-marker-prefix", optionalFlagMarkerPrefix, {
         "alias($._kw_compares, $.compares)",
       ),
       errors: [
-        { message: /compare complete valid and error trees and node-schema required flags/ },
+        {
+          message: /compare complete valid and error trees and node-schema required flags/,
+        },
       ],
     },
     {
@@ -2245,7 +2298,9 @@ new RuleTester().run(
         __frame_column_keyword: ($) => choice($._kw_column, kw("COLUMNS"), kw("COL")),
       });`,
         errors: [
-          { message: /__frame_column_keyword has 2 unaliased local uses.*private selector/ },
+          {
+            message: /__frame_column_keyword has 2 unaliased local uses.*private selector/,
+          },
         ],
       },
       {
@@ -2258,7 +2313,11 @@ new RuleTester().run(
           'choice(kw("COLUMNS", {alias: "COL", offset: 3}), $._kw_column)',
           'seq(field("first", $.__keyword_selector), optional(field("second", $.__keyword_selector)))',
         ),
-        errors: [{ message: /abbreviation options, alternative order and caller fields/ }],
+        errors: [
+          {
+            message: /abbreviation options, alternative order and caller fields/,
+          },
+        ],
       },
       {
         name: "static caller precedence and multiple rule uses",
@@ -2291,7 +2350,9 @@ try {
     join(privateKeywordChoiceMetadata, "grammar.js"),
     "export default grammar({ rules: {} });",
   );
-  mkdirSync(join(privateKeywordChoiceMetadata, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(privateKeywordChoiceMetadata, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(privateKeywordChoiceMetadata, "grammar", "precedences", "frame.js"),
     "export default ($) => [[$.binary_expression, $.__keyword_selector]];",
@@ -2416,7 +2477,10 @@ new RuleTester().run("nested-field-body-extraction", nestedFieldBodyExtraction, 
       code: originalNestedDatabaseEventSource,
       errors: [{ message: /object-led body.*private non-empty body helper/ }],
     },
-    { code: nestedFieldBodyFixture(), errors: [{ message: /option order, action alternatives/ }] },
+    {
+      code: nestedFieldBodyFixture(),
+      errors: [{ message: /option order, action alternatives/ }],
+    },
     {
       name: "other field and private rule names",
       code: nestedFieldBodyFixture()
@@ -2499,7 +2563,10 @@ new RuleTester().run("optional-prefix-head-extraction", optionalPrefixHeadExtrac
     "const value = choice(seq(optional($.__modifier), $._kw_get, optional($.__parameters), $.__tail), seq(optional($.__modifier), $._kw_set, optional($.__parameters), $.__tail));",
   ],
   invalid: [
-    { code: optionalPrefixHeadFixture(), errors: [{ message: /non-empty hidden header/ }] },
+    {
+      code: optionalPrefixHeadFixture(),
+      errors: [{ message: /non-empty hidden header/ }],
+    },
     {
       code: optionalPrefixHeadFixture(undefined, undefined, 'kw("SET", {offset: 3})'),
       errors: [{ message: /ordered keyword choice/ }],
@@ -2578,7 +2645,10 @@ new RuleTester().run("nested-event-head-extraction", nestedEventHeadExtraction, 
     'const value = choice(seq(field("event", $._kw_delete), $._kw_of, choice($.__action, seq($.widget, $.action))), seq(field("event", choice($._kw_create, $._kw_find)), $._kw_of, $.__action));',
   ],
   invalid: [
-    { code: nestedEventHeadFixture(), errors: [{ message: /hidden head helper/ }] },
+    {
+      code: nestedEventHeadFixture(),
+      errors: [{ message: /hidden head helper/ }],
+    },
     {
       code: nestedEventHeadFixture('field("event", kw("DELETE", {offset: 3}))'),
       errors: [{ message: /preserve its priority/ }],
@@ -2666,7 +2736,11 @@ new RuleTester().run(
           undefined,
           'choice(seq("GET", optional($.__accessor_modifier)), seq("SET", optional($.__accessor_modifier)))',
         ),
-        errors: [{ message: /preserve keyword identity, alternative order and alias visibility/ }],
+        errors: [
+          {
+            message: /preserve keyword identity, alternative order and alias visibility/,
+          },
+        ],
       },
       {
         code: privateKeywordAliasChoiceFixture(
@@ -2835,7 +2909,9 @@ new RuleTester().run("precedence-keyword-alias-inline", precedenceKeywordAliasIn
       name: "transfer the keyword-only ordering before inlining",
       code: keywordAliasGrammar(),
       errors: [
-        { message: /declared rule precedence.*transferring every ordering.*exact alias branch/ },
+        {
+          message: /declared rule precedence.*transferring every ordering.*exact alias branch/,
+        },
       ],
     },
     {
@@ -2859,7 +2935,9 @@ new RuleTester().run("precedence-keyword-alias-inline", precedenceKeywordAliasIn
 
 const keywordAliasFixture = mkdtempSync(join(tmpdir(), "abl-keyword-alias-lint-"));
 try {
-  mkdirSync(join(keywordAliasFixture, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordAliasFixture, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordAliasFixture, "grammar.js"),
     `export default grammar({
@@ -2903,7 +2981,11 @@ try {
       invalid: ["__ordered", "__root_ordered"].map((name) => ({
         ...fixture,
         code: externalAlias(name),
-        errors: [{ message: /declared rule precedence.*named precedence.*grammar.inline/ }],
+        errors: [
+          {
+            message: /declared rule precedence.*named precedence.*grammar.inline/,
+          },
+        ],
       })),
     },
   );
@@ -2984,7 +3066,9 @@ new RuleTester().run("private-precedence-symbol-inline", privatePrecedenceSymbol
         'prec.left("option", $._expression)',
       ),
       errors: [
-        { message: /Preserve the complete precedence chain, associativity and caller fields/ },
+        {
+          message: /Preserve the complete precedence chain, associativity and caller fields/,
+        },
       ],
     },
     {
@@ -3134,7 +3218,9 @@ new RuleTester().run("optional-selector-body-inline", optionalSelectorBodyInline
       name: "all symbol alternatives before a hidden tail",
       code: optionalSelectorBodyGrammar.replace("alias($._kw_display, $.display)", "$._kw_display"),
       errors: [
-        { message: /optional symbol selector.*Preserve selector order, aliases, tail fields/ },
+        {
+          message: /optional symbol selector.*Preserve selector order, aliases, tail fields/,
+        },
       ],
     },
     {
@@ -3259,7 +3345,10 @@ new RuleTester().run("choice-suffix-hoist", choiceSuffixHoist, {
     "export default grammar({inline: ($) => [$.__body], rules: {root: ($) => seq($.start, $.__body), __body: ($) => seq(choice($.a, $.b), optional($.tail))}});",
   ],
   invalid: [
-    { code: choiceSuffixGrammar, errors: [{ message: /moving the complete optional suffix/ }] },
+    {
+      code: choiceSuffixGrammar,
+      errors: [{ message: /moving the complete optional suffix/ }],
+    },
     {
       code: 'export default () => ({root: ($) => seq($.__body, "."), __body: ($) => seq(choice($.a, $.b), optional($.tail))});',
       errors: [{ message: /moving the complete optional suffix/ }],
@@ -3401,7 +3490,11 @@ new RuleTester().run("shared-symbol-alias-choice-inline", sharedSymbolAliasChoic
     {
       name: "event symbols include a signed-number alias",
       code: `export default () => ({ _event_values: ($) => ${mixedSymbolAliasChoice} });`,
-      errors: [{ message: /_event_values mixes direct symbols and named symbol aliases/ }],
+      errors: [
+        {
+          message: /_event_values mixes direct symbols and named symbol aliases/,
+        },
+      ],
     },
     {
       name: "shared mixed choice has multiple field-scoped uses",
@@ -3415,7 +3508,11 @@ new RuleTester().run("shared-symbol-alias-choice-inline", sharedSymbolAliasChoic
     {
       name: "aliases can precede direct alternatives",
       code: `export default grammar({ rules: { _event_values: ($) => choice(alias($.signed, $.number), $.identifier) } });`,
-      errors: [{ message: /_event_values mixes direct symbols and named symbol aliases/ }],
+      errors: [
+        {
+          message: /_event_values mixes direct symbols and named symbol aliases/,
+        },
+      ],
     },
   ],
 });
@@ -3446,7 +3543,11 @@ try {
           cwd: mixedChoiceFixture,
           filename: join(mixedChoiceFixture, "grammar", "common.js"),
           code: `export default () => ({ _comment_only: ($) => ${mixedSymbolAliasChoice} });`,
-          errors: [{ message: /_comment_only mixes direct symbols and named symbol aliases/ }],
+          errors: [
+            {
+              message: /_comment_only mixes direct symbols and named symbol aliases/,
+            },
+          ],
         },
       ],
     },
@@ -3473,7 +3574,11 @@ new RuleTester().run("recursive-item-extraction", recursiveItemExtraction, {
     {
       name: "ASSIGN INPUT field with optional value and WHEN",
       code: `export default () => ({ __items: ($) => ${compoundRecursiveItem} });`,
-      errors: [{ message: /__items repeats a compound field item before optional self-recursion/ }],
+      errors: [
+        {
+          message: /__items repeats a compound field item before optional self-recursion/,
+        },
+      ],
     },
   ],
 });
@@ -3496,12 +3601,20 @@ new RuleTester().run("recursive-choice-item-extraction", recursiveChoiceItemExtr
     {
       name: "CONVERT options retain list precedence after extraction",
       code: `export default () => ({ _options: ($) => prec.right(seq(${recursiveChoiceItem}, optional($._options))) });`,
-      errors: [{ message: /_options repeats a compound choice before optional self-recursion/ }],
+      errors: [
+        {
+          message: /_options repeats a compound choice before optional self-recursion/,
+        },
+      ],
     },
     {
       name: "unwrapped recursive choices are candidates too",
       code: `export default () => ({ _options: ($) => seq(${recursiveChoiceItem}, optional($._options)) });`,
-      errors: [{ message: /_options repeats a compound choice before optional self-recursion/ }],
+      errors: [
+        {
+          message: /_options repeats a compound choice before optional self-recursion/,
+        },
+      ],
     },
   ],
 });
@@ -3581,13 +3694,19 @@ new RuleTester().run("shared-precedence-sequence-inline", sharedPrecedenceSequen
       name: "DISPLAY SPACE shared precedence sequence",
       code: `export default () => ({ _display_space_phrase: ($) => ${displaySpacePhrase} });`,
       errors: [
-        { message: /_display_space_phrase wraps a nonrecursive sequence in static precedence/ },
+        {
+          message: /_display_space_phrase wraps a nonrecursive sequence in static precedence/,
+        },
       ],
     },
     {
       name: "nested static precedence wrappers are retained",
       code: `export default () => ({ _space: ($) => prec("space", ${displaySpacePhrase}) });`,
-      errors: [{ message: /_space wraps a nonrecursive sequence in static precedence/ }],
+      errors: [
+        {
+          message: /_space wraps a nonrecursive sequence in static precedence/,
+        },
+      ],
     },
   ],
 });
@@ -3611,7 +3730,9 @@ new RuleTester().run("shared-closing-delimiter-inline", sharedClosingDelimiterIn
       name: "shared parenthesized value used by FORM and PROMPT-FOR",
       code: `export default () => ({ _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")") });`,
       errors: [
-        { message: /_parenthesized_value appends.*hidden prefix _parenthesized_expression_prefix/ },
+        {
+          message: /_parenthesized_value appends.*hidden prefix _parenthesized_expression_prefix/,
+        },
       ],
     },
     {
@@ -3641,7 +3762,11 @@ new RuleTester().run("shared-keyword-field-inline", sharedKeywordFieldInline, {
     {
       name: "TABLE-HANDLE value shared by signature grammars",
       code: `export default () => ({ _table_handle_value: ($) => ${keywordFieldBody} });`,
-      errors: [{ message: /_table_handle_value is a shared keyword-plus-field helper/ }],
+      errors: [
+        {
+          message: /_table_handle_value is a shared keyword-plus-field helper/,
+        },
+      ],
     },
     {
       name: "abbreviation options remain at the keyword",
@@ -3920,7 +4045,11 @@ new RuleTester().run("shared-sequence across files", sharedSequence, {
       name: "original EXPORT phrase duplicates the same public DELIMITER node",
       filename: "grammar/statements/export.js",
       code: delimiterRule("export"),
-      errors: [{ message: /__import_delimiter_phrase in import\.js.*alias to delimiter_phrase/ }],
+      errors: [
+        {
+          message: /__import_delimiter_phrase in import\.js.*alias to delimiter_phrase/,
+        },
+      ],
     },
   ],
 });
@@ -4307,7 +4436,9 @@ new RuleTester().run("single-use-sequence", singleUseSequence, {
         __var_variable_tail: ($) => seq(",", $.__var_variable_suffix),
       });`,
       errors: [
-        { message: /__var_variable_tail has one unaliased local use in __var_variable_suffix/ },
+        {
+          message: /__var_variable_tail has one unaliased local use in __var_variable_suffix/,
+        },
       ],
     },
     {
@@ -4396,7 +4527,11 @@ new RuleTester().run("sequence-subset PUT assignment regression", sequenceSubset
     {
       filename: "grammar/statements/put-assign.js",
       code: `export default () => ({ __put_assign_prefix: ($) => seq(field("type", $.__put_assign_type), $.__put_assign_args, "=", field("value", $._expression)) });`,
-      errors: [{ message: /_equals_value matches 2 consecutive elements in __put_assign_prefix/ }],
+      errors: [
+        {
+          message: /_equals_value matches 2 consecutive elements in __put_assign_prefix/,
+        },
+      ],
     },
   ],
 });
@@ -4448,7 +4583,11 @@ new RuleTester().run("recursive-tail-reuse", recursiveTailReuse, {
         __event_parameter_list: ($) => seq($.__event_parameter, optional($.__event_parameter_tail)),
         __event_parameter_tail: ($) => seq(",", $.__event_parameter, optional($.__event_parameter_tail)),
       });`,
-      errors: [{ message: /__event_parameter_tail repeats the body of __event_parameter_list/ }],
+      errors: [
+        {
+          message: /__event_parameter_tail repeats the body of __event_parameter_list/,
+        },
+      ],
     },
     {
       name: "optional comma with preserved fields, tail declared first",
@@ -4497,25 +4636,41 @@ new RuleTester().run("keyword-reuse", keywordReuse, {
     {
       name: "VIEW/HIDE keyword reuse",
       code: `export default ({kw}) => ({ _in_keyword: ($) => kw("IN"), root: ($) => seq(kw("IN"), kw("FRAME", {offset:4}), field("frame", $.name)) });`,
-      errors: [{ message: /root repeats the exact "IN" keyword call from _in_keyword/ }],
+      errors: [
+        {
+          message: /root repeats the exact "IN" keyword call from _in_keyword/,
+        },
+      ],
     },
     {
       name: "provider last retains all occurrences",
       code: `export default ({kw}) => ({ root: ($) => choice(seq(kw("IN"), $.a), seq(kw("IN"), $.b)), _in_keyword: ($) => kw("IN") });`,
       errors: [
-        { message: /root repeats the exact "IN" keyword call from _in_keyword/ },
-        { message: /root repeats the exact "IN" keyword call from _in_keyword/ },
+        {
+          message: /root repeats the exact "IN" keyword call from _in_keyword/,
+        },
+        {
+          message: /root repeats the exact "IN" keyword call from _in_keyword/,
+        },
       ],
     },
     {
       name: "matching keyword options",
       code: `export default ({kw}) => ({ _keyword: ($) => kw("FIELDS", {alias:"FIELD", offset:5}), root: ($) => seq(kw("FIELDS", {alias:"FIELD", offset:5}), $.value) });`,
-      errors: [{ message: /root repeats the exact "FIELDS" keyword call from _keyword/ }],
+      errors: [
+        {
+          message: /root repeats the exact "FIELDS" keyword call from _keyword/,
+        },
+      ],
     },
     {
       name: "direct token alias retained at callsite",
       code: `export default ({kw}) => ({ _keyword: ($) => kw("NO-LOCK"), root: ($) => seq($.name, alias(kw("NO-LOCK"), $.no_lock)) });`,
-      errors: [{ message: /root repeats the exact "NO-LOCK" keyword call from _keyword/ }],
+      errors: [
+        {
+          message: /root repeats the exact "NO-LOCK" keyword call from _keyword/,
+        },
+      ],
     },
   ],
 });
@@ -4534,7 +4689,9 @@ new RuleTester().run("keyword-reuse cross-file VIEW/HIDE regression", keywordReu
       filename: "grammar/phrases/widget.js",
       code: `export default ({kw}) => ({ __view_hide_widget_ref: ($) => seq(field("field", $._identifier_or_array_access), kw("IN"), kw("FRAME", {offset:4}), field("frame", $.__widget_name)) });`,
       errors: [
-        { message: /__view_hide_widget_ref repeats the exact "IN" keyword call from _in_keyword/ },
+        {
+          message: /__view_hide_widget_ref repeats the exact "IN" keyword call from _in_keyword/,
+        },
       ],
     },
   ],
@@ -4572,7 +4729,11 @@ new RuleTester().run("shared-choice", sharedChoice, {
     {
       name: "two-branch choices with fields outside the choice",
       code: `export default () => ({ first: ($) => field("right", choice($.array_initializer, $._expression)), second: ($) => seq("=", choice($.array_initializer, $._expression)) });`,
-      errors: [{ message: /repeats 2 alternatives.*extract a shared hidden choice helper/ }],
+      errors: [
+        {
+          message: /repeats 2 alternatives.*extract a shared hidden choice helper/,
+        },
+      ],
     },
     {
       name: "reuse hidden provider",
@@ -4605,12 +4766,20 @@ new RuleTester().run("shared-choice assignment value regression", sharedChoice, 
     {
       filename: "grammar/phrases/assign.js",
       code: `export default () => ({ __assign_pair_tail: ($) => seq("=", field("right", choice($.array_initializer, $._expression)), optional($._when_phrase)) });`,
-      errors: [{ message: /repeats 2 alternatives from __assignment_statement_body/ }],
+      errors: [
+        {
+          message: /repeats 2 alternatives from __assignment_statement_body/,
+        },
+      ],
     },
     {
       filename: "grammar/statements/var.js",
       code: `export default () => ({ __var_initializer: ($) => seq("=", choice($.array_initializer, $._expression)) });`,
-      errors: [{ message: /repeats 2 alternatives from __assignment_statement_body/ }],
+      errors: [
+        {
+          message: /repeats 2 alternatives from __assignment_statement_body/,
+        },
+      ],
     },
   ],
 });
@@ -4646,12 +4815,20 @@ new RuleTester().run("forwarding-rule", forwardingRule, {
     {
       name: "macro statement forwarding rule used by other grammar modules",
       code: `export default grammar({ externals: ($) => [$._macro_statement_token], rules: { __macro_statement: ($) => $._macro_statement_token } });`,
-      errors: [{ message: /__macro_statement only forwards to _macro_statement_token/ }],
+      errors: [
+        {
+          message: /__macro_statement only forwards to _macro_statement_token/,
+        },
+      ],
     },
     {
       name: "alias stays at the callsite",
       code: `export default () => ({ __macro_statement: ($) => $._macro_statement_token, root: ($) => alias($.__macro_statement, $.constant) });`,
-      errors: [{ message: /__macro_statement only forwards to _macro_statement_token/ }],
+      errors: [
+        {
+          message: /__macro_statement only forwards to _macro_statement_token/,
+        },
+      ],
     },
     {
       name: "forwarding expression helper preserves each field at its callsite",
@@ -4705,7 +4882,11 @@ new RuleTester().run("single-use-choice", singleUseChoice, {
         __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
         __enum_member_value: ($) => choice($.number_literal, seq($.identifier, optional($.__enum_member_value_tail)), $.null_literal),
       });`,
-      errors: [{ message: /__enum_member_value has one unaliased local use in __enum_member/ }],
+      errors: [
+        {
+          message: /__enum_member_value has one unaliased local use in __enum_member/,
+        },
+      ],
     },
     {
       name: "fields outside and inside the choice are preserved",
@@ -4738,7 +4919,11 @@ new RuleTester().run("single-use-shared-choice-inline", singleUseSharedChoiceInl
     {
       name: "one local use suggests metadata inlining",
       code: `export default () => ({ _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")), _initial_phrase: ($) => field("initial", $._initial_value) });`,
-      errors: [{ message: /_initial_value has one unaliased local use in _initial_phrase/ }],
+      errors: [
+        {
+          message: /_initial_value has one unaliased local use in _initial_phrase/,
+        },
+      ],
     },
   ],
 });
@@ -4810,13 +4995,19 @@ new RuleTester().run("shared-keyword-alias-choice-inline", sharedKeywordAliasCho
       name: "shared serialization choice may have callers in other files",
       code: `export default () => ({ _serialization_modifier: ($) => ${serializationChoice} });`,
       errors: [
-        { message: /_serialization_modifier chooses static keywords aliased as serializable/ },
+        {
+          message: /_serialization_modifier chooses static keywords aliased as serializable/,
+        },
       ],
     },
     {
       name: "keyword abbreviation options are retained",
       code: `export default () => ({ _direction: ($) => choice(alias(kw("ASCENDING", {offset: 3}), $.direction), alias(kw("DESCENDING", {offset: 4}), $.direction)) });`,
-      errors: [{ message: /_direction chooses static keywords aliased as direction/ }],
+      errors: [
+        {
+          message: /_direction chooses static keywords aliased as direction/,
+        },
+      ],
     },
   ],
 });
@@ -4869,7 +5060,9 @@ new RuleTester().run("single-use-precedence", singleUsePrecedence, {
         __wait_for_widget_list: ($) => prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))),
       });`,
       errors: [
-        { message: /__wait_for_widget_list has one unaliased local use in __wait_for_of_phrase/ },
+        {
+          message: /__wait_for_widget_list has one unaliased local use in __wait_for_of_phrase/,
+        },
       ],
     },
     {
@@ -5035,7 +5228,11 @@ new RuleTester().run("list-head-extraction", listHeadExtraction, {
         _go_on_phrase: ($) => seq(kw("GO-ON"), "(", choice($.identifier, $.string_literal), optional($._go_on_key_tail), ")"),
         _go_on_key_tail: ($) => seq(optional(","), choice($.identifier, $.string_literal), optional($._go_on_key_tail)),
       });`,
-      errors: [{ message: /item and optional continuation repeated by _go_on_key_tail/ }],
+      errors: [
+        {
+          message: /item and optional continuation repeated by _go_on_key_tail/,
+        },
+      ],
     },
     {
       name: "required comma is retained",
@@ -6396,7 +6593,9 @@ new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
 const itemAlias = "alias($._menu_item, $.menu_item)";
 const itemAliasRules = (body, definitions = "") =>
   `export default () => ({ items: ($) => ${body}, ${definitions} });`;
-const itemAliasError = { message: /alias of _menu_item as menu_item duplicates items/ };
+const itemAliasError = {
+  message: /alias of _menu_item as menu_item duplicates items/,
+};
 
 resetSharingCandidates();
 new RuleTester().run("shared-item-alias", sharedItemAlias, {
@@ -6452,7 +6651,10 @@ new RuleTester().run("shared-item-alias", sharedItemAlias, {
       // oxlint-disable-next-line rule-to-test/shared-item-alias
       ${itemAlias}, $.other)`),
     },
-    { filename: "grammar/statements/submenu.js", code: itemAliasRules(itemAlias) },
+    {
+      filename: "grammar/statements/submenu.js",
+      code: itemAliasRules(itemAlias),
+    },
   ],
   invalid: [],
 });
@@ -6512,11 +6714,18 @@ const recordBody =
   'seq(field("record", $._identifier_or_qualified_name), optional($._except_fields), optional($.frame_phrase))';
 const fieldBodyRules = (name, body = recordBody) =>
   `export default () => ({ ${name}: ($) => ${body} });`;
-const fieldBodyError = { message: /field-led body duplicates __set_record_body/ };
+const fieldBodyError = {
+  message: /field-led body duplicates __set_record_body/,
+};
 
 resetSharingCandidates();
 new RuleTester().run("shared-field-body", sharedFieldBody, {
-  valid: [{ filename: "grammar/statements/set.js", code: fieldBodyRules("__set_record_body") }],
+  valid: [
+    {
+      filename: "grammar/statements/set.js",
+      code: fieldBodyRules("__set_record_body"),
+    },
+  ],
   invalid: [
     {
       name: "SET and UPDATE record body regression",
@@ -6590,7 +6799,10 @@ for (const suppressed of [
   new RuleTester().run("shared-field-body", sharedFieldBody, {
     valid: [
       { filename: "grammar/first.js", code: suppressed },
-      { filename: "grammar/second.js", code: fieldBodyRules("__update_record_body") },
+      {
+        filename: "grammar/second.js",
+        code: fieldBodyRules("__update_record_body"),
+      },
     ],
     invalid: [],
   });
@@ -6611,7 +6823,10 @@ new RuleTester().run("shared-field-body", sharedFieldBody, {
 resetSharingCandidates();
 new RuleTester().run("shared-field-body", sharedFieldBody, {
   valid: [
-    { filename: "grammar/core/common.js", code: fieldBodyRules("_set_update_record_body") },
+    {
+      filename: "grammar/core/common.js",
+      code: fieldBodyRules("_set_update_record_body"),
+    },
     {
       filename: "grammar/statements/set.js",
       code: fieldBodyRules("__set_record_body", "$._set_update_record_body"),
@@ -6896,7 +7111,9 @@ const signatureChunk =
   'field("name", $._routine_name), optional(kw("RETURNS", {offset: 5})), $.__type';
 const fieldChunkRules = (first, second) =>
   `export default ({kw}) => ({first: ($) => ${first}, second: ($) => ${second}});`;
-const fieldChunkError = { message: /three field-led elements repeat a chunk in first/ };
+const fieldChunkError = {
+  message: /three field-led elements repeat a chunk in first/,
+};
 
 new RuleTester().run("shared-field-chunk", sharedFieldChunk, {
   valid: [
@@ -6988,7 +7205,9 @@ export default ({kw}) => ({
   root: ($) => seq("(", choice(kw("ROWID"), seq(${item}, optional($.__tail))), ")"),
   __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
 });`;
-const choiceHeadError = { message: /choice branch repeats the item and continuation in __tail/ };
+const choiceHeadError = {
+  message: /choice branch repeats the item and continuation in __tail/,
+};
 
 new RuleTester().run("choice-list-head-extraction", choiceListHeadExtraction, {
   valid: [
@@ -7048,7 +7267,11 @@ new RuleTester().run("choice-list-head-extraction", choiceListHeadExtraction, {
     ),
   ],
   invalid: [
-    { name: "DATA-SOURCE KEYS regression", code: choiceHeadGrammar(), errors: [choiceHeadError] },
+    {
+      name: "DATA-SOURCE KEYS regression",
+      code: choiceHeadGrammar(),
+      errors: [choiceHeadError],
+    },
     {
       name: "named aliases are preserved",
       code: choiceHeadGrammar("alias($.item, $.value)"),
@@ -7077,7 +7300,9 @@ export default () => ({
   root: ($) => seq("ITEMS", field("items", seq(${item}, optional($.__tail)))),
   __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
 });`;
-const fieldHeadError = { message: /field contains the item and continuation repeated by __tail/ };
+const fieldHeadError = {
+  message: /field contains the item and continuation repeated by __tail/,
+};
 
 new RuleTester().run("field-list-head-extraction", fieldListHeadExtraction, {
   valid: [
@@ -7135,7 +7360,11 @@ new RuleTester().run("field-list-head-extraction", fieldListHeadExtraction, {
     ),
   ],
   invalid: [
-    { name: "COMBO-BOX LIST-ITEMS regression", code: fieldHeadGrammar(), errors: [fieldHeadError] },
+    {
+      name: "COMBO-BOX LIST-ITEMS regression",
+      code: fieldHeadGrammar(),
+      errors: [fieldHeadError],
+    },
     {
       name: "inner fields stay inside the head",
       code: fieldHeadGrammar('field("value", $.value)'),
@@ -7343,7 +7572,11 @@ new RuleTester().run("ordered-optional-chain", orderedOptionalChain, {
     ),
   ],
   invalid: [
-    { name: "SCROLL regression", code: orderedChainGrammar(), errors: [orderedChainError] },
+    {
+      name: "SCROLL regression",
+      code: orderedChainGrammar(),
+      errors: [orderedChainError],
+    },
     {
       name: "symbol elements",
       code: orderedChainGrammar("$.a", "$.b", "$.c"),
@@ -7517,7 +7750,11 @@ new RuleTester().run("closing-delimiter-wrapper", closingDelimiterWrapper, {
       code: closingWrapperGrammar('"["', '"]"'),
       errors: [closingWrapperError],
     },
-    { name: "braces", code: closingWrapperGrammar('"{"', '"}"'), errors: [closingWrapperError] },
+    {
+      name: "braces",
+      code: closingWrapperGrammar('"{"', '"}"'),
+      errors: [closingWrapperError],
+    },
     {
       name: "caller optionality preserved",
       code: closingWrapperGrammar().replace(
@@ -7552,9 +7789,17 @@ new RuleTester().run("closing-delimiter-wrapper", closingDelimiterWrapper, {
 
 const commaFieldSeed = `export default () => ({first: ($) => seq($.position, optional(seq(",", field("length", $._expression))))});`;
 const commaFieldTarget = `export default () => ({second: ($) => seq(",", field("length", $._expression), optional($.type))});`;
-const commaFieldError = { message: /comma and length field repeat a fragment in first/ };
-const commaSeedCase = { filename: "grammar/core/common.js", code: commaFieldSeed };
-const commaTargetCase = (code) => ({ filename: "grammar/statements/overlay.js", code });
+const commaFieldError = {
+  message: /comma and length field repeat a fragment in first/,
+};
+const commaSeedCase = {
+  filename: "grammar/core/common.js",
+  code: commaFieldSeed,
+};
+const commaTargetCase = (code) => ({
+  filename: "grammar/statements/overlay.js",
+  code,
+});
 for (const code of [
   commaFieldTarget.replace('field("length"', 'field("size"'),
   commaFieldTarget.replace("$._expression", "$.number_literal"),
@@ -7641,7 +7886,9 @@ resetSharingCandidates();
 
 const continuationGrammar = (separator = 'optional(",")') =>
   `export default () => ({_tail: ($) => seq(${separator}, $.__head), __head: ($) => seq(choice($.identifier, $.string_literal), optional($._tail))});`;
-const continuationError = { message: /_tail only adds a separator before recursing into __head/ };
+const continuationError = {
+  message: /_tail only adds a separator before recursing into __head/,
+};
 new RuleTester().run("recursive-continuation-inline", recursiveContinuationInline, {
   valid: [
     continuationGrammar().replace('seq(optional(","), $.__head)', 'seq(optional(","), $.other)'),
@@ -7669,14 +7916,24 @@ new RuleTester().run("recursive-continuation-inline", recursiveContinuationInlin
     ),
   ],
   invalid: [
-    { name: "GO-ON optional separator", code: continuationGrammar(), errors: [continuationError] },
-    { name: "required separator", code: continuationGrammar('","'), errors: [continuationError] },
+    {
+      name: "GO-ON optional separator",
+      code: continuationGrammar(),
+      errors: [continuationError],
+    },
+    {
+      name: "required separator",
+      code: continuationGrammar('","'),
+      errors: [continuationError],
+    },
   ],
 });
 
 const fieldChoiceGrammar = (use = 'optional(field("size", $._sizes))') =>
   `export default () => ({root: ($) => seq("EXTENT", ${use}), _sizes: ($) => choice($.number_literal, $.identifier, $.null_literal)});`;
-const fieldWrappedChoiceError = { message: /_sizes has one local use inside the size field/ };
+const fieldWrappedChoiceError = {
+  message: /_sizes has one local use inside the size field/,
+};
 new RuleTester().run("single-use-field-choice", singleUseFieldChoice, {
   valid: [
     fieldChoiceGrammar().replaceAll("_sizes", "public_sizes"),
@@ -7795,7 +8052,11 @@ new RuleTester().run("shared-comma-continuation", sharedCommaContinuation, {
     {
       filename: "grammar/phrases/on-stop.js",
       code: continuationTarget,
-      errors: [{ message: /comma and _action continuation repeat a fragment in first/ }],
+      errors: [
+        {
+          message: /comma and _action continuation repeat a fragment in first/,
+        },
+      ],
     },
   ],
 });
@@ -7858,7 +8119,9 @@ new RuleTester().run("optional-repetition-inline", optionalRepetitionInline, {
       name: "FRAME display-value options",
       code: optionalRepeatGrammar,
       errors: [
-        { message: /__options is a non-empty repetition used only inside 2 local optional calls/ },
+        {
+          message: /__options is a non-empty repetition used only inside 2 local optional calls/,
+        },
       ],
     },
   ],
@@ -7948,7 +8211,9 @@ new RuleTester().run("shared-declaration-tail", sharedDeclarationTail, {
       filename: "grammar/statements/interface.js",
       code: declarationTarget,
       errors: [
-        { message: /keyword, _event_body and terminator clause repeat a fragment in first/ },
+        {
+          message: /keyword, _event_body and terminator clause repeat a fragment in first/,
+        },
       ],
     },
   ],
@@ -8227,7 +8492,11 @@ new RuleTester().run("redundant-inherited-field", redundantInheritedField, {
   invalid: [
     {
       code: inheritedFieldGrammar,
-      errors: [{ message: /Every local use of __item already applies the field field/ }],
+      errors: [
+        {
+          message: /Every local use of __item already applies the field field/,
+        },
+      ],
     },
     {
       code: inheritedFieldGrammar.replace(
@@ -8324,7 +8593,10 @@ new RuleTester().run("choice-product-extraction", choiceProductExtraction, {
     `const ordinary = ($) => ${productSequence};`,
   ],
   invalid: [
-    { code: productGrammar, errors: [{ message: /2 independent choices form 6 combinations/ }] },
+    {
+      code: productGrammar,
+      errors: [{ message: /2 independent choices form 6 combinations/ }],
+    },
     {
       code: productGrammar.replace("$._to_keyword", 'choice(kw("TO"), kw("FROM"))'),
       errors: [{ message: /3 independent choices form 12 combinations/ }],
@@ -8507,9 +8779,18 @@ resetSharingCandidates();
 resetSharingCandidates();
 new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
   valid: [
-    { filename: "grammar/a.js", code: "export default () => ({a: ($) => $.__x});" },
-    { filename: "grammar/b.js", code: "export default () => ({b: ($) => $.__x});" },
-    { filename: "grammar/use.js", code: "export default () => ({use: ($) => alias($.a, $.b)});" },
+    {
+      filename: "grammar/a.js",
+      code: "export default () => ({a: ($) => $.__x});",
+    },
+    {
+      filename: "grammar/b.js",
+      code: "export default () => ({b: ($) => $.__x});",
+    },
+    {
+      filename: "grammar/use.js",
+      code: "export default () => ({use: ($) => alias($.a, $.b)});",
+    },
   ],
   invalid: [],
 });
@@ -8572,7 +8853,10 @@ new RuleTester().run("left-recursive-list", leftRecursiveList, {
     'export default () => ({__records: ($) => seq(field("first", $.record), repeat(seq(",", field("next", $.record))))});',
   ],
   invalid: [
-    { code: leftRecursiveListGrammar, errors: [{ message: /hidden left-recursive sequence/ }] },
+    {
+      code: leftRecursiveListGrammar,
+      errors: [{ message: /hidden left-recursive sequence/ }],
+    },
     {
       code: leftRecursiveListGrammar.replaceAll("$.__record", 'field("record", $.record)'),
       errors: [{ message: /one-item minimum/ }],
@@ -8679,7 +8963,11 @@ new RuleTester().run("inline-keyword-owner across files", inlineKeywordOwner, {
     {
       filename: "grammar/statements/procedure.js",
       code: `export default () => ({ second: ($) => seq(kw("PROCEDURE", {offset: 4}), $.name) });`,
-      errors: [{ message: /exact "PROCEDURE" keyword call repeats first in delete\.js/ }],
+      errors: [
+        {
+          message: /exact "PROCEDURE" keyword call repeats first in delete\.js/,
+        },
+      ],
     },
   ],
 });
@@ -9167,7 +9455,9 @@ new RuleTester().run(
         name: "original shared color/font option retains expression precedence and all five fields",
         code: precedenceValuedChoiceFixture(),
         errors: [
-          { message: /_color_font_option expands a precedence-wrapped choice of keyword fields/ },
+          {
+            message: /_color_font_option expands a precedence-wrapped choice of keyword fields/,
+          },
         ],
       },
       {
@@ -9298,7 +9588,11 @@ new RuleTester().run("inline-literal-choice-boundary", inlineLiteralChoiceBounda
       code: literalBoundaryFixture(
         "choice($.string_literal, $.number_literal, alias($._signed_number_literal, $.number_literal))",
       ),
-      errors: [{ message: /Preserve literal aliases, branch order and caller fields/ }],
+      errors: [
+        {
+          message: /Preserve literal aliases, branch order and caller fields/,
+        },
+      ],
     },
   ],
 });
@@ -9391,7 +9685,10 @@ new RuleTester().run("inline-valued-choice-boundary", inlineValuedChoiceBoundary
       code: valuedBoundaryFixture(originalFormatFieldOptions, "_format_field_option"),
       errors: [{ message: /_format_field_option mixes valued keyword clauses/ }],
     },
-    { code: valuedBoundaryFixture(), errors: [{ message: /mixes valued keyword clauses/ }] },
+    {
+      code: valuedBoundaryFixture(),
+      errors: [{ message: /mixes valued keyword clauses/ }],
+    },
     {
       code: valuedBoundaryFixture(
         valuedInlineChoice.replace('kw("COLUMN-LABEL")', 'kw("COLUMN-LABEL", { offset: 6 })'),
@@ -9449,7 +9746,11 @@ new RuleTester().run("inline-dispatcher-boundary", inlineDispatcherBoundary, {
   invalid: [
     {
       code: inlineBoundaryFixture(broadInlineChoice),
-      errors: [{ message: /_dispatch expands a broad symbol choice through grammar.inline/ }],
+      errors: [
+        {
+          message: /_dispatch expands a broad symbol choice through grammar.inline/,
+        },
+      ],
     },
   ],
 });
@@ -9466,7 +9767,11 @@ try {
         cwd: boundaryFixture,
         filename: join(boundaryFixture, "grammar", "expressions.js"),
         code: `export default () => ({ _dispatch: ($) => ${broadInlineChoice} });`,
-        errors: [{ message: /_dispatch expands a broad symbol choice through grammar.inline/ }],
+        errors: [
+          {
+            message: /_dispatch expands a broad symbol choice through grammar.inline/,
+          },
+        ],
       },
     ],
   });
@@ -9841,7 +10146,9 @@ try {
       ),
     ],
   });
-  mkdirSync(join(contextualInfixDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(contextualInfixDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(contextualInfixDirectory, "grammar", "precedences", "binary.js"),
     "export default ($) => [[$.__additive_operator, $.__unary_sign]];",
@@ -9931,7 +10238,9 @@ new RuleTester().run("inline-keyword-name-boundary", inlineKeywordNameBoundary, 
       name: "original TABLE-HANDLE keyword and identifier field",
       code: keywordNameBoundaryFixture(),
       errors: [
-        { message: /_table_handle_value expands a keyword followed by an identifier field/ },
+        {
+          message: /_table_handle_value expands a keyword followed by an identifier field/,
+        },
       ],
     },
     {
@@ -9982,7 +10291,9 @@ try {
           filename: commonPath,
           code: originalModule,
           errors: [
-            { message: /_table_handle_value expands a keyword followed by an identifier field/ },
+            {
+              message: /_table_handle_value expands a keyword followed by an identifier field/,
+            },
           ],
         },
       ],
@@ -9996,7 +10307,13 @@ try {
     "inline-keyword-name-boundary cross-file metadata",
     inlineKeywordNameBoundary,
     {
-      valid: [{ cwd: keywordNameBoundaryDirectory, filename: commonPath, code: originalModule }],
+      valid: [
+        {
+          cwd: keywordNameBoundaryDirectory,
+          filename: commonPath,
+          code: originalModule,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10004,7 +10321,9 @@ try {
     join(keywordNameBoundaryDirectory, "grammar.js"),
     "export default grammar({ inline: ($) => [$._table_handle_value], rules: {} });",
   );
-  mkdirSync(join(keywordNameBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordNameBoundaryDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordNameBoundaryDirectory, "grammar", "precedences", "names.js"),
     "export default ($) => [[$.other, $._table_handle_value]];",
@@ -10013,7 +10332,13 @@ try {
     "inline-keyword-name-boundary precedence module",
     inlineKeywordNameBoundary,
     {
-      valid: [{ cwd: keywordNameBoundaryDirectory, filename: commonPath, code: originalModule }],
+      valid: [
+        {
+          cwd: keywordNameBoundaryDirectory,
+          filename: commonPath,
+          code: originalModule,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10150,10 +10475,19 @@ const modifierAliasPair = (
     `export default grammar({ ${metadata} rules: {} });`,
   );
   const filename = (file) => join(modifierAliasDirectory, "grammar", "statements", file);
-  const candidate = { name, cwd: modifierAliasDirectory, filename: filename("variable.js"), code };
+  const candidate = {
+    name,
+    cwd: modifierAliasDirectory,
+    filename: filename("variable.js"),
+    code,
+  };
   new RuleTester().run("shared-modifier-alias-sequence", sharedModifierAliasSequence, {
     valid: [
-      { cwd: modifierAliasDirectory, filename: filename("stream.js"), code: seed },
+      {
+        cwd: modifierAliasDirectory,
+        filename: filename("stream.js"),
+        code: seed,
+      },
       ...(diagnostic ? [] : [candidate]),
     ],
     invalid: diagnostic
@@ -10378,7 +10712,9 @@ new RuleTester().run("inline-mixed-symbol-choice-boundary", inlineMixedSymbolCho
       `,
       ),
       errors: [
-        { message: /_type_or_string expands a compact choice of hidden and public symbols/ },
+        {
+          message: /_type_or_string expands a compact choice of hidden and public symbols/,
+        },
       ],
     },
     {
@@ -10438,7 +10774,13 @@ try {
     "inline-mixed-symbol-choice-boundary cross-file conflicts",
     inlineMixedSymbolChoiceBoundary,
     {
-      valid: [{ cwd: mixedSelectorDirectory, filename: modulePath, code: originalModule }],
+      valid: [
+        {
+          cwd: mixedSelectorDirectory,
+          filename: modulePath,
+          code: originalModule,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10446,7 +10788,9 @@ try {
     join(mixedSelectorDirectory, "grammar.js"),
     "export default grammar({ inline: ($) => [$._type_or_string], rules: {} });",
   );
-  mkdirSync(join(mixedSelectorDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(mixedSelectorDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(mixedSelectorDirectory, "grammar", "precedences", "types.js"),
     "export default ($) => [[$.other, $._type_or_string]];",
@@ -10455,7 +10799,13 @@ try {
     "inline-mixed-symbol-choice-boundary cross-file precedence",
     inlineMixedSymbolChoiceBoundary,
     {
-      valid: [{ cwd: mixedSelectorDirectory, filename: modulePath, code: originalModule }],
+      valid: [
+        {
+          cwd: mixedSelectorDirectory,
+          filename: modulePath,
+          code: originalModule,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10547,7 +10897,9 @@ new RuleTester().run("inline-keyword-alias-choice-boundary", inlineKeywordAliasC
         'other: ($) => prec.right(field("modifier", optional($.__flag_family))),',
       ),
       errors: [
-        { message: /Preserve keyword options, alias targets, alternative order and caller fields/ },
+        {
+          message: /Preserve keyword options, alias targets, alternative order and caller fields/,
+        },
       ],
     },
     {
@@ -10555,7 +10907,11 @@ new RuleTester().run("inline-keyword-alias-choice-boundary", inlineKeywordAliasC
       code: `const note = "conflicts: ($) => [[$._flag_family]]";
         // precedences: ($) => [[$._flag_family]]
         ${keywordAliasFamilyFixture()}`,
-      errors: [{ message: /complete trees, error recovery and required-field metadata/ }],
+      errors: [
+        {
+          message: /complete trees, error recovery and required-field metadata/,
+        },
+      ],
     },
   ],
 });
@@ -10596,7 +10952,13 @@ try {
     "inline-keyword-alias-choice-boundary cross-file conflicts",
     inlineKeywordAliasChoiceBoundary,
     {
-      valid: [{ cwd: keywordAliasBoundaryDirectory, filename: modulePath, code: module }],
+      valid: [
+        {
+          cwd: keywordAliasBoundaryDirectory,
+          filename: modulePath,
+          code: module,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10604,7 +10966,9 @@ try {
     join(keywordAliasBoundaryDirectory, "grammar.js"),
     "export default grammar({ inline: ($) => [$._flag_family], rules: {} });",
   );
-  mkdirSync(join(keywordAliasBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordAliasBoundaryDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordAliasBoundaryDirectory, "grammar", "precedences", "flags.js"),
     "export default ($) => [[$.other, $._flag_family]];",
@@ -10613,7 +10977,13 @@ try {
     "inline-keyword-alias-choice-boundary cross-file precedence",
     inlineKeywordAliasChoiceBoundary,
     {
-      valid: [{ cwd: keywordAliasBoundaryDirectory, filename: modulePath, code: module }],
+      valid: [
+        {
+          cwd: keywordAliasBoundaryDirectory,
+          filename: modulePath,
+          code: module,
+        },
+      ],
       invalid: [],
     },
   );
@@ -10699,7 +11069,11 @@ new RuleTester().run("contextual-scalar-name-boundary", contextualScalarNameBoun
     {
       name: "original shared identifier/string selector",
       code: scalarNameBoundaryFixture(),
-      errors: [{ message: /_identifier_or_string_literal expands identifiers and literal nodes/ }],
+      errors: [
+        {
+          message: /_identifier_or_string_literal expands identifiers and literal nodes/,
+        },
+      ],
     },
     {
       name: "scalar selector with several literal alternatives",
@@ -10719,7 +11093,9 @@ new RuleTester().run("contextual-scalar-name-boundary", contextualScalarNameBoun
         "_value: ($) => $._identifier_or_string_literal,",
       ).replace("[$._identifier_or_string_literal]", "[$._identifier_or_string_literal, $._value]"),
       errors: [
-        { message: /try a non-inlined hidden forwarding helper at selected name\/value fields/ },
+        {
+          message: /try a non-inlined hidden forwarding helper at selected name\/value fields/,
+        },
       ],
     },
     {
@@ -10732,7 +11108,9 @@ new RuleTester().run("contextual-scalar-name-boundary", contextualScalarNameBoun
         "value: ($) => $._identifier_or_string_literal,",
       ),
       errors: [
-        { message: /Preserve token identities, alternative order, field scopes and metadata/ },
+        {
+          message: /Preserve token identities, alternative order, field scopes and metadata/,
+        },
       ],
     },
     {
@@ -10904,7 +11282,9 @@ try {
       invalid: [],
     },
   );
-  mkdirSync(join(keywordChoiceBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordChoiceBoundaryDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordChoiceBoundaryDirectory, "grammar.js"),
     "export default grammar({ inline: ($) => [$._selector], rules: {} });",
@@ -11004,12 +11384,20 @@ new RuleTester().run("contextual-keyword-prefix-boundary", contextualKeywordPref
     {
       name: "original shared COLOR prefix at both phrase callers",
       code: beforeColorKeywordBoundary,
-      errors: [{ message: /_kw_color expands before the phrase-valued "color" field/ }],
+      errors: [
+        {
+          message: /_kw_color expands before the phrase-valued "color" field/,
+        },
+      ],
     },
     {
       name: "another inline keyword and phrase field",
       code: keywordPrefixBoundaryFixture(),
-      errors: [{ message: /keeping the exact keyword expansion before general expressions/ }],
+      errors: [
+        {
+          message: /keeping the exact keyword expansion before general expressions/,
+        },
+      ],
     },
     {
       name: "phrase and bare flag alternatives preserve scalar contexts",
@@ -11040,7 +11428,9 @@ try {
   const filename = join(keywordPrefixBoundaryDirectory, "grammar", "statements", "style.js"),
     code =
       'export default ({kw}) => ({ clause: ($) => seq($._kw_style, field("style", $.style_phrase)) });';
-  mkdirSync(join(keywordPrefixBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordPrefixBoundaryDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordPrefixBoundaryDirectory, "grammar.js"),
     'import {inline} from "./grammar/keywords.js"; export default grammar({inline, rules: {}});',
@@ -11234,7 +11624,11 @@ try {
     leadingKeywordFieldBoundary,
     {
       valid: [
-        { cwd: keywordFieldBoundaryDirectory, filename, code: beforeAvailableKeywordBoundary },
+        {
+          cwd: keywordFieldBoundaryDirectory,
+          filename,
+          code: beforeAvailableKeywordBoundary,
+        },
       ],
       invalid: [],
     },
@@ -11243,7 +11637,9 @@ try {
     join(keywordFieldBoundaryDirectory, "grammar.js"),
     "export default grammar({ rules: {} });",
   );
-  mkdirSync(join(keywordFieldBoundaryDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordFieldBoundaryDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordFieldBoundaryDirectory, "grammar", "precedences", "query.js"),
     "export default ($) => [[$.available_expression, $.value]];",
@@ -11253,7 +11649,11 @@ try {
     leadingKeywordFieldBoundary,
     {
       valid: [
-        { cwd: keywordFieldBoundaryDirectory, filename, code: beforeAvailableKeywordBoundary },
+        {
+          cwd: keywordFieldBoundaryDirectory,
+          filename,
+          code: beforeAvailableKeywordBoundary,
+        },
       ],
       invalid: [],
     },
@@ -11348,7 +11748,11 @@ new RuleTester().run("contextual-keyword-alias-tail-inline", contextualKeywordAl
     {
       name: "standalone assignment marker choice before the proven expansion",
       code: beforeAssignmentMarkerContext,
-      errors: [{ message: /_bare_marker_identifier joins another value in the right field/ }],
+      errors: [
+        {
+          message: /_bare_marker_identifier joins another value in the right field/,
+        },
+      ],
     },
     {
       name: "another keyword family retains spelling options and its identifier alias",
@@ -11381,7 +11785,9 @@ const keywordAliasTailDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-alias-
 try {
   const filename = join(keywordAliasTailDirectory, "grammar", "statements", "set.js"),
     code = keywordAliasTailFixture("");
-  mkdirSync(join(keywordAliasTailDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordAliasTailDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordAliasTailDirectory, "grammar.js"),
     "export default grammar({rules: {}});",
@@ -11517,12 +11923,20 @@ new RuleTester().run("keyword-list-head-extraction", keywordListHeadExtraction, 
     {
       name: "the original record USING head and AND tail before the measured rewrite",
       code: beforeKeywordListHead,
-      errors: [{ message: /non-empty item and continuation in __record_using_fields_tail/ }],
+      errors: [
+        {
+          message: /non-empty item and continuation in __record_using_fields_tail/,
+        },
+      ],
     },
     {
       name: "keyword selectors retain a reused optional frame value and field scope",
       code: keywordListHeadFixture(),
-      errors: [{ message: /optional sequence of its exact keyword separator and that head/ }],
+      errors: [
+        {
+          message: /optional sequence of its exact keyword separator and that head/,
+        },
+      ],
     },
     {
       name: "literal keyword calls retain abbreviation options",
@@ -11554,7 +11968,9 @@ const keywordListHeadDirectory = mkdtempSync(join(tmpdir(), "abl-keyword-list-he
 try {
   const filename = join(keywordListHeadDirectory, "grammar", "phrases", "record.js"),
     code = keywordListHeadFixture();
-  mkdirSync(join(keywordListHeadDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(keywordListHeadDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   writeFileSync(
     join(keywordListHeadDirectory, "grammar.js"),
     "export default grammar({rules: {}});",
@@ -11659,7 +12075,11 @@ new RuleTester().run("paired-marker-field-prefix", pairedMarkerFieldPrefix, {
     {
       name: "original ON NEW and OLD BUFFER clauses",
       code: pairedMarkerFieldFixture(),
-      errors: [{ message: /extracting the complete new_record prefix into a hidden helper/ }],
+      errors: [
+        {
+          message: /extracting the complete new_record prefix into a hidden helper/,
+        },
+      ],
     },
     {
       name: "static keyword options and an enclosing precedence remain at their scopes",
@@ -11670,7 +12090,9 @@ new RuleTester().run("paired-marker-field-prefix", pairedMarkerFieldPrefix, {
           .replaceAll("$._kw_buffer", 'kw("BUFFER", {offset: 3})')})`,
       ),
       errors: [
-        { message: /large states before actions and compare complete valid and recovery trees/ },
+        {
+          message: /large states before actions and compare complete valid and recovery trees/,
+        },
       ],
     },
     {
@@ -11823,7 +12245,11 @@ try {
       {
         ...optionalFlagChoiceCase(optionalFlagChoiceFixture()),
         name: "an optional prefix and a required ordered flag suffix",
-        errors: [{ message: /extracting the complete nonempty choice into a hidden helper/ }],
+        errors: [
+          {
+            message: /extracting the complete nonempty choice into a hidden helper/,
+          },
+        ],
       },
       {
         ...optionalFlagChoiceCase(
@@ -11832,7 +12258,11 @@ try {
           ),
         ),
         name: "matching keyword abbreviation options remain exact",
-        errors: [{ message: /Preserve every alias, keyword option, alternative and suffix order/ }],
+        errors: [
+          {
+            message: /Preserve every alias, keyword option, alternative and suffix order/,
+          },
+        ],
       },
       {
         ...optionalFlagChoiceCase(
@@ -11866,7 +12296,9 @@ try {
     ],
   });
 
-  mkdirSync(join(optionalFlagChoiceDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(optionalFlagChoiceDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   for (const key of ["inline", "conflicts", "supertypes", "externals", "precedences", "extras"]) {
     writeFileSync(
       join(optionalFlagChoiceDirectory, "grammar.js"),
@@ -12129,7 +12561,9 @@ try {
     ],
   });
 
-  mkdirSync(join(optionalAliasTailDirectory, "grammar", "precedences"), { recursive: true });
+  mkdirSync(join(optionalAliasTailDirectory, "grammar", "precedences"), {
+    recursive: true,
+  });
   for (const key of ["inline", "conflicts", "supertypes", "externals", "precedences", "extras"]) {
     for (const name of ["__demo_body", "__demo_convert"]) {
       writeFileSync(

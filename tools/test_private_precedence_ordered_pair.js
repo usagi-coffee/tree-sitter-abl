@@ -115,8 +115,14 @@ try {
         ),
       ],
       invalid: [
-        { ...testCase("private ordered pair with right associativity"), errors: [{ message }] },
-        { ...testCase("measured format VIEW-AS tail", fixture), errors: [{ message }] },
+        {
+          ...testCase("private ordered pair with right associativity"),
+          errors: [{ message }],
+        },
+        {
+          ...testCase("measured format VIEW-AS tail", fixture),
+          errors: [{ message }],
+        },
         {
           ...testCase(
             "renamed helper and symbols",
@@ -215,7 +221,10 @@ try {
     {
       valid: [],
       invalid: [
-        { ...moduleCase("comments and strings do not add dependencies"), errors: [{ message }] },
+        {
+          ...moduleCase("comments and strings do not add dependencies"),
+          errors: [{ message }],
+        },
       ],
     },
   );

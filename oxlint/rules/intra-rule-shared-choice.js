@@ -64,7 +64,11 @@ export const intraRuleSharedChoice = rule((context) => {
       const start = context.sourceCode.getRange(subject)[0];
       const previous = occurrences.get(signature);
       if (!previous) {
-        occurrences.set(signature, { start, line: subject.loc.start.line, reported: false });
+        occurrences.set(signature, {
+          start,
+          line: subject.loc.start.line,
+          reported: false,
+        });
         return;
       }
       if (previous.start === start || previous.reported) return;

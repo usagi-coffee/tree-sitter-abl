@@ -94,7 +94,10 @@ try {
     ],
     invalid: [
       { ...testCase("shared ordered pair"), errors: [{ message }] },
-      { ...testCase("measured selection helper", fixture), errors: [{ message }] },
+      {
+        ...testCase("measured selection helper", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase(
           "renamed helper and node pair",
@@ -168,7 +171,10 @@ try {
   new RuleTester().run("shared-ordered-pair-inline", sharedOrderedPairInline, {
     valid: [],
     invalid: [
-      { ...moduleCase("comments and strings do not add dependencies"), errors: [{ message }] },
+      {
+        ...moduleCase("comments and strings do not add dependencies"),
+        errors: [{ message }],
+      },
     ],
   });
 } finally {

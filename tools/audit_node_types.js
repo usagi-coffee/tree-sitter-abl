@@ -117,7 +117,11 @@ function itemFromNode(node) {
   }
 
   if (unwrapped.type === "SYMBOL") {
-    return { key: `SYM:${unwrapped.name}`, display: `$${unwrapped.name}`, kind: "symbol" };
+    return {
+      key: `SYM:${unwrapped.name}`,
+      display: `$${unwrapped.name}`,
+      kind: "symbol",
+    };
   }
 
   if (unwrapped.type === "STRING") {
@@ -161,7 +165,11 @@ function itemFromNode(node) {
     };
   }
 
-  return { key: `NODE:${unwrapped.type}`, display: unwrapped.type.toLowerCase(), kind: "other" };
+  return {
+    key: `NODE:${unwrapped.type}`,
+    display: unwrapped.type.toLowerCase(),
+    kind: "other",
+  };
 }
 
 function branchItems(node) {

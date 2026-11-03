@@ -23,7 +23,10 @@ export function sharedEdgeRule({ optimization, fromEnd, minimum, message, filter
   return rule(
     collectRules((context, properties) => {
       const sequences = properties
-        .map((property) => ({ property, elements: sequenceElements(property.value.body) }))
+        .map((property) => ({
+          property,
+          elements: sequenceElements(property.value.body),
+        }))
         .filter(({ elements }) => elements?.length > minimum);
       const reported = new Set();
       for (let right = 1; right < sequences.length; right += 1) {

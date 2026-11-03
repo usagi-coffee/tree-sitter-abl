@@ -69,7 +69,11 @@ export function listHeadExtractionVisitor(context, mode = "embedded") {
         )
           return;
       }
-      sequences.push({ node, owner, signatures: node.arguments.map(signature) });
+      sequences.push({
+        node,
+        owner,
+        signatures: node.arguments.map(signature),
+      });
     },
     "Program:exit"() {
       const nullable = (node) => {
@@ -102,7 +106,11 @@ export function listHeadExtractionVisitor(context, mode = "embedded") {
         const items = body.arguments.slice(1, -1);
         if (items.every(nullable) || items.some((item) => referencedSymbols(item).includes(name)))
           continue;
-        tails.push({ property, name, suffix: body.arguments.slice(1).map(signature) });
+        tails.push({
+          property,
+          name,
+          suffix: body.arguments.slice(1).map(signature),
+        });
       }
       for (const sequence of sequences) {
         for (const tail of tails) {

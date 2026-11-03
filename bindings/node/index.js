@@ -10,7 +10,9 @@ const binding =
     : (await import("node-gyp-build")).default(root);
 
 try {
-  const nodeTypes = await import(`${root}/src/node-types.json`, { with: { type: "json" } });
+  const nodeTypes = await import(`${root}/src/node-types.json`, {
+    with: { type: "json" },
+  });
   binding.nodeTypeInfo = nodeTypes.default;
 } catch {}
 

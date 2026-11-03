@@ -152,7 +152,11 @@ export const contextualValuedChoiceInline = rule((context) => {
       }
       const reported = new Set();
       for (const site of sites) {
-        const candidate = { ...site, cwd: context.cwd, filename: context.filename };
+        const candidate = {
+          ...site,
+          cwd: context.cwd,
+          filename: context.filename,
+        };
         for (const previous of contextualValuedChoiceSites) {
           if (
             previous.cwd !== candidate.cwd ||

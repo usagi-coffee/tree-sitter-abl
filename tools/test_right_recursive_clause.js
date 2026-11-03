@@ -177,8 +177,14 @@ try {
       ),
     ],
     invalid: [
-      { ...testCase("two compatible entry callers", before), errors: [{ message }] },
-      { ...testCase("measured FOR BY clause", fixture), errors: [{ message }] },
+      {
+        ...testCase("two compatible entry callers", before),
+        errors: [{ message }],
+      },
+      {
+        ...testCase("measured FOR BY clause", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase(
           "renamed helpers and symbols",
@@ -259,7 +265,10 @@ try {
   new RuleTester().run("right-recursive-clause-reuse", rightRecursiveClauseReuse, {
     valid: [],
     invalid: [
-      { ...moduleCase("comments and strings are not dependencies"), errors: [{ message }] },
+      {
+        ...moduleCase("comments and strings are not dependencies"),
+        errors: [{ message }],
+      },
     ],
   });
 } finally {

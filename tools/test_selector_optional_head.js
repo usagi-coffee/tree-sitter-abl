@@ -107,8 +107,14 @@ try {
       ),
     ],
     invalid: [
-      { ...testCase("local optional field-led clause", before), errors: [{ message }] },
-      { ...testCase("measured CREATE widget shape", fixture), errors: [{ message }] },
+      {
+        ...testCase("local optional field-led clause", before),
+        errors: [{ message }],
+      },
+      {
+        ...testCase("measured CREATE widget shape", fixture),
+        errors: [{ message }],
+      },
       {
         ...testCase(
           "external clause requires definition review",

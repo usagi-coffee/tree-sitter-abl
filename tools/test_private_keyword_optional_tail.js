@@ -109,8 +109,14 @@ try {
         ),
       ],
       invalid: [
-        { ...testCase("keyword with optional recursive tail"), errors: [{ message }] },
-        { ...testCase("measured BROWSE options helper", fixture), errors: [{ message }] },
+        {
+          ...testCase("keyword with optional recursive tail"),
+          errors: [{ message }],
+        },
+        {
+          ...testCase("measured BROWSE options helper", fixture),
+          errors: [{ message }],
+        },
         {
           ...testCase(
             "renamed helper and tail",
@@ -189,7 +195,10 @@ try {
     {
       valid: [],
       invalid: [
-        { ...moduleCase("comments and strings do not add dependencies"), errors: [{ message }] },
+        {
+          ...moduleCase("comments and strings do not add dependencies"),
+          errors: [{ message }],
+        },
       ],
     },
   );

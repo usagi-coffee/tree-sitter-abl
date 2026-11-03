@@ -131,8 +131,14 @@ try {
         ),
       ],
       invalid: [
-        { ...testCase("two unaliased local uses", before), errors: [{ message }] },
-        { ...testCase("measured PUT count helper", fixture), errors: [{ message }] },
+        {
+          ...testCase("two unaliased local uses", before),
+          errors: [{ message }],
+        },
+        {
+          ...testCase("measured PUT count helper", fixture),
+          errors: [{ message }],
+        },
         {
           ...testCase(
             "renamed helper and field",
@@ -240,7 +246,10 @@ try {
     {
       valid: [],
       invalid: [
-        { ...moduleCase("comments and strings are not dependencies"), errors: [{ message }] },
+        {
+          ...moduleCase("comments and strings are not dependencies"),
+          errors: [{ message }],
+        },
       ],
     },
   );
