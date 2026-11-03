@@ -1,0 +1,49 @@
+================================================================================
+FOR TENANT - CREATE locators and REPOSITION rowid lists
+================================================================================
+
+CREATE Customer FOR TENANT tenantId USING ROWID (ROWID(Customer)) NO-ERROR.
+CREATE Customer FOR TENANT (tenantId + 1) USING RECID (RECID(Customer)).
+REPOSITION qCust TO ROWID ROWID(Customer) FOR TENANT (tenantId + 1) NO-ERROR.
+REPOSITION qCust TO ROWID rTop, rChild FOR TENANT "tenant-a".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (identifier)
+    tenant: (identifier)
+    rowid: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    (no_error))
+  (create_statement
+    table: (identifier)
+    tenant: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal)))
+    recid: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)))))
+  (reposition_statement
+    query: (identifier)
+    rowid: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    tenant: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal)))
+    (no_error))
+  (reposition_statement
+    query: (identifier)
+    rowid: (identifier)
+    rowid: (identifier)
+    tenant: (string_literal)))
