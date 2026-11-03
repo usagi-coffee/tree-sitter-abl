@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
-  format_phrase: ($) => $.__format_options,
-  __format_options: ($) => prec.right(seq($.__format_option, optional($.__format_options))),
+  // Consecutive options stay in one phrase, including FORMAT followed by TO.
+  format_phrase: ($) => prec.right($.__format_options),
+  __format_options: ($) => prec.right(seq(optional($.__format_options), $.__format_option)),
   __format_option: ($) =>
     choice(
       $.__format_at_phrase,

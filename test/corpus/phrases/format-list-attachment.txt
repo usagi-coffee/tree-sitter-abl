@@ -1,0 +1,103 @@
+================================================================================
+FORMAT list - greedy PUT options and following values
+================================================================================
+
+PUT value TO 20.
+PUT value FORMAT "x(10)" TO 20 FORMAT "x(20)".
+PUT first FORMAT "x(10)" FONT 1 second FORMAT "x(20)" COLON 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    value: (identifier)
+    position: (number_literal))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (string_literal)
+      to: (number_literal)
+      format: (string_literal)))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (string_literal)
+      font: (number_literal))
+    value: (identifier)
+    (format_phrase
+      format: (string_literal)
+      colon: (number_literal))))
+
+================================================================================
+FORMAT list - DISPLAY and FRAME field boundaries
+================================================================================
+
+DISPLAY first FORMAT "x(10)" FONT 1 second FORMAT "x(20)" COLON 3.
+DEFINE FRAME f first FORMAT "x(10)" FONT 1 second FORMAT "x(20)" COLON 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (string_literal)
+      font: (number_literal))
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (string_literal)
+      colon: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      format: (string_literal)
+      font: (number_literal))
+    field: (identifier)
+    (format_phrase
+      format: (string_literal)
+      colon: (number_literal))))
+
+================================================================================
+FORMAT list - interleaved flags and valued options
+================================================================================
+
+DISPLAY value AUTO-RETURN FORMAT "x(10)" BLANK FONT 1 NO-TAB-STOP WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (string_literal)
+      font: (number_literal))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+FORMAT list - reject an incomplete valued continuation
+:error
+================================================================================
+
+DISPLAY value FORMAT "x(10)" FONT .
+DISPLAY nextValue.
+
+--------------------------------------------------------------------------------
+
+(source_code)
+
+================================================================================
+FORMAT list - reject an incomplete repeated FORMAT option
+:error
+================================================================================
+
+PUT value FORMAT "x(10)" TO 20 FORMAT .
+DISPLAY nextValue.
+
+--------------------------------------------------------------------------------
+
+(source_code)
