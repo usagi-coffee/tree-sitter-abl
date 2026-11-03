@@ -1,3 +1,4 @@
+import "./test_optional_choice_prefix.js";
 import "./test_optional_flag_pair.js";
 import "./test_shared_keyword_pair_field.js";
 import "./test_private_precedence_ordered_pair.js";

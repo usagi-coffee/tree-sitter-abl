@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/optional-choice-prefix-hoist": "warn",
         "tree-sitter-optimize/optional-flag-pair-extraction": "warn",
         "tree-sitter-optimize/shared-keyword-pair-field-inline": "warn",
         "tree-sitter-optimize/private-precedence-ordered-pair-inline": "warn",
