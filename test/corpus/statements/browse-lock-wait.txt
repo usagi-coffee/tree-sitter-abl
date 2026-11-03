@@ -1,0 +1,36 @@
+================================================================================
+BROWSE - ordered lock and wait flags
+================================================================================
+
+DEFINE BROWSE b1 QUERY q1 NO-WAIT DISPLAY CustNum.
+DEFINE BROWSE b2 QUERY q2 SHARE-LOCK NO-WAIT DISPLAY Customer EXCEPT Comments.
+DEFINE BROWSE b3 QUERY q3 EXCLUSIVE-LOCK NO-WAIT DISPLAY CustNum.
+DEFINE BROWSE b4 QUERY q4 NO-LOCK DISPLAY CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (no_wait)
+    (column
+      column: (identifier)))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (no_wait)
+    (record
+      record: (identifier)
+      field: (identifier)))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (no_wait)
+    (column
+      column: (identifier)))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))))

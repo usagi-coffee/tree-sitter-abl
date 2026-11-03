@@ -10,13 +10,21 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       $._kw_query,
       field("query", $.identifier),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
-      optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      optional(alias(kw("NO-WAIT"), $.no_wait)),
+      optional($.__browse_lock_wait),
       $._kw_display,
       choice($.__browse_columns, alias($.__browse_record, $.record)),
       optional($.__browse_body_tail),
+    ),
+  __browse_lock_wait: ($) =>
+    choice(
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
+        alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        optional(alias(kw("NO-WAIT"), $.no_wait)),
+      ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("NO-WAIT"), $.no_wait),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __browse_body_tail: ($) =>
