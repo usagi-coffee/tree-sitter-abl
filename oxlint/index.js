@@ -1,3 +1,4 @@
+import { sharedKeywordPairFieldInline } from "./rules/shared-keyword-pair-field-inline.js";
 import { privatePrecedenceOrderedPairInline } from "./rules/private-precedence-ordered-pair-inline.js";
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
 import { multiUsePrivateKeywordOptionalTailInline } from "./rules/multi-use-private-keyword-optional-tail-inline.js";
@@ -141,6 +142,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  sharedKeywordPairFieldInline,
   privatePrecedenceOrderedPairInline,
   multiUsePrivateKeywordOptionalTailInline,
   sharedOrderedPairInline,
@@ -277,6 +279,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "shared-keyword-pair-field-inline": sharedKeywordPairFieldInline,
     "private-precedence-ordered-pair-inline": privatePrecedenceOrderedPairInline,
     "multi-use-private-keyword-optional-tail-inline": multiUsePrivateKeywordOptionalTailInline,
     "shared-ordered-pair-inline": sharedOrderedPairInline,
