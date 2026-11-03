@@ -1,0 +1,61 @@
+================================================================================
+ELSE - nearest nested statement branch
+================================================================================
+
+IF outerReady THEN
+  IF innerReady THEN MESSAGE "inner".
+  ELSE MESSAGE "inner fallback".
+ELSE MESSAGE "outer fallback".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (identifier)
+    then: (if_statement
+      (identifier)
+      then: (message_statement
+        (string_literal))
+      else: (message_statement
+        (string_literal)))
+    else: (message_statement
+      (string_literal))))
+
+================================================================================
+ELSE - nested conditional expressions and statement branches
+================================================================================
+
+result = IF ready THEN IF other THEN 1 ELSE 2 ELSE 3.
+IF result = 1 THEN MESSAGE (IF flag THEN "yes" ELSE "no").
+ELSE result = IF fallback THEN 4 ELSE 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (conditional_expression
+      (identifier)
+      (conditional_expression
+        (identifier)
+        (number_literal)
+        (number_literal))
+      (number_literal)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (message_statement
+      (parenthesized_expression
+        (conditional_expression
+          (identifier)
+          (string_literal)
+          (string_literal))))
+    else: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (conditional_expression
+        (identifier)
+        (number_literal)
+        (number_literal)))))

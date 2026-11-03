@@ -43,7 +43,6 @@ export const inline = ($) => [
   $._kw_average,
   $._kw_maximum,
   $._kw_application,
-  $._kw_else,
   $._kw_assign,
   $._kw_bell,
   $._kw_bgcolor,
