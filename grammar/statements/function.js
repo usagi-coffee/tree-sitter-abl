@@ -42,6 +42,7 @@ export default ({ kw }) => ({
     ),
 
   __function_forward_head: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $.__function_signature,
       optional($.__function_extent_phrase),
