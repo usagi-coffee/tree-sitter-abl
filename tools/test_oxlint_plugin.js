@@ -1,3 +1,4 @@
+import "./test_existing_alternative_body_reuse.js";
 import "./test_keyword_optional_marker_prefix.js";
 import "./test_optional_choice_prefix.js";
 import "./test_optional_flag_pair.js";

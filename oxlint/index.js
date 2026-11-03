@@ -1,3 +1,4 @@
+import { existingAlternativeBodyReuse } from "./rules/existing-alternative-body-reuse.js";
 import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
 import { optionalChoicePrefixHoist } from "./rules/optional-choice-prefix-hoist.js";
 import { optionalFlagPairExtraction } from "./rules/optional-flag-pair-extraction.js";
@@ -145,6 +146,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  existingAlternativeBodyReuse,
   keywordOptionalMarkerPrefix,
   optionalChoicePrefixHoist,
   optionalFlagPairExtraction,
@@ -285,6 +287,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "existing-alternative-body-reuse": existingAlternativeBodyReuse,
     "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
     "optional-choice-prefix-hoist": optionalChoicePrefixHoist,
     "optional-flag-pair-extraction": optionalFlagPairExtraction,
