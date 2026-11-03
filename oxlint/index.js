@@ -1,3 +1,4 @@
+import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
 import { optionalChoicePrefixHoist } from "./rules/optional-choice-prefix-hoist.js";
 import { optionalFlagPairExtraction } from "./rules/optional-flag-pair-extraction.js";
 import { sharedKeywordPairFieldInline } from "./rules/shared-keyword-pair-field-inline.js";
@@ -144,6 +145,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  keywordOptionalMarkerPrefix,
   optionalChoicePrefixHoist,
   optionalFlagPairExtraction,
   sharedKeywordPairFieldInline,
@@ -283,6 +285,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
     "optional-choice-prefix-hoist": optionalChoicePrefixHoist,
     "optional-flag-pair-extraction": optionalFlagPairExtraction,
     "shared-keyword-pair-field-inline": sharedKeywordPairFieldInline,
