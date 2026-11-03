@@ -1,3 +1,4 @@
+import { optionalFlagPairExtraction } from "./rules/optional-flag-pair-extraction.js";
 import { sharedKeywordPairFieldInline } from "./rules/shared-keyword-pair-field-inline.js";
 import { privatePrecedenceOrderedPairInline } from "./rules/private-precedence-ordered-pair-inline.js";
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
@@ -142,6 +143,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  optionalFlagPairExtraction,
   sharedKeywordPairFieldInline,
   privatePrecedenceOrderedPairInline,
   multiUsePrivateKeywordOptionalTailInline,
@@ -279,6 +281,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "optional-flag-pair-extraction": optionalFlagPairExtraction,
     "shared-keyword-pair-field-inline": sharedKeywordPairFieldInline,
     "private-precedence-ordered-pair-inline": privatePrecedenceOrderedPairInline,
     "multi-use-private-keyword-optional-tail-inline": multiUsePrivateKeywordOptionalTailInline,
