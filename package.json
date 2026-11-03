@@ -35,7 +35,7 @@
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "format": "oxfmt",
+    "format": "bun fmt",
     "test": "bun run tools/generate.js && bun run tools/test.js",
     "test:queries": "python3 tools/extract_keywords.py --node-types src/node-types.json --check-highlights queries/highlights.scm && tree-sitter test",
     "test:wasm": "cargo test --features wasm-test --lib",
@@ -65,7 +65,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
-    "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.25.1",
