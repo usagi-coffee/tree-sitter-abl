@@ -1,3 +1,4 @@
+import { leftRecursiveOptionList } from "./rules/left-recursive-option-list.js";
 import { inlineBranchSeparatorBoundary } from "./rules/inline-branch-separator-boundary.js";
 import { existingAlternativeBodyReuse } from "./rules/existing-alternative-body-reuse.js";
 import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
@@ -147,6 +148,7 @@ import { tailExtraction } from "./rules/tail-extraction.js";
 import { tokenPacking } from "./rules/token-packing.js";
 
 export {
+  leftRecursiveOptionList,
   inlineBranchSeparatorBoundary,
   existingAlternativeBodyReuse,
   keywordOptionalMarkerPrefix,
@@ -289,6 +291,7 @@ export { resetSharingCandidates } from "./sharing-state.js";
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "left-recursive-option-list": leftRecursiveOptionList,
     "inline-branch-separator-boundary": inlineBranchSeparatorBoundary,
     "existing-alternative-body-reuse": existingAlternativeBodyReuse,
     "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
