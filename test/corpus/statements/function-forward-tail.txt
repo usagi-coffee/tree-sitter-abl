@@ -1,0 +1,88 @@
+================================================================================
+FUNCTION - ordered optional forward header parts
+================================================================================
+
+FUNCTION extentOnly RETURNS INTEGER EXTENT 2 FORWARD.
+FUNCTION accessOnly RETURNS INTEGER PRIVATE FORWARD.
+FUNCTION parametersOnly RETURNS INTEGER (INTEGER) FORWARD.
+FUNCTION extentAccess RETURNS INTEGER EXTENT 2 PRIVATE FORWARD.
+FUNCTION extentParameters RETURNS INTEGER EXTENT 2 (INTEGER) FORWARD.
+FUNCTION accessParameters RETURNS INTEGER PRIVATE (INTEGER) FORWARD.
+FUNCTION allParts RETURNS INTEGER EXTENT 2 PRIVATE (INTEGER) FORWARD.
+DEFINE FUNCTION noParts RETURNS INTEGER.
+DEFINE FUNCTION extentMapping RETURNS INTEGER EXTENT 2 PRIVATE (INTEGER) MAP TO mapped IN THIS-PROCEDURE.
+MESSAGE "after".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (access_modifier)
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (access_modifier)
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (parameters
+      (parameter
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (access_modifier)
+    (parameters
+      (parameter
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (access_modifier)
+    (parameters
+      (parameter
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (access_modifier)
+    (parameters
+      (parameter
+        type: (identifier)))
+    (map_phrase
+      actual: (identifier))
+    (in_phrase
+      context: (identifier)))
+  (message_statement
+    (string_literal)))
