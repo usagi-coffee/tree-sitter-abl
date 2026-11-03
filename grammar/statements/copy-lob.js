@@ -13,6 +13,8 @@ export default ({ kw }) => ({
       optional($.__copy_lob_conversion),
     ),
 
+  // Keeping this prefix separate reduces parser actions.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __copy_lob_keyword_prefix: ($) => seq(kw("COPY-LOB"), optional($._kw_from)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
