@@ -4,8 +4,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __copy_lob_prefix: ($) =>
     seq(
-      kw("COPY-LOB"),
-      optional($._kw_from),
+      $.__copy_lob_keyword_prefix,
       $.__copy_lob_source,
       optional(seq(kw("STARTING"), $._kw_at, field("starting_at", $._expression))),
       optional(seq($._kw_for, field("for_length", $._expression))),
@@ -13,6 +12,8 @@ export default ({ kw }) => ({
       $.__copy_lob_target,
       optional($.__copy_lob_conversion),
     ),
+
+  __copy_lob_keyword_prefix: ($) => seq(kw("COPY-LOB"), optional($._kw_from)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __copy_lob_conversion: ($) =>

@@ -19,6 +19,44 @@ COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET COD
       target_codepage: (string_literal))))
 
 ================================================================================
+COPY-LOB - optional FROM before source selectors
+================================================================================
+
+COPY-LOB FROM src TO dst.
+COPY-LOB FROM OBJECT src TO dst.
+COPY-LOB FROM OBJECT GetBlob() TO dst.
+COPY-LOB FROM FILE (inputPath + ".txt") TO dst.
+COPY-LOB /* input source */ FROM /* file */ FILE inputPath TO dst.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier))
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier))
+  (copy_lob_statement
+    source: (function_call
+      function: (identifier)
+      (arguments))
+    target: (identifier))
+  (copy_lob_statement
+    source_file: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (string_literal)))
+    target: (identifier))
+  (copy_lob_statement
+    (comment
+      (block_comment))
+    (comment
+      (block_comment))
+    source_file: (identifier)
+    target: (identifier)))
+
+================================================================================
 COPY-LOB - Additional phrases
 ================================================================================
 
