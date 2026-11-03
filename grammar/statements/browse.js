@@ -15,6 +15,7 @@ export default ({ kw }) => ({
       choice($.__browse_columns, alias($.__browse_record, $.record)),
       optional($.__browse_body_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice -- Keep the lock/wait boundary to reduce parser actions.
   __browse_lock_wait: ($) =>
     choice(
       seq(
