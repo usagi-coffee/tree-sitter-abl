@@ -49,8 +49,13 @@ export const singleUseKeywordSequence = rule((context) => {
         const name = ruleName(property);
         const body = property.value.body;
         if (!name.startsWith("__") || name.endsWith("_body")) continue;
-        if (callName(body) !== "seq" || ![2, 3, 5].includes(body.arguments.length)) continue;
-        if (!body.arguments.every(smallElement) || !body.arguments.some(hasKeyword)) continue;
+        if (callName(body) !== "seq" || ![2, 3, 5, 7].includes(body.arguments.length)) continue;
+        const qualifiedBranch = body.arguments.length === 7;
+        if (
+          !qualifiedBranch &&
+          (!body.arguments.every(smallElement) || !body.arguments.some(hasKeyword))
+        )
+          continue;
         if (isRuleDisabled(context, property)) continue;
         const uses = references.get(name) ?? [];
         if (uses.length !== 1) continue;
@@ -59,7 +64,7 @@ export const singleUseKeywordSequence = rule((context) => {
         if (!owner || owner === property || owner.parent !== property.parent) continue;
         const fixedBranch = body.arguments.length === 5;
         if (
-          fixedBranch &&
+          (fixedBranch || qualifiedBranch) &&
           (dynamicReference || !isFixedKeywordFieldBranch(context, property, use, properties))
         )
           continue;
@@ -72,11 +77,13 @@ export const singleUseKeywordSequence = rule((context) => {
           context,
           property,
           "single-use-keyword-sequence",
-          fixedBranch
-            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this five-part required keyword/field branch. Preserve keyword options, token identities, field scope and branch order; check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.`
-            : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small keyword sequence. Preserve keyword options, fields and ordering; check external references and grammar metadata, then measure parser size and validate trees.`,
+          qualifiedBranch
+            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this qualified-field branch with its optional keyword modifier and trailing flag. Preserve keyword options, token identities, field scope, aliases and branch order; check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.`
+            : fixedBranch
+              ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this five-part required keyword/field branch. Preserve keyword options, token identities, field scope and branch order; check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.`
+              : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small keyword sequence. Preserve keyword options, fields and ordering; check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
     },
   };
-}, "Suggest inlining small keyword sequences and fixed keyword/field branches with one private use");
+}, "Suggest inlining small keyword sequences and fixed or qualified keyword/field branches with one private use");
