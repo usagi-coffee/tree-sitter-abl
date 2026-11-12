@@ -1,6 +1,8 @@
 export default ({ kw }) => ({
   create_statement: ($) => seq($._kw_create, $.__create_body, $._terminator),
 
+  // The NO-ERROR alternatives share recovery paths with other CREATE bodies.
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __create_body: ($) =>
     choice(
       seq(
