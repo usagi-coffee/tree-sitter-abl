@@ -5,7 +5,18 @@ export default ({ kw }) => ({
     seq(
       kw("DDE"),
       choice(
-        $.__dde_advise_or_send_branch,
+        seq(
+          field(
+            "action",
+            choice(alias(kw("ADVISE"), $.identifier), alias(kw("SEND"), $.identifier)),
+          ),
+          field("ddeid", $._expression),
+          choice(
+            field("mode", alias($.__dde_mode, $.identifier)),
+            seq($._kw_source, field("source", $._expression)),
+          ),
+          $.__dde_item_time_body,
+        ),
         $.__dde_execute_or_terminate_branch,
         seq(
           field(
@@ -16,17 +27,6 @@ export default ({ kw }) => ({
         ),
         seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
       ),
-    ),
-
-  __dde_advise_or_send_branch: ($) =>
-    seq(
-      field("action", choice(alias(kw("ADVISE"), $.identifier), alias(kw("SEND"), $.identifier))),
-      field("ddeid", $._expression),
-      choice(
-        field("mode", alias($.__dde_mode, $.identifier)),
-        seq($._kw_source, field("source", $._expression)),
-      ),
-      $.__dde_item_time_body,
     ),
 
   __dde_mode: ($) => choice(kw("START"), $._kw_stop),

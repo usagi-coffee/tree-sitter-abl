@@ -79,3 +79,75 @@ DDE REQUEST channel TARGET result ITEM "second".
     ddeid: (identifier)
     target: (identifier)
     item: (string_literal)))
+
+================================================================================
+DDE - ADVISE and SEND without optional suffixes
+================================================================================
+
+DDE ADVISE channel START ITEM "first".
+DDE ADVISE channel STOP ITEM "second".
+DDE SEND channel SOURCE content ITEM "third".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    mode: (identifier)
+    item: (string_literal))
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    mode: (identifier)
+    item: (string_literal))
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    source: (identifier)
+    item: (string_literal)))
+
+================================================================================
+DDE - ADVISE and SEND expression boundaries
+================================================================================
+
+DDE ADVISE getChannel() START ITEM itemName TIME waitTime + 1 NO-ERROR.
+DDE SEND obj:channel SOURCE content + suffix ITEM "joined" TIME (waitTime + 1).
+DDE SEND channel SOURCE IF ready THEN first ELSE second ITEM "conditional" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (function_call
+      function: (identifier)
+      (arguments))
+    mode: (identifier)
+    item: (identifier)
+    time: (binary_expression
+      (identifier)
+      (number_literal))
+    (no_error))
+  (dde_statement
+    action: (identifier)
+    ddeid: (object_access
+      left: (identifier)
+      right: (identifier))
+    source: (binary_expression
+      (identifier)
+      (identifier))
+    item: (string_literal)
+    time: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    source: (conditional_expression
+      (identifier)
+      (identifier)
+      (identifier))
+    item: (string_literal)
+    (no_error)))
