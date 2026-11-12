@@ -151,3 +151,41 @@ DDE SEND channel SOURCE IF ready THEN first ELSE second ITEM "conditional" NO-ER
       (identifier))
     item: (string_literal)
     (no_error)))
+
+================================================================================
+DDE - EXECUTE and TERMINATE expression boundaries
+================================================================================
+
+DDE EXECUTE getChannel() COMMAND commandText + suffix TIME waitTime + 1 NO-ERROR.
+DDE EXECUTE obj:channel COMMAND IF ready THEN first ELSE second.
+DDE TERMINATE obj:channel.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (function_call
+      function: (identifier)
+      (arguments))
+    command: (binary_expression
+      (identifier)
+      (identifier))
+    time: (binary_expression
+      (identifier)
+      (number_literal))
+    (no_error))
+  (dde_statement
+    action: (identifier)
+    ddeid: (object_access
+      left: (identifier)
+      right: (identifier))
+    command: (conditional_expression
+      (identifier)
+      (identifier)
+      (identifier)))
+  (dde_statement
+    action: (identifier)
+    ddeid: (object_access
+      left: (identifier)
+      right: (identifier))))
