@@ -10,10 +10,12 @@ import {
   report,
   ruleName,
 } from "../helpers.js";
+import { isStructuredFieldChoiceBranch } from "./structured-field-choice-branch.js";
 
 export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, withAlias = false) {
   const properties = [];
   const references = new Map();
+  let dynamicReference = false;
   const smallElement = (node) => isSmallSequenceElement(node) || isStaticKeywordCall(node);
   const symbolAlias = (node) => {
     if (callName(node) !== "alias" || node.arguments.length !== 2) return false;
@@ -55,6 +57,8 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
       if (isRuleProperty(node)) properties.push(node);
     },
     MemberExpression(node) {
+      if (node.object.type === "Identifier" && node.object.name === "$" && !memberName(node))
+        dynamicReference = true;
       const name =
         memberName(node) ??
         (node.computed &&
@@ -74,17 +78,18 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
         const body = property.value.body;
         if (!name.startsWith("__") || name.endsWith("_body")) continue;
         if (isRuleDisabled(context, property) || !isStaticDsl(body)) continue;
-        if (callName(body) !== "seq" || body.arguments.length < 2 || body.arguments.length > 3)
-          continue;
-        if (!body.arguments.some(smallChoice)) continue;
-        if (withAlias && !body.arguments.some(symbolAlias)) continue;
-        if (
-          !body.arguments.every(
+        if (callName(body) !== "seq") continue;
+        const structured = fieldChoice && !withAlias && body.arguments.length === 4;
+        const small =
+          body.arguments.length >= 2 &&
+          body.arguments.length <= 3 &&
+          body.arguments.some(smallChoice) &&
+          (!withAlias || body.arguments.some(symbolAlias)) &&
+          body.arguments.every(
             (element) =>
               smallElement(element) || smallChoice(element) || (withAlias && symbolAlias(element)),
-          )
-        )
-          continue;
+          );
+        if (!small && !structured) continue;
         const uses = references.get(name) ?? [];
         if (uses.length !== 1) continue;
         const use = uses[0];
@@ -94,6 +99,12 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
           !owner ||
           owner === property ||
           owner.parent !== property.parent
+        )
+          continue;
+        if (
+          structured &&
+          (dynamicReference ||
+            !isStructuredFieldChoiceBranch(context, property, use, properties, references))
         )
           continue;
         let unsafe = false;
@@ -114,7 +125,9 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
             : fieldChoice
               ? "single-use-field-choice-sequence"
               : "single-use-choice-sequence",
-          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice${withAlias ? " and symbol alias" : ""}. Preserve alternative order, fields${fieldChoice || withAlias ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
+          structured
+            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this structured field-choice branch while retaining its shared suffix helper. Preserve alternative order, field scope, aliases, keyword options and precedence; check external references and metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees before retaining the change.`
+            : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice${withAlias ? " and symbol alias" : ""}. Preserve alternative order, fields${fieldChoice || withAlias ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
     },

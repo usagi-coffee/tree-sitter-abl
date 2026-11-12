@@ -3,5 +3,5 @@ import { singleUseChoiceSequenceVisitor } from "../helpers/single-use-choice-seq
 
 export const singleUseFieldChoiceSequence = rule(
   (context) => singleUseChoiceSequenceVisitor(context, true),
-  "Suggest inlining single-use private sequences containing small field-wrapped choices",
+  "Suggest inlining single-use private sequences containing field-wrapped choices or structured branches",
 );

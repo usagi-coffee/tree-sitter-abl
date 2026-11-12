@@ -1,3 +1,4 @@
+import "./test_structured_field_choice_branch.js";
 import "./test_left_recursive_option_list.js";
 import "./test_inline_branch_separator_boundary.js";
 import "./test_existing_alternative_body_reuse.js";
