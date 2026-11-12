@@ -474,3 +474,31 @@ CREATE BUFFER h FOR TABLE IF c THEN "a" ELSE "b".
       (identifier)
       (string_literal)
       (string_literal))))
+
+================================================================================
+CREATE ALIAS - quoted and dynamic names
+================================================================================
+
+CREATE ALIAS "reporting" FOR DATABASE "sports".
+CREATE ALIAS VALUE("report_" + aliasName) FOR DATABASE VALUE(databaseName) NO-ERROR.
+CREATE ALIAS aliasName FOR /* database name */ DATABASE VALUE(getDatabase()).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    alias: (string_literal)
+    database: (string_literal))
+  (create_statement
+    value: (binary_expression
+      (string_literal)
+      (identifier))
+    value: (identifier)
+    (no_error))
+  (create_statement
+    alias: (identifier)
+    (comment
+      (block_comment))
+    value: (function_call
+      function: (identifier)
+      (arguments))))

@@ -5,7 +5,14 @@ export default ({ kw }) => ({
     choice(
       seq(
         choice(
-          $.__create_alias,
+          seq(
+            $._kw_alias,
+            field("alias", $._alias_name),
+            $._kw_for,
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+            kw("DATABASE"),
+            field("database", $._alias_name),
+          ),
           $.__create_buffer,
           $.__create_widget_pool,
           $.__create_database,
@@ -17,15 +24,6 @@ export default ({ kw }) => ({
       ),
       $.__create_handle_with_pool_body,
       $.__create_server,
-    ),
-  __create_alias: ($) =>
-    seq(
-      $._kw_alias,
-      field("alias", $._alias_name),
-      $._kw_for,
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      kw("DATABASE"),
-      field("database", $._alias_name),
     ),
   __create_buffer: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
