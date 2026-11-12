@@ -32,7 +32,16 @@ export default ({ kw }) => ({
             ),
           ),
         ),
-        $.__parameter_buffer_parameter,
+        seq(
+          $._kw_parameter,
+          $._kw_buffer,
+          field("name", $.identifier),
+          $._kw_for,
+          optional(field("for", kw("TEMP-TABLE"))),
+          field("table", $._qualified_identifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+          optional(alias(kw("PRESELECT"), $.preselect)),
+        ),
       ),
     ),
 
@@ -88,18 +97,6 @@ export default ({ kw }) => ({
     ),
   __parameter_label_tail: ($) =>
     seq(",", field("label", $.string_literal), optional($.__parameter_label_tail)),
-
-  __parameter_buffer_parameter: ($) =>
-    seq(
-      $._kw_parameter,
-      $._kw_buffer,
-      field("name", $.identifier),
-      $._kw_for,
-      optional(field("for", kw("TEMP-TABLE"))),
-      field("table", $._qualified_identifier),
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      optional(alias(kw("PRESELECT"), $.preselect)),
-    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence
   __parameter_variable_type_phrase: ($) =>

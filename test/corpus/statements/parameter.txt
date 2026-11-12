@@ -335,6 +335,37 @@ DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
     (preselect)))
 
 ================================================================================
+PARAMETER DEFINITION - BUFFER table names and modifiers
+================================================================================
+
+DEFINE PARAMETER BUFFER bDb FOR sports.Customer.
+DEFINE PARAMETER BUFFER bTemp FOR TEMP-TABLE ttOrder.
+DEF PARAM BUFFER bSelected FOR TEMP-TABLE ttOrder PRESELECT.
+DEFINE PARAMETER BUFFER bQualified FOR sports.Order PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier)
+    (preselect))
+  (parameter_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (preselect)))
+
+================================================================================
 PARAMETER DEFINITION - Combinations
 ================================================================================
 
