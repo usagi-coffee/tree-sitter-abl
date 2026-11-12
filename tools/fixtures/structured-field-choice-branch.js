@@ -6,7 +6,16 @@ export default ({ kw }) => ({
       kw("DDE"),
       choice(
         $.__dde_advise_or_send_branch,
-        $.__dde_execute_or_terminate_branch,
+        seq(
+          field(
+            "action",
+            choice(alias(kw("EXECUTE"), $.identifier), alias(kw("TERMINATE"), $.identifier)),
+          ),
+          field("ddeid", $._expression),
+          optional(
+            seq($._kw_command, field("command", $._expression), optional($.__dde_time_phrase)),
+          ),
+        ),
         seq(
           field(
             "action",
@@ -30,15 +39,6 @@ export default ({ kw }) => ({
     ),
 
   __dde_mode: ($) => choice(kw("START"), $._kw_stop),
-  __dde_execute_or_terminate_branch: ($) =>
-    seq(
-      field(
-        "action",
-        choice(alias(kw("EXECUTE"), $.identifier), alias(kw("TERMINATE"), $.identifier)),
-      ),
-      field("ddeid", $._expression),
-      optional(seq($._kw_command, field("command", $._expression), optional($.__dde_time_phrase))),
-    ),
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __dde_initiate_body: ($) =>
     seq(

@@ -96,7 +96,14 @@ try {
           'seq(kw("ITEM"), optional(field("item", $._expression)), optional($.__dde_time_phrase))',
         ],
         [tail, `seq(kw("ITEM"), field("item", $._expression), optional($.${branchName}))`],
-      ].map(([from, to]) => testCase(`unsupported shape: ${to}`, fixture.replace(from, to))),
+      ].map(([from, to]) =>
+        testCase(
+          `unsupported shape: ${to}`,
+          branchDefinition.includes(from)
+            ? fixture.replace(branchDefinition, branchDefinition.replace(from, to))
+            : fixture.replace(from, to),
+        ),
+      ),
       testCase(
         "unshared suffix helper",
         fixture.replace(

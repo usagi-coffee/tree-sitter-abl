@@ -41,26 +41,49 @@ export function isStructuredFieldChoiceBranch(context, property, use, properties
     node.arguments.length >= 2 &&
     node.arguments.length <= 5 &&
     node.arguments.every((branch) => namedAlias(branch, keyword));
-  const [action, target, selection, tail] = body.arguments;
+  const [action, target, selection] = body.arguments;
+  if (!valueField(action, actionChoice) || !valueField(target)) return false;
+  const optionalClause = body.arguments.length === 3,
+    fields = [action, target];
+  let tail;
+  if (optionalClause) {
+    if (callName(selection) !== "optional" || selection.arguments.length !== 1) return false;
+    const clause = selection.arguments[0];
+    if (callName(clause) !== "seq" || clause.arguments.length !== 3) return false;
+    const [marker, value, suffix] = clause.arguments;
+    if (
+      !keyword(marker) ||
+      !valueField(value) ||
+      callName(suffix) !== "optional" ||
+      suffix.arguments.length !== 1
+    )
+      return false;
+    fields.push(value);
+    tail = suffix.arguments[0];
+  } else {
+    if (
+      body.arguments.length !== 4 ||
+      callName(selection) !== "choice" ||
+      selection.arguments.length !== 2
+    )
+      return false;
+    const [mode, valued] = selection.arguments;
+    if (
+      !valueField(mode, (node) =>
+        namedAlias(node, (source) => memberName(source)?.startsWith("__")),
+      ) ||
+      callName(valued) !== "seq" ||
+      valued.arguments.length !== 2 ||
+      !keyword(valued.arguments[0]) ||
+      !valueField(valued.arguments[1])
+    )
+      return false;
+    fields.push(mode, valued.arguments[1]);
+    tail = body.arguments[3];
+  }
   if (
-    !valueField(action, actionChoice) ||
-    !valueField(target) ||
-    callName(selection) !== "choice" ||
-    selection.arguments.length !== 2 ||
-    !memberName(tail)?.startsWith("__")
-  )
-    return false;
-  const [mode, valued] = selection.arguments;
-  if (
-    !valueField(mode, (node) =>
-      namedAlias(node, (source) => memberName(source)?.startsWith("__")),
-    ) ||
-    callName(valued) !== "seq" ||
-    valued.arguments.length !== 2 ||
-    !keyword(valued.arguments[0]) ||
-    !valueField(valued.arguments[1]) ||
-    new Set([action, target, mode, valued.arguments[1]].map((field) => field.arguments[0].value))
-      .size !== 4
+    !memberName(tail)?.startsWith("__") ||
+    new Set(fields.map((field) => field.arguments[0].value)).size !== fields.length
   )
     return false;
   const definition = (symbol) =>
@@ -73,13 +96,15 @@ export function isStructuredFieldChoiceBranch(context, property, use, properties
     !tailRule ||
     tailRule.computed ||
     callName(tailBody) !== "seq" ||
-    tailBody.arguments.length !== 3 ||
+    tailBody.arguments.length !== (optionalClause ? 2 : 3) ||
     !keyword(tailBody.arguments[0]) ||
     !valueField(tailBody.arguments[1]) ||
-    callName(tailBody.arguments[2]) !== "optional" ||
-    tailBody.arguments[2].arguments.length !== 1 ||
-    !memberName(tailBody.arguments[2].arguments[0])?.startsWith("__") ||
+    (!optionalClause &&
+      (callName(tailBody.arguments[2]) !== "optional" ||
+        tailBody.arguments[2].arguments.length !== 1 ||
+        !memberName(tailBody.arguments[2].arguments[0])?.startsWith("__"))) ||
     tailUses.length < 2 ||
+    (optionalClause && !tailUses.some((reference) => enclosingRule(reference) !== property)) ||
     !tailUses.every((reference) => enclosingRule(reference)?.parent === property.parent)
   )
     return false;
@@ -116,7 +141,12 @@ export function isStructuredFieldChoiceBranch(context, property, use, properties
     "word",
   ]);
   for (const symbol of projectPrecedenceSymbols(context)) restricted.add(symbol);
-  if (restricted.has(name)) return false;
+  if (restricted.has(name) || (optionalClause && restricted.has(ruleName(owner)))) return false;
+  if (
+    optionalClause &&
+    (references.get(ruleName(owner)) ?? []).some((reference) => !enclosingRule(reference))
+  )
+    return false;
   const recursive = (symbol, seen = new Set()) => {
     if (symbol === name) return true;
     if (seen.has(symbol)) return false;

@@ -79,7 +79,12 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
         if (!name.startsWith("__") || name.endsWith("_body")) continue;
         if (isRuleDisabled(context, property) || !isStaticDsl(body)) continue;
         if (callName(body) !== "seq") continue;
-        const structured = fieldChoice && !withAlias && body.arguments.length === 4;
+        const optionalClause =
+          body.arguments.length === 3 &&
+          callName(body.arguments[2]) === "optional" &&
+          callName(body.arguments[2].arguments[0]) === "seq";
+        const structured =
+          fieldChoice && !withAlias && (body.arguments.length === 4 || optionalClause);
         const small =
           body.arguments.length >= 2 &&
           body.arguments.length <= 3 &&
@@ -126,7 +131,7 @@ export function singleUseChoiceSequenceVisitor(context, fieldChoice = false, wit
               ? "single-use-field-choice-sequence"
               : "single-use-choice-sequence",
           structured
-            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this structured field-choice branch while retaining its shared suffix helper. Preserve alternative order, field scope, aliases, keyword options and precedence; check external references and metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees before retaining the change.`
+            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this structured field-choice branch${optionalClause ? " with its optional valued clause" : ""} while retaining its shared suffix helper. Preserve alternative order, field scope, aliases, keyword options and precedence; check external references and metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees before retaining the change.`
             : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice${withAlias ? " and symbol alias" : ""}. Preserve alternative order, fields${fieldChoice || withAlias ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
