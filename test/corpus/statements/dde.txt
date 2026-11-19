@@ -230,3 +230,43 @@ DDE TERMINATE obj:channel.
     ddeid: (object_access
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+DDE - INITIATE expression boundaries
+================================================================================
+
+DDE INITIATE getChannel() FRAM 2a APPLICATION app + suffix TOPIC topics[i + 1] NO-ERROR.
+DDE INITIATE context:channel FRAME inbox APPLICATION IF ready THEN live ELSE fallback TOPIC (title + suffix).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (function_call
+      function: (identifier)
+      (arguments))
+    frame: (identifier)
+    application: (binary_expression
+      (identifier)
+      (identifier))
+    topic: (array_access
+      array: (identifier)
+      index: (binary_expression
+        (identifier)
+        (number_literal)))
+    (no_error))
+  (dde_statement
+    action: (identifier)
+    ddeid: (object_access
+      left: (identifier)
+      right: (identifier))
+    frame: (identifier)
+    application: (conditional_expression
+      (identifier)
+      (identifier)
+      (identifier))
+    topic: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))))

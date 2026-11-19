@@ -37,21 +37,20 @@ export default ({ kw }) => ({
           field("target", $._assignable),
           $.__dde_item_time_body,
         ),
-        seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
+        // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
+        seq(
+          field("action", alias(kw("INITIATE"), $.identifier)),
+          field("ddeid", $._expression),
+          $._frame_identifier_phrase,
+          $._kw_application,
+          field("application", $._expression),
+          kw("TOPIC"),
+          field("topic", $._expression),
+        ),
       ),
     ),
 
   __dde_mode: ($) => choice(kw("START"), $._kw_stop),
-  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
-  __dde_initiate_body: ($) =>
-    seq(
-      field("ddeid", $._expression),
-      $._frame_identifier_phrase,
-      $._kw_application,
-      field("application", $._expression),
-      kw("TOPIC"),
-      field("topic", $._expression),
-    ),
   __dde_item_time_body: ($) =>
     seq(kw("ITEM"), field("item", $._expression), optional($.__dde_time_phrase)),
   // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-keyword-field-inline
