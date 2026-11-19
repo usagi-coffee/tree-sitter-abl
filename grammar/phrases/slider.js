@@ -3,26 +3,26 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $._kw_slider,
-      optional(
-        choice(
-          seq(
-            kw("MAX-VALUE"),
-            field("max", $.number_literal),
-            kw("MIN-VALUE"),
-            field("min", $.number_literal),
-          ),
-          seq(
-            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-            kw("MIN-VALUE"),
-            field("min", $.number_literal),
-            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-            kw("MAX-VALUE"),
-            field("max", $.number_literal),
-          ),
-        ),
-      ),
+      optional($.__slider_range),
       optional(choice($._kw_horizontal, $._kw_vertical)),
       optional($.__slider_after_orientation),
+    ),
+  __slider_range: ($) =>
+    choice(
+      seq(
+        kw("MAX-VALUE"),
+        field("max", $.number_literal),
+        kw("MIN-VALUE"),
+        field("min", $.number_literal),
+      ),
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        kw("MIN-VALUE"),
+        field("min", $.number_literal),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+        kw("MAX-VALUE"),
+        field("max", $.number_literal),
+      ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __slider_after_orientation: ($) =>
