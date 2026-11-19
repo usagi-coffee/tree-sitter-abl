@@ -65,19 +65,20 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __temp_table_as_primary_phrase: ($) => seq($._kw_as, alias(kw("PRIMARY"), $.primary)),
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
-  __temp_table_index_field: ($) =>
-    seq(
-      field("field", $._qualified_identifier),
-      optional(
-        field(
-          "sort_order",
-          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-          choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
+  __temp_table_index_fields: ($) =>
+    prec.right(
+      seq(
+        field("field", $._qualified_identifier),
+        optional(
+          field(
+            "sort_order",
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+            choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
+          ),
         ),
+        optional($.__temp_table_index_fields),
       ),
     ),
-  __temp_table_index_fields: ($) =>
-    prec.right(seq($.__temp_table_index_field, optional($.__temp_table_index_fields))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __temp_table_field_option: ($) =>
     choice(
