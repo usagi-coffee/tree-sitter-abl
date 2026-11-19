@@ -48,10 +48,14 @@ export const singleUseKeywordSequence = rule((context) => {
       for (const property of properties) {
         const name = ruleName(property);
         const body = property.value.body;
-        if (!name.startsWith("__") || name.endsWith("_body")) continue;
-        if (callName(body) !== "seq" || ![2, 3, 5, 7].includes(body.arguments.length)) continue;
+        if (callName(body) !== "seq" || ![2, 3, 4, 5, 7].includes(body.arguments.length)) continue;
+        const suffixBranch = body.arguments.length === 4;
+        if (!name.startsWith("__") || (name.endsWith("_body") && !suffixBranch)) continue;
+        const fixedBranch = body.arguments.length === 5;
         const qualifiedBranch = body.arguments.length === 7;
+        const structuredBranch = suffixBranch || fixedBranch || qualifiedBranch;
         if (
+          !suffixBranch &&
           !qualifiedBranch &&
           (!body.arguments.every(smallElement) || !body.arguments.some(hasKeyword))
         )
@@ -62,10 +66,10 @@ export const singleUseKeywordSequence = rule((context) => {
         const use = uses[0];
         const owner = enclosingRule(use);
         if (!owner || owner === property || owner.parent !== property.parent) continue;
-        const fixedBranch = body.arguments.length === 5;
         if (
-          (fixedBranch || qualifiedBranch) &&
-          (dynamicReference || !isFixedKeywordFieldBranch(context, property, use, properties))
+          structuredBranch &&
+          (dynamicReference ||
+            !isFixedKeywordFieldBranch(context, property, use, properties, references))
         )
           continue;
         let unsafe = false;
@@ -73,17 +77,19 @@ export const singleUseKeywordSequence = rule((context) => {
           if (["alias", "token", "token.immediate"].includes(callName(parent))) unsafe = true;
         }
         if (unsafe) continue;
-        report(
-          context,
-          property,
-          "single-use-keyword-sequence",
-          qualifiedBranch
-            ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this qualified-field branch with its optional keyword modifier and trailing flag. Preserve keyword options, token identities, field scope, aliases and branch order; check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.`
-            : fixedBranch
-              ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining this five-part required keyword/field branch. Preserve keyword options, token identities, field scope and branch order; check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.`
-              : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small keyword sequence. Preserve keyword options, fields and ordering; check external references and grammar metadata, then measure parser size and validate trees.`,
-        );
+        const scope = `${name} has one unaliased`;
+        const ownerName = ruleName(owner);
+        const measure =
+          "check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.";
+        let message = `${scope} local use in ${ownerName}; try inlining this small keyword sequence. Preserve keyword options, fields and ordering; check external references and grammar metadata, then measure parser size and validate trees.`;
+        if (suffixBranch)
+          message = `${scope} choice-arm suffix use in ${ownerName}. Try inlining the required fields and keyword while retaining their shared trailing helper. Preserve field scope, aliases, token identities and branch order. Before keeping the change, ${measure}`;
+        else if (qualifiedBranch)
+          message = `${scope} choice-arm use in ${ownerName}; try inlining this qualified-field branch with its optional keyword modifier and trailing flag. Preserve keyword options, token identities, field scope, aliases and branch order; ${measure}`;
+        else if (fixedBranch)
+          message = `${scope} choice-arm use in ${ownerName}; try inlining this five-part required keyword/field branch. Preserve keyword options, token identities, field scope and branch order; ${measure}`;
+        report(context, property, "single-use-keyword-sequence", message);
       }
     },
   };
-}, "Suggest inlining small keyword sequences and fixed or qualified keyword/field branches with one private use");
+}, "Suggest inlining single-use private keyword sequences and structured keyword/field branches");

@@ -1,3 +1,4 @@
+import "./test_required_keyword_field_suffix.js";
 import "./test_qualified_keyword_field_branch.js";
 import "./test_fixed_keyword_field_branch.js";
 import "./test_optional_field_choice_branch.js";

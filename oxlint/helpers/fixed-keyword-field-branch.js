@@ -10,16 +10,19 @@ import {
 } from "../helpers.js";
 import { projectPrecedenceSymbols, rootMetadataSymbols } from "./project-metadata.js";
 
-export function isFixedKeywordFieldBranch(context, property, use, properties) {
+export function isFixedKeywordFieldBranch(context, property, use, properties, references) {
   const name = ruleName(property),
     body = property.value.body,
     owner = enclosingRule(use);
+  const suffixBranch = body.arguments.length === 4;
+  const caller = use.parent;
+  const alternatives = suffixBranch ? caller.parent : caller;
   if (
     property.computed ||
     owner.computed ||
     property.parent.properties.some((entry) => entry.type === "SpreadElement") ||
-    callName(use.parent) !== "choice" ||
-    use.parent.arguments.length < 2 ||
+    callName(alternatives) !== "choice" ||
+    alternatives.arguments.length < 2 ||
     !isStaticDsl(body)
   )
     return false;
@@ -31,6 +34,12 @@ export function isFixedKeywordFieldBranch(context, property, use, properties) {
     typeof node.arguments[0].value === "string" &&
     node.arguments[0].value.length > 0 &&
     value(node.arguments[1]);
+  const keywordAlias = (node) => {
+    if (callName(node) !== "alias" || node.arguments.length !== 2 || !keyword(node.arguments[0]))
+      return null;
+    const target = memberName(node.arguments[1]);
+    return target && !target.startsWith("_") ? target : null;
+  };
   const requiredBranch = () => {
     const [first, source, second, third, target] = body.arguments;
     return (
@@ -59,13 +68,8 @@ export function isFixedKeywordFieldBranch(context, property, use, properties) {
       flag.arguments.length !== 1
     )
       return false;
-    const alias = flag.arguments[0],
-      visible = callName(alias) === "alias" && memberName(alias.arguments[1]);
     return (
-      alias.arguments?.length === 2 &&
-      keyword(alias.arguments[0]) &&
-      visible &&
-      !visible.startsWith("_") &&
+      keywordAlias(flag.arguments[0]) &&
       new Set([
         source.arguments[0].value,
         modifier.arguments[0].arguments[0].value,
@@ -73,11 +77,38 @@ export function isFixedKeywordFieldBranch(context, property, use, properties) {
       ]).size === 3
     );
   };
-  if (!requiredBranch() && !qualifiedBranch()) return false;
+  const requiredSuffix = () => {
+    if (callName(caller) !== "seq" || caller.arguments.length !== 2 || caller.arguments[1] !== use)
+      return false;
+    const [action] = caller.arguments;
+    const [source, marker, target, tail] = body.arguments;
+    const aliasChoice = (node) => {
+      if (callName(node) !== "choice" || node.arguments.length < 2) return false;
+      const aliasName = keywordAlias(node.arguments[0]);
+      return (
+        aliasName && node.arguments.every((alternative) => keywordAlias(alternative) === aliasName)
+      );
+    };
+    if (
+      !valueField(action, aliasChoice) ||
+      !valueField(source) ||
+      !keyword(marker) ||
+      !valueField(target) ||
+      new Set([action, source, target].map((field) => field.arguments[0].value)).size !== 3
+    )
+      return false;
+    const tailName = memberName(tail);
+    if (!tailName?.startsWith("__") || !definition(tailName)) return false;
+    return (references.get(tailName) ?? []).some((reference) => enclosingRule(reference) === owner);
+  };
+  const definition = (symbol) =>
+    properties.find((other) => other.parent === property.parent && ruleName(other) === symbol);
+  if (!requiredBranch() && !qualifiedBranch() && !requiredSuffix()) return false;
   const suppressed = (node) =>
     isRuleDisabled(context, node) ||
     (node.type === "CallExpression" && node.arguments.some(suppressed));
-  if (suppressed(body) || isRuleDisabled(context, owner)) return false;
+  if (suppressed(body) || isRuleDisabled(context, owner) || (suffixBranch && suppressed(caller)))
+    return false;
   for (let current = use; current !== owner; current = current.parent) {
     if (
       isRuleDisabled(context, current) ||
@@ -111,12 +142,10 @@ export function isFixedKeywordFieldBranch(context, property, use, properties) {
     if (symbol === name) return true;
     if (seen.has(symbol)) return false;
     seen.add(symbol);
-    const definition = properties.find(
-      (other) => other.parent === property.parent && ruleName(other) === symbol,
-    );
-    return definition
-      ? !isStaticDsl(definition.value.body) ||
-          referencedSymbols(definition.value.body).some((next) => recursive(next, seen))
+    const dependency = definition(symbol);
+    return dependency
+      ? !isStaticDsl(dependency.value.body) ||
+          referencedSymbols(dependency.value.body).some((next) => recursive(next, seen))
       : false;
   };
   return !referencedSymbols(body).some((symbol) => recursive(symbol));
