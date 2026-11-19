@@ -116,6 +116,62 @@ function isRequiredListBodyTail(body, use, owner, localRules) {
   );
 }
 
+function requiredChoiceArmHead(body, use, owner, localRules) {
+  const wrapper = owner.value.body;
+  const arm = use.parent;
+  if (
+    ruleName(owner).startsWith("_") ||
+    callName(wrapper) !== "prec.right" ||
+    wrapper.arguments.length !== 1 ||
+    callName(arm) !== "seq" ||
+    arm.arguments.length !== 2 ||
+    arm.arguments[1] !== use
+  )
+    return null;
+
+  const statement = wrapper.arguments[0];
+  if (
+    callName(statement) !== "seq" ||
+    statement.arguments.length !== 2 ||
+    !keyword(statement.arguments[0])
+  )
+    return null;
+
+  let choices = arm;
+  while (callName(choices.parent) === "choice" && choices.parent.arguments.length > 1)
+    choices = choices.parent;
+  if (choices === arm || choices !== statement.arguments[1]) return null;
+
+  const head = memberName(arm.arguments[0]);
+  const [object, clause, action] = body.arguments;
+  const tail = memberName(optionalValue(clause));
+  if (
+    !head?.startsWith("__") ||
+    !head.endsWith("_head") ||
+    !localRules.has(head) ||
+    callName(object) !== "field" ||
+    object.arguments.length !== 2 ||
+    object.arguments[0].type !== "Literal" ||
+    object.arguments[0].value !== "object" ||
+    !memberName(object.arguments[1]) ||
+    !tail?.startsWith("__") ||
+    tail === head ||
+    !localRules.has(tail) ||
+    callName(action) !== "choice" ||
+    action.arguments.length !== 2 ||
+    memberName(action.arguments[1]) !== "_statement"
+  )
+    return null;
+
+  const localAction = memberName(action.arguments[0]);
+  return localAction?.startsWith("__") &&
+    localAction !== head &&
+    localAction !== tail &&
+    localRules.has(localAction)
+    ? head
+    : null;
+}
+
 function canInlinePrivateBody(context, property, owner, localRules, references, extraSymbols) {
   const body = property.value.body;
   const sequence = owner.value.body;
@@ -197,7 +253,8 @@ export const singleUseSequence = rule((context) => {
         const privateBody = name.endsWith("_body");
         const selectorBody = privateBody && body.arguments.length === 4;
         const listTailBody = privateBody && body.arguments.length === 2;
-        if (privateBody && !selectorBody && !listTailBody) continue;
+        const choiceArmBody = privateBody && body.arguments.length === 3;
+        if (privateBody && !selectorBody && !listTailBody && !choiceArmBody) continue;
         if (
           !privateBody &&
           (body.arguments.length < 2 ||
@@ -217,11 +274,20 @@ export const singleUseSequence = rule((context) => {
               .filter((other) => other.parent === property.parent)
               .map((other) => [ruleName(other), other.value.body]),
           );
+          const choiceHead = choiceArmBody
+            ? requiredChoiceArmHead(body, use, owner, localRules)
+            : null;
           const matches = selectorBody
             ? isOptionalSelectorChoiceArm(context, body, use, owner, localRules)
-            : isRequiredListBodyTail(body, use, owner, localRules);
+            : listTailBody
+              ? isRequiredListBodyTail(body, use, owner, localRules)
+              : choiceHead !== null;
           if (!matches) continue;
-          const extraSymbols = listTailBody ? [memberName(owner.value.body.arguments[0])] : [];
+          const extraSymbols = listTailBody
+            ? [memberName(owner.value.body.arguments[0])]
+            : choiceHead
+              ? [choiceHead]
+              : [];
           if (!canInlinePrivateBody(context, property, owner, localRules, references, extraSymbols))
             continue;
         }
@@ -243,7 +309,9 @@ export const singleUseSequence = rule((context) => {
             ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining the optional marker, shared selector, field group and recursive continuation inside the existing optional choice. Preserve field scope, keyword tokens and branch order, then compare parser metrics, parsing speed and complete valid and recovery trees.`
             : listTailBody
               ? `${name} is the sole unaliased tail of ${ruleName(owner)}; try inlining its required field list and optional phrase while retaining the separate prefix and statement body. Preserve field scope and optionality, then compare parser metrics, parsing speed and complete valid and recovery trees.`
-              : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence. Check external references, then measure parser size and validate trees.`,
+              : choiceArmBody
+                ? `${name} has one unaliased choice-arm use in ${ruleName(owner)}; try inlining its required object field, optional clause, and action choice after the retained private head. Preserve field scope and branch order, then compare parser metrics, parsing speed and complete valid and recovery trees.`
+                : `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence. Check external references, then measure parser size and validate trees.`,
         );
       }
     },
