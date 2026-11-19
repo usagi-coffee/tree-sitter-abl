@@ -14,10 +14,12 @@ export default ({ kw }) => ({
           alias($._kw_current, $.current),
         ),
       ),
-      field("table", $._qualified_identifier),
-      optional(field("constant", $._expression)),
+      $.__find_target,
       optional($.__find_options),
     ),
+
+  __find_target: ($) =>
+    seq(field("table", $._qualified_identifier), optional(field("constant", $._expression))),
 
   __find_options: ($) =>
     prec.right(
