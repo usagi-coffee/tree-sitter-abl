@@ -18,6 +18,7 @@ export default ({ kw }) => ({
       optional($.__find_options),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __find_target: ($) =>
     seq(field("table", $._qualified_identifier), optional(field("constant", $._expression))),
 
