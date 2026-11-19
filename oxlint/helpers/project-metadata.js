@@ -1,5 +1,22 @@
 import { resolve } from "node:path";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+
+export function usedOutsideFile(context, name) {
+  const filename = resolve(context.cwd, context.filename);
+  const directory = resolve(context.cwd, "grammar");
+  const root = resolve(context.cwd, "grammar.js");
+  const files = existsSync(root) ? [root] : [];
+  try {
+    if (existsSync(directory)) {
+      for (const entry of readdirSync(directory, { recursive: true })) {
+        if (entry.endsWith(".js")) files.push(resolve(directory, entry));
+      }
+    }
+    return files.some((file) => file !== filename && readFileSync(file, "utf8").includes(name));
+  } catch {
+    return true;
+  }
+}
 
 export function rootMetadataSymbols(context, properties) {
   const root = resolve(context.cwd, "grammar.js");

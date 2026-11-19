@@ -1,5 +1,3 @@
-import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { resolve } from "node:path";
 import {
   callName,
   enclosingRule,
@@ -14,28 +12,15 @@ import {
   rule,
   ruleName,
 } from "../helpers.js";
-import { projectPrecedenceSymbols, rootMetadataSymbols } from "../helpers/project-metadata.js";
+import {
+  projectPrecedenceSymbols,
+  rootMetadataSymbols,
+  usedOutsideFile,
+} from "../helpers/project-metadata.js";
 
 const optionalValue = (node) =>
   callName(node) === "optional" && node.arguments.length === 1 ? node.arguments[0] : null;
 const keyword = (node) => memberName(node)?.startsWith("_kw_") || isStaticKeywordCall(node);
-
-function usedOutsideFile(context, name) {
-  const filename = resolve(context.cwd, context.filename);
-  const directory = resolve(context.cwd, "grammar");
-  const root = resolve(context.cwd, "grammar.js");
-  const files = existsSync(root) ? [root] : [];
-  try {
-    if (existsSync(directory)) {
-      for (const entry of readdirSync(directory, { recursive: true })) {
-        if (entry.endsWith(".js")) files.push(resolve(directory, entry));
-      }
-    }
-    return files.some((file) => file !== filename && readFileSync(file, "utf8").includes(name));
-  } catch {
-    return true;
-  }
-}
 
 function isOptionalSelectorChoiceArm(context, property, use, owner, properties, references) {
   const name = ruleName(property);
