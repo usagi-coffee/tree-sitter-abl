@@ -48,8 +48,10 @@ export const singleUseKeywordSequence = rule((context) => {
       for (const property of properties) {
         const name = ruleName(property);
         const body = property.value.body;
-        if (callName(body) !== "seq" || ![2, 3, 4, 5, 7].includes(body.arguments.length)) continue;
-        const suffixBranch = body.arguments.length === 4;
+        if (callName(body) !== "seq" || ![2, 3, 4, 5, 6, 7].includes(body.arguments.length))
+          continue;
+        const compoundSuffix = body.arguments.length === 6;
+        const suffixBranch = body.arguments.length === 4 || compoundSuffix;
         if (!name.startsWith("__") || (name.endsWith("_body") && !suffixBranch)) continue;
         const fixedBranch = body.arguments.length === 5;
         const qualifiedBranch = body.arguments.length === 7;
@@ -82,7 +84,9 @@ export const singleUseKeywordSequence = rule((context) => {
         const measure =
           "check external references and grammar metadata, then compare actions, table bytes, memory, parsing speed and complete valid and recovery trees.";
         let message = `${scope} local use in ${ownerName}; try inlining this small keyword sequence. Preserve keyword options, fields and ordering; check external references and grammar metadata, then measure parser size and validate trees.`;
-        if (suffixBranch)
+        if (compoundSuffix)
+          message = `${scope} choice-arm suffix use in ${ownerName} after a field-wrapped keyword alias. Try inlining the required fields, shared phrase and keyword clauses in place. Preserve field scope, aliases, token identities and branch order. Before keeping the change, ${measure}`;
+        else if (suffixBranch)
           message = `${scope} choice-arm suffix use in ${ownerName}. Try inlining the required fields and keyword while retaining their shared trailing helper. Preserve field scope, aliases, token identities and branch order. Before keeping the change, ${measure}`;
         else if (qualifiedBranch)
           message = `${scope} choice-arm use in ${ownerName}; try inlining this qualified-field branch with its optional keyword modifier and trailing flag. Preserve keyword options, token identities, field scope, aliases and branch order; ${measure}`;

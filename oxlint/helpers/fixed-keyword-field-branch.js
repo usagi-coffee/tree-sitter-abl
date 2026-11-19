@@ -14,7 +14,8 @@ export function isFixedKeywordFieldBranch(context, property, use, properties, re
   const name = ruleName(property),
     body = property.value.body,
     owner = enclosingRule(use);
-  const suffixBranch = body.arguments.length === 4;
+  const compoundSuffix = body.arguments.length === 6;
+  const suffixBranch = body.arguments.length === 4 || compoundSuffix;
   const caller = use.parent;
   const alternatives = suffixBranch ? caller.parent : caller;
   if (
@@ -81,6 +82,29 @@ export function isFixedKeywordFieldBranch(context, property, use, properties, re
     if (callName(caller) !== "seq" || caller.arguments.length !== 2 || caller.arguments[1] !== use)
       return false;
     const [action] = caller.arguments;
+    if (compoundSuffix) {
+      const [source, phrase, firstMarker, firstValue, secondMarker, secondValue] = body.arguments;
+      const phraseName = memberName(phrase);
+      const keywordName = (node) =>
+        (isStaticKeywordCall(node)
+          ? node.arguments[0].value
+          : memberName(node).slice(4).replaceAll("_", "-")
+        ).toUpperCase();
+      return (
+        valueField(action, keywordAlias) &&
+        valueField(source) &&
+        phraseName?.startsWith("_") &&
+        !phraseName.startsWith("__") &&
+        phraseName.endsWith("_phrase") &&
+        keyword(firstMarker) &&
+        keyword(secondMarker) &&
+        keywordName(firstMarker) !== keywordName(secondMarker) &&
+        valueField(firstValue) &&
+        valueField(secondValue) &&
+        new Set([action, source, firstValue, secondValue].map((field) => field.arguments[0].value))
+          .size === 4
+      );
+    }
     const [source, marker, target, tail] = body.arguments;
     const aliasChoice = (node) => {
       if (callName(node) !== "choice" || node.arguments.length < 2) return false;

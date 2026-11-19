@@ -64,3 +64,87 @@ new RuleTester().run("single-use-keyword-sequence", singleUseKeywordSequence, {
     },
   ],
 });
+
+const compoundAction = 'field("action", alias(kw("INITIATE"), $.identifier))';
+const compoundUse = `seq(${compoundAction}, $.__dde_initiate_body)`;
+const compoundBody = `seq(
+    field("ddeid", $._expression),
+    $._frame_identifier_phrase,
+    $._kw_application,
+    field("application", $._expression),
+    kw("TOPIC"),
+    field("topic", $._expression),
+  )`;
+const compoundDefinition = `__dde_initiate_body: ($) => ${compoundBody},`;
+const compoundBefore = `export default grammar({ rules: {
+  __dde_prefix: ($) => seq(kw("DDE"), choice(
+    seq(kw("TERMINATE"), field("ddeid", $._expression)),
+    ${compoundUse},
+  )),
+  ${compoundDefinition}
+} });`;
+const compoundMessage =
+  /choice-arm suffix use.*after a field-wrapped keyword alias.*required fields, shared phrase and keyword clauses/;
+const disableKeywordSequence =
+  "// oxlint-disable-next-line rule-to-test/single-use-keyword-sequence";
+
+new RuleTester().run("single-use-keyword-sequence", singleUseKeywordSequence, {
+  valid: [
+    compoundBefore
+      .replace(compoundUse, `seq(${compoundAction}, ${compoundBody.slice(4, -1)})`)
+      .replace(compoundDefinition, ""),
+    compoundBefore.replace(compoundUse, `seq(${compoundAction}, $.__dde_initiate_body, $.extra)`),
+    compoundBefore.replace(compoundUse, `seq($.__dde_initiate_body, ${compoundAction})`),
+    compoundBefore.replace(compoundUse, "alias($.__dde_initiate_body, $.branch)"),
+    compoundBefore.replace(compoundUse, "seq(kw('INITIATE'), $.__dde_initiate_body)"),
+    compoundBefore.replace(compoundUse, `field("branch", ${compoundUse})`),
+    compoundBefore.replace(compoundUse, `alias(${compoundUse}, $.branch)`),
+    compoundBefore.replace(compoundUse, `token(${compoundUse})`),
+    compoundBefore.replace(compoundUse, `prec.dynamic(1, ${compoundUse})`),
+    compoundBefore.replace(compoundUse, `${compoundUse}, ${compoundUse}`),
+    compoundBefore.replace(
+      'alias(kw("INITIATE"), $.identifier)',
+      "alias(kw(action), $.identifier)",
+    ),
+    compoundBefore.replace(
+      'alias(kw("INITIATE"), $.identifier)',
+      'alias(kw("INITIATE"), $._hidden)',
+    ),
+    compoundBefore.replace("$._frame_identifier_phrase", "$.__private_phrase"),
+    compoundBefore.replace("$._frame_identifier_phrase", "optional($._frame_identifier_phrase)"),
+    compoundBefore.replace("$._frame_identifier_phrase", "$.frame_phrase"),
+    compoundBefore.replace("$._kw_application", "$.application_marker"),
+    compoundBefore.replace('kw("TOPIC")', 'kw("Application", { offset: 4 })'),
+    compoundBefore.replace('field("topic", $._expression)', 'field("action", $._expression)'),
+    compoundBefore.replace(
+      'field("topic", $._expression)',
+      'field("topic", $.__dde_initiate_body)',
+    ),
+    compoundBefore.replace(
+      'field("topic", $._expression)',
+      'optional(field("topic", $._expression))',
+    ),
+    compoundBefore.replace("rules: {", "rules: { ...others,"),
+    compoundBefore.replace("rules: {", "inline: ($) => [$.__dde_initiate_body], rules: {"),
+    compoundBefore.replace("rules: {", "conflicts: ($) => [[$.__dde_prefix, $.other]], rules: {"),
+    `${compoundBefore}\nconst computedUse = ($) => $[name];`,
+    compoundBefore.replace(
+      compoundDefinition,
+      `${disableKeywordSequence}\n  ${compoundDefinition}`,
+    ),
+    compoundBefore.replace(compoundUse, `${disableKeywordSequence}\n    ${compoundUse}`),
+    compoundBefore.replace('kw("TOPIC")', `${disableKeywordSequence}\n    kw("TOPIC")`),
+  ].map((code) => ({ code, filename: "grammar.js" })),
+  invalid: [
+    { code: compoundBefore, errors: [{ message: compoundMessage }] },
+    {
+      code: compoundBefore
+        .replaceAll("__dde_prefix", "__example_prefix")
+        .replaceAll("__dde_initiate_body", "__example_begin_body")
+        .replaceAll("$._frame_identifier_phrase", "$._context_phrase")
+        .replace('kw("INITIATE")', "$._kw_begin")
+        .replace('kw("TOPIC")', "$._kw_destination"),
+      errors: [{ message: compoundMessage }],
+    },
+  ],
+});
