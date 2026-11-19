@@ -186,13 +186,17 @@ export default ({ kw }) => ({
       alias($._extent_phrase, $.extent_phrase),
     ),
 
-  __class_property_accessor_body: ($) => seq(alias($._colon, ":"), $._compound_body),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,
       // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction, tree-sitter-optimize/shared-choice
-      seq($.__class_property_accessor_body, optional(choice($._kw_get, $._kw_set)), $._terminator),
+      seq(
+        alias($._colon, ":"),
+        $._compound_body,
+        optional(choice($._kw_get, $._kw_set)),
+        $._terminator,
+      ),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset

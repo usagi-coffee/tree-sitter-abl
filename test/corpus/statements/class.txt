@@ -1045,3 +1045,37 @@ END CLASS.
           name: (identifier)
           like: (identifier)))
       (body))))
+
+================================================================================
+PROPERTY - getter without a closing keyword followed by a setter
+================================================================================
+
+CLASS Accessors:
+  DEFINE PUBLIC PROPERTY Value AS INTEGER
+    GET():
+      RETURN 0.
+    END.
+    SET(INPUT newValue AS INTEGER):
+      Value = newValue.
+    END SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (return_statement
+        value: (number_literal))
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier)))))
