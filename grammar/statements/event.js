@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       seq(kw("DELEGATE"), optional($._kw_class), field("delegate_type", $._type_or_string)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __event_signature_parameters: ($) => seq("(", optional($.__event_parameter_list), ")"),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
