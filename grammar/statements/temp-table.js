@@ -67,6 +67,7 @@ export default ({ kw }) => ({
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_fields: ($) =>
     prec.right(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", $._qualified_identifier),
         optional(
