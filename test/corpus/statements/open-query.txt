@@ -392,3 +392,26 @@ OPEN QUERY q FOR EACH Customer WHERE
       by: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+OPEN QUERY - FOR EACH with argument reference record and WHERE condition
+================================================================================
+
+OPEN QUERY qList FOR EACH {1} WHERE {1}.Code = {4} AND {6} = {7}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (argument_reference)
+      where: (binary_expression
+        (binary_expression
+          (qualified_name
+            left: (argument_reference)
+            right: (identifier))
+          (argument_reference))
+        (binary_expression
+          (argument_reference)
+          (argument_reference))))))

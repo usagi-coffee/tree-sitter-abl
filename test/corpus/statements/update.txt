@@ -445,3 +445,24 @@ UPDATE field1 GO-ON(F1, "F2" F3, "F4").
       (string_literal)
       (identifier)
       (string_literal))))
+
+================================================================================
+UPDATE with argument reference qualified fields
+================================================================================
+
+update {1}.Name {1}.Descr with frame fMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    (field
+      field: (qualified_name
+        left: (argument_reference)
+        right: (identifier)))
+    (field
+      field: (qualified_name
+        left: (argument_reference)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier))))

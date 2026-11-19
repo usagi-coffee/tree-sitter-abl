@@ -11,7 +11,7 @@ export default ({ kw }) => ({
 
   __variable_body: ($) =>
     seq(
-      field("name", $.identifier),
+      field("name", choice($.identifier, $.argument_reference)),
       optional($.__variable_extents),
       optional(alias($._kw_no_undo, $.no_undo)),
       choice(

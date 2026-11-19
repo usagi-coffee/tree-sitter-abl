@@ -694,3 +694,22 @@ ASSIGN INPUT FRAME fr tt.f.
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+ASSIGN object_access in frame argument_reference
+================================================================================
+
+assign x:LIST-ITEMS IN FRAME {1} = cItems.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (widget_qualified_name
+          target: (object_access
+            left: (identifier)
+            right: (identifier))
+          widget: (argument_reference))
+        right: (identifier)))))

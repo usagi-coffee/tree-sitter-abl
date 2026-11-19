@@ -185,3 +185,16 @@ VIEW c-win IN WINDOW w1.
       handle: (identifier))
     (in_window_phrase
       window: (identifier))))
+
+================================================================================
+VIEW frame with argument_reference
+================================================================================
+
+VIEW FRAME {3}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      frame: (argument_reference))))

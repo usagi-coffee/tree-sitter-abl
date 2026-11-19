@@ -1033,3 +1033,18 @@ DEFINE {&NEWGLOBAL} SHARED VARIABLE g-user AS CHARACTER.
     (scope_modifier)
     name: (identifier)
     type: (identifier)))
+
+================================================================================
+VARIABLE LIKE with preprocessor argument qualified name
+================================================================================
+
+define variable x like {2}.field.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (argument_reference)
+      right: (identifier))))

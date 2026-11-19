@@ -27,7 +27,77 @@ ARGUMENT REFERENCE positional and all arguments
 --------------------------------------------------------------------------------
 
 (source_code
-  (argument_reference)
-  (empty_statement)
-  (argument_reference)
-  (empty_statement))
+  (expression_statement
+    (argument_reference))
+  (expression_statement
+    (argument_reference)))
+
+================================================================================
+ARGUMENT REFERENCE in ASSIGN left-hand side
+================================================================================
+
+ASSIGN
+  {1}.Code = ttParam.Code
+  {1}.Name = ttParam.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (argument_reference)
+          right: (identifier))
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (qualified_name
+          left: (argument_reference)
+          right: (identifier))
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+ARGUMENT REFERENCE - positional CREATE record
+================================================================================
+
+CREATE {1}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    (argument_reference)))
+
+================================================================================
+ARGUMENT REFERENCE - positional AVAILABLE record
+================================================================================
+
+IF NOT AVAILABLE {1} THEN BELL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (unary_expression
+      (available_expression
+        (argument_reference)))
+    (bell_statement)))
+
+================================================================================
+ARGUMENT REFERENCE - positional LOCKED record
+================================================================================
+
+IF NOT LOCKED {1} THEN BELL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (unary_expression
+      (locked_expression
+        (argument_reference)))
+    (bell_statement)))
