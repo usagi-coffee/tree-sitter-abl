@@ -1,3 +1,4 @@
+import "./test_compound_body_choice_arm.js";
 import "./test_optional_keyword_selector.js";
 import "./test_required_keyword_field_suffix.js";
 import "./test_qualified_keyword_field_branch.js";
