@@ -8,7 +8,12 @@ export default ({ kw }) => ({
         choice(
           alias($.__assign_statement_phrase_body, $.assign_phrase),
           $.__assign_record_body,
-          $.__assign_input_body,
+          seq(
+            optional($._kw_input),
+            $._frame_browse_selector,
+            $.__assign_input_fields,
+            optional($.__assign_input_sections),
+          ),
         ),
       ),
     ),
@@ -38,13 +43,6 @@ export default ({ kw }) => ({
       optional(seq(optional(","), $.__assign_except_fields)),
     ),
 
-  __assign_input_body: ($) =>
-    seq(
-      optional($._kw_input),
-      $._frame_browse_selector,
-      $.__assign_input_fields,
-      optional($.__assign_input_sections),
-    ),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __assign_input_sections: ($) =>
     prec.right(
