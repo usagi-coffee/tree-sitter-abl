@@ -76,6 +76,7 @@ import { recursiveContinuationInline } from "./rules/recursive-continuation-inli
 import { sharedCommaField } from "./rules/shared-comma-field.js";
 import { closingDelimiterWrapper } from "./rules/closing-delimiter-wrapper.js";
 import { literalOpenerBodyBoundary } from "./rules/literal-opener-body-boundary.js";
+import { sharedKeywordBodyBoundary } from "./rules/shared-keyword-body-boundary.js";
 import { singleUseDelimitedSequence } from "./rules/single-use-delimited-sequence.js";
 import { orderedOptionalChain } from "./rules/ordered-optional-chain.js";
 import { optionalTailChoiceCollapse } from "./rules/optional-tail-choice-collapse.js";
@@ -206,6 +207,7 @@ export {
   closingDelimiterHoist,
   closingDelimiterWrapper,
   literalOpenerBodyBoundary,
+  sharedKeywordBodyBoundary,
   redundantInheritedField,
   singleUseFieldSequence,
   singleUseFieldChoice,
@@ -371,6 +373,7 @@ export default {
     "shared-comma-field": sharedCommaField,
     "closing-delimiter-wrapper": closingDelimiterWrapper,
     "literal-opener-body-boundary": literalOpenerBodyBoundary,
+    "shared-keyword-body-boundary": sharedKeywordBodyBoundary,
     "single-use-delimited-sequence": singleUseDelimitedSequence,
     "ordered-optional-chain": orderedOptionalChain,
     "optional-tail-choice-collapse": optionalTailChoiceCollapse,
