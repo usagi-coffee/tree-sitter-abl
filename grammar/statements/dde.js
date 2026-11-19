@@ -32,7 +32,10 @@ export default ({ kw }) => ({
             "action",
             choice(alias($._kw_get, $.identifier), alias(kw("REQUEST"), $.identifier)),
           ),
-          $.__dde_target_item_body,
+          field("ddeid", $._expression),
+          $._kw_target,
+          field("target", $._assignable),
+          $.__dde_item_time_body,
         ),
         seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
       ),
@@ -48,13 +51,6 @@ export default ({ kw }) => ({
       field("application", $._expression),
       kw("TOPIC"),
       field("topic", $._expression),
-    ),
-  __dde_target_item_body: ($) =>
-    seq(
-      field("ddeid", $._expression),
-      $._kw_target,
-      field("target", $._assignable),
-      $.__dde_item_time_body,
     ),
   __dde_item_time_body: ($) =>
     seq(kw("ITEM"), field("item", $._expression), optional($.__dde_time_phrase)),

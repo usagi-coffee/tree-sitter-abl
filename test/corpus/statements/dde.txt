@@ -81,6 +81,47 @@ DDE REQUEST channel TARGET result ITEM "second".
     item: (string_literal)))
 
 ================================================================================
+DDE - GET and REQUEST expression boundaries
+================================================================================
+
+DDE GET getChannel() TARGET obj:value ITEM itemName TIME waitTime + 1 NO-ERROR.
+DDE REQUEST obj:channel TARGET results[i + 1] ITEM "first" + suffix TIME (waitTime + 1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (function_call
+      function: (identifier)
+      (arguments))
+    target: (object_access
+      left: (identifier)
+      right: (identifier))
+    item: (identifier)
+    time: (binary_expression
+      (identifier)
+      (number_literal))
+    (no_error))
+  (dde_statement
+    action: (identifier)
+    ddeid: (object_access
+      left: (identifier)
+      right: (identifier))
+    target: (array_access
+      array: (identifier)
+      index: (binary_expression
+        (identifier)
+        (number_literal)))
+    item: (binary_expression
+      (string_literal)
+      (identifier))
+    time: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal)))))
+
+================================================================================
 DDE - ADVISE and SEND without optional suffixes
 ================================================================================
 
