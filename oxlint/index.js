@@ -46,6 +46,7 @@ import { optionalAliasTailExtraction } from "./rules/optional-alias-tail-extract
 import { sharedRepeatedSignature } from "./rules/shared-repeated-signature.js";
 import { leftRecursiveList } from "./rules/left-recursive-list.js";
 import { recursiveItemInline } from "./rules/recursive-item-inline.js";
+import { rightRecursiveSortItemInline } from "./rules/right-recursive-sort-item-inline.js";
 import { recursiveItemExtraction } from "./rules/recursive-item-extraction.js";
 import { recursiveChoiceItemExtraction } from "./rules/recursive-choice-item-extraction.js";
 import { forwardedAliasReuse } from "./rules/forwarded-alias-reuse.js";
@@ -205,6 +206,7 @@ export {
   recursiveItemExtraction,
   recursiveChoiceItemExtraction,
   recursiveItemInline,
+  rightRecursiveSortItemInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
   closingDelimiterWrapper,
@@ -345,6 +347,7 @@ export default {
     "shared-repeated-signature": sharedRepeatedSignature,
     "left-recursive-list": leftRecursiveList,
     "recursive-item-inline": recursiveItemInline,
+    "right-recursive-sort-item-inline": rightRecursiveSortItemInline,
     "recursive-item-extraction": recursiveItemExtraction,
     "recursive-choice-item-extraction": recursiveChoiceItemExtraction,
     "forwarded-alias-reuse": forwardedAliasReuse,

@@ -70,6 +70,7 @@
         "tree-sitter-optimize/shared-modifier-alias-sequence": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
         "tree-sitter-optimize/recursive-item-inline": "warn",
+        "tree-sitter-optimize/right-recursive-sort-item-inline": "warn",
         "tree-sitter-optimize/recursive-item-extraction": "warn",
         "tree-sitter-optimize/recursive-choice-item-extraction": "warn",
         "tree-sitter-optimize/forwarded-alias-reuse": "warn",

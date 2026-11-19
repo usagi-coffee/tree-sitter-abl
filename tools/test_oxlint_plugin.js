@@ -26,6 +26,7 @@ import "./test_selector_optional_head.js";
 import "./test_prefixed_selector_head.js";
 import "./test_private_delimited_field.js";
 import "./test_right_recursive_clause.js";
+import "./test_right_recursive_sort_item_inline.js";
 import "./test_shared_field_optional_tail.js";
 import "./test_shared_ordered_pair.js";
 import "./test_private_keyword_optional_tail.js";

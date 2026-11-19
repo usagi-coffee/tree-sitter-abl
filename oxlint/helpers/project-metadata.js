@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 
-export function usedOutsideFile(context, name) {
+export function usedOutsideFile(context, name, { wholeName = false } = {}) {
   const filename = resolve(context.cwd, context.filename);
   const directory = resolve(context.cwd, "grammar");
   const root = resolve(context.cwd, "grammar.js");
@@ -12,7 +12,13 @@ export function usedOutsideFile(context, name) {
         if (entry.endsWith(".js")) files.push(resolve(directory, entry));
       }
     }
-    return files.some((file) => file !== filename && readFileSync(file, "utf8").includes(name));
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const whole = wholeName ? new RegExp(`(?<![$\\w])${escapedName}(?![$\\w])`) : null;
+    return files.some((file) => {
+      if (file === filename) return false;
+      const source = readFileSync(file, "utf8");
+      return whole ? whole.test(source) : source.includes(name);
+    });
   } catch {
     return true;
   }
