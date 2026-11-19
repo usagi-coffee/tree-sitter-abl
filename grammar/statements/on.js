@@ -95,6 +95,7 @@ export default ({ kw }) => ({
           choice(
             seq(
               $.__on_database_event_head,
+              // oxlint-disable-next-line tree-sitter-optimize/nested-field-body-extraction
               seq(
                 field("object", $._qualified_identifier),
                 optional($.__on_database_event_tail),
