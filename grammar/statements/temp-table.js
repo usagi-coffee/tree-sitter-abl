@@ -84,6 +84,7 @@ export default ({ kw }) => ({
   __temp_table_field_option: ($) =>
     choice(
       $._color_font_option,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_decimals, field("decimals", $.number_literal)),
