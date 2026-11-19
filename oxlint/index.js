@@ -4,6 +4,7 @@ import { existingAlternativeBodyReuse } from "./rules/existing-alternative-body-
 import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
 import { optionalChoicePrefixHoist } from "./rules/optional-choice-prefix-hoist.js";
 import { optionalFlagPairExtraction } from "./rules/optional-flag-pair-extraction.js";
+import { optionalNumericPairExtraction } from "./rules/optional-numeric-pair-extraction.js";
 import { sharedKeywordPairFieldInline } from "./rules/shared-keyword-pair-field-inline.js";
 import { privatePrecedenceOrderedPairInline } from "./rules/private-precedence-ordered-pair-inline.js";
 import { noNumericPrecedence } from "./rules/no-numeric-precedence.js";
@@ -156,6 +157,7 @@ export {
   keywordOptionalMarkerPrefix,
   optionalChoicePrefixHoist,
   optionalFlagPairExtraction,
+  optionalNumericPairExtraction,
   sharedKeywordPairFieldInline,
   privatePrecedenceOrderedPairInline,
   multiUsePrivateKeywordOptionalTailInline,
@@ -301,6 +303,7 @@ export default {
     "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
     "optional-choice-prefix-hoist": optionalChoicePrefixHoist,
     "optional-flag-pair-extraction": optionalFlagPairExtraction,
+    "optional-numeric-pair-extraction": optionalNumericPairExtraction,
     "shared-keyword-pair-field-inline": sharedKeywordPairFieldInline,
     "private-precedence-ordered-pair-inline": privatePrecedenceOrderedPairInline,
     "multi-use-private-keyword-optional-tail-inline": multiUsePrivateKeywordOptionalTailInline,
