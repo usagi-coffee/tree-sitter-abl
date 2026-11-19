@@ -20,6 +20,7 @@ import { keywordListHeadExtraction } from "./rules/keyword-list-head-extraction.
 import { pairedMarkerFieldPrefix } from "./rules/paired-marker-field-prefix.js";
 import { optionalPrefixHeadExtraction } from "./rules/optional-prefix-head-extraction.js";
 import { nestedEventHeadExtraction } from "./rules/nested-event-head-extraction.js";
+import { parenthesizedSignatureExtraction } from "./rules/parenthesized-signature-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
 import { privatePrecedenceSymbolInline } from "./rules/private-precedence-symbol-inline.js";
 import { optionalSelectorBodyInline } from "./rules/optional-selector-body-inline.js";
@@ -176,6 +177,7 @@ export {
   recursiveContinuationInline,
   optionalPrefixHeadExtraction,
   nestedEventHeadExtraction,
+  parenthesizedSignatureExtraction,
   choiceProductExtraction,
   sharedFieldMarker,
   sharedValuedFragment,
@@ -319,6 +321,7 @@ export default {
     "keyword-list-head-extraction": keywordListHeadExtraction,
     "optional-prefix-head-extraction": optionalPrefixHeadExtraction,
     "nested-event-head-extraction": nestedEventHeadExtraction,
+    "parenthesized-signature-extraction": parenthesizedSignatureExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,
     "private-precedence-symbol-inline": privatePrecedenceSymbolInline,
     "optional-selector-body-inline": optionalSelectorBodyInline,
