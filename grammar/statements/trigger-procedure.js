@@ -40,6 +40,10 @@ export default ({ kw }) => ({
     seq(
       optional($._kw_value),
       field("value", $.identifier),
+      $.__trigger_procedure_value_declaration,
+    ),
+  __trigger_procedure_value_declaration: ($) =>
+    seq(
       choice(
         seq($._kw_as, field("data_type", $.identifier)),
         seq($._kw_like, field("like_field", $.qualified_name)),
