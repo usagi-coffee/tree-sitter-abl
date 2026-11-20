@@ -1,16 +1,11 @@
 export default ({ kw }) => ({
   variable_definition: ($) => seq($.__variable_prefix, $._terminator),
 
-  __variable_prefix: ($) =>
-    seq(
-      $._kw_define,
-      optional($.__variable_modifier),
-      kw("VARIABLE", { offset: 3 }),
-      $.__variable_body,
-    ),
+  __variable_prefix: ($) => seq($._kw_define, optional($.__variable_modifier), $.__variable_body),
 
   __variable_body: ($) =>
     seq(
+      kw("VARIABLE", { offset: 3 }),
       field("name", $.identifier),
       optional($.__variable_extents),
       optional(alias($._kw_no_undo, $.no_undo)),
