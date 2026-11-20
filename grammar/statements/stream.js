@@ -9,13 +9,10 @@ export default ({ kw }) => ({
       seq(
         alias($._kw_new, $.new_modifier),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        alias(kw("GLOBAL"), $.scope_modifier),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("SHARED"), $.scope_modifier),
       ),
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      alias(kw("SHARED"), $.scope_modifier),
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      alias(kw("PRIVATE"), $.access_modifier),
+      $._definition_scope_modifier,
     ),
 });
