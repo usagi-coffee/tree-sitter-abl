@@ -44,15 +44,11 @@ export default ({ kw }) => ({
     seq(field("field", $.__record_using_field), optional(seq($._kw_and, $.__record_using_fields))),
 
   __record_field_list: ($) =>
-    choice(
-      seq(
-        seq(
-          kw("FIELDS", { alias: "FIELD", offset: 5 }),
-          optional(seq($.__record_field_names_prefix, ")")),
-        ),
-        optional($.__record_except_list),
-      ),
-      $.__record_except_list,
+    choice($.__record_fields_list, seq(optional($.__record_fields_list), $.__record_except_list)),
+  __record_fields_list: ($) =>
+    seq(
+      kw("FIELDS", { alias: "FIELD", offset: 5 }),
+      optional(seq($.__record_field_names_prefix, ")")),
     ),
   __record_except_list: ($) => seq($._kw_except, $.__record_field_names_prefix, ")"),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
