@@ -72,6 +72,7 @@
         "tree-sitter-optimize/required-clause-selector-extraction": "warn",
         "tree-sitter-optimize/value-declaration-tail-extraction": "warn",
         "tree-sitter-optimize/selector-frame-suffix": "warn",
+        "tree-sitter-optimize/recursive-list-frame-suffix": "warn",
         "tree-sitter-optimize/no-numeric-precedence": "error",
         "tree-sitter-optimize/hoist-rule-precedence": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",

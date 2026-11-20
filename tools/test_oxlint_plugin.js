@@ -21,6 +21,7 @@ import "./test_shared_field_scalar_choice.js";
 import "./test_required_clause_selector_extraction.js";
 import "./test_value_declaration_tail_extraction.js";
 import "./test_selector_frame_suffix.js";
+import "./test_recursive_list_frame_suffix.js";
 import "./test_keyword_optional_marker_prefix.js";
 import "./test_optional_choice_prefix.js";
 import "./test_optional_flag_pair.js";
