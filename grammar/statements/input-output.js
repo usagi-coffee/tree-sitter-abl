@@ -7,25 +7,23 @@ export default ({ kw }) => ({
     choice(
       alias($._kw_close, $.close),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-      seq(
-        $._kw_through,
-        $._program_target,
-        optional($.__input_output_arguments),
-        optional($.__input_output_options),
-      ),
+      seq($._kw_through, $._program_target, optional($.__input_output_through_tail)),
     ),
-  __input_output_arguments: ($) =>
-    prec.right(
-      seq(
-        choice(
-          $.string_literal,
-          $.number_literal,
-          $.identifier,
-          $.preprocessor_name,
-          $._value_expression,
+  __input_output_through_tail: ($) =>
+    choice(
+      prec.right(
+        seq(
+          choice(
+            $.string_literal,
+            $.number_literal,
+            $.identifier,
+            $.preprocessor_name,
+            $._value_expression,
+          ),
+          optional($.__input_output_through_tail),
         ),
-        optional($.__input_output_arguments),
       ),
+      $.__input_output_options,
     ),
   __input_output_options: ($) =>
     prec.right(seq($.__input_output_option, optional($.__input_output_options))),
