@@ -69,6 +69,7 @@
         "tree-sitter-optimize/standalone-flag-tail-inline": "warn",
         "tree-sitter-optimize/optional-flag-choice-extraction": "warn",
         "tree-sitter-optimize/optional-alias-tail-extraction": "warn",
+        "tree-sitter-optimize/required-clause-selector-extraction": "warn",
         "tree-sitter-optimize/no-numeric-precedence": "error",
         "tree-sitter-optimize/hoist-rule-precedence": "warn",
         "tree-sitter-optimize/shared-repeated-signature": "warn",
