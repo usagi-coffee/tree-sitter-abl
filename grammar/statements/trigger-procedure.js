@@ -42,6 +42,7 @@ export default ({ kw }) => ({
       field("value", $.identifier),
       $.__trigger_procedure_value_declaration,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-suffix-hoist
   __trigger_procedure_value_declaration: ($) =>
     seq(
       choice(
