@@ -113,6 +113,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __frame_color_value: ($) => choice($._kw_normal, $._kw_input, $._kw_messages, $.color_phrase),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __frame_prompt_color: ($) => seq($._kw_prompt, field("prompt_color", $.__frame_color_value)),
 
   // DISPLAY's WITH BROWSE form must continue into a following NO-ERROR.
