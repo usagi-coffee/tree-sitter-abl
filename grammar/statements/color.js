@@ -16,13 +16,12 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/contextual-keyword-prefix-boundary
       optional(seq($._kw_prompt, field("prompt_color", $.color_phrase))),
       $.__color_targets,
-      optional($.frame_phrase),
     ),
   __color_targets: ($) =>
     prec.right(
       seq(
         choice($._qualified_identifier, $.scoped_name, $.input_expression),
-        optional($.__color_targets),
+        optional(choice($.__color_targets, $.frame_phrase)),
       ),
     ),
 });
