@@ -13,6 +13,7 @@ export default ({ kw }) => ({
   __class_definition_compound_body: ($) =>
     seq($.__class_body_opener, $.__class_definition_items, optional($._kw_class)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __class_definition_items: ($) =>
     choice(
       prec.right(
