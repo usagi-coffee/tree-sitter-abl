@@ -29,27 +29,25 @@ export default ({ kw }) => ({
         ),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-      seq(
-        $._kw_through,
-        $._program_target,
-        optional($.__output_program_items),
-        optional($.__output_shared_options),
-      ),
+      seq($._kw_through, $._program_target, optional($.__output_through_tail)),
     ),
 
-  __output_program_items: ($) =>
-    prec.right(
-      seq(
-        choice(
-          $.string_literal,
-          $.number_literal,
-          $.identifier,
-          $.preprocessor_name,
-          alias($.__output_program_flag, $.program_flag),
-          $._value_expression,
+  __output_through_tail: ($) =>
+    choice(
+      prec.right(
+        seq(
+          choice(
+            $.string_literal,
+            $.number_literal,
+            $.identifier,
+            $.preprocessor_name,
+            alias($.__output_program_flag, $.program_flag),
+            $._value_expression,
+          ),
+          optional($.__output_through_tail),
         ),
-        optional($.__output_program_items),
       ),
+      $.__output_shared_options,
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/choice-subset
