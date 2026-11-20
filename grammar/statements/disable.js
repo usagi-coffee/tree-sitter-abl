@@ -11,7 +11,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __disable_items: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner, tree-sitter-optimize/non-empty-tail-extraction
       seq(alias(kw("ALL"), $.all), optional($._except_fields), optional($.frame_phrase)),
       $.__disable_items_list,
     ),
