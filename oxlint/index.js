@@ -78,6 +78,7 @@ import { precedenceOptionalMarkerHoist } from "./rules/precedence-optional-marke
 import { sharedCommaContinuation } from "./rules/shared-comma-continuation.js";
 import { nullableSlotList } from "./rules/nullable-slot-list.js";
 import { singleUseFieldChoice } from "./rules/single-use-field-choice.js";
+import { singleUseFieldKeywordAliasChoice } from "./rules/single-use-field-keyword-alias-choice.js";
 import { recursiveContinuationInline } from "./rules/recursive-continuation-inline.js";
 import { sharedCommaField } from "./rules/shared-comma-field.js";
 import { closingDelimiterWrapper } from "./rules/closing-delimiter-wrapper.js";
@@ -227,6 +228,7 @@ export {
   redundantInheritedField,
   singleUseFieldSequence,
   singleUseFieldChoice,
+  singleUseFieldKeywordAliasChoice,
   choiceSuffixHoist,
   precedenceOptionalMarkerHoist,
   optionalRepetitionInline,
@@ -391,6 +393,7 @@ export default {
     "shared-comma-continuation": sharedCommaContinuation,
     "nullable-slot-list": nullableSlotList,
     "single-use-field-choice": singleUseFieldChoice,
+    "single-use-field-keyword-alias-choice": singleUseFieldKeywordAliasChoice,
     "recursive-continuation-inline": recursiveContinuationInline,
     "shared-comma-field": sharedCommaField,
     "closing-delimiter-wrapper": closingDelimiterWrapper,

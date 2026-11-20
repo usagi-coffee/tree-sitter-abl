@@ -99,6 +99,7 @@
         "tree-sitter-optimize/shared-scoped-declaration-head": "warn",
         "tree-sitter-optimize/recursive-continuation-inline": "warn",
         "tree-sitter-optimize/single-use-field-choice": "warn",
+        "tree-sitter-optimize/single-use-field-keyword-alias-choice": "warn",
         "tree-sitter-optimize/nullable-slot-list": "warn",
         "tree-sitter-optimize/shared-comma-continuation": "warn",
         "tree-sitter-optimize/optional-repetition-inline": "warn",
