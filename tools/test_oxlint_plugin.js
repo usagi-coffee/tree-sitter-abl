@@ -48,6 +48,7 @@ import "./test_form_terminal_frame_phrases.js";
 import "./test_frame_header_terminal_phrases.js";
 import "./test_on_widget_tail_anywhere.js";
 import "./test_triggers_terminal_end.js";
+import "./test_radio_set_keyword_prefix.js";
 import "./test_prompt_color_clause_extraction.js";
 import "./test_persistent_run_suffix_extraction.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
