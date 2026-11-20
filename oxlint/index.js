@@ -22,6 +22,7 @@ import { optionalPrefixHeadExtraction } from "./rules/optional-prefix-head-extra
 import { nestedEventHeadExtraction } from "./rules/nested-event-head-extraction.js";
 import { parenthesizedSignatureExtraction } from "./rules/parenthesized-signature-extraction.js";
 import { recordTargetExtraction } from "./rules/record-target-extraction.js";
+import { recordProjectionFactoring } from "./rules/record-projection-factoring.js";
 import { promptColorClauseExtraction } from "./rules/prompt-color-clause-extraction.js";
 import { persistentRunSuffixExtraction } from "./rules/persistent-run-suffix-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
@@ -190,6 +191,7 @@ export {
   nestedEventHeadExtraction,
   parenthesizedSignatureExtraction,
   recordTargetExtraction,
+  recordProjectionFactoring,
   promptColorClauseExtraction,
   persistentRunSuffixExtraction,
   choiceProductExtraction,
@@ -345,6 +347,7 @@ export default {
     "nested-event-head-extraction": nestedEventHeadExtraction,
     "parenthesized-signature-extraction": parenthesizedSignatureExtraction,
     "record-target-extraction": recordTargetExtraction,
+    "record-projection-factoring": recordProjectionFactoring,
     "prompt-color-clause-extraction": promptColorClauseExtraction,
     "persistent-run-suffix-extraction": persistentRunSuffixExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,
