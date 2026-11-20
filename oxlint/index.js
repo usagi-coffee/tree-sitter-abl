@@ -28,6 +28,7 @@ import { inputOutputTerminalOptions } from "./rules/input-output-terminal-option
 import { outputTerminalOptions } from "./rules/output-terminal-options.js";
 import { formTerminalFramePhrases } from "./rules/form-terminal-frame-phrases.js";
 import { frameHeaderTerminalPhrases } from "./rules/frame-header-terminal-phrases.js";
+import { onWidgetTailAnywhere } from "./rules/on-widget-tail-anywhere.js";
 import { promptColorClauseExtraction } from "./rules/prompt-color-clause-extraction.js";
 import { persistentRunSuffixExtraction } from "./rules/persistent-run-suffix-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
@@ -202,6 +203,7 @@ export {
   outputTerminalOptions,
   formTerminalFramePhrases,
   frameHeaderTerminalPhrases,
+  onWidgetTailAnywhere,
   promptColorClauseExtraction,
   persistentRunSuffixExtraction,
   choiceProductExtraction,
@@ -363,6 +365,7 @@ export default {
     "output-terminal-options": outputTerminalOptions,
     "form-terminal-frame-phrases": formTerminalFramePhrases,
     "frame-header-terminal-phrases": frameHeaderTerminalPhrases,
+    "on-widget-tail-anywhere": onWidgetTailAnywhere,
     "prompt-color-clause-extraction": promptColorClauseExtraction,
     "persistent-run-suffix-extraction": persistentRunSuffixExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,
