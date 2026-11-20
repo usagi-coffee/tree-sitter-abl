@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       $.__subscribe_publisher,
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __subscribe_publisher: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
