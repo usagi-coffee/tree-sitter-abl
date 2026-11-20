@@ -2,16 +2,15 @@ export default ({ kw }) => ({
   trigger_phrase: ($) =>
     choice(seq($._kw_triggers, $.__triggers_body), seq($._kw_on, $.__trigger_event_list)),
 
-  __triggers_body: ($) =>
-    prec.right(seq(":", optional($.__triggers_entries), $._kw_end, optional($._kw_triggers))),
-  __triggers_entries: ($) =>
+  __triggers_body: ($) => prec.right(seq(":", $.__triggers_entries, optional($._kw_triggers))),
+  __triggers_entries: ($) => choice(seq($.__triggers_entry, $.__triggers_entries), $._kw_end),
+  __triggers_entry: ($) =>
     seq(
       $._kw_on,
       field("event", $.__trigger_event_list),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ANYWHERE"), $.anywhere)),
       $.__trigger_action,
-      optional($.__triggers_entries),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __trigger_action: ($) =>
