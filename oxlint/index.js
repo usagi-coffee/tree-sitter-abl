@@ -26,6 +26,7 @@ import { recordProjectionFactoring } from "./rules/record-projection-factoring.j
 import { classEndAlternative } from "./rules/class-end-alternative.js";
 import { inputOutputTerminalOptions } from "./rules/input-output-terminal-options.js";
 import { outputTerminalOptions } from "./rules/output-terminal-options.js";
+import { formTerminalFramePhrases } from "./rules/form-terminal-frame-phrases.js";
 import { promptColorClauseExtraction } from "./rules/prompt-color-clause-extraction.js";
 import { persistentRunSuffixExtraction } from "./rules/persistent-run-suffix-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
@@ -198,6 +199,7 @@ export {
   classEndAlternative,
   inputOutputTerminalOptions,
   outputTerminalOptions,
+  formTerminalFramePhrases,
   promptColorClauseExtraction,
   persistentRunSuffixExtraction,
   choiceProductExtraction,
@@ -357,6 +359,7 @@ export default {
     "class-end-alternative": classEndAlternative,
     "input-output-terminal-options": inputOutputTerminalOptions,
     "output-terminal-options": outputTerminalOptions,
+    "form-terminal-frame-phrases": formTerminalFramePhrases,
     "prompt-color-clause-extraction": promptColorClauseExtraction,
     "persistent-run-suffix-extraction": persistentRunSuffixExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,
