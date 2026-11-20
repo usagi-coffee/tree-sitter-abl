@@ -32,6 +32,7 @@ import "./test_shared_ordered_pair.js";
 import "./test_private_keyword_optional_tail.js";
 import "./test_parenthesized_signature_extraction.js";
 import "./test_record_target_extraction.js";
+import "./test_prompt_color_clause_extraction.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
