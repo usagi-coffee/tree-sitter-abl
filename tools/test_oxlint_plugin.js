@@ -15,6 +15,7 @@ import "./test_structured_field_choice_branch.js";
 import "./test_left_recursive_option_list.js";
 import "./test_inline_branch_separator_boundary.js";
 import "./test_existing_alternative_body_reuse.js";
+import "./test_statement_prefix_body_inline.js";
 import "./test_keyword_optional_marker_prefix.js";
 import "./test_optional_choice_prefix.js";
 import "./test_optional_flag_pair.js";
