@@ -46,6 +46,7 @@
         "tree-sitter-optimize/record-projection-factoring": "warn",
         "tree-sitter-optimize/class-end-alternative": "warn",
         "tree-sitter-optimize/input-output-terminal-options": "warn",
+        "tree-sitter-optimize/output-terminal-options": "warn",
         "tree-sitter-optimize/prompt-color-clause-extraction": "warn",
         "tree-sitter-optimize/persistent-run-suffix-extraction": "warn",
         "tree-sitter-optimize/precedence-keyword-alias-inline": "warn",

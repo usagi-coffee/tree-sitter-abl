@@ -1,14 +1,5 @@
-import {
-  dslSignature,
-  isRuleDisabled,
-  isRuleProperty,
-  isStaticDsl,
-  referencedSymbols,
-  report,
-  rule,
-  ruleName,
-} from "../helpers.js";
-import { usedOutsideFile } from "../helpers/project-metadata.js";
+import { report, rule } from "../helpers.js";
+import { matchStaticRuleLayout } from "../helpers/static-rule-layout.js";
 
 const ruleId = "input-output-terminal-options";
 const bodyName = "__input_output_body";
@@ -47,72 +38,11 @@ const expectedUses = new Map([
   [tailName, 0],
 ]);
 
-export const inputOutputTerminalOptions = rule((context) => {
-  const suppressed = (node) =>
-    isRuleDisabled(context, node) ||
-    (node.type === "CallExpression" && node.arguments.some(suppressed));
-
-  return {
+export const inputOutputTerminalOptions = rule(
+  (context) => ({
     "Program:exit"(program) {
-      const [declaration] = program.body;
-      const factory = declaration?.declaration;
-      if (
-        program.body.length !== 1 ||
-        declaration.type !== "ExportDefaultDeclaration" ||
-        factory?.type !== "ArrowFunctionExpression" ||
-        factory.async ||
-        factory.params.length !== 1 ||
-        factory.params[0].type !== "ObjectPattern" ||
-        factory.body.type !== "ObjectExpression"
-      )
-        return;
-
-      const bindings = factory.params[0].properties;
-      if (bindings.length !== 1 || !bindings[0].shorthand || bindings[0].value.name !== "kw")
-        return;
-
-      const properties = factory.body.properties;
-      if (!properties.some((entry) => ruleName(entry) === bodyName)) return;
-      if (
-        properties.some(
-          (entry) =>
-            !isRuleProperty(entry) ||
-            entry.computed ||
-            entry.value.async ||
-            entry.value.params.length !== 1 ||
-            !isStaticDsl(entry.value.body),
-        )
-      )
-        return;
-
-      const local = new Map(properties.map((entry) => [ruleName(entry), entry]));
-      if (local.size !== properties.length || local.has(tailName)) return;
-
-      for (const [name, signature] of measuredRules) {
-        const entry = local.get(name);
-        if (
-          !entry ||
-          dslSignature(entry.value.body) !== signature ||
-          suppressed(entry) ||
-          suppressed(entry.value.body)
-        )
-          return;
-      }
-
-      const counts = new Map();
-      for (const entry of properties) {
-        for (const name of referencedSymbols(entry.value.body)) {
-          if (expectedUses.has(name)) counts.set(name, (counts.get(name) ?? 0) + 1);
-        }
-      }
-
-      for (const [name, expected] of expectedUses) {
-        if (
-          (counts.get(name) ?? 0) !== expected ||
-          usedOutsideFile(context, name, { wholeName: true })
-        )
-          return;
-      }
+      const local = matchStaticRuleLayout(context, program, measuredRules, expectedUses);
+      if (!local) return;
 
       report(
         context,
@@ -121,5 +51,6 @@ export const inputOutputTerminalOptions = rule((context) => {
         "Try making the existing INPUT-OUTPUT option list the terminal alternative of the right-recursive THROUGH argument tail. Keep the tail optional, preserve the CLOSE alias and program target, and retain the option aliases, order and both right-precedence wrappers. Compare parser metrics, parsing speed, and complete valid and recovery trees before retaining the change.",
       );
     },
-  };
-}, "Suggest making INPUT-OUTPUT options the terminal alternative of the THROUGH argument tail");
+  }),
+  "Suggest making INPUT-OUTPUT options the terminal alternative of the THROUGH argument tail",
+);
