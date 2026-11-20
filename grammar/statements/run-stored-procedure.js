@@ -49,7 +49,9 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("direction", choice($._kw_input, $._kw_output, $._kw_input_output))),
-      optional(seq(kw("PARAM"), field("name", $.identifier), "=")),
+      optional($.__run_stored_procedure_param_name),
       field("value", $._expression),
     ),
+
+  __run_stored_procedure_param_name: ($) => seq(kw("PARAM"), field("name", $.identifier), "="),
 });
