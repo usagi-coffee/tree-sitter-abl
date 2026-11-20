@@ -44,6 +44,7 @@
         "tree-sitter-optimize/parenthesized-signature-extraction": "warn",
         "tree-sitter-optimize/record-target-extraction": "warn",
         "tree-sitter-optimize/prompt-color-clause-extraction": "warn",
+        "tree-sitter-optimize/persistent-run-suffix-extraction": "warn",
         "tree-sitter-optimize/precedence-keyword-alias-inline": "warn",
         "tree-sitter-optimize/private-precedence-symbol-inline": "warn",
         "tree-sitter-optimize/optional-selector-body-inline": "warn",

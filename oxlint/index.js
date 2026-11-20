@@ -23,6 +23,7 @@ import { nestedEventHeadExtraction } from "./rules/nested-event-head-extraction.
 import { parenthesizedSignatureExtraction } from "./rules/parenthesized-signature-extraction.js";
 import { recordTargetExtraction } from "./rules/record-target-extraction.js";
 import { promptColorClauseExtraction } from "./rules/prompt-color-clause-extraction.js";
+import { persistentRunSuffixExtraction } from "./rules/persistent-run-suffix-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
 import { privatePrecedenceSymbolInline } from "./rules/private-precedence-symbol-inline.js";
 import { optionalSelectorBodyInline } from "./rules/optional-selector-body-inline.js";
@@ -182,6 +183,7 @@ export {
   parenthesizedSignatureExtraction,
   recordTargetExtraction,
   promptColorClauseExtraction,
+  persistentRunSuffixExtraction,
   choiceProductExtraction,
   sharedFieldMarker,
   sharedValuedFragment,
@@ -328,6 +330,7 @@ export default {
     "parenthesized-signature-extraction": parenthesizedSignatureExtraction,
     "record-target-extraction": recordTargetExtraction,
     "prompt-color-clause-extraction": promptColorClauseExtraction,
+    "persistent-run-suffix-extraction": persistentRunSuffixExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,
     "private-precedence-symbol-inline": privatePrecedenceSymbolInline,
     "optional-selector-body-inline": optionalSelectorBodyInline,
