@@ -170,12 +170,17 @@ export default ({ kw }) => ({
         kw("PERSISTENT"),
         $._kw_run,
         field("procedure", $.identifier),
-        optional($.arguments),
-        optional(alias($.__on_in_phrase, $.in_phrase)),
-        optional($.arguments),
+        optional($.__on_persistent_run_suffix),
         $._terminator,
       ),
     ),
+  __on_persistent_run_suffix: ($) =>
+    choice(
+      seq($.arguments, optional(choice($.__on_persistent_run_context, $.arguments))),
+      $.__on_persistent_run_context,
+    ),
+  __on_persistent_run_context: ($) =>
+    seq(alias($.__on_in_phrase, $.in_phrase), optional($.arguments)),
   __on_in_phrase: ($) => seq($._kw_in, field("context", $.__on_context_value)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __on_context_value: ($) =>
