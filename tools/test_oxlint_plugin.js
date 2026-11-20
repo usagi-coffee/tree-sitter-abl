@@ -45,6 +45,7 @@ import "./test_class_end_alternative.js";
 import "./test_input_output_terminal_options.js";
 import "./test_output_terminal_options.js";
 import "./test_form_terminal_frame_phrases.js";
+import "./test_frame_header_terminal_phrases.js";
 import "./test_prompt_color_clause_extraction.js";
 import "./test_persistent_run_suffix_extraction.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
