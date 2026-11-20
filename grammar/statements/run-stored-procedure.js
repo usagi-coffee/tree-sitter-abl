@@ -53,5 +53,6 @@ export default ({ kw }) => ({
       field("value", $._expression),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __run_stored_procedure_param_name: ($) => seq(kw("PARAM"), field("name", $.identifier), "="),
 });
