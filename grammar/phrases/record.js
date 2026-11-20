@@ -50,6 +50,7 @@ export default ({ kw }) => ({
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       optional(seq($.__record_field_names_prefix, ")")),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_except_list: ($) => seq($._kw_except, $.__record_field_names_prefix, ")"),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_field_names_prefix: ($) => seq("(", optional($.__record_field_names)),
