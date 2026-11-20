@@ -1,7 +1,6 @@
 export default ({ kw }) => ({
-  prompt_for_statement: ($) => seq($.__prompt_for_statement_body, $._terminator),
+  prompt_for_statement: ($) => seq($.__prompt_for_prefix, $.__prompt_for_body, $._terminator),
 
-  __prompt_for_statement_body: ($) => seq($.__prompt_for_prefix, $.__prompt_for_body),
   __prompt_for_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
