@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   variable_definition: ($) => seq($.__variable_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __variable_prefix: ($) => seq($._kw_define, optional($.__variable_modifier), $.__variable_body),
 
   __variable_body: ($) =>
