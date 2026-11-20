@@ -50,6 +50,7 @@ import "./test_on_widget_tail_anywhere.js";
 import "./test_triggers_terminal_end.js";
 import "./test_radio_set_keyword_prefix.js";
 import "./test_stream_definition_scope_reuse.js";
+import "./test_stored_procedure_param_name_extraction.js";
 import "./test_prompt_color_clause_extraction.js";
 import "./test_persistent_run_suffix_extraction.js";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";

@@ -32,6 +32,7 @@ import { onWidgetTailAnywhere } from "./rules/on-widget-tail-anywhere.js";
 import { triggersTerminalEnd } from "./rules/triggers-terminal-end.js";
 import { radioSetKeywordPrefix } from "./rules/radio-set-keyword-prefix.js";
 import { streamDefinitionScopeReuse } from "./rules/stream-definition-scope-reuse.js";
+import { storedProcedureParamNameExtraction } from "./rules/stored-procedure-param-name-extraction.js";
 import { promptColorClauseExtraction } from "./rules/prompt-color-clause-extraction.js";
 import { persistentRunSuffixExtraction } from "./rules/persistent-run-suffix-extraction.js";
 import { precedenceKeywordAliasInline } from "./rules/precedence-keyword-alias-inline.js";
@@ -210,6 +211,7 @@ export {
   triggersTerminalEnd,
   radioSetKeywordPrefix,
   streamDefinitionScopeReuse,
+  storedProcedureParamNameExtraction,
   promptColorClauseExtraction,
   persistentRunSuffixExtraction,
   choiceProductExtraction,
@@ -375,6 +377,7 @@ export default {
     "triggers-terminal-end": triggersTerminalEnd,
     "radio-set-keyword-prefix": radioSetKeywordPrefix,
     "stream-definition-scope-reuse": streamDefinitionScopeReuse,
+    "stored-procedure-param-name-extraction": storedProcedureParamNameExtraction,
     "prompt-color-clause-extraction": promptColorClauseExtraction,
     "persistent-run-suffix-extraction": persistentRunSuffixExtraction,
     "precedence-keyword-alias-inline": precedenceKeywordAliasInline,

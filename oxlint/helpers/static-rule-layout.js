@@ -8,7 +8,13 @@ import {
 } from "../helpers.js";
 import { usedOutsideFile } from "./project-metadata.js";
 
-export function matchStaticRuleLayout(context, program, measuredRules, expectedUses) {
+export function matchStaticRuleLayout(
+  context,
+  program,
+  measuredRules,
+  expectedUses,
+  expectedOutsideFiles = new Map(),
+) {
   const [declaration] = program.body;
   const factory = declaration?.declaration;
   if (
@@ -68,9 +74,12 @@ export function matchStaticRuleLayout(context, program, measuredRules, expectedU
 
   for (const [name, expected] of expectedUses) {
     if (
-      (expected === 0 && local.has(name)) ||
+      (expected === 0 && !measuredRules.has(name) && local.has(name)) ||
       (counts.get(name) ?? 0) !== expected ||
-      usedOutsideFile(context, name, { wholeName: true })
+      usedOutsideFile(context, name, {
+        wholeName: true,
+        except: expectedOutsideFiles.get(name),
+      })
     )
       return null;
   }

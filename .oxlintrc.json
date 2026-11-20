@@ -53,6 +53,7 @@
         "tree-sitter-optimize/triggers-terminal-end": "warn",
         "tree-sitter-optimize/radio-set-keyword-prefix": "warn",
         "tree-sitter-optimize/stream-definition-scope-reuse": "warn",
+        "tree-sitter-optimize/stored-procedure-param-name-extraction": "warn",
         "tree-sitter-optimize/prompt-color-clause-extraction": "warn",
         "tree-sitter-optimize/persistent-run-suffix-extraction": "warn",
         "tree-sitter-optimize/precedence-keyword-alias-inline": "warn",
