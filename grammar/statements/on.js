@@ -132,12 +132,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ANYWHERE"), $.anywhere),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-      seq(
-        alias($.__on_of_phrase, $.of_phrase),
-        optional($.__on_ui_event_widgets_tail),
-        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        optional(alias(kw("ANYWHERE"), $.anywhere)),
-      ),
+      seq(alias($.__on_of_phrase, $.of_phrase), optional($.__on_ui_event_widgets_tail)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
@@ -241,14 +236,18 @@ export default ({ kw }) => ({
   __on_ui_event: ($) => choice($.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
   __on_ui_events: ($) => seq(field("event", $.__on_ui_event), optional(seq(",", $.__on_ui_events))),
   __on_ui_event_widgets_tail: ($) =>
-    seq(
-      $._kw_or,
+    choice(
       seq(
-        $.__on_ui_events,
-        // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
-        alias($.__on_of_phrase, $.of_phrase),
+        $._kw_or,
+        seq(
+          $.__on_ui_events,
+          // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
+          alias($.__on_of_phrase, $.of_phrase),
+        ),
+        optional($.__on_ui_event_widgets_tail),
       ),
-      optional($.__on_ui_event_widgets_tail),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      alias(kw("ANYWHERE"), $.anywhere),
     ),
   __on_of_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
