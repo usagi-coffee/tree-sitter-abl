@@ -17,6 +17,7 @@ import "./test_inline_branch_separator_boundary.js";
 import "./test_existing_alternative_body_reuse.js";
 import "./test_statement_prefix_body_inline.js";
 import "./test_single_use_field_keyword_alias_choice.js";
+import "./test_shared_field_scalar_choice.js";
 import "./test_keyword_optional_marker_prefix.js";
 import "./test_optional_choice_prefix.js";
 import "./test_optional_flag_pair.js";

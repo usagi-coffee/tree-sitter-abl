@@ -61,6 +61,7 @@
         "tree-sitter-optimize/inline-mixed-symbol-choice-boundary": "warn",
         "tree-sitter-optimize/inline-keyword-alias-choice-boundary": "warn",
         "tree-sitter-optimize/contextual-scalar-name-boundary": "warn",
+        "tree-sitter-optimize/shared-field-scalar-choice": "warn",
         "tree-sitter-optimize/contextual-keyword-choice-boundary": "warn",
         "tree-sitter-optimize/contextual-keyword-prefix-boundary": "warn",
         "tree-sitter-optimize/contextual-valued-choice-inline": "warn",

@@ -40,6 +40,7 @@ import { inlineKeywordNameBoundary } from "./rules/inline-keyword-name-boundary.
 import { inlineMixedSymbolChoiceBoundary } from "./rules/inline-mixed-symbol-choice-boundary.js";
 import { inlineKeywordAliasChoiceBoundary } from "./rules/inline-keyword-alias-choice-boundary.js";
 import { contextualScalarNameBoundary } from "./rules/contextual-scalar-name-boundary.js";
+import { sharedFieldScalarChoice } from "./rules/shared-field-scalar-choice.js";
 import { contextualKeywordChoiceBoundary } from "./rules/contextual-keyword-choice-boundary.js";
 import { contextualKeywordPrefixBoundary } from "./rules/contextual-keyword-prefix-boundary.js";
 import { contextualValuedChoiceInline } from "./rules/contextual-valued-choice-inline.js";
@@ -269,6 +270,7 @@ export {
   sharedSymbolAliasChoiceInline,
   inlineKeywordAliasChoiceBoundary,
   contextualScalarNameBoundary,
+  sharedFieldScalarChoice,
   contextualKeywordChoiceBoundary,
   contextualKeywordPrefixBoundary,
   contextualValuedChoiceInline,
@@ -353,6 +355,7 @@ export default {
     "inline-mixed-symbol-choice-boundary": inlineMixedSymbolChoiceBoundary,
     "inline-keyword-alias-choice-boundary": inlineKeywordAliasChoiceBoundary,
     "contextual-scalar-name-boundary": contextualScalarNameBoundary,
+    "shared-field-scalar-choice": sharedFieldScalarChoice,
     "contextual-keyword-choice-boundary": contextualKeywordChoiceBoundary,
     "contextual-keyword-prefix-boundary": contextualKeywordPrefixBoundary,
     "contextual-valued-choice-inline": contextualValuedChoiceInline,
