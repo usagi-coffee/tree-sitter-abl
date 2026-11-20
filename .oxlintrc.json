@@ -106,6 +106,7 @@
         "tree-sitter-optimize/closing-delimiter-wrapper": "warn",
         "tree-sitter-optimize/literal-opener-body-boundary": "warn",
         "tree-sitter-optimize/shared-keyword-body-boundary": "warn",
+        "tree-sitter-optimize/variable-keyword-body-boundary": "warn",
         "tree-sitter-optimize/single-use-delimited-sequence": "warn",
         "tree-sitter-optimize/ordered-optional-chain": "warn",
         "tree-sitter-optimize/optional-tail-choice-collapse": "warn",
