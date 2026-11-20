@@ -35,7 +35,7 @@ export function rootMetadataSymbols(context, properties) {
   } catch {
     return new Set();
   }
-  // Read static metadata arrays without executing the project's grammar module.
+  // Read static metadata without executing the project's grammar module.
   // Keep literals opaque so comments and strings cannot supply metadata entries.
   const tokens =
     source.match(
@@ -44,8 +44,18 @@ export function rootMetadataSymbols(context, properties) {
   const code = tokens.filter((part) => !part.startsWith("//") && !part.startsWith("/*"));
   const names = new Set();
   for (let i = 0; i < code.length - 6; i++) {
-    if (!properties.includes(code[i]) || code.slice(i + 1, i + 7).join(" ") !== ": ( $ ) => [")
+    if (!properties.includes(code[i]) || code.slice(i + 1, i + 6).join(" ") !== ": ( $ ) =>")
       continue;
+    if (
+      code[i + 6] === "$" &&
+      code[i + 7] === "." &&
+      /^[$A-Z_a-z][$\w]*$/.test(code[i + 8] ?? "") &&
+      [",", "}"].includes(code[i + 9])
+    ) {
+      names.add(code[i + 8]);
+      continue;
+    }
+    if (code[i + 6] !== "[") continue;
     let depth = 1;
     for (let j = i + 7; j < code.length && depth > 0; j++) {
       if (code[j] === "[") depth++;

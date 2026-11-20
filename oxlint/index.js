@@ -49,6 +49,7 @@ import { standaloneFlagTailInline } from "./rules/standalone-flag-tail-inline.js
 import { optionalFlagChoiceExtraction } from "./rules/optional-flag-choice-extraction.js";
 import { optionalAliasTailExtraction } from "./rules/optional-alias-tail-extraction.js";
 import { requiredClauseSelectorExtraction } from "./rules/required-clause-selector-extraction.js";
+import { valueDeclarationTailExtraction } from "./rules/value-declaration-tail-extraction.js";
 import { sharedRepeatedSignature } from "./rules/shared-repeated-signature.js";
 import { leftRecursiveList } from "./rules/left-recursive-list.js";
 import { recursiveItemInline } from "./rules/recursive-item-inline.js";
@@ -280,6 +281,7 @@ export {
   optionalFlagChoiceExtraction,
   optionalAliasTailExtraction,
   requiredClauseSelectorExtraction,
+  valueDeclarationTailExtraction,
   noNumericPrecedence,
   hoistRulePrecedence,
   inlineMixedSymbolChoiceBoundary,
@@ -366,6 +368,7 @@ export default {
     "optional-flag-choice-extraction": optionalFlagChoiceExtraction,
     "optional-alias-tail-extraction": optionalAliasTailExtraction,
     "required-clause-selector-extraction": requiredClauseSelectorExtraction,
+    "value-declaration-tail-extraction": valueDeclarationTailExtraction,
     "no-numeric-precedence": noNumericPrecedence,
     "hoist-rule-precedence": hoistRulePrecedence,
     "shared-repeated-signature": sharedRepeatedSignature,
