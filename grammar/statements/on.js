@@ -174,6 +174,7 @@ export default ({ kw }) => ({
         $._terminator,
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_persistent_run_suffix: ($) =>
     choice(
       seq($.arguments, optional(choice($.__on_persistent_run_context, $.arguments))),
