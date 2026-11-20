@@ -19,9 +19,13 @@ export default ({ kw }) => ({
         seq(field("record", $._qualified_identifier), $._kw_except, $._field_references),
         optional($.__frame_form_items),
       ),
-      optional($.__frame_header_section),
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat($.frame_phrase),
+      optional(
+        choice(
+          $.__frame_header_section,
+          // oxlint-disable-next-line tree-sitter-optimize/recurse
+          repeat1($.frame_phrase),
+        ),
+      ),
     ),
   __frame_form_items: ($) => prec.right(seq($.__frame_form_item, optional($.__frame_form_items))),
 
@@ -30,7 +34,19 @@ export default ({ kw }) => ({
       choice(alias(kw("HEADER"), $.header), alias(kw("BACKGROUND"), $.background)),
       $.__frame_head_items,
     ),
-  __frame_head_items: ($) => prec.right(seq($.__frame_head_item, optional($.__frame_head_items))),
+  __frame_head_items: ($) =>
+    prec.right(
+      seq(
+        $.__frame_head_item,
+        optional(
+          choice(
+            $.__frame_head_items,
+            // oxlint-disable-next-line tree-sitter-optimize/recurse
+            repeat1($.frame_phrase),
+          ),
+        ),
+      ),
+    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __frame_head_item: ($) =>
