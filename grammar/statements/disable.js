@@ -7,17 +7,21 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       $.__disable_items,
-      optional($.frame_phrase),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __disable_items: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      seq(alias(kw("ALL"), $.all), optional($._except_fields)),
+      seq(alias(kw("ALL"), $.all), optional($._except_fields), optional($.frame_phrase)),
       $.__disable_items_list,
     ),
   __disable_items_list: ($) =>
-    prec.right(seq(alias($.__disable_item, $.disable_item), optional($.__disable_items_list))),
+    prec.right(
+      seq(
+        alias($.__disable_item, $.disable_item),
+        optional(choice($.__disable_items_list, $.frame_phrase)),
+      ),
+    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __disable_item: ($) =>
