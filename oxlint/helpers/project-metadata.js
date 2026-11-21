@@ -11,7 +11,7 @@ export function staticSourceTokens(source) {
 
 export function usedOutsideFile(
   context,
-  name,
+  nameOrMatch,
   { wholeName = false, except = [], caseInsensitiveLiteral = false } = {},
 ) {
   const filename = resolve(context.cwd, context.filename);
@@ -24,6 +24,8 @@ export function usedOutsideFile(
         if (entry.endsWith(".js")) files.push(resolve(directory, entry));
       }
     }
+    const matchesTokens = typeof nameOrMatch === "function" ? nameOrMatch : null;
+    const name = matchesTokens ? "" : nameOrMatch;
     const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const whole = wholeName ? new RegExp(`(?<![$\\w])${escapedName}(?![$\\w])`) : null;
     const literal = caseInsensitiveLiteral
@@ -32,6 +34,7 @@ export function usedOutsideFile(
     return files.some((file) => {
       if (file === filename || except.includes(file)) return false;
       const source = readFileSync(file, "utf8");
+      if (matchesTokens) return matchesTokens(staticSourceTokens(source));
       if (literal) return staticSourceTokens(source).some((token) => literal.test(token));
       return whole ? whole.test(source) : source.includes(name);
     });

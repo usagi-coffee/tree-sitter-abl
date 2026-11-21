@@ -30,6 +30,7 @@ import { formTerminalFramePhrases } from "./rules/form-terminal-frame-phrases.js
 import { formLabelClauseExtraction } from "./rules/form-label-clause-extraction.js";
 import { sqlDeclareCursorKeywordBody } from "./rules/sql-declare-cursor-keyword-body.js";
 import { openQueryIndexedRepositionBranch } from "./rules/open-query-indexed-reposition-branch.js";
+import { asKeywordBoundary } from "./rules/as-keyword-boundary.js";
 import { frameHeaderTerminalPhrases } from "./rules/frame-header-terminal-phrases.js";
 import { onWidgetTailAnywhere } from "./rules/on-widget-tail-anywhere.js";
 import { triggersTerminalEnd } from "./rules/triggers-terminal-end.js";
@@ -212,6 +213,7 @@ export {
   formLabelClauseExtraction,
   sqlDeclareCursorKeywordBody,
   openQueryIndexedRepositionBranch,
+  asKeywordBoundary,
   frameHeaderTerminalPhrases,
   onWidgetTailAnywhere,
   triggersTerminalEnd,
@@ -381,6 +383,7 @@ export default {
     "form-label-clause-extraction": formLabelClauseExtraction,
     "sql-declare-cursor-keyword-body": sqlDeclareCursorKeywordBody,
     "open-query-indexed-reposition-branch": openQueryIndexedRepositionBranch,
+    "as-keyword-boundary": asKeywordBoundary,
     "frame-header-terminal-phrases": frameHeaderTerminalPhrases,
     "on-widget-tail-anywhere": onWidgetTailAnywhere,
     "triggers-terminal-end": triggersTerminalEnd,
