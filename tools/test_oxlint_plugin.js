@@ -49,6 +49,7 @@ import "./test_form_label_clause_extraction.js";
 import "./test_sql_declare_cursor_keyword_body.js";
 import "./test_open_query_indexed_reposition_branch.js";
 import "./test_as_keyword_boundary.js";
+import "./test_set_fields_body_inline.js";
 import "./test_frame_header_terminal_phrases.js";
 import "./test_on_widget_tail_anywhere.js";
 import "./test_triggers_terminal_end.js";
