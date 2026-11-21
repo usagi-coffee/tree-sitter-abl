@@ -9,14 +9,15 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
-  __set_body: ($) => choice($._set_update_record_body, $.__set_fields_body),
-
-  __set_fields_body: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq(
-      $.__set_fields,
-      optional(alias($._go_on_phrase, $.go_on_phrase)),
-      optional($.__set_fields_tail_after_go_on),
+  __set_body: ($) =>
+    choice(
+      $._set_update_record_body,
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+      seq(
+        $.__set_fields,
+        optional(alias($._go_on_phrase, $.go_on_phrase)),
+        optional($.__set_fields_tail_after_go_on),
+      ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __set_fields_tail_after_go_on: ($) =>
