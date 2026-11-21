@@ -9,7 +9,17 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
-  __prompt_for_body: ($) => choice($.__prompt_for_fields_body, $.__prompt_for_record_body),
+  __prompt_for_body: ($) =>
+    choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+      seq(
+        $.__prompt_for_fields,
+        optional(alias($._go_on_phrase, $.go_on_phrase)),
+        optional($.__prompt_for_fields_tail),
+        optional($.editing_phrase),
+      ),
+      $.__prompt_for_record_body,
+    ),
 
   __prompt_for_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -20,14 +30,6 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
 
-  __prompt_for_fields_body: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq(
-      $.__prompt_for_fields,
-      optional(alias($._go_on_phrase, $.go_on_phrase)),
-      optional($.__prompt_for_fields_tail),
-      optional($.editing_phrase),
-    ),
   __prompt_for_except_fields: ($) =>
     prec.right(
       seq(alias($._qualified_identifier, $.field), optional($.__prompt_for_except_fields)),
