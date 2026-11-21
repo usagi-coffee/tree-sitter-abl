@@ -166,6 +166,7 @@ import { sharedSequence } from "./rules/shared-sequence.js";
 import { sharedRecursion } from "./rules/shared-recursion.js";
 import { sharedRepetition } from "./rules/shared-repetition.js";
 import { singleUseSequence } from "./rules/single-use-sequence.js";
+import { singleUseOptionBodyInline } from "./rules/single-use-option-body-inline.js";
 import { singleUseKeywordSequence } from "./rules/single-use-keyword-sequence.js";
 import { singleUsePrecedence } from "./rules/single-use-precedence.js";
 import { forwardingRule } from "./rules/forwarding-rule.js";
@@ -245,6 +246,7 @@ export {
   orderedOptionalChain,
   optionalSelectorBodyInline,
   singleUseSequence,
+  singleUseOptionBodyInline,
   singleUseAliasSequence,
   singleUseChoiceSequence,
   singleUseFieldChoiceSequence,
@@ -523,6 +525,7 @@ export default {
     "shared-recursion": sharedRecursion,
     "shared-repetition": sharedRepetition,
     "single-use-sequence": singleUseSequence,
+    "single-use-option-body-inline": singleUseOptionBodyInline,
     "single-use-keyword-sequence": singleUseKeywordSequence,
     "single-use-precedence": singleUsePrecedence,
     "forwarding-rule": forwardingRule,

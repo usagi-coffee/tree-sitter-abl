@@ -1,5 +1,6 @@
 import "./test_required_choice_arm_body.js";
 import "./test_required_list_body_tail.js";
+import "./test_single_use_option_body_inline.js";
 import "./test_literal_opener_body_boundary.js";
 import "./test_shared_keyword_body_boundary.js";
 import "./test_variable_keyword_body_boundary.js";

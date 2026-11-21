@@ -12,16 +12,19 @@ export function staticSourceTokens(source) {
 export function usedOutsideFile(
   context,
   nameOrMatch,
-  { wholeName = false, except = [], caseInsensitiveLiteral = false } = {},
+  { wholeName = false, except = [], caseInsensitiveLiteral = false, sourceDirectories = [] } = {},
 ) {
   const filename = resolve(context.cwd, context.filename);
-  const directory = resolve(context.cwd, "grammar");
+  const directories = new Set(
+    ["grammar", ...sourceDirectories].map((directory) => resolve(context.cwd, directory)),
+  );
   const root = resolve(context.cwd, "grammar.js");
-  const files = existsSync(root) ? [root] : [];
+  const files = new Set(existsSync(root) ? [root] : []);
   try {
-    if (existsSync(directory)) {
+    for (const directory of directories) {
+      if (!existsSync(directory)) continue;
       for (const entry of readdirSync(directory, { recursive: true })) {
-        if (entry.endsWith(".js")) files.push(resolve(directory, entry));
+        if (/\.[cm]?js$/.test(entry)) files.add(resolve(directory, entry));
       }
     }
     const matchesTokens = typeof nameOrMatch === "function" ? nameOrMatch : null;
@@ -31,7 +34,7 @@ export function usedOutsideFile(
     const literal = caseInsensitiveLiteral
       ? new RegExp("^([\"'`])" + escapedName + "\\1$", "i")
       : null;
-    return files.some((file) => {
+    return [...files].some((file) => {
       if (file === filename || except.includes(file)) return false;
       const source = readFileSync(file, "utf8");
       if (matchesTokens) return matchesTokens(staticSourceTokens(source));
