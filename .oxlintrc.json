@@ -54,6 +54,7 @@
         "tree-sitter-optimize/as-keyword-boundary": "warn",
         "tree-sitter-optimize/set-fields-body-inline": "warn",
         "tree-sitter-optimize/prompt-for-fields-body-inline": "warn",
+        "tree-sitter-optimize/alert-box-title-recursion": "warn",
         "tree-sitter-optimize/frame-header-terminal-phrases": "warn",
         "tree-sitter-optimize/on-widget-tail-anywhere": "warn",
         "tree-sitter-optimize/triggers-terminal-end": "warn",
