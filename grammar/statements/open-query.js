@@ -32,6 +32,7 @@ export default ({ kw }) => ({
         field("lock", $._lock_option),
         optional(choice($.__open_query_indexed_reposition, $.__open_query_max_rows_option)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/standalone-flag-tail-inline
       $.__open_query_indexed_reposition,
       $.__open_query_max_rows_option,
     ),
