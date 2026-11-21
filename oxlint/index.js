@@ -31,9 +31,7 @@ import { formLabelClauseExtraction } from "./rules/form-label-clause-extraction.
 import { sqlDeclareCursorKeywordBody } from "./rules/sql-declare-cursor-keyword-body.js";
 import { openQueryIndexedRepositionBranch } from "./rules/open-query-indexed-reposition-branch.js";
 import { asKeywordBoundary } from "./rules/as-keyword-boundary.js";
-import { setFieldsBodyInline } from "./rules/set-fields-body-inline.js";
-import { promptForFieldsBodyInline } from "./rules/prompt-for-fields-body-inline.js";
-import { alertBoxTitleRecursion } from "./rules/alert-box-title-recursion.js";
+import { singleUseListChoiceArm } from "./rules/single-use-list-choice-arm.js";
 import { frameHeaderTerminalPhrases } from "./rules/frame-header-terminal-phrases.js";
 import { onWidgetTailAnywhere } from "./rules/on-widget-tail-anywhere.js";
 import { triggersTerminalEnd } from "./rules/triggers-terminal-end.js";
@@ -217,9 +215,7 @@ export {
   sqlDeclareCursorKeywordBody,
   openQueryIndexedRepositionBranch,
   asKeywordBoundary,
-  setFieldsBodyInline,
-  promptForFieldsBodyInline,
-  alertBoxTitleRecursion,
+  singleUseListChoiceArm,
   frameHeaderTerminalPhrases,
   onWidgetTailAnywhere,
   triggersTerminalEnd,
@@ -390,9 +386,7 @@ export default {
     "sql-declare-cursor-keyword-body": sqlDeclareCursorKeywordBody,
     "open-query-indexed-reposition-branch": openQueryIndexedRepositionBranch,
     "as-keyword-boundary": asKeywordBoundary,
-    "set-fields-body-inline": setFieldsBodyInline,
-    "prompt-for-fields-body-inline": promptForFieldsBodyInline,
-    "alert-box-title-recursion": alertBoxTitleRecursion,
+    "single-use-list-choice-arm": singleUseListChoiceArm,
     "frame-header-terminal-phrases": frameHeaderTerminalPhrases,
     "on-widget-tail-anywhere": onWidgetTailAnywhere,
     "triggers-terminal-end": triggersTerminalEnd,

@@ -7,9 +7,12 @@ Please format your code with `bun run format` before committing.
 ## Optimization lint
 
 Run `bun run lint` to find grammar shapes that are candidates for the measured
-optimizations. These diagnostics are suggestions: try one transformation at a
-time, regenerate the parser, and retain it only when the parser metrics
-improve without changing behavior or tree shape.
+optimizations. Match reusable Tree-sitter DSL structures and include fixtures
+with unrelated grammar names so other grammars can use the same suggestions.
+
+Try one transformation at a time and regenerate the parser. Retain a change
+when its gains justify its costs across parser counts, generated size,
+estimated Wasm memory, and parsing speed. Preserve behavior and tree shape.
 
 Oxlint's rule-specific ignore directive can silence a suggestion next to the
 reported construct. When suppressing multiple rules on the same line, list them
