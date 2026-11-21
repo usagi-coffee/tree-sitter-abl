@@ -27,7 +27,7 @@ export default ({ kw }) => ({
           field("field", $._expression),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           optional(seq($._kw_colon, field("colon", $._expression))),
-          optional(seq($._kw_label, optional(field("label", $.__form_label)))),
+          optional($.__form_label_clause),
           optional($.__form_validate_format_view_as_tail),
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
@@ -81,6 +81,9 @@ export default ({ kw }) => ({
     ),
   __form_validate_expression_tail: ($) =>
     seq(",", field("expression", $._expression), optional($.__form_validate_expression_tail)),
+  // An include or macro after LABEL supplies the label before a new form item.
+  __form_label_clause: ($) =>
+    prec.right(seq($._kw_label, optional(field("label", $.__form_label)))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __form_label: ($) =>
     choice(
