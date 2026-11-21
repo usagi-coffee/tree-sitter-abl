@@ -28,16 +28,17 @@ export default ({ kw }) => ({
     ),
   __open_query_tail_after_by: ($) =>
     choice(
-      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
-      $.__open_query_reposition_tail,
-    ),
-  __open_query_reposition_tail: ($) =>
-    choice(
       seq(
-        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional($.__open_query_max_rows_option),
+        field("lock", $._lock_option),
+        optional(choice($.__open_query_indexed_reposition, $.__open_query_max_rows_option)),
       ),
+      $.__open_query_indexed_reposition,
       $.__open_query_max_rows_option,
+    ),
+  __open_query_indexed_reposition: ($) =>
+    seq(
+      alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+      optional($.__open_query_max_rows_option),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/multi-use-private-keyword-field-inline
   __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
