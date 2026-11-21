@@ -223,7 +223,7 @@ export const inline = ($) => [
   $._kw_procedure,
   $._routine_access_modifier,
   $._kw_for,
-  $._kw_as,
+  $._kw_catch_as,
 ];
 
 export default ({ kw }) => ({
@@ -234,10 +234,11 @@ export default ({ kw }) => ({
   _kw_define: ($) => kw("DEFINE", { offset: 3 }),
   _kw_end: ($) => kw("END"),
   _kw_by: ($) => kw("BY"),
-  _kw_as: ($) => kw("AS"),
   _kw_no_undo: ($) => kw("NO-UNDO"),
   _kw_of: ($) => kw("OF"),
   _kw_like: ($) => kw("LIKE"),
+  _kw_as: ($) => kw("AS"),
+  _kw_catch_as: ($) => kw("AS"),
   _kw_row: ($) => kw("ROW"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
   _kw_new: ($) => kw("NEW"),
