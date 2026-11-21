@@ -10,9 +10,10 @@ Run `bun run lint` to find grammar shapes that are candidates for the measured
 optimizations. Match reusable Tree-sitter DSL structures and include fixtures
 with unrelated grammar names so other grammars can use the same suggestions.
 
-Try one transformation at a time and regenerate the parser. Retain a change
-when its gains justify its costs across parser counts, generated size,
-estimated Wasm memory, and parsing speed. Preserve behavior and tree shape.
+Try one transformation at a time and regenerate the parser. Judge each change
+by its parser actions, total states, large states, and estimated Wasm memory.
+Retain it when the gains justify the costs across those metrics. Preserve
+behavior and tree shape.
 
 Oxlint's rule-specific ignore directive can silence a suggestion next to the
 reported construct. When suppressing multiple rules on the same line, list them
@@ -36,11 +37,9 @@ the change in the same commit, but do not bundle unrelated grammar, tests,
 formatting, or cleanup changes; split them into separate commits when they can
 be reviewed or reverted independently.
 
-For grammar and parser changes with any non-zero parser-count delta, include parser-count
-deltas at the end of the commit description in exactly this form and order. It is
-acceptable to omit the parser-count annotation when all four deltas are zero or when the
-change is not grammar-related. When included, the four metric lines must be separate
-physical lines; do not write literal `\\n` escape sequences into the message.
+For grammar and parser changes that affect any reported metric, include the
+deltas at the end of the commit description in the order shown below. Record
+generated C size for reference. Use a separate line for each metric.
 
 Use this complete template for grammar and parser changes:
 
@@ -53,7 +52,7 @@ ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
 PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
-WASM_MEMORY_ESTIMATE_MIB: <before> -> <after> (<delta>)
+WASM_MEMORY_ESTIMATE_SIZE_BYTES: <before> -> <after> (<delta>)
 ```
 
 Keep the blank lines and metric names exactly as shown. Replace the angle-bracketed
@@ -62,22 +61,20 @@ placeholders; do not include the brackets in the final message.
 Measure the values against the commit's actual base. Recalculate them after rebasing or
 merging instead of keeping deltas from an earlier base.
 
+Record the before and after Wasm memory estimates and the signed delta in whole
+bytes.
+
 Descriptions must explain the actual semantic change and resulting behavior. Do not add
 generic test-pass summaries or corpus counts; every commit is expected to pass the
 required tests. Mention validation details only when they clarify the change or a
 focused regression covered.
 
-Use this complete template for lint rejections:
+Use this template for lint rejections and describe the regression in prose:
 
 ```text
 lint: <short description of lint rejection>
 
 <brief explanation of the rejection>
-
-ACTION_COUNT: <delta>
-STATE_COUNT: <delta>
-LARGE_STATE_COUNT: <delta>
-PARSER_C_SIZE_BYTES: <delta>
 ```
 
 ## Tests

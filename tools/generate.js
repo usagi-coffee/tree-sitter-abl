@@ -144,7 +144,7 @@ console.log(`#define ACTION_COUNT ${highest}`);
 await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
 console.log(`#define PARSER_C_SIZE_BYTES ${parserSizeBytes}`);
 console.log(`#define PARSER_C_SIZE_MIB ${parserSizeMiB}`);
-console.log(`#define WASM_MEMORY_ESTIMATE_MIB ${estimateWasmMemory(text).mib.toFixed(2)}`);
+console.log(`#define WASM_MEMORY_ESTIMATE_SIZE_BYTES ${estimateWasmMemory(text).bytes}`);
 
 if ((testOut + testErr).trim() === "") {
   console.error(
