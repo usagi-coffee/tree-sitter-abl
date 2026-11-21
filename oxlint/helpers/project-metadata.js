@@ -9,7 +9,11 @@ export function staticSourceTokens(source) {
   ).filter((part) => !part.startsWith("//") && !part.startsWith("/*"));
 }
 
-export function usedOutsideFile(context, name, { wholeName = false, except = [] } = {}) {
+export function usedOutsideFile(
+  context,
+  name,
+  { wholeName = false, except = [], caseInsensitiveLiteral = false } = {},
+) {
   const filename = resolve(context.cwd, context.filename);
   const directory = resolve(context.cwd, "grammar");
   const root = resolve(context.cwd, "grammar.js");
@@ -22,9 +26,13 @@ export function usedOutsideFile(context, name, { wholeName = false, except = [] 
     }
     const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const whole = wholeName ? new RegExp(`(?<![$\\w])${escapedName}(?![$\\w])`) : null;
+    const literal = caseInsensitiveLiteral
+      ? new RegExp("^([\"'`])" + escapedName + "\\1$", "i")
+      : null;
     return files.some((file) => {
       if (file === filename || except.includes(file)) return false;
       const source = readFileSync(file, "utf8");
+      if (literal) return staticSourceTokens(source).some((token) => literal.test(token));
       return whole ? whole.test(source) : source.includes(name);
     });
   } catch {
