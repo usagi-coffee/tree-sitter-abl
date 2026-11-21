@@ -52,7 +52,6 @@ import "./test_as_keyword_boundary.js";
 import "./test_set_fields_body_inline.js";
 import "./test_prompt_for_fields_body_inline.js";
 import "./test_alert_box_title_recursion.js";
-import "./test_export_target_presence.js";
 import "./test_frame_header_terminal_phrases.js";
 import "./test_on_widget_tail_anywhere.js";
 import "./test_triggers_terminal_end.js";

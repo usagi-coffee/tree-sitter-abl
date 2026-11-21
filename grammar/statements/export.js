@@ -1,12 +1,9 @@
 export default ({ kw }) => ({
-  export_statement: ($) =>
-    seq(choice($.__export_statement_body, $.__export_statement_head), $._terminator),
+  export_statement: ($) => seq($.__export_statement_body, $._terminator),
   __export_statement_body: ($) =>
     seq(
       $.__export_statement_head,
-      optional($.delimiter_phrase),
-      $._expression_list,
-      optional($.__export_tail),
+      optional(seq(optional($.delimiter_phrase), $._expression_list, optional($.__export_tail))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __export_statement_head: ($) => seq(kw("EXPORT"), optional($._stream_phrase)),

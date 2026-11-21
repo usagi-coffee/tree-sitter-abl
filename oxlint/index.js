@@ -34,7 +34,6 @@ import { asKeywordBoundary } from "./rules/as-keyword-boundary.js";
 import { setFieldsBodyInline } from "./rules/set-fields-body-inline.js";
 import { promptForFieldsBodyInline } from "./rules/prompt-for-fields-body-inline.js";
 import { alertBoxTitleRecursion } from "./rules/alert-box-title-recursion.js";
-import { exportTargetPresence } from "./rules/export-target-presence.js";
 import { frameHeaderTerminalPhrases } from "./rules/frame-header-terminal-phrases.js";
 import { onWidgetTailAnywhere } from "./rules/on-widget-tail-anywhere.js";
 import { triggersTerminalEnd } from "./rules/triggers-terminal-end.js";
@@ -221,7 +220,6 @@ export {
   setFieldsBodyInline,
   promptForFieldsBodyInline,
   alertBoxTitleRecursion,
-  exportTargetPresence,
   frameHeaderTerminalPhrases,
   onWidgetTailAnywhere,
   triggersTerminalEnd,
@@ -395,7 +393,6 @@ export default {
     "set-fields-body-inline": setFieldsBodyInline,
     "prompt-for-fields-body-inline": promptForFieldsBodyInline,
     "alert-box-title-recursion": alertBoxTitleRecursion,
-    "export-target-presence": exportTargetPresence,
     "frame-header-terminal-phrases": frameHeaderTerminalPhrases,
     "on-widget-tail-anywhere": onWidgetTailAnywhere,
     "triggers-terminal-end": triggersTerminalEnd,
