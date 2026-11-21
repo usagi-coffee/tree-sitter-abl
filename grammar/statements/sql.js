@@ -32,9 +32,10 @@
 // they fail loudly, and a loud failure needs no rule to make it honest.
 export default ({ kw }) => ({
   // `DECLARE cursor_name CURSOR FOR query_expr [ORDER BY] [FOR UPDATE]`
-  declare_cursor_statement: ($) => seq(kw("DECLARE"), $.__sql_declare_cursor_body, $._terminator),
+  declare_cursor_statement: ($) => seq($.__sql_declare_cursor_body, $._terminator),
   __sql_declare_cursor_body: ($) =>
     seq(
+      kw("DECLARE"),
       field("cursor", $.identifier),
       $._kw_cursor,
       $._kw_for,
