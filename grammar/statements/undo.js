@@ -7,28 +7,31 @@ export default ({ kw }) => ({
     seq(
       $._kw_undo,
       optional(field("undo_label", alias($._label_identifier, $.identifier))),
-      optional(seq(",", $.__undo_action)),
+      optional($.__undo_action),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __undo_action: ($) =>
-    choice(
-      seq(
-        $._kw_throw,
-        optional(
-          field(
-            "value",
-            choice($.new_expression, $._assignable, $.string_literal, $.number_literal),
+    seq(
+      ",",
+      choice(
+        seq(
+          $._kw_throw,
+          optional(
+            field(
+              "value",
+              choice($.new_expression, $._assignable, $.string_literal, $.number_literal),
+            ),
           ),
         ),
-      ),
-      $._undo_lnr_target,
-      seq(
-        $._kw_return,
-        optional(
-          choice(
-            $.__return_error_clause,
-            alias($._kw_no_apply, $.no_apply),
-            field("return_value", $._expression),
+        $._undo_lnr_target,
+        seq(
+          $._kw_return,
+          optional(
+            choice(
+              $.__return_error_clause,
+              alias($._kw_no_apply, $.no_apply),
+              field("return_value", $._expression),
+            ),
           ),
         ),
       ),
