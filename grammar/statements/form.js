@@ -82,6 +82,7 @@ export default ({ kw }) => ({
   __form_validate_expression_tail: ($) =>
     seq(",", field("expression", $._expression), optional($.__form_validate_expression_tail)),
   // An include or macro after LABEL supplies the label before a new form item.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-precedence
   __form_label_clause: ($) =>
     prec.right(seq($._kw_label, optional(field("label", $.__form_label)))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
