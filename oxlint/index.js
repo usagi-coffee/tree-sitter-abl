@@ -1,5 +1,6 @@
 import { leftRecursiveOptionList } from "./rules/left-recursive-option-list.js";
 import { inlineBranchSeparatorBoundary } from "./rules/inline-branch-separator-boundary.js";
+import { singleUseChoiceSeparator } from "./rules/single-use-choice-separator.js";
 import { existingAlternativeBodyReuse } from "./rules/existing-alternative-body-reuse.js";
 import { keywordOptionalMarkerPrefix } from "./rules/keyword-optional-marker-prefix.js";
 import { optionalChoicePrefixHoist } from "./rules/optional-choice-prefix-hoist.js";
@@ -183,6 +184,7 @@ import { tokenPacking } from "./rules/token-packing.js";
 export {
   leftRecursiveOptionList,
   inlineBranchSeparatorBoundary,
+  singleUseChoiceSeparator,
   existingAlternativeBodyReuse,
   keywordOptionalMarkerPrefix,
   optionalChoicePrefixHoist,
@@ -359,6 +361,7 @@ export default {
   rules: {
     "left-recursive-option-list": leftRecursiveOptionList,
     "inline-branch-separator-boundary": inlineBranchSeparatorBoundary,
+    "single-use-choice-separator": singleUseChoiceSeparator,
     "existing-alternative-body-reuse": existingAlternativeBodyReuse,
     "keyword-optional-marker-prefix": keywordOptionalMarkerPrefix,
     "optional-choice-prefix-hoist": optionalChoicePrefixHoist,

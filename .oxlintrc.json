@@ -23,6 +23,7 @@
       "rules": {
         "tree-sitter-optimize/left-recursive-option-list": "warn",
         "tree-sitter-optimize/inline-branch-separator-boundary": "warn",
+        "tree-sitter-optimize/single-use-choice-separator": "warn",
         "tree-sitter-optimize/existing-alternative-body-reuse": "warn",
         "tree-sitter-optimize/keyword-optional-marker-prefix": "warn",
         "tree-sitter-optimize/optional-choice-prefix-hoist": "warn",
